@@ -1,0 +1,66 @@
+/* ============================================================
+   KAIS — KAISolutions
+   o-nama.css — founder story stranica "O nama".
+   Nadopunjuje base.css (nikad ga ne mijenja).
+   ============================================================ */
+
+/* ---------- Page hero ---------- */
+.page-hero { padding: clamp(56px, 8vw, 100px) 0 clamp(24px, 4vw, 44px); }
+.page-hero h1 { margin: 20px 0 18px; }
+.page-hero .lead { max-width: 60ch; }
+
+/* ---------- Priča ---------- */
+.story-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 44px; align-items: start; }
+.story-copy h2 { margin-bottom: 20px; }
+.story-copy p { margin-bottom: 18px; font-size: 1.02rem; color: var(--text-soft); }
+.story-copy strong { color: #fff; }
+
+.founder-card { position: sticky; top: 100px; text-align: center;
+  background: linear-gradient(180deg, var(--surface-2), var(--bg-2));
+  border: 1px solid var(--border-2); border-radius: var(--radius-lg);
+  padding: 34px 28px; box-shadow: var(--shadow); }
+.founder-avatar { width: 92px; height: 92px; margin: 0 auto 18px; border-radius: 50%;
+  display: grid; place-items: center; color: var(--accent-2);
+  background: var(--grad-soft); border: 1px solid var(--border-2); }
+.founder-avatar svg { width: 44px; height: 44px; }
+.founder-card h3 { font-size: 1.2rem; }
+.founder-role { font-size: .88rem; color: var(--muted); margin: 6px 0 18px; }
+.founder-facts { display: grid; gap: 10px; text-align: left; }
+.founder-facts li { position: relative; padding-left: 26px; font-size: .9rem; color: var(--text-soft); }
+.founder-facts li::before { content: "✓"; position: absolute; left: 0; top: 0;
+  width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center;
+  font-size: .68rem; font-weight: 700; background: rgba(52,211,153,.15); color: var(--success); }
+
+/* ---------- Principi ---------- */
+.principles { background: linear-gradient(180deg, var(--surface), var(--bg-2));
+  border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(28px, 4vw, 44px); }
+.principles h2 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); margin-bottom: 20px; }
+.principles ul { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; }
+.principles li { position: relative; padding-left: 30px; font-size: .96rem; color: var(--text-soft); }
+.principles li::before { content: "—"; position: absolute; left: 0; color: var(--accent-2); font-weight: 700; }
+.principles strong { color: #fff; }
+
+/* ---------- Brojke-dokazi ---------- */
+.proof-band { border-block: 1px solid var(--border); background: rgba(255,255,255,.015); }
+.proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; text-align: center; }
+.proof b { display: block; font-family: var(--font-head); font-weight: 700; font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.proof span { display: block; font-size: .88rem; color: var(--muted); margin-top: 6px; }
+
+/* ---------- Završni CTA ---------- */
+.final-cta { position: relative; overflow: hidden; text-align: center; padding: clamp(48px, 7vw, 80px) 30px;
+  border-radius: var(--radius-lg); border: 1px solid var(--border-2);
+  background: linear-gradient(180deg, var(--surface-2), var(--bg-2)); }
+.final-glow { position: absolute; inset: 0; background: radial-gradient(600px 300px at 50% 0%, rgba(91,140,255,.22), transparent 70%); pointer-events: none; }
+.final-cta > * { position: relative; }
+.final-cta h2 { margin-bottom: 14px; }
+.final-cta p { max-width: 54ch; margin: 0 auto 30px; color: var(--text-soft); font-size: 1.05rem; }
+.cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 940px) {
+  .story-grid { grid-template-columns: 1fr; }
+  .founder-card { position: static; max-width: 420px; margin-inline: auto; }
+  .principles ul { grid-template-columns: 1fr; }
+  .proof-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
+}

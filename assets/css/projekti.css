@@ -1,0 +1,107 @@
+/* ============================================================
+   KAIS — KAISolutions
+   projekti.css — case study stranica (projekti.html)
+   Nadopunjuje base.css. Ništa ovdje ne mijenja globalne tokene.
+   ============================================================ */
+
+/* ---------- Page hero ---------- */
+.page-hero { padding: clamp(56px, 8vw, 100px) 0 clamp(24px, 4vw, 44px); }
+.page-hero h1 { margin: 20px 0 18px; max-width: 24ch; }
+.page-hero .lead { max-width: 62ch; }
+
+.proj-note { display: flex; gap: 16px; align-items: flex-start; margin-top: 34px; max-width: 860px;
+  background: var(--grad-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 24px; }
+.proj-note svg { flex: 0 0 auto; width: 22px; height: 22px; color: var(--accent-2); margin-top: 3px; }
+.proj-note p { font-size: .95rem; color: var(--text-soft); }
+.proj-note strong { color: #fff; }
+
+/* ---------- Case kartice ---------- */
+.case { position: relative; background: linear-gradient(180deg, var(--surface), var(--bg-2));
+  border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(28px, 4.5vw, 52px); overflow: hidden; }
+.case-flagship { border-color: rgba(91,140,255,.45); box-shadow: var(--shadow-glow); }
+.case-flagship::before { content: ""; position: absolute; inset: 0;
+  background: radial-gradient(640px 300px at 92% 0%, rgba(34,211,238,.12), transparent 65%); pointer-events: none; }
+.case > * { position: relative; }
+
+.case-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+.case-num { font-family: var(--font-head); font-size: .78rem; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent-2); }
+.case h2 { margin-bottom: 12px; }
+.case-client { display: flex; align-items: center; gap: 10px; font-size: .92rem; color: var(--muted); margin-bottom: 28px; }
+.case-client svg { width: 18px; height: 18px; color: var(--accent); flex: 0 0 auto; }
+
+/* problem / rješenje grid */
+.pr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.tri-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.case-block { background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.case-block + .case-block { margin-top: 20px; }
+.pr-grid .case-block, .tri-grid .case-block { margin-top: 0; }
+.case-block h3 { display: flex; align-items: center; gap: 11px; font-size: 1.05rem; margin-bottom: 12px; }
+.blk-ico { width: 34px; height: 34px; flex: 0 0 auto; border-radius: 10px; display: grid; place-items: center;
+  background: var(--grad-soft); border: 1px solid var(--border); color: var(--accent-2); }
+.blk-ico svg { width: 17px; height: 17px; }
+.block-problem .blk-ico { color: #ff8079; background: rgba(255,95,87,.08); }
+.block-solution .blk-ico, .block-result .blk-ico { color: var(--success); background: rgba(52,211,153,.08); }
+.case-block p { font-size: .96rem; color: var(--text-soft); }
+
+.mod-list { margin-top: 12px; display: grid; gap: 7px; }
+.mod-list li { position: relative; padding-left: 22px; font-size: .93rem; color: var(--text-soft); }
+.mod-list li::before { content: "▸"; position: absolute; left: 0; color: var(--accent-2); }
+
+/* "Zašto ne gotov WMS" quote */
+.why-quote { margin: 4px 0 24px; border-left: 3px solid var(--accent);
+  background: rgba(91,140,255,.05); border-radius: 0 var(--radius) var(--radius) 0; padding: 22px 26px; }
+.why-label { display: block; font-family: var(--font-head); font-size: .8rem; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.why-quote p { font-size: 1rem; color: var(--text-soft); font-style: italic; }
+
+/* flow — kako radi u praksi */
+.flow { display: grid; gap: 12px; counter-reset: fl; margin-top: 6px; list-style: none; padding-left: 0; }
+.flow li { position: relative; counter-increment: fl; padding: 14px 16px 14px 58px;
+  background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+.flow li::before { content: counter(fl, decimal-leading-zero); position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  font-family: var(--font-head); font-weight: 700; font-size: .95rem;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.flow b { display: block; color: #fff; font-family: var(--font-head); font-weight: 600; font-size: .98rem; }
+.flow span { display: block; font-size: .88rem; color: var(--muted); margin-top: 2px; }
+.tech-note { margin-top: 16px; font-size: .84rem; color: var(--muted); font-style: italic; }
+
+/* rezultati */
+.results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 8px; }
+.res { text-align: center; background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px 14px; }
+.res b { display: block; font-family: var(--font-head); font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 700;
+  background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.res span { display: block; font-size: .82rem; color: var(--muted); margin-top: 6px; }
+
+.case-status { display: flex; align-items: center; gap: 10px; margin-top: 22px; font-size: .92rem; color: var(--text-soft); }
+.case-status svg { width: 18px; height: 18px; color: var(--success); flex: 0 0 auto; }
+.case-status strong { color: #fff; }
+
+.case-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-top: 26px; padding-top: 26px; border-top: 1px solid var(--border); }
+.case-cta p { font-family: var(--font-head); font-weight: 600; color: #fff; }
+
+/* pouka */
+.lesson { display: flex; gap: 16px; align-items: flex-start; margin-top: 22px;
+  background: rgba(52,211,153,.06); border: 1px solid rgba(52,211,153,.3); border-radius: var(--radius); padding: 20px 24px; }
+.lesson svg { flex: 0 0 auto; width: 22px; height: 22px; color: var(--success); margin-top: 2px; }
+.lesson p { font-size: .95rem; color: var(--text-soft); }
+.lesson strong { color: #fff; }
+
+/* ---------- Završni CTA ---------- */
+.final-cta { position: relative; overflow: hidden; text-align: center; padding: clamp(48px, 7vw, 80px) 30px;
+  border-radius: var(--radius-lg); border: 1px solid var(--border-2); background: linear-gradient(180deg, var(--surface-2), var(--bg-2)); }
+.final-glow { position: absolute; inset: 0; background: radial-gradient(600px 300px at 50% 0%, rgba(91,140,255,.22), transparent 70%); pointer-events: none; }
+.final-cta > * { position: relative; }
+.final-cta h2 { margin-bottom: 14px; }
+.final-cta p { max-width: 54ch; margin: 0 auto 30px; color: var(--text-soft); font-size: 1.05rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 940px) {
+  .pr-grid { grid-template-columns: 1fr; }
+  .tri-grid { grid-template-columns: 1fr; }
+  .results-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .results-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .case-cta { flex-direction: column; align-items: flex-start; }
+}

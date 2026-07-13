@@ -1,0 +1,101 @@
+/* ============================================================
+   KAIS — KAISolutions
+   kontakt.css — stranica Kontakt / Snimka skladišta
+   (page-hero, info blok, koraci snimke, forma / inputi).
+   Nadovezuje se na base.css (tokeni, kartice, gumbi).
+   ============================================================ */
+
+/* ---------- Page hero ---------- */
+.page-hero { padding-bottom: 0; }
+.page-hero h1 { margin: 18px 0 16px; }
+.page-hero .lead { max-width: 58ch; }
+.lead-soft { font-size: 1rem; color: var(--muted); margin-top: 10px; }
+
+/* ---------- Layout ---------- */
+.contact-grid { grid-template-columns: 1fr 1.15fr; gap: 40px; align-items: start; }
+
+/* ---------- Info blok (lijevo) ---------- */
+.info-list { display: grid; gap: 14px; }
+.info-item { display: flex; gap: 16px; align-items: flex-start;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+.info-ico { flex: 0 0 auto; width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+  background: var(--grad-soft); border: 1px solid var(--border); color: var(--accent-2); }
+.info-ico svg { width: 22px; height: 22px; }
+.info-k { display: block; font-family: var(--font-head); font-size: .72rem; font-weight: 600;
+  letter-spacing: 1.8px; text-transform: uppercase; color: var(--muted); }
+.info-v { display: inline-block; font-family: var(--font-head); font-weight: 600; font-size: 1.02rem; color: #fff; margin-top: 3px; }
+a.info-v:hover { color: var(--accent-2); }
+.info-note { display: block; font-size: .84rem; color: var(--muted); margin-top: 2px; }
+
+/* Koraci snimke */
+.next-steps { margin-top: 26px; background: linear-gradient(180deg, var(--surface), var(--bg-2));
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 26px 22px; }
+.next-steps h3 { font-size: 1.12rem; margin-bottom: 18px; }
+.steps-list { display: grid; gap: 16px; list-style: none; padding-left: 0; }
+.steps-list li { display: flex; gap: 14px; align-items: flex-start; }
+.step-num { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--font-head); font-weight: 700; font-size: .85rem; color: #06101f;
+  background: var(--grad); box-shadow: 0 0 14px rgba(91,140,255,.35); }
+.steps-list strong { display: block; color: #fff; font-family: var(--font-head); font-weight: 600; font-size: .96rem; }
+.steps-list p { font-size: .87rem; color: var(--muted); margin-top: 2px; }
+.steps-reassure { display: flex; align-items: center; gap: 9px; margin-top: 20px; padding-top: 18px;
+  border-top: 1px solid var(--border); font-size: .9rem; font-weight: 600; color: var(--success); }
+.steps-reassure svg { width: 17px; height: 17px; flex: 0 0 auto; }
+
+/* ---------- Forma (desno) ---------- */
+.contact-card { padding: 32px; }
+.contact-card:hover { transform: none; }
+.form-title { font-size: 1.4rem; margin-bottom: 6px; }
+.form-sub { font-size: .92rem; color: var(--muted); margin-bottom: 24px; }
+
+.contact-form { display: grid; gap: 18px; }
+.field { display: grid; gap: 7px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.field label { font-family: var(--font-head); font-weight: 600; font-size: .88rem; color: var(--text); }
+.field label small { font-family: var(--font-body); font-weight: 400; font-size: .78rem; color: var(--muted); }
+.req { color: var(--accent-2); }
+
+.field input, .field select, .field textarea {
+  width: 100%; background: rgba(255,255,255,.03); border: 1px solid var(--border-2);
+  border-radius: var(--radius-sm); color: var(--text); padding: 13px 15px; font-size: .95rem;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--muted); opacity: .7; }
+.field input:hover, .field select:hover, .field textarea:hover { border-color: var(--border-2); background: rgba(255,255,255,.05); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(91,140,255,.18); background: rgba(255,255,255,.04);
+}
+.field input:user-invalid, .field textarea:user-invalid { border-color: #ff5f57; }
+.field textarea { resize: vertical; min-height: 110px; }
+
+.field select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237e8aa6' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 42px;
+}
+.field select option { background: var(--surface); color: var(--text); }
+
+.contact-form .btn { justify-self: start; margin-top: 4px; }
+.form-note { font-size: .82rem; color: var(--muted); }
+.form-success[hidden] { display: none; }
+.form-success { display: flex; gap: 10px; align-items: flex-start; font-size: .92rem; color: var(--success);
+  background: rgba(52,211,153,.08); border: 1px solid rgba(52,211,153,.35); border-radius: var(--radius-sm); padding: 14px 16px; }
+.form-success svg { width: 18px; height: 18px; flex: 0 0 auto; margin-top: 2px; }
+.form-success a { color: var(--accent-2); text-decoration: underline; }
+
+/* Završni red */
+.contact-alt { text-align: center; margin-top: 44px; color: var(--muted); font-size: .95rem; }
+.contact-alt a { color: var(--accent-2); font-weight: 600; }
+.contact-alt a:hover { text-decoration: underline; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 940px) {
+  .contact-grid { grid-template-columns: 1fr; }
+  /* forma prva na mobitelu */
+  .contact-card { order: -1; }
+}
+@media (max-width: 620px) {
+  .field-row { grid-template-columns: 1fr; }
+  .contact-card { padding: 24px 20px; }
+}

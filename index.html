@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAIS — WMS po mjeri za proizvodnju i skladišta</title>
+  <meta name="description" content="KAIS gradi WMS po mjeri za male i srednje proizvodne i skladišne firme. Izgrađen u tvornici, ne u uredu — od tehnologa koji je vlastiti WMS uveo u stvarni pogon." />
+  <meta name="theme-color" content="#080b14" />
+  <meta property="og:title" content="KAIS — WMS po mjeri, izgrađen u tvornici" />
+  <meta property="og:description" content="WMS po mjeri za proizvodne i skladišne firme koje su prerasle Excel, a premale su za SAP." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/home.css" />
+</head>
+<body>
+
+  <!-- ============ HEADER (identičan na svim stranicama) ============ -->
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand" aria-label="KAIS početna">
+        <span class="logo">K</span>
+        <span>KAIS<small>KAISolutions</small></span>
+      </a>
+      <nav class="nav-links" aria-label="Glavna navigacija">
+        <a href="index.html" class="active">Početna</a>
+        <a href="usluge.html">Ponuda i cijene</a>
+        <a href="projekti.html">Projekti</a>
+        <a href="o-nama.html">O nama</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="kontakt.html" class="btn btn-primary nav-cta">Snimka skladišta</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Otvori izbornik" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow" data-reveal>WMS po mjeri · proizvodnja i skladišta</span>
+          <h1 data-reveal data-delay="1">
+            Softver za skladište —<br /><span class="gradient-text">izgrađen u tvornici,<br />ne u uredu.</span>
+          </h1>
+          <p class="lead" data-reveal data-delay="2">
+            KAIS gradi WMS po mjeri za proizvodne i skladišne firme koje su prerasle
+            Excel i papir, a premale su za SAP. Vodi ga tehnolog iz proizvodnje —
+            čovjek koji je vlastiti WMS uveo u stvarni pogon, paletu po paletu.
+          </p>
+          <div class="hero-cta" data-reveal data-delay="3">
+            <a href="kontakt.html" class="btn btn-primary btn-lg">
+              Dogovorite snimku skladišta
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="projekti.html" class="btn btn-ghost btn-lg">Pogledajte kako radi</a>
+          </div>
+          <ul class="hero-trust" data-reveal data-delay="4">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> 1.500+ pozicija u stvarnom pogonu</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Zebra PDA skeneri</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Fiksna cijena i rok</li>
+          </ul>
+        </div>
+
+        <!-- Vizual: mock WMS dashboard -->
+        <div class="hero-visual" data-reveal data-delay="2" aria-hidden="true">
+          <div class="mock">
+            <div class="mock-top">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <span class="mock-title">KAIS WMS · Skladište</span>
+            </div>
+            <div class="mock-body">
+              <div class="mock-stats">
+                <div class="ms"><span class="ms-k">Pozicija</span><b>1 500</b><i class="up">pod kontrolom</i></div>
+                <div class="ms"><span class="ms-k">Naloga danas</span><b>147</b><i class="up">0 grešaka</i></div>
+                <div class="ms"><span class="ms-k">Točnost zaliha</span><b>99%+</b><i class="up">u realnom vremenu</i></div>
+              </div>
+              <div class="mock-bars">
+                <span style="--h:42%"></span><span style="--h:66%"></span><span style="--h:38%"></span>
+                <span style="--h:82%"></span><span style="--h:55%"></span><span style="--h:74%"></span>
+                <span style="--h:48%"></span><span style="--h:90%"></span><span style="--h:63%"></span>
+              </div>
+              <div class="mock-rows">
+                <div class="mock-row"><span class="pill ok">Zaprimljeno</span> Paleta A-2201 · Zona R3</div>
+                <div class="mock-row"><span class="pill go">Komisioniranje</span> Nalog #4471 · 3 stavke</div>
+                <div class="mock-row"><span class="pill wait">Otprema</span> Kupac Delta d.o.o.</div>
+              </div>
+            </div>
+          </div>
+          <div class="mock-float mf1">📦 Svaka paleta skenirana</div>
+          <div class="mock-float mf2">✓ Sljedivost serije</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REZULTATI (podaci industrije) ============ -->
+    <section class="section-tight stats-band">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat" data-reveal><b>99%+</b><span>točnost zaliha (umjesto 80–90% s Excelom)</span></div>
+          <div class="stat" data-reveal data-delay="1"><b>do 80%</b><span>manje grešaka u komisioniranju i otpremi</span></div>
+          <div class="stat" data-reveal data-delay="2"><b>sati</b><span>za inventuru — umjesto dana</span></div>
+          <div class="stat" data-reveal data-delay="3"><b>12–24 mj</b><span>tipičan povrat investicije u WMS</span></div>
+        </div>
+        <p class="stats-note" data-reveal>Rasponi prema podacima industrije (Gartner i implementatori WMS sustava) — u snimci skladišta izračunamo što je realno za vaš pogon.</p>
+      </div>
+    </section>
+
+    <!-- ============ BOLNE TOČKE ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow" data-reveal>Prepoznajete li se?</span>
+          <h2 data-reveal data-delay="1">Ovo su znakovi da vas skladište košta svaki dan</h2>
+        </div>
+        <div class="grid grid-2 pains">
+          <div class="pain" data-reveal>
+            <span class="pain-n">01</span>
+            <h3>Netko opet traži paletu</h3>
+            <p>Koliko puta dnevno netko traži paletu za koju "sustav kaže da postoji"? Do 50% vremena komisioniranja je hodanje i traženje. Sa skenerom i pozicijama — nula.</p>
+          </div>
+          <div class="pain" data-reveal data-delay="1">
+            <span class="pain-n">02</span>
+            <h3>Inventura kojoj se svi čude</h3>
+            <p>Ako inventura svake godine "otkrije" manjkove i viškove — problem nije u ljudima, nego u papiru i Excelu. Skeniranje diže točnost zaliha na 99%+.</p>
+          </div>
+          <div class="pain" data-reveal data-delay="2">
+            <span class="pain-n">03</span>
+            <h3>Kriva roba kod kupca</h3>
+            <p>Jedna kriva otprema ne košta samo prijevoz natrag — košta povjerenje kupca. WMS jednostavno ne dopušta skeniranje krive palete.</p>
+          </div>
+          <div class="pain" data-reveal data-delay="3">
+            <span class="pain-n">04</span>
+            <h3>"Samo Ivica zna gdje što stoji"</h3>
+            <p>Što kad vaš najiskusniji skladištar ode na bolovanje — ili u mirovinu? Znanje o skladištu mora biti u sustavu, ne u nečijoj glavi.</p>
+          </div>
+          <div class="pain wide" data-reveal>
+            <span class="pain-n">05</span>
+            <h3>Tri unosa, tri prilike za grešku</h3>
+            <p>Otpremnica na papiru, pa prepisivanje u Excel, pa u knjigovodstveni program. Jedan sken — nula prepisivanja.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ZAŠTO KAIS / FOUNDER ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="split">
+          <div class="split-copy" data-reveal>
+            <span class="eyebrow">Zašto KAIS</span>
+            <h2>Iz pogona, za pogon</h2>
+            <p class="lead">
+              KAIS ne vodi programer koji uči što je paleta — vodi ga <strong>tehnolog iz
+              proizvodnje</strong> koji je godinama živio uska grla skladišta i proizvodnje,
+              pa ih riješio softverom. Vlastiti WMS s 1.500 pozicija i Zebra skenerima
+              izgradio je i uveo u stvarnu tvornicu — i on danas radi, svaki dan.
+            </p>
+            <a href="o-nama.html" class="btn btn-ghost">Upoznajte tko stoji iza KAIS-a →</a>
+          </div>
+          <div class="split-list grid" data-reveal data-delay="1">
+            <div class="mini ok">
+              <div class="mini-c">✓</div>
+              <div><strong>Razumijemo pogon prije prve linije koda</strong> — snimku procesa radimo kao tehnolozi, ne kao prodavači.</div>
+            </div>
+            <div class="mini ok">
+              <div class="mini-c">✓</div>
+              <div><strong>Softver se prilagođava vama</strong> — ne prilagođavate firmu tuđem sustavu ni čekate tuđi backlog.</div>
+            </div>
+            <div class="mini ok">
+              <div class="mini-c">✓</div>
+              <div><strong>Bez enterprise cirkusa</strong> — bez vojske konzultanata, bez licenci po korisniku, bez mjeseci uvođenja.</div>
+            </div>
+            <div class="mini ok">
+              <div class="mini-c">✓</div>
+              <div><strong>Fiksna cijena, fiksan rok, mjerljiv kriterij</strong> — "gotovo" znači da inventura prolazi, ne da je kod isporučen.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FLAGSHIP CASE STUDY TEASER ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="case-teaser" data-reveal>
+          <div class="case-copy">
+            <span class="eyebrow">Iz prakse</span>
+            <h2>WMS koji već radi — u stvarnoj tvornici</h2>
+            <p>
+              Ovaj sustav osnivač KAIS-a izgradio je i uveo u proizvodnoj firmi u kojoj radi kao tehnolog —
+              paletno skladište s ~1.500 pozicija. Prije: papiri, Excel i traženje paleta.
+              Danas: svaka paleta skenirana Zebra PDA skenerom, pozicije i zalihe u realnom
+              vremenu, FIFO/FEFO alokacija, inventura skeniranjem i potpuna sljedivost svake serije.
+            </p>
+            <ul class="case-points">
+              <li>1.500+ pozicija pod kontrolom, u svakodnevnoj upotrebi</li>
+              <li>0 "izgubljenih" paleta — svaka lokacija poznata u realnom vremenu</li>
+              <li>Gotovi WMS-ovi nisu podržavali role, šarže i specifičnosti proizvodnje — zato je građen po mjeri</li>
+            </ul>
+            <a href="projekti.html" class="btn btn-primary">Pogledajte case study →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PONUDA / 3 PAKETA ============ -->
+    <section class="section" id="ponuda">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow" data-reveal>Kako radimo</span>
+          <h2 data-reveal data-delay="1">Tri koraka — bez rizika i bez iznenađenja</h2>
+          <p data-reveal data-delay="2">Fiksne cijene i jasan opseg. Znate što dobivate i koliko košta — prije nego potpišete.</p>
+        </div>
+        <div class="grid grid-3 pkgs">
+          <article class="card pkg" data-reveal>
+            <span class="pkg-step">Korak 1</span>
+            <h3>Snimka skladišta</h3>
+            <div class="pkg-price">490 €<small> fiksno</small></div>
+            <p>1–2 dana u vašem pogonu, kao tehnolog — ne kao prodavač.</p>
+            <ul class="pkg-list">
+              <li>Pisani nalaz uskih grla i skrivenih troškova</li>
+              <li>Plan digitalizacije po prioritetima</li>
+              <li>Fiksna ponuda za pilot — bez obveze</li>
+            </ul>
+            <p class="pkg-note">Iznos se u cijelosti odbija od cijene pilota.</p>
+            <a href="kontakt.html" class="btn btn-primary">Dogovorite snimku</a>
+          </article>
+          <article class="card pkg featured" data-reveal data-delay="1">
+            <span class="pkg-step">Korak 2</span>
+            <h3>WMS Pilot</h3>
+            <div class="pkg-price">Fiksna cijena<small> i fiksan rok</small></div>
+            <p>Jedno skladište ili zona — u produkciji tipično za 6–8 tjedana.</p>
+            <ul class="pkg-list">
+              <li>Zaprimanje, pozicije i izdavanje s PDA skenerom</li>
+              <li>Inventura skeniranjem</li>
+              <li>Mjerljiv kriterij: "gotovo" = inventura prolazi s 99%+ točnosti</li>
+            </ul>
+            <p class="pkg-note">Opseg i cijena definirani nakon snimke — bez naknadnih "sitnica".</p>
+            <a href="usluge.html" class="btn btn-ghost">Što točno uključuje →</a>
+          </article>
+          <article class="card pkg" data-reveal data-delay="2">
+            <span class="pkg-step">Korak 3</span>
+            <h3>Rast i podrška</h3>
+            <div class="pkg-price">Mjesečno<small> po dogovoru</small></div>
+            <p>Sustav živi i raste s vama — bez ovisnosti o "onome tko je to napravio".</p>
+            <ul class="pkg-list">
+              <li>Hosting, nadzor i sigurnosne kopije</li>
+              <li>Podrška i sitne dorade</li>
+              <li>Novi moduli po dogovorenoj cijeni</li>
+            </ul>
+            <p class="pkg-note">Vi ste vlasnik podataka — i koda.</p>
+            <a href="usluge.html" class="btn btn-ghost">Detalji →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow" data-reveal>Česta pitanja</span>
+          <h2 data-reveal data-delay="1">Ono što svi pitaju prije prvog poziva</h2>
+        </div>
+        <div class="grid grid-2 faqs">
+          <div class="faq" data-reveal>
+            <h3>Što s našim knjigovodstvenim / ERP programom?</h3>
+            <p>Ostaje. WMS se povezuje s postojećim sustavom — podaci se ne prepisuju ručno. Integracije s postojećim ERP-om već su izvedene u praksi.</p>
+          </div>
+          <div class="faq" data-reveal data-delay="1">
+            <h3>Nemamo IT osobu. Je li to problem?</h3>
+            <p>Ne. Sustav održavamo mi (hosting, nadzor, backup), a skladištari ga koriste kroz skener — novi radnik je produktivan u danima, jer ga sustav vodi korak po korak.</p>
+          </div>
+          <div class="faq" data-reveal data-delay="2">
+            <h3>Koliko traje uvođenje?</h3>
+            <p>Pilot je tipično u produkciji za 6–8 tjedana od snimke. Radi se u iteracijama uz vaše ljude — bez zaustavljanja rada skladišta.</p>
+          </div>
+          <div class="faq" data-reveal data-delay="3">
+            <h3>Po čemu je to bolje od gotovog WMS-a?</h3>
+            <p>Gotova rješenja traže da se vaši procesi prilagode njima; specifičnosti (role, šarže, poluproizvodi...) ostaju izvan sustava. Ovdje je obrnuto — sustav se gradi oko vašeg procesa, a vi ste vlasnik koda i roadmapa.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band" data-reveal>
+          <div class="cta-glow" aria-hidden="true"></div>
+          <h2>Krenite od snimke skladišta</h2>
+          <p>1–2 dana u vašem pogonu, pisani nalaz i plan digitalizacije za 490 € — koji se odbija od pilota. Bez obveze za nastavak.</p>
+          <div class="hero-cta">
+            <a href="kontakt.html" class="btn btn-primary btn-lg">Dogovorite snimku skladišta</a>
+            <a href="mailto:info@kaisolutions.hr" class="btn btn-ghost btn-lg">info@kaisolutions.hr</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER (identičan na svim stranicama) ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a href="index.html" class="brand"><span class="logo">K</span><span>KAIS<small>KAISolutions</small></span></a>
+          <p>WMS i softver po mjeri za proizvodne i skladišne firme. Izgrađen u tvornici, ne u uredu.</p>
+        </div>
+        <div>
+          <h4>Ponuda</h4>
+          <a href="usluge.html">Snimka skladišta</a>
+          <a href="usluge.html">WMS Pilot</a>
+          <a href="usluge.html">Rast i podrška</a>
+        </div>
+        <div>
+          <h4>Firma</h4>
+          <a href="o-nama.html">O nama</a>
+          <a href="projekti.html">Projekti</a>
+          <a href="kontakt.html">Kontakt</a>
+        </div>
+        <div>
+          <h4>Kontakt</h4>
+          <a href="mailto:info@kaisolutions.hr">info@kaisolutions.hr</a>
+          <a href="kontakt.html">Dogovorite snimku skladišta</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year>2026</span> KAIS — KAISolutions. Sva prava pridržana.</span>
+        <div class="socials">
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.57-2.3 3.2V21H9z"/></svg></a>
+          <a href="mailto:info@kaisolutions.hr" aria-label="Email"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/script.js"></script>
+</body>
+</html>
