@@ -1,4 +1,4 @@
-# NASTAVAK — KAIS (KAISolutions) web stranica
+# NASTAVAK — KAI-SOL (KAI Solutions) web stranica
 
 > Ovaj dokument je **handoff za nastavak rada** (npr. Claude Code kod kuće).
 > Sadrži cijeli kontekst projekta, poslovnu strategiju, kako ga pokrenuti, plan za
@@ -8,7 +8,7 @@
 
 ## 1. Što je ovo
 
-Marketinška web stranica za **KAIS (KAISolutions)** — novu firmu specijaliziranu za
+Marketinška web stranica za **KAI-SOL (KAI Solutions)** — novu firmu specijaliziranu za
 **custom WMS (Warehouse Management System) po mjeri** za **male i srednje proizvodne
 i skladišne firme** (30–250 zaposlenih).
 
@@ -17,9 +17,9 @@ i skladišne firme** (30–250 zaposlenih).
 - **Tehnologija:** statični **HTML / CSS / JS** — bez build koraka, bez ovisnosti (samo otvoriš `index.html`)
 
 ### Vlasnički kontekst (VAŽNO za sadržaj!)
-- Osnivač **radi kao tehnolog u tiskari etiketa** i KAIS gradi **uz taj posao**.
+- Osnivač **radi kao tehnolog u tiskari etiketa** i KAI-SOL gradi **uz taj posao**.
 - Sustavi iz "Projekti" (WMS, ERP/MES/WMS, QMS...) izgrađeni su **za tu firmu, interno** — zato se
-  na stranici NE smiju prikazivati kao KAIS-ovi klijentski projekti niti s imenom firme,
+  na stranici NE smiju prikazivati kao KAI-SOL-ovi klijentski projekti niti s imenom firme,
   screenshotovima ili fotografijama pogona. Smiju se **spomenuti kao iskustvo** (anonimno:
   "proizvodna firma u kojoj osnivač radi kao tehnolog"). Ta formulacija je već primijenjena
   na index/projekti/o-nama — zadrži je pri budućim izmjenama.
@@ -51,7 +51,7 @@ Rezultat multi-agent istraživanja (pozicioniranje + konkurentske poruke), srpan
 
 ## 2. Git
 
-- **Lokalni folder:** `C:\Users\Tehnolog\Desktop\KAIS-website`
+- **Lokalni folder:** `C:\Users\Tehnolog\Desktop\KAI-SOL-website`
 - **GitHub:** https://github.com/Shywera/web  (grana `main`)
 - Kod kuće:
   ```bash
@@ -64,7 +64,7 @@ Rezultat multi-agent istraživanja (pozicioniranje + konkurentske poruke), srpan
 ## 3. Struktura projekta
 
 ```
-KAIS-website/
+web/
 ├── index.html          # Početna
 ├── usluge.html         # Usluge (WMS istaknut kao specijalnost)
 ├── projekti.html       # Portfolio — 5 rješenja
@@ -134,7 +134,7 @@ python -m http.server 8000
 
 ## 6. HOSTING — ✅ AKTIVNO (besplatno)
 
-**Stranica je ŽIVA na:** https://shywera.github.io/web/
+**Stranica je ŽIVA na:** https://kai-sol.com/
 
 Hostano besplatno preko **GitHub Pages + GitHub Actions**. Deploy je automatski:
 svaki `git push` na granu `main` pokrene workflow `.github/workflows/deploy.yml`
@@ -160,7 +160,7 @@ Sve tri opcije podržavaju **vlastitu domenu** (npr. `kais.hr`) besplatno kad je
 | `kais.com` | ❌ zauzeta |
 | `kaisolutions.com` | ❌ zauzeta |
 | **`kais.hr`** | ✅ slobodna (preporuka) |
-| **`kaisolutions.hr`** | ✅ slobodna |
+| **`kai-sol.com`** | ✅ slobodna |
 
 ### Trošak — što JE, a što NIJE besplatno
 - **Hosting stranice:** besplatan.
@@ -191,13 +191,13 @@ email besplatno preko Cloudflare Email Routing. Ukupno: samo cijena domene (~1 �
       Ako se mijenja: traži "490" kroz index.html, usluge.html, kontakt.html, NASTAVAK.md.
 - [ ] **Ime i fotografija osnivača** na o-nama.html (`<!-- TODO: ime i fotografija osnivača -->`) —
       portret, NE fotografije pogona/sustava (vidi vlasnički kontekst u točki 1).
-- [ ] **Odabrati domenu** (`kais.hr` ili `kaisolutions.hr`) i registrirati je.
-- [ ] **Zamijeniti email** `info@kaisolutions.hr` stvarnim (npr. `info@kais.hr`) na **svih 5 .html** stranica
-      (traži string `kaisolutions.hr`).
+- [ ] **Odabrati domenu** (`kais.hr` ili `kai-sol.com`) i registrirati je.
+- [ ] **Zamijeniti email** `info@kai-sol.com` stvarnim (npr. `info@kais.hr`) na **svih 5 .html** stranica
+      (traži string `kai-sol.com`).
 - [ ] **Kontakt forma:** trenutno otvara mail klijent (mailto). Za pravu obradu spojiti na
       **Formspree** ili **Netlify Forms** (u `kontakt.html` je HTML komentar gdje se to ubacuje).
 - [ ] Dodati **stvarni telefon** (sad piše "na upit") u `kontakt.html` (`<!-- TODO: broj telefona -->`).
-- [x] ~~Uključiti GitHub Pages~~ — **GOTOVO**, živo na https://shywera.github.io/web/ (auto-deploy na svaki push).
+- [x] ~~Uključiti GitHub Pages~~ — **GOTOVO**, živo na https://kai-sol.com/ (auto-deploy na svaki push).
 - [ ] (Opc.) Pravi **logo** umjesto slova "K" i **OG slika** za dijeljenje na društvenim mrežama.
 - [ ] (Opc.) 2–3 **stručna članka** na hrvatskom ("Kako pripremiti skladište za WMS", "Zašto inventura laže")
       — nitko u HR niši ne piše ovako konkretno; brzo gradi autoritet i SEO.
@@ -213,7 +213,7 @@ email besplatno preko Cloudflare Email Routing. Ukupno: samo cijena domene (~1 �
 
 Kad nastavljaš rad, korisan prompt za Claude:
 
-> "Ovo je KAIS (KAISolutions) marketinška web stranica — statični HTML/CSS/JS, hrvatski, tamna tech tema.
+> "Ovo je KAI-SOL (KAI Solutions) marketinška web stranica — statični HTML/CSS/JS, hrvatski, tamna tech tema.
 > Pročitaj `NASTAVAK.md` za cijeli kontekst. Dizajn-sistem (boje/klase) je u `assets/css/base.css`.
 > Header i footer su identični na svih 5 .html stranica — ako ih mijenjaš, promijeni svugdje.
 > Svaka stranica ima svoj `*.css` u `assets/css/`. Zadatak: [tvoj zadatak]."
