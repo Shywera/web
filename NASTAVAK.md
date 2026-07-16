@@ -228,3 +228,12 @@ Napomene za nastavak:
 ---
 
 *Zadnje ažurirano: 2026-07-08*
+
+---
+
+## AŽURIRANJE 16.7.2026 — rebrand + promjena tona
+
+- **Brend:** KAIS → **KAI-SOL** (KAI Solutions), domena **kai-sol.com** (Cloudflare), email **info@kai-sol.com**. CNAME datoteka dodana.
+- **Ton stranice promijenjen:** BEZ founder/one-man-army priče ("vodi ga tehnolog", "osnivač", prvo lice jednine) — sve prepisano u **"mi" ton ozbiljne firme**. Iskustvo iz pogona ostaje kao temelj, ali anonimno i u množini.
+- **Nova sekcija na index.html: "Pogled u sustav"** — 6 stvarnih funkcija produkcijskog WMS-a (izvor: README u `Desktop\WMS-app`): zaprimanje skenerom + QR pozicije, izdavanje po zahtjevnici (Excel/CSV/PDF, FIFO/FEFO), karta skladišta (tlocrt po zonama/regalima/visinama), inventura skeniranjem, dozvole po korisniku + audit log, PDF izvještaji + backup + read-only ERP adapter. **Ne izmišljati funkcije koje aplikacija nema.**
+- Hero mock brojke realne (zauzeto 1.243/1.500, zaprimanja/izdavanja danas), bez "0 grešaka" preseravanja.
