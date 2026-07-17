@@ -1,6 +1,6 @@
 /* ============================================================
-   KAI-SOL — KAI Solutions
-   projekti.css — case study stranica (projekti.html)
+   KAI-SOL · KAI Solutions
+   projekti.css: case study stranica (projekti.html)
    Nadopunjuje base.css. Ništa ovdje ne mijenja globalne tokene.
    ============================================================ */
 
@@ -55,7 +55,7 @@
   letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
 .why-quote p { font-size: 1rem; color: var(--text-soft); font-style: italic; }
 
-/* flow — kako radi u praksi */
+/* flow: kako radi u praksi */
 .flow { display: grid; gap: 12px; counter-reset: fl; margin-top: 6px; list-style: none; padding-left: 0; }
 .flow li { position: relative; counter-increment: fl; padding: 14px 16px 14px 58px;
   background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: var(--radius-sm); }

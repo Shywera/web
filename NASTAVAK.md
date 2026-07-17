@@ -237,3 +237,12 @@ Napomene za nastavak:
 - **Ton stranice promijenjen:** BEZ founder/one-man-army priče ("vodi ga tehnolog", "osnivač", prvo lice jednine) — sve prepisano u **"mi" ton ozbiljne firme**. Iskustvo iz pogona ostaje kao temelj, ali anonimno i u množini.
 - **Nova sekcija na index.html: "Pogled u sustav"** — 6 stvarnih funkcija produkcijskog WMS-a (izvor: README u `Desktop\WMS-app`): zaprimanje skenerom + QR pozicije, izdavanje po zahtjevnici (Excel/CSV/PDF, FIFO/FEFO), karta skladišta (tlocrt po zonama/regalima/visinama), inventura skeniranjem, dozvole po korisniku + audit log, PDF izvještaji + backup + read-only ERP adapter. **Ne izmišljati funkcije koje aplikacija nema.**
 - Hero mock brojke realne (zauzeto 1.243/1.500, zaprimanja/izdavanja danas), bez "0 grešaka" preseravanja.
+
+## AŽURIRANJE 17.7.2026 — multiagent polish + pravilo stila
+
+- **Pravilo stila (trajno):** BEZ em crtica "—" u prozi. To je AI potpis koji vlasnik izričito odbija. Interpunkcija: zarez/točka/dvotočka; en crtica samo u rasponima (1–2, 6–8); "·" kao separator u čipovima; naslovi stranica s "|" (npr. "Projekti | KAI-SOL").
+- **Naslovnica:** tekst kraći 22%, hero "Skladište koje zna gdje je svaka paleta.", spojene sekcije Zašto+Dokaz, 4 bolne točke, FAQ s risk-reversal pitanjem.
+- **Usluge:** maknuta duplicirana stats sekcija i 3 FAQ-a (dupli s naslovnicom); dodana generička timeline pilota (tjedni 1–8, "tipičan tijek") i sekcija Garancije (4 kartice = ugovorni uvjeti). ERP veza dosljedno opisana kao read-only.
+- **Kontakt:** rok odgovora svugdje "u roku 24 h radnim danom"; maknut "Telefon: na upit" (TODO vratiti s pravim brojem); lijevi stupac = "što se događa nakon upita".
+- **Provjereno:** 0 em crtica u repou, footeri byte-identični, headeri identični (osim active klase), HTML valjan na svih 6 stranica, svi interni linkovi rade.
+- Izbačene neprovjerene tvrdnje ("bez marže na uređaje", "ispisi i etikete", "kontrola prije utovara"). Ako su stvarne, vlasnik ih može vratiti.

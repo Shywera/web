@@ -1,6 +1,6 @@
 /* ============================================================
-   KAI-SOL — KAI Solutions
-   o-nama.css — founder story stranica "O nama".
+   KAI-SOL · KAI Solutions
+   o-nama.css: stranica "O nama" (priča firme + "KAI-SOL ukratko").
    Nadopunjuje base.css (nikad ga ne mijenja).
    ============================================================ */
 
@@ -37,7 +37,7 @@
 .principles h2 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); margin-bottom: 20px; }
 .principles ul { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; }
 .principles li { position: relative; padding-left: 30px; font-size: .96rem; color: var(--text-soft); }
-.principles li::before { content: "—"; position: absolute; left: 0; color: var(--accent-2); font-weight: 700; }
+.principles li::before { content: "→"; position: absolute; left: 0; color: var(--accent-2); font-weight: 700; }
 .principles strong { color: #fff; }
 
 /* ---------- Brojke-dokazi ---------- */

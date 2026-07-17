@@ -1,4 +1,4 @@
-/* KAI-SOL — interakcije: sticky header, mobilni meni, reveal on scroll, brojači */
+/* KAI-SOL · interakcije: sticky header, mobilni meni, reveal on scroll, brojači */
 (function () {
   "use strict";
 

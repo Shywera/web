@@ -1,6 +1,6 @@
 /* ============================================================
-   KAI-SOL — KAI Solutions
-   usluge.css — stilovi specifični za stranicu PONUDA I CIJENE
+   KAI-SOL (KAI Solutions)
+   usluge.css: stilovi specifični za stranicu PONUDA I CIJENE
    Nadopunjuje base.css (koristi njegove tokene i klase).
    ============================================================ */
 
@@ -157,23 +157,44 @@
 .flow-step b { font-family: var(--font-head); font-size: .95rem; color: #fff; font-weight: 600; }
 .flow-step > span:last-child { font-size: .82rem; color: var(--muted); line-height: 1.45; }
 
-/* ---------- Branjive brojke ---------- */
-.num-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.num {
+/* ---------- Tijek pilota (tjedan po tjedan) ---------- */
+.tl-wrap { margin-top: 40px; }
+.tl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.tl-item {
+  position: relative; padding: 20px 18px 16px; border-radius: var(--radius-sm);
+  background: rgba(255,255,255,.025); border: 1px solid var(--border);
+  overflow: hidden;
+}
+.tl-item::before {
+  content: ""; position: absolute; inset: 0 0 auto 0; height: 2px;
+  background: var(--grad); opacity: .55;
+}
+.tl-week {
+  display: inline-block; font-family: var(--font-head); font-size: .72rem; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent-2);
+  margin-bottom: 8px;
+}
+.tl-item b { display: block; font-family: var(--font-head); font-weight: 600; font-size: .96rem; color: #fff; margin-bottom: 6px; }
+.tl-item p { font-size: .86rem; color: var(--muted); line-height: 1.5; }
+.tl-note { margin-top: 14px; font-size: .88rem; color: var(--muted); }
+
+/* ---------- Garancije (uvjeti suradnje) ---------- */
+.guar-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.guar {
   padding: 26px 24px; border-radius: var(--radius);
   background: linear-gradient(180deg, var(--surface), var(--bg-2));
   border: 1px solid var(--border);
-  display: flex; flex-direction: column; gap: 6px;
+  transition: border-color .3s, transform .3s var(--ease);
 }
-.num b {
-  font-family: var(--font-head); font-weight: 700; font-size: clamp(1.7rem, 2.8vw, 2.2rem);
-  letter-spacing: -1px; line-height: 1.1;
-  background: var(--grad);
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent;
+.guar:hover { border-color: var(--border-2); transform: translateY(-4px); }
+.guar-ico {
+  width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center;
+  background: var(--grad-soft); border: 1px solid var(--border); color: var(--accent-2);
+  margin-bottom: 16px;
 }
-.num span { font-size: .92rem; color: var(--muted); line-height: 1.5; }
-.num-note { margin-top: 26px; text-align: center; font-size: .88rem; color: var(--muted); }
+.guar-ico svg { width: 22px; height: 22px; }
+.guar h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.guar p { font-size: .92rem; color: var(--muted); }
 
 /* ---------- FAQ ---------- */
 .faqs { max-width: 1000px; margin-inline: auto; }
@@ -186,7 +207,6 @@
 .faq:hover { border-color: var(--border-2); }
 .faq h3 { font-size: 1.06rem; margin-bottom: 10px; }
 .faq p { font-size: .95rem; color: var(--muted); }
-.faq.wide { grid-column: 1 / -1; }
 
 /* ---------- Završni CTA band ---------- */
 .cta-band {
@@ -210,7 +230,8 @@
 @media (max-width: 940px) {
   .flow { grid-template-columns: repeat(2, 1fr); }
   .flow-step:not(:last-child)::after { display: none; }
-  .num-grid { grid-template-columns: repeat(2, 1fr); }
+  .tl { grid-template-columns: repeat(2, 1fr); }
+  .guar-grid { grid-template-columns: repeat(2, 1fr); }
   .pkg-cols { grid-template-columns: 1fr; }
   .pkg-price-box { align-items: flex-start; text-align: left; }
   .pkg-flag { position: static; align-self: flex-start; margin-bottom: 16px; display: inline-block; }
@@ -219,7 +240,8 @@
   .steps-strip { flex-direction: column; align-items: stretch; }
   .ss-arrow { display: none; }
   .flow { grid-template-columns: 1fr; }
-  .num-grid { grid-template-columns: 1fr; }
+  .tl { grid-template-columns: 1fr; }
+  .guar-grid { grid-template-columns: 1fr; }
   .pkg-head { flex-direction: column; }
   .pkg-price-box { width: 100%; min-width: 0; }
   .crit-box { flex-direction: column; align-items: flex-start; gap: 10px; }
