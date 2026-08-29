@@ -642,6 +642,10 @@
   /* no scrolling mid-run — you cannot lose the bar */
   html.locked, body.locked{overflow:hidden !important}
 
+  /* the briefing and the level select are inert mid-run: a stray click on
+     them would otherwise start a different mode out from under you */
+  body.locked .page{pointer-events:none}
+
   /* nothing is selectable mid-run: dragging across the briefing while
      you click bars would smear a selection over the whole page */
   body.locked, body.locked *{
@@ -1106,7 +1110,10 @@
     cursor:pointer;
     transition:color .2s ease, border-color .2s ease;
   }
+  #mute{transition:opacity .3s ease, color .2s ease, border-color .2s ease}
   #mute:hover{color:var(--text);border-color:var(--amber)}
+  /* out of the way mid-run — a stray click here would kill the music */
+  body.locked #mute{opacity:0;pointer-events:none}
   #mute:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
   #mute .eq{display:flex;align-items:flex-end;gap:2px;height:12px}
   #mute .eq i{
@@ -2985,6 +2992,8 @@
   }
 
   function startRun(which){
+    // a run in progress owns the screen — never let another mode barge in
+    if (mode !== 'gate' && mode !== which) return;
     clearTimers();
     chalEl.classList.remove('on');
     wipeEl.classList.remove('on');
