@@ -176,9 +176,35 @@
     font-weight:600;
     color:var(--text);
     gap:12px;
+    text-shadow:0 1px 3px rgba(10,11,17,.95);
   }
   .bar-label .t{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px}
   .bar-label .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  /* bar states recolor through the same tokens */
+  .fill{transition:background .12s linear}
+  .sim[data-state="interrupted"] .fill{
+    background:linear-gradient(180deg,#6FD5A0,#3E9E6D);
+    box-shadow:0 0 18px rgba(88,192,138,.35);
+  }
+  .sim[data-state="landed"] .fill{
+    background:linear-gradient(180deg,#E3625F,#A82A28);
+    box-shadow:0 0 22px rgba(214,65,63,.45);
+  }
+  .sim[data-state="done"] .bar{opacity:.5}
+  .sim[data-state="done"] .bar-label{color:var(--dimmer)}
+  .sim[data-state="done"] .glyph{opacity:.4}
+  .sim[data-state="done"] .kick-btn{
+    background:transparent;
+    color:var(--dim);
+    border-color:var(--line-hot);
+    font-size:18px;
+  }
+  .sim[data-state="done"] .kick-btn:hover{
+    background:transparent;
+    color:var(--text);
+    border-color:var(--amber);
+  }
 
   .sim-foot{
     display:flex;
@@ -983,7 +1009,7 @@
     bootEl.classList.remove('on');
     missStreak = 0;
     unlock('You failed your way in. The rest of the page is open â€” read it properly this time.', 'Unlocked the hard way');
-    reset();
+    stopSim('Bar is quiet. Now go and read why that matters.');
   }
 
   function unlock(msg, label){
@@ -1000,6 +1026,7 @@
   }
 
   function kick(){
+    if (state === 'done') { restart(); return; }
     if (state !== 'casting') return;
     cancelAnimationFrame(raf);
     state = 'interrupted';
@@ -1024,12 +1051,35 @@
     winEl.classList.remove('on');
     streak = 0;
     unlock('Five for five. You clearly do not need the rest of this page, but read it anyway â€” the class table is at least useful.', 'Unlocked');
-    reset();
+    stopSim('Pack is dead. Nothing left to kick. Go read the rest.');
   }
 
   function reset(){
     fill.style.width = '0%';
     beginCast();
+  }
+
+  function stopSim(msg){
+    cancelAnimationFrame(raf);
+    state = 'done';
+    sim.dataset.state = 'done';
+    fill.style.width = '0%';
+    nameEl.textContent = 'No cast incoming';
+    timerEl.textContent = 'â€”';
+    tagEl.textContent = 'idle';
+    bar.setAttribute('aria-valuenow', 0);
+    verdict.className = 'verdict';
+    verdict.textContent = msg;
+    kickBtn.textContent = 'RUN IT AGAIN';
+  }
+
+  function restart(){
+    kickBtn.textContent = 'KICK';
+    verdict.className = 'verdict';
+    verdict.textContent = 'Again. Same rules, no stakes â€” the page is already open.';
+    streak = 0; missStreak = 0;
+    setTally();
+    reset();
   }
 
   kickBtn.addEventListener('click', kick);
