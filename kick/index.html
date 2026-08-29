@@ -532,6 +532,145 @@
     opacity:.9;
   }
 
+  /* ================= HORROR MODE ================= */
+  .horror-btn{
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    padding:9px 14px 10px;
+    background:transparent;
+    color:#5B3A7A;
+    border:1px solid #34204A;
+    border-radius:2px;
+    cursor:pointer;
+    transition:color .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .horror-btn:hover{color:#C79BF0;border-color:#7A4FB0;box-shadow:0 0 20px rgba(122,79,176,.4)}
+  .horror-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+  .horror-btn.on{color:#C79BF0;border-color:#8E5ACB;box-shadow:0 0 26px rgba(142,90,203,.55)}
+
+  #voidc{
+    position:fixed;
+    inset:0;
+    width:100%;height:100%;
+    pointer-events:none;
+    z-index:40;
+    display:none;
+  }
+  #voidc.on{display:block}
+
+  #mirrors{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:43;
+    display:none;
+  }
+  #mirrors.on{display:block}
+  .mbar{
+    position:absolute;
+    height:42px;
+    background:rgba(18,14,28,.92);
+    border:1px solid #4A2E6B;
+    overflow:hidden;
+    box-shadow:0 0 26px rgba(90,40,150,.35);
+  }
+  .mbar i{
+    position:absolute;
+    inset:0 auto 0 0;
+    width:0;
+    background:linear-gradient(180deg,#8B62C4,#4B2A78);
+  }
+  .mbar span{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 12px;
+    font-family:var(--body);
+    font-size:14px;
+    font-weight:600;
+    color:#CBB6E4;
+    text-shadow:0 1px 3px rgba(0,0,0,.9);
+    white-space:nowrap;
+    overflow:hidden;
+  }
+  #mirrors.on .mbar{pointer-events:auto;cursor:crosshair}
+  .mbar.flip span{transform:scaleX(-1)}
+  .mbar.hitok{border-color:var(--green);box-shadow:0 0 30px rgba(88,192,138,.7)}
+  .mbar.hitok i{background:linear-gradient(180deg,#6FD5A0,#3E9E6D)}
+  .mbar.hitbad{border-color:var(--red);box-shadow:0 0 30px rgba(214,65,63,.8)}
+  .mbar.hitbad i{background:linear-gradient(180deg,#E3625F,#A82A28)}
+  #mirrors.flipped{transform:scaleX(-1)}
+  .mbar b{
+    position:absolute;
+    top:-16px;right:0;
+    font-family:var(--mono);
+    font-size:9px;
+    font-weight:400;
+    letter-spacing:.14em;
+    color:#7A5F9E;
+  }
+  .mhint{
+    position:absolute;
+    left:50%;
+    top:14px;
+    transform:translateX(-50%);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:#8E5ACB;
+    text-shadow:0 0 14px rgba(142,90,203,.8);
+    white-space:nowrap;
+  }
+
+  body.horror{background:#05030A}
+  body.horror .sim{
+    border-color:#4A2E6B;
+    box-shadow:0 0 60px rgba(110,50,180,.28) inset, 0 0 34px rgba(110,50,180,.24);
+    transition:transform .9s cubic-bezier(.4,.1,.3,1), opacity .5s ease, filter .5s ease;
+    will-change:transform;
+  }
+  body.horror .fill{background:linear-gradient(180deg,#B98CE8,#6A3FA8) !important}
+  body.horror .glyph{border-color:#6A3FA8;color:#C79BF0}
+  body.horror .kick-btn{background:#9A6FE0;border-color:#B98CE8;color:#0A0611}
+  body.horror .kick-btn:hover{background:#B98CE8}
+
+  .page{transition:transform .55s cubic-bezier(.5,0,.3,1), opacity .5s ease, filter .5s ease}
+  .page.dimflip{transform:scaleX(-1)}
+  .page.dimspin{transform:rotate(180deg)}
+  .page.dimskew{transform:skewY(-4deg) scale(1.04)}
+  .page.dimfade{opacity:.12;filter:blur(3px)}
+
+  body.horror .bar-label .n{animation:phase 2.7s ease-in-out infinite}
+  @keyframes phase{
+    0%,100%{opacity:1;letter-spacing:0}
+    46%{opacity:.35;letter-spacing:.14em}
+  }
+
+  .boot.void{
+    background:
+      radial-gradient(80% 60% at 50% 45%, rgba(52,14,86,.85) 0%, rgba(3,1,7,.99) 72%),
+      #030107;
+  }
+  .boot.void .boot-eyebrow{color:#8E5ACB}
+  .boot.void h2{
+    color:#C79BF0;
+    font-size:clamp(44px,12vw,104px);
+    text-shadow:0 0 60px rgba(160,90,240,.6), 0 0 140px rgba(120,50,200,.35);
+  }
+  .boot.void .boot-btn:hover{border-color:#8E5ACB;color:#C79BF0}
+
+  @media (prefers-reduced-motion:reduce){
+    .page{transition:none}
+    .page.dimflip,.page.dimspin,.page.dimskew{transform:none}
+    body.horror .sim{transition:none}
+  }
+
   /* win variant of the same takeover */
   .boot.win{
     background:
@@ -843,6 +982,7 @@
         <kbd>SPACE</kbd>
         <button class="chal-btn" id="chalStart" type="button">Challenge · 10 casts</button>
         <button class="ultra-btn" id="ultraStart" type="button">Ultra · 15 casts</button>
+        <button class="horror-btn" id="horrorStart" type="button">Horror · 13 casts</button>
         <span class="verdict" id="verdict">Press it before the bar fills. Five in a row and you're invited. Miss two and we're done.</span>
       </div>
 
@@ -1126,6 +1266,20 @@
 </div>
 
 <canvas id="chaos" aria-hidden="true"></canvas>
+<canvas id="voidc" aria-hidden="true"></canvas>
+<div id="mirrors" aria-hidden="true"><div class="mhint" id="mhint"></div></div>
+
+<div class="boot void" id="voidend" role="dialog" aria-modal="true" aria-labelledby="voidTitle">
+  <div class="boot-inner">
+    <p class="boot-eyebrow" id="voidEyebrow">It found you.</p>
+    <h2 id="voidTitle">Consumed.</h2>
+    <p id="voidSay">—</p>
+    <div class="chal-actions">
+      <button class="boot-btn" id="voidAgain" type="button">Go back in</button>
+      <button class="bail" id="voidClose" type="button">Never again</button>
+    </div>
+  </div>
+</div>
 <div class="bloodv" id="bloodv" aria-hidden="true"></div>
 <div class="tear" id="tear" aria-hidden="true"></div>
 
@@ -1318,6 +1472,260 @@
     };
   })();
 
+  /* ---- horror: many casters, click every frame ---- */
+  var Horror = (function(){
+    var layer, hint, bars = [], rafH = null, last = 0, running = false;
+    var onClear = null, onFail = null, onKick = null;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function el(tag, cls){ var e = document.createElement(tag); if (cls) e.className = cls; return e; }
+
+    function spawn(n, durMin, durMax, speed, wave){
+      layer = document.getElementById('mirrors');
+      hint  = document.getElementById('mhint');
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var bw = Math.min(300, Math.max(190, vw * 0.24));
+
+      for (var i = 0; i < n; i++){
+        var b = el('div', 'mbar');
+        b.style.width = bw + 'px';
+        var x = 20 + Math.random() * Math.max(vw - bw - 40, 10);
+        var y = 90 + Math.random() * Math.max(vh - 230, 10);
+
+        var sp = SPELLS[Math.floor(Math.random() * SPELLS.length)];
+        var fill = el('i');
+        var lab = el('span');
+        var nm = el('em'); nm.style.fontStyle = 'normal'; nm.textContent = sp.n;
+        var tm = el('u'); tm.style.textDecoration = 'none';
+        tm.style.fontFamily = '"JetBrains Mono", monospace';
+        tm.style.fontSize = '12px';
+        lab.appendChild(nm); lab.appendChild(tm);
+        var tag = el('b'); tag.textContent = 'Caster ' + (i + 1);
+
+        b.appendChild(fill); b.appendChild(lab); b.appendChild(tag);
+        if (Math.random() < 0.45) b.classList.add('flip');
+
+        var rec = {
+          e: b, fill: fill, tm: tm, w: bw,
+          x: x, y: y,
+          vx: (Math.random() - .5) * speed,
+          vy: (Math.random() - .5) * speed * .7,
+          dur: (durMin + Math.random() * (durMax - durMin)) * 1000,
+          delay: Math.random() * 380,
+          t0: 0, done: false, born: performance.now()
+        };
+        b.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+        b.addEventListener('pointerdown', (function(r){
+          return function(ev){ ev.preventDefault(); hit(r); };
+        })(rec));
+
+        bars.push(rec);
+        layer.appendChild(b);
+      }
+
+      hint.textContent = 'Wave ' + wave + ' · ' + n + ' caster' + (n > 1 ? 's' : '') + ' — click every bar';
+      layer.classList.add('on');
+      running = true; last = 0;
+      rafH = requestAnimationFrame(tick);
+    }
+
+    function hit(r){
+      if (!running || r.done) return;
+      r.done = true;
+      r.e.classList.add('hitok');
+      r.tm.textContent = Math.round(performance.now() - r.born) + 'ms';
+      if (onKick) onKick(performance.now() - r.born);
+      setTimeout(function(){ if (r.e.parentNode) r.e.style.opacity = '0'; }, 90);
+
+      for (var i = 0; i < bars.length; i++) if (!bars[i].done) return;
+      running = false;
+      cancelAnimationFrame(rafH);
+      setTimeout(function(){ if (onClear) onClear(); }, 260);
+    }
+
+    function tick(now){
+      if (!running) return;
+      var dt = last ? Math.min((now - last) / 1000, .05) : 0;
+      last = now;
+      var vw = window.innerWidth, vh = window.innerHeight;
+
+      for (var i = 0; i < bars.length; i++){
+        var r = bars[i];
+        if (r.done){ continue; }
+
+        if (!reduce){
+          r.x += r.vx * dt; r.y += r.vy * dt;
+          if (r.x < 8 || r.x > vw - r.w - 8) r.vx *= -1;
+          if (r.y < 80 || r.y > vh - 70) r.vy *= -1;
+          r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
+        }
+
+        var el2 = now - r.born - r.delay;
+        if (el2 < 0){ r.fill.style.width = '0%'; r.tm.textContent = '—'; continue; }
+        var p = el2 / r.dur;
+        if (p >= 1){
+          running = false;
+          cancelAnimationFrame(rafH);
+          r.fill.style.width = '100%';
+          r.e.classList.add('hitbad');
+          r.tm.textContent = 'CAST';
+          if (onFail) onFail();
+          return;
+        }
+        r.fill.style.width = (p * 100).toFixed(1) + '%';
+        r.tm.textContent = ((r.dur - el2) / 1000).toFixed(1);
+      }
+      rafH = requestAnimationFrame(tick);
+    }
+
+    return {
+      wave: function(n, dMin, dMax, speed, waveNo, cbKick, cbClear, cbFail){
+        onKick = cbKick; onClear = cbClear; onFail = cbFail;
+        spawn(n, dMin, dMax, speed, waveNo);
+      },
+      clear: function(){
+        running = false;
+        cancelAnimationFrame(rafH);
+        var l = document.getElementById('mirrors');
+        for (var i = 0; i < bars.length; i++) if (bars[i].e.parentNode) bars[i].e.parentNode.removeChild(bars[i].e);
+        bars = [];
+        if (l){ l.classList.remove('on'); l.classList.remove('flipped'); }
+      },
+      count: function(){ return bars.length; }
+    };
+  })();
+
+  /* ---- the void: tendrils, whispers, and something watching ---- */
+  var Void = (function(){
+    var c, ctx, w = 0, h = 0, on = false, rafV = null, t = 0, last = 0;
+    var whispers = [], eye = 0, eyeT = 0, dread = 0;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var WORDS = ['it sees you','kick it','you are late','again','look behind the bar',
+                 'they are all real','do not blink','it is already casting','you cannot read this fast'];
+
+    function size(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth; h = window.innerHeight;
+      c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function frame(now){
+      if (!on) return;
+      var dt = last ? Math.min((now - last) / 1000, .05) : 0;
+      last = now; t += dt; eyeT += dt;
+      ctx.clearRect(0, 0, w, h);
+
+      // creeping tendrils from the edges
+      var arms = 9;
+      ctx.lineCap = 'round';
+      for (var i = 0; i < arms; i++){
+        var side = i % 4;
+        var seed = i * 12.9898;
+        var base = (i / arms) * (side < 2 ? w : h);
+        var reach = (0.16 + 0.5 * dread) * (side < 2 ? h : w) * (0.7 + 0.3 * Math.sin(t * .6 + seed));
+        ctx.beginPath();
+        var steps = 9;
+        for (var s = 0; s <= steps; s++){
+          var f = s / steps;
+          var wob = Math.sin(t * 1.1 + seed + f * 4) * 34 * f;
+          var px, py;
+          if (side === 0){ px = base + wob; py = f * reach; }
+          else if (side === 1){ px = base + wob; py = h - f * reach; }
+          else if (side === 2){ px = f * reach; py = base + wob; }
+          else { px = w - f * reach; py = base + wob; }
+          if (s === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+        }
+        ctx.strokeStyle = 'rgba(38,10,64,' + (0.5 + 0.4 * dread).toFixed(2) + ')';
+        ctx.lineWidth = 16 - 10 * (i / arms);
+        ctx.stroke();
+        ctx.strokeStyle = 'rgba(150,80,230,' + (0.05 + 0.09 * dread).toFixed(3) + ')';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      // the eye
+      if (eyeT > 7 && eye <= 0){ eye = 0.001; eyeT = 0; }
+      if (eye > 0){
+        eye += dt * (eye < 1.2 ? .55 : .35);
+        var op = eye < 1 ? eye : Math.max(0, 2.4 - eye);
+        if (op <= 0){ eye = 0; }
+        else {
+          var ex = w * .5, ey = h * .42, er = Math.min(w, h) * .19;
+          ctx.save();
+          ctx.globalAlpha = op * .85;
+          var gg = ctx.createRadialGradient(ex, ey, 0, ex, ey, er * 2.2);
+          gg.addColorStop(0, 'rgba(190,120,255,.5)');
+          gg.addColorStop(1, 'rgba(120,40,200,0)');
+          ctx.fillStyle = gg;
+          ctx.fillRect(ex - er * 2.2, ey - er * 2.2, er * 4.4, er * 4.4);
+          ctx.beginPath();
+          ctx.ellipse(ex, ey, er, er * .52, 0, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(232,214,160,.92)';
+          ctx.fill();
+          ctx.beginPath();
+          ctx.ellipse(ex, ey, er * .30, er * .46, 0, 0, Math.PI * 2);
+          ctx.fillStyle = '#12060B';
+          ctx.fill();
+          ctx.beginPath();
+          ctx.ellipse(ex, ey, er * .085, er * .42, 0, 0, Math.PI * 2);
+          ctx.fillStyle = '#000';
+          ctx.fill();
+          ctx.restore();
+        }
+      }
+
+      // whispers
+      if (Math.random() < .012 + dread * .03){
+        whispers.push({
+          x: Math.random() * w, y: 80 + Math.random() * (h - 160),
+          txt: WORDS[Math.floor(Math.random() * WORDS.length)],
+          life: 1, sz: 13 + Math.random() * 20
+        });
+      }
+      for (var k = whispers.length - 1; k >= 0; k--){
+        var wp = whispers[k];
+        wp.life -= dt * .32;
+        if (wp.life <= 0){ whispers.splice(k, 1); continue; }
+        ctx.font = 'italic ' + wp.sz.toFixed(0) + 'px Georgia, serif';
+        ctx.textAlign = 'center';
+        var a = Math.sin(wp.life * Math.PI) * .5;
+        ctx.fillStyle = 'rgba(196,160,240,' + a.toFixed(3) + ')';
+        ctx.fillText(wp.txt, wp.x + Math.sin(t * 3 + k) * 3, wp.y);
+      }
+
+      // closing dark
+      var vg = ctx.createRadialGradient(w / 2, h / 2, Math.min(w, h) * (0.52 - 0.30 * dread), w / 2, h / 2, Math.max(w, h) * .78);
+      vg.addColorStop(0, 'rgba(3,1,7,0)');
+      vg.addColorStop(1, 'rgba(3,1,7,' + (0.72 + 0.26 * dread).toFixed(2) + ')');
+      ctx.fillStyle = vg;
+      ctx.fillRect(0, 0, w, h);
+
+      rafV = requestAnimationFrame(frame);
+    }
+
+    return {
+      start: function(){
+        c = document.getElementById('voidc');
+        if (!c || !c.getContext || reduce) return;
+        ctx = c.getContext('2d');
+        size(); on = true; last = 0; t = 0; eye = 0; eyeT = 3; dread = 0; whispers = [];
+        c.classList.add('on');
+        window.addEventListener('resize', size);
+        rafV = requestAnimationFrame(frame);
+      },
+      stop: function(){
+        on = false;
+        cancelAnimationFrame(rafV);
+        window.removeEventListener('resize', size);
+        if (ctx) ctx.clearRect(0, 0, w, h);
+        var cc = document.getElementById('voidc');
+        if (cc) cc.classList.remove('on');
+      },
+      setDread: function(p){ dread = Math.max(0, Math.min(p, 1)); }
+    };
+  })();
+
   var MISS_LINES = [
     "LANDED — %s Well fucking done.",
     "MISSED AGAIN. Two for two. That's your lot."
@@ -1363,7 +1771,13 @@
       rHit      = document.getElementById('rHit'),
       rEarly    = document.getElementById('rEarly');
 
-  var ultraStart = document.getElementById('ultraStart'),
+  var ultraStart  = document.getElementById('ultraStart'),
+      horrorStart = document.getElementById('horrorStart'),
+      voidEnd     = document.getElementById('voidend'),
+      voidAgain   = document.getElementById('voidAgain'),
+      voidClose   = document.getElementById('voidClose'),
+      voidSay     = document.getElementById('voidSay'),
+      voidTitle   = document.getElementById('voidTitle'),
       wipeEl     = document.getElementById('wipe'),
       wipeAgain  = document.getElementById('wipeAgain'),
       wipeClose  = document.getElementById('wipeClose'),
@@ -1391,8 +1805,12 @@
     return 'Slow, but it landed.';
   }
 
-  function rate(avg, kicked, early, wasUltra, done, total){
+  function rate(avg, kicked, early, wasUltra, wasHorror, total){
     var ms = Math.round(avg);
+    if (wasHorror){
+      return {t:'You Are Not Human.', c:'good', s:'Thirteen casters, all of them moving, the room folding in on itself, and not one cast went off. Averaging ' + ms +
+        'ms per interrupt. I do not believe you and I want you in my key immediately.'};
+    }
     if (wasUltra){
       return {t:'Untouchable.', c:'good', s:'Fifteen casts, zero misses, averaging ' + ms +
         'ms — through blood, screen shake and everything else this page could throw at you. I have played with people who could not do that in a clean UI.'};
@@ -1409,7 +1827,7 @@
     chalEl.classList.remove('on');
     wipeEl.classList.remove('on');
     mode = which;
-    chTotal = (which === 'ultra') ? 15 : 10;
+    chTotal = which === 'ultra' ? 15 : (which === 'horror' ? 13 : 10);
     chIdx = 0; chTimes = []; chEarly = 0; ultraCdUntil = 0;
     kickBtn.textContent = 'KICK';
     kickBtn.classList.remove('cd');
@@ -1418,7 +1836,9 @@
     chalStart.classList.toggle('on', which === 'challenge');
     ultraStart.textContent = which === 'ultra' ? 'Abort ultra' : 'Ultra · 15 casts';
     ultraStart.classList.toggle('on', which === 'ultra');
-    chalStart.blur(); ultraStart.blur();
+    horrorStart.textContent = which === 'horror' ? 'Abort horror' : 'Horror · 13 casts';
+    horrorStart.classList.toggle('on', which === 'horror');
+    chalStart.blur(); ultraStart.blur(); horrorStart.blur();
 
     verdict.className = 'verdict';
     if (which === 'ultra'){
@@ -1428,10 +1848,64 @@
       Chaos.start();
       Chaos.setBlood(0);
       verdict.textContent = 'Fifteen casts. Watch the icon — it flares before every cast. One miss and the raid is over.';
+      chWait();
+    } else if (which === 'horror'){
+      document.body.classList.add('horror');
+      Void.start();
+      Void.setDread(0);
+      verdict.textContent = 'They all cast at once. Click every bar before any of them finish. Space will not save you here.';
+      hWave();
     } else {
       verdict.textContent = 'Ten casts, random gaps. One miss ends the run. Do not press early.';
+      chWait();
     }
-    chWait();
+  }
+
+  /* ---- horror waves ---- */
+  function hWave(){
+    var left = chTotal - chIdx;
+    var p = chIdx / chTotal;
+    var n = Math.min(left, 2 + Math.floor(Math.random() * 2) + Math.round(p * 2));
+    var dMin = 2.5 - p * 0.9;
+    var dMax = 3.4 - p * 1.1;
+    var speed = 40 + p * 150;
+
+    Void.setDread(p);
+    dimShift(p);
+
+    state = 'casting';
+    sim.dataset.state = 'casting';
+    nameEl.textContent = n + ' casters. All of them real.';
+    timerEl.textContent = chIdx + '/' + chTotal;
+    tagEl.textContent = 'wave ' + (Math.floor(p * 6) + 1);
+
+    Horror.wave(n, dMin, dMax, speed, Math.floor(p * 6) + 1,
+      function(ms){ chTimes.push(ms); },
+      function(){
+        chIdx += n;
+        Horror.clear();
+        if (chIdx >= chTotal){ chResults(); }
+        else { chTimer = setTimeout(hWave, 600); }
+      },
+      function(){
+        setTimeout(function(){ Horror.clear(); }, 700);
+        chFail();
+      }
+    );
+  }
+
+  function dimShift(p){
+    var page = document.querySelector('.page');
+    var mir = document.getElementById('mirrors');
+    if (!page || Math.random() > 0.25 + p * 0.45) return;
+    var fx = ['dimflip','dimspin','dimskew','dimfade'];
+    var pick2 = fx[Math.floor(Math.random() * fx.length)];
+    page.classList.add(pick2);
+    if (pick2 === 'dimflip' && mir) mir.classList.add('flipped');
+    setTimeout(function(){
+      page.classList.remove(pick2);
+      if (mir) mir.classList.remove('flipped');
+    }, 900 + Math.random() * 1600);
   }
 
   function endRunUi(){
@@ -1440,12 +1914,19 @@
     chalStart.classList.remove('on');
     ultraStart.textContent = 'Ultra · 15 casts';
     ultraStart.classList.remove('on');
+    horrorStart.textContent = 'Horror · 13 casts';
+    horrorStart.classList.remove('on');
     document.body.classList.remove('ultra');
+    document.body.classList.remove('horror');
     chaosEl.classList.remove('on');
     bloodEl.classList.remove('on');
     tearEl.classList.remove('on');
     kickBtn.classList.remove('cd');
+    var page = document.querySelector('.page');
+    if (page) page.className = 'page';
     Chaos.stop();
+    Void.stop();
+    Horror.clear();
   }
 
   function abortRun(){
@@ -1499,13 +1980,14 @@
 
   function chResults(){
     var wasUltra = (mode === 'ultra');
+    var wasHorror = (mode === 'horror');
     state = 'idle';
     clearTimers();
 
     var kicked = chTimes.length;
     var avg = kicked ? chTimes.reduce(function(a,b){ return a + b; }, 0) / kicked : 0;
     var best = kicked ? Math.min.apply(null, chTimes) : 0;
-    var r = rate(avg, kicked, chEarly, wasUltra, chIdx, chTotal);
+    var r = rate(avg, kicked, chEarly, wasUltra, wasHorror, chTotal);
 
     rAvg.textContent   = kicked ? Math.round(avg) + 'ms' : '—';
     rBest.textContent  = kicked ? Math.round(best) + 'ms' : '—';
@@ -1515,7 +1997,7 @@
     chalTitle.textContent = r.t;
     chalTitle.className = r.c;
     document.getElementById('chalEyebrow').textContent =
-      (wasUltra ? 'Ultra hard · ' : 'Challenge · ') + chTotal + ' casts';
+      (wasHorror ? 'Horror · ' : wasUltra ? 'Ultra hard · ' : 'Challenge · ') + chTotal + ' casts';
 
     var extra = '';
     if (chEarly >= 3) extra = ' You also kicked thin air ' + chEarly + ' times, which in a real pull is your interrupt on cooldown while the cast goes off.';
@@ -1533,9 +2015,26 @@
 
   function chFail(){
     var wasUltra = (mode === 'ultra');
+    var wasHorror = (mode === 'horror');
     clearTimers();
     state = 'idle';
     var kicked = chTimes.length;
+
+    if (wasHorror){
+      Void.setDread(1);
+      voidTitle.textContent = 'Consumed.';
+      voidSay.textContent = 'One of them finished casting. You interrupted ' + kicked + ' of ' + chTotal +
+        ' before the pack ate the group. In a real pull nobody would even tell you which one you missed.';
+      setTimeout(function(){
+        endRunUi();
+        voidEnd.classList.add('on');
+        voidAgain.focus();
+      }, 780);
+      if (!unlocked && kicked >= 3){
+        unlock('You saw enough of it. The page is open.', 'Unlocked the hard way');
+      }
+      return;
+    }
 
     if (wasUltra){
       Chaos.setBlood(1);
@@ -1576,8 +2075,10 @@
   function chCloseAnd(fn){
     chalEl.classList.remove('on');
     wipeEl.classList.remove('on');
+    voidEnd.classList.remove('on');
     chalAgain.blur(); chalClose.blur();
     wipeAgain.blur(); wipeClose.blur();
+    voidAgain.blur(); voidClose.blur();
     streak = 0; missStreak = 0;
     setTally();
     if (fn) fn(); else stopSim('Run over. Press RUN IT AGAIN for normal casts.');
@@ -1801,6 +2302,19 @@
     lastRun = 'ultra';
     startRun('ultra');
   });
+  horrorStart.addEventListener('click', function(){
+    if (mode === 'horror') { abortRun(); return; }
+    lastRun = 'horror';
+    startRun('horror');
+  });
+  voidAgain.addEventListener('click', function(){
+    voidEnd.classList.remove('on');
+    chCloseAnd(function(){ startRun('horror'); });
+  });
+  voidClose.addEventListener('click', function(){
+    voidEnd.classList.remove('on');
+    chCloseAnd(null);
+  });
   chalAgain.addEventListener('click', function(){
     chCloseAnd(function(){ startRun(lastRun); });
   });
@@ -1813,7 +2327,8 @@
     if (e.code !== 'Space' && e.key !== ' ') return;
     // once the sim has settled, Space belongs to the page again (scrolling)
     if (state === 'done') return;
-    if (chalEl.classList.contains('on') || wipeEl.classList.contains('on')) return;
+    if (chalEl.classList.contains('on') || wipeEl.classList.contains('on') || voidEnd.classList.contains('on')) return;
+    if (mode === 'horror') return;
     var a = document.activeElement;
     if (a && (a.tagName === 'INPUT' || a.tagName === 'BUTTON')) return;
     e.preventDefault();
