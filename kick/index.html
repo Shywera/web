@@ -694,6 +694,11 @@
     border-color:#C79BF0;
     box-shadow:0 0 0 2px rgba(199,155,240,.35), 0 0 60px rgba(160,90,240,.55);
   }
+  /* in horror the bar is display only (Space kicks it), so it must never
+     swallow a click meant for a small bar drifting under it */
+  body.horror .sim{pointer-events:none}
+  #bigone{pointer-events:none}
+
   body.horror .sim-foot,
   body.horror .tally{display:none}
   body.horror .hud{border-top:none;padding-top:6px;margin-top:0}
@@ -1289,6 +1294,109 @@
     mask-image:linear-gradient(#000 15%, transparent 95%);
   }
 
+  /* ---------- level select ---------- */
+  .levels[hidden]{display:none}
+  .levels{
+    margin-top:clamp(22px,4vw,32px);
+    animation:lvIn .7s cubic-bezier(.2,.8,.25,1) both;
+  }
+  @keyframes lvIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+  .lv-head{display:flex;flex-direction:column;gap:.4em;margin-bottom:18px}
+  .lv-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:12px;
+  }
+  .lv{
+    --c:var(--amber);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:7px;
+    padding:20px 18px 18px;
+    text-align:left;
+    background:linear-gradient(165deg, rgba(255,255,255,.035), rgba(255,255,255,0) 60%), var(--panel);
+    border:1px solid var(--line-hot);
+    border-radius:2px;
+    color:inherit;
+    font:inherit;
+    cursor:pointer;
+    overflow:hidden;
+    transition:transform .25s cubic-bezier(.2,.8,.25,1), border-color .25s ease, box-shadow .25s ease;
+  }
+  .lv::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:3px;
+    background:var(--c);
+    opacity:.65;
+    transition:opacity .25s ease, box-shadow .25s ease;
+  }
+  .lv:hover,.lv:focus-visible{
+    transform:translateY(-4px);
+    border-color:var(--c);
+    box-shadow:0 12px 34px rgba(0,0,0,.5);
+    outline:none;
+  }
+  .lv:hover::after,.lv:focus-visible::after{opacity:1;box-shadow:0 0 22px var(--c)}
+
+  .lv-no{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:.24em;
+    color:var(--c);
+  }
+  .lv-name{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(26px,4vw,34px);
+    line-height:1;
+    color:var(--text);
+  }
+  .lv-desc{font-size:14px;line-height:1.45;color:var(--dim);flex:1 1 auto}
+  .lv-meta{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--dimmer);
+  }
+  .lv-cta{
+    margin-top:8px;
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--c);
+  }
+  .lv:hover .lv-cta{color:var(--text)}
+
+  .lv-1{--c:var(--amber)}
+  .lv-2{--c:var(--red)}
+  .lv-3{
+    --c:#B98CE8;
+    border-color:#6A3FA8;
+    background:
+      radial-gradient(120% 100% at 50% 120%, rgba(160,90,240,.22), rgba(160,90,240,0) 70%),
+      linear-gradient(165deg, rgba(255,255,255,.04), rgba(255,255,255,0) 60%),
+      var(--panel);
+    animation:lvGlow 2.8s ease-in-out infinite;
+  }
+  @keyframes lvGlow{
+    0%,100%{box-shadow:0 0 0 rgba(160,90,240,0), 0 0 26px rgba(160,90,240,.28)}
+    50%{box-shadow:0 0 0 1px rgba(185,140,232,.5), 0 0 54px rgba(160,90,240,.62)}
+  }
+  .lv-3 .lv-name{
+    color:#E7D2FF;
+    text-shadow:0 0 26px rgba(160,90,240,.6);
+  }
+  .lv-3::after{opacity:1;box-shadow:0 0 26px #B98CE8}
+
   /* ---------- the rule ---------- */
   .rule-body{max-width:62ch}
   .rule-body p{color:var(--dim)}
@@ -1540,9 +1648,6 @@
       <div class="sim-foot">
         <button class="kick-btn" id="kickBtn" type="button">KICK</button>
         <kbd>SPACE</kbd>
-        <button class="chal-btn" id="chalStart" type="button">Challenge · 10 casts</button>
-        <button class="ultra-btn" id="ultraStart" type="button">Ultra · 15 casts</button>
-        <button class="horror-btn" id="horrorStart" type="button">Horror</button>
         <span class="verdict" id="verdict">Press it before the bar fills. Five in a row and you're invited. Miss two and we're done.</span>
       </div>
 
@@ -1556,6 +1661,36 @@
     <span class="gate-text" id="gateText">The rest of this page is locked until you settle the bar above. Kick <strong>5 in a row</strong> and you're in. Miss <strong>2 in a row</strong> and you're out. Either way you get to read it — the difference is how.</span>
     <span class="gate-prog" id="gateProg">Streak <b>0</b>/5 · Misses <b>0</b>/2</span>
   </div>
+
+  <section class="levels" id="levels" hidden>
+    <div class="lv-head">
+      <p class="eyebrow">You're in. Now pick something worse.</p>
+      <h2>Difficulty.</h2>
+    </div>
+    <div class="lv-grid">
+      <button class="lv lv-1" id="chalStart" type="button">
+        <span class="lv-no">I</span>
+        <span class="lv-name">Challenge</span>
+        <span class="lv-desc">Ten casts at random intervals. It times every kick in milliseconds and one miss ends the run.</span>
+        <span class="lv-meta">Reaction test · 10 casts</span>
+        <span class="lv-cta">Start →</span>
+      </button>
+      <button class="lv lv-2" id="ultraStart" type="button">
+        <span class="lv-no">II</span>
+        <span class="lv-name">Ultra</span>
+        <span class="lv-desc">Fifteen casts, far shorter. The icon flares before each one. Blood, screen tearing, and an interrupt cooldown if you panic.</span>
+        <span class="lv-meta">Prediction · 15 casts</span>
+        <span class="lv-cta">Start →</span>
+      </button>
+      <button class="lv lv-3" id="horrorStart" type="button">
+        <span class="lv-no">III</span>
+        <span class="lv-name">Horror</span>
+        <span class="lv-desc">Four stages. Mouse and keyboard at the same time, mages that blink out of your click, allies you must not touch, and something watching.</span>
+        <span class="lv-meta">Endurance · one heart</span>
+        <span class="lv-cta">Enter →</span>
+      </button>
+    </div>
+  </section>
 
   <div class="gated locked" id="gated" aria-hidden="true">
 
@@ -2194,9 +2329,38 @@
 
     var BAR_H = 56;
 
+    // the whole viewport is fair game — the big bar is avoided wherever it currently sits
+    function floorOf(vh){ return vh - BAR_H - 16; }
+
     function boxHit(x, y, w, a, pad){
       return !(x + w < a.left - pad || x > a.right + pad ||
                y + BAR_H < a.top - pad || y > a.bottom + pad);
+    }
+
+    // shove a bar clear of the big bar along whichever axis needs least movement
+    function pushOut(r, a, vw, vh){
+      if (!a || !boxHit(r.x, r.y, r.w, a, 12)) return;
+      var pad = 14;
+      var up    = (r.y + BAR_H) - (a.top - pad);      // move up by this much
+      var down  = (a.bottom + pad) - r.y;
+      var left  = (r.x + r.w) - (a.left - pad);
+      var right = (a.right + pad) - r.x;
+
+      var floorY = floorOf(vh);
+      var canUp    = (r.y - up)    >= TOP_CLEAR;
+      var canDown  = (r.y + down)  <= floorY;
+      var canLeft  = (r.x - left)  >= 8;
+      var canRight = (r.x + right) <= vw - r.w - 8;
+
+      var best = null;
+      if (canUp)    best = { d:up,    ax:'y', v:r.y - up };
+      if (canDown  && (!best || down  < best.d)) best = { d:down,  ax:'y', v:r.y + down };
+      if (canLeft  && (!best || left  < best.d)) best = { d:left,  ax:'x', v:r.x - left };
+      if (canRight && (!best || right < best.d)) best = { d:right, ax:'x', v:r.x + right };
+      if (!best) best = { ax:'x', v: (a.left > vw / 2) ? 8 : vw - r.w - 8 };  // last resort: a side
+
+      if (best.ax === 'y'){ r.y = best.v; if ((best.v < r.y) === (r.vy < 0)) r.vy *= -1; }
+      else { r.x = best.v; r.vx *= -1; }
     }
 
     // live rect of the pinned bar — it moves, so this is read fresh
@@ -2220,7 +2384,7 @@
     }
 
     function place(r, vw, vh){
-      var maxY = vh - clearPx - 52;
+      var maxY = floorOf(vh);
       var bestX = r.x, bestY = r.y, found = false;
       for (var k = 0; k < 40; k++){
         var nx = 20 + Math.random() * Math.max(vw - r.w - 40, 10);
@@ -2243,7 +2407,7 @@
       for (var i = 0; i < n; i++){
         var b = el('div', 'mbar');
         b.style.width = bw + 'px';
-        var maxY0 = vh - clearPx - 52;
+        var maxY0 = floorOf(vh);
         var x = 20 + Math.random() * Math.max(vw - bw - 40, 10);
         var y = TOP_CLEAR + Math.random() * Math.max(maxY0 - TOP_CLEAR, 10);
 
@@ -2339,7 +2503,7 @@
         r.e.classList.remove('blink');
         void r.e.offsetWidth;
         r.e.classList.add('blink');
-        Sfx.play('tp', 1, 0.45);
+        Sfx.play('tp', 1, 0.9);
         return;
       }
 
@@ -2348,7 +2512,7 @@
         r.left--;
         var vw2 = window.innerWidth, vh2 = window.innerHeight;
         r.x = Math.max(12, Math.min(vw2 - r.w - 12, vw2 - r.x - r.w));
-        r.y = Math.max(TOP_CLEAR, Math.min(vh2 - clearPx - 52, vh2 - r.y - 90));
+        r.y = Math.max(TOP_CLEAR, Math.min(floorOf(vh2), vh2 - r.y - 90));
         r.vx *= -1; r.vy *= -1;
         r.zoomUntil = performance.now() + 620;
         r.e.classList.add('bubbled');
@@ -2389,17 +2553,17 @@
 
         if (!reduce && now > r.zoomUntil){
           r.x += r.vx * dt; r.y += r.vy * dt;
-          var floorY = vh - clearPx - 52;
+          var floorY = floorOf(vh);
           if (r.x < 8 || r.x > vw - r.w - 8) r.vx *= -1;
           if (r.y < TOP_CLEAR || r.y > floorY) r.vy *= -1;
           if (r.y > floorY) r.y = floorY;
           if (r.y < TOP_CLEAR) r.y = TOP_CLEAR;
 
-          // the pinned bar moves in later stages — never drift on top of it
-          if (liveSim && boxHit(r.x, r.y, r.w, liveSim, 12)){
-            r.y = Math.max(TOP_CLEAR, liveSim.top - BAR_H - 14);
-            if (r.vy > 0) r.vy *= -1;
-          }
+          pushOut(r, liveSim, vw, vh);
+          r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
+        } else if (liveSim && boxHit(r.x, r.y, r.w, liveSim, 12)){
+          // even parked bars get shoved clear if the big bar wanders onto them
+          pushOut(r, liveSim, vw, vh);
           r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
         }
 
@@ -2441,7 +2605,49 @@
         r.fill.style.width = (p * 100).toFixed(1) + '%';
         r.tm.textContent = ((r.dur - el2) / 1000).toFixed(1);
       }
+
+      separate(vw, vh, liveSim);
       rafH = requestAnimationFrame(tick);
+    }
+
+    function clampBar(r, vw, vh){
+      r.x = Math.max(8, Math.min(vw - r.w - 8, r.x));
+      r.y = Math.max(TOP_CLEAR, Math.min(floorOf(vh), r.y));
+    }
+
+    // small bars must never sit on each other either — a few passes per frame
+    // converges much faster than one, and it runs every frame anyway
+    function separate(vw, vh, liveSim){
+      if (reduce) return;
+      for (var pass = 0; pass < 3; pass++) sepPass(vw, vh, liveSim);
+    }
+
+    function sepPass(vw, vh, liveSim){
+      for (var i = 0; i < bars.length; i++){
+        var A = bars[i];
+        if (A.done || performance.now() < A.zoomUntil) continue;
+        for (var j = i + 1; j < bars.length; j++){
+          var B = bars[j];
+          if (B.done || performance.now() < B.zoomUntil) continue;
+          if (!boxHit(A.x, A.y, A.w, { left:B.x, right:B.x + B.w, top:B.y, bottom:B.y + BAR_H }, 10)) continue;
+
+          var ox = Math.min(A.x + A.w - B.x, B.x + B.w - A.x) + 8;
+          var oy = Math.min(A.y + BAR_H - B.y, B.y + BAR_H - A.y) + 8;
+          if (ox < oy){
+            var sx = (A.x < B.x) ? 1 : -1;
+            A.x -= sx * ox / 2; B.x += sx * ox / 2;
+            A.vx *= -1; B.vx *= -1;
+          } else {
+            var sy = (A.y < B.y) ? 1 : -1;
+            A.y -= sy * oy / 2; B.y += sy * oy / 2;
+            A.vy *= -1; B.vy *= -1;
+          }
+          clampBar(A, vw, vh); clampBar(B, vw, vh);
+          pushOut(A, liveSim, vw, vh); pushOut(B, liveSim, vw, vh);
+          A.e.style.transform = 'translate(' + A.x.toFixed(1) + 'px,' + A.y.toFixed(1) + 'px)';
+          B.e.style.transform = 'translate(' + B.x.toFixed(1) + 'px,' + B.y.toFixed(1) + 'px)';
+        }
+      }
     }
 
     return {
@@ -2628,7 +2834,8 @@
       gate    = document.getElementById('gate'),
       gateLabel = document.getElementById('gateLabel'),
       gateText  = document.getElementById('gateText'),
-      gateProg  = document.getElementById('gateProg');
+      gateProg  = document.getElementById('gateProg'),
+      levelsEl  = document.getElementById('levels');
 
   var unlocked = false;
 
@@ -2728,6 +2935,11 @@
     return {t:'Survived.', c:'mid', s:'All ' + total + ', averaging ' + ms + 'ms. You never missed, but at that speed you are relying on long casts to save you.'};
   }
 
+  function lvLabel(btn, txt){
+    var e = btn.querySelector('.lv-cta');
+    if (e) e.textContent = txt; else btn.textContent = txt;
+  }
+
   function startRun(which){
     clearTimers();
     chalEl.classList.remove('on');
@@ -2745,11 +2957,11 @@
     hpEl.classList.add('on');
     hpEl.querySelector('.hp-label').innerHTML = '1 HP<span>one cast kills you</span>';
 
-    chalStart.textContent = which === 'challenge' ? 'Abort challenge' : 'Challenge · 10 casts';
+    lvLabel(chalStart, which === 'challenge' ? 'Abort ✕' : 'Start →');
     chalStart.classList.toggle('on', which === 'challenge');
-    ultraStart.textContent = which === 'ultra' ? 'Abort ultra' : 'Ultra · 15 casts';
+    lvLabel(ultraStart, which === 'ultra' ? 'Abort ✕' : 'Start →');
     ultraStart.classList.toggle('on', which === 'ultra');
-    horrorStart.textContent = which === 'horror' ? 'Abort horror' : 'Horror';
+    lvLabel(horrorStart, which === 'horror' ? 'Abort ✕' : 'Enter →');
     horrorStart.classList.toggle('on', which === 'horror');
     chalStart.blur(); ultraStart.blur(); horrorStart.blur();
 
@@ -3273,11 +3485,11 @@
 
   function endRunUi(){
     mode = 'gate';
-    chalStart.textContent = 'Challenge · 10 casts';
+    lvLabel(chalStart, 'Start →');
     chalStart.classList.remove('on');
-    ultraStart.textContent = 'Ultra · 15 casts';
+    lvLabel(ultraStart, 'Start →');
     ultraStart.classList.remove('on');
-    horrorStart.textContent = 'Horror';
+    lvLabel(horrorStart, 'Enter →');
     horrorStart.classList.remove('on');
     document.body.classList.remove('ultra');
     document.body.classList.remove('horror');
@@ -3616,6 +3828,7 @@
 
   function unlock(msg, label){
     loop = false;
+    levelsEl.hidden = false;
     gated.classList.remove('locked');
     gated.removeAttribute('aria-hidden');
     gate.classList.add('done');
@@ -3624,7 +3837,7 @@
     unlocked = true;
     setTally();
     setTimeout(function(){
-      gate.scrollIntoView({behavior:'smooth', block:'start'});
+      (levelsEl || gate).scrollIntoView({behavior:'smooth', block:'center'});
     }, 350);
   }
 
