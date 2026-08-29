@@ -300,6 +300,16 @@
   .boot-btn:hover{border-color:var(--red);color:#F2605D}
   .boot-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
 
+  /* win variant of the same takeover */
+  .boot.win{
+    background:
+      radial-gradient(90% 70% at 50% 40%, rgba(18,92,60,.55) 0%, rgba(10,11,17,.97) 70%),
+      var(--ink);
+  }
+  .boot.win .boot-eyebrow{color:var(--green)}
+  .boot.win h2{color:#6FD5A0;text-shadow:0 0 40px rgba(88,192,138,.4)}
+  .boot.win .boot-btn:hover{border-color:var(--green);color:#6FD5A0}
+
   /* ---------- the rule ---------- */
   .rule-body{max-width:62ch}
   .rule-body p{color:var(--dim)}
@@ -551,7 +561,7 @@
       <div class="sim-foot">
         <button class="kick-btn" id="kickBtn" type="button">KICK</button>
         <kbd>SPACE</kbd>
-        <span class="verdict" id="verdict">Press it before the bar fills. That's the whole game. That is the entire thing I am asking of you.</span>
+        <span class="verdict" id="verdict">Press it before the bar fills. Five in a row and you're invited. Miss two and we're done.</span>
       </div>
 
       <p class="tally" id="tally">Interrupted <b>0</b> Â· Missed <b>0</b> Â· Success rate <b>â€”</b></p>
@@ -784,11 +794,21 @@
 
 <div class="boot" id="boot" role="dialog" aria-modal="true" aria-labelledby="bootTitle">
   <div class="boot-inner">
-    <p class="boot-eyebrow">Three casts. Zero interrupts.</p>
+    <p class="boot-eyebrow">Two casts. Zero interrupts.</p>
     <h2 id="bootTitle">Fuck Off Out Of My Key.</h2>
-    <p>You missed <strong>three casts in a row</strong> on a webpage with one button, a warning label, a giant flashing bar, and absolutely nothing else happening on screen.</p>
+    <p>You missed <strong>two casts in a row</strong> on a webpage with one button, a warning label, a giant flashing bar, and absolutely nothing else happening on screen.</p>
     <p class="small">This is precisely what happens at the third boss, except there we also lose 35 minutes, a key level, and any remaining faith in the group finder.</p>
     <button class="boot-btn" id="bootBtn" type="button">Let me try again</button>
+  </div>
+</div>
+
+<div class="boot win" id="win" role="dialog" aria-modal="true" aria-labelledby="winTitle">
+  <div class="boot-inner">
+    <p class="boot-eyebrow">Five casts. Five interrupts.</p>
+    <h2 id="winTitle">Come To My Key.</h2>
+    <p>Five in a row. That is <strong>five more than the Hunter from last night</strong> managed across an entire dungeon while sitting at the top of the meter.</p>
+    <p class="small">Invite is open. Bring the thumb. Say nothing about damage and we'll get along fine.</p>
+    <button class="boot-btn" id="winBtn" type="button">Run it back</button>
   </div>
 </div>
 
@@ -805,19 +825,14 @@
 
   var MISS_LINES = [
     "LANDED â€” %s Well fucking done.",
-    "MISSED AGAIN. Two for two. Are you alt-tabbed or just built like this?",
-    "THREE. One button. On a website. With a warning on it.",
-    "Four. Genuinely, what are you doing.",
-    "Five. The healer has stopped healing you and I'm backing them.",
-    "At this point I'm choosing to believe this is a bit."
+    "MISSED AGAIN. Two for two. That's your lot."
   ];
 
   var HIT_LINES = [
     "INTERRUPTED. That's it. That's the entire job. You can do this.",
     "Two in a row. Already above the median pug.",
     "Three. This would be a personal record for most of my DPS.",
-    "Four. Genuinely, where have you been all season.",
-    "Okay you've made your point. Please come to my key."
+    "Four. One more and I'm sending you an invite."
   ];
 
   var sim     = document.getElementById('sim'),
@@ -830,7 +845,9 @@
       tally   = document.getElementById('tally'),
       kickBtn = document.getElementById('kickBtn'),
       bootEl  = document.getElementById('boot'),
-      bootBtn = document.getElementById('bootBtn');
+      bootBtn = document.getElementById('bootBtn'),
+      winEl   = document.getElementById('win'),
+      winBtn  = document.getElementById('winBtn');
 
   var state = 'idle', start = 0, dur = 2.2, cur = SPELLS[0], raf = null;
   var hits = 0, miss = 0, streak = 0, missStreak = 0;
@@ -883,7 +900,7 @@
     sim.classList.add('hit');
     setTimeout(function(){ sim.classList.remove('hit'); }, 360);
 
-    if (missStreak >= 3) { setTimeout(boot, 700); return; }
+    if (missStreak >= 2) { setTimeout(boot, 700); return; }
     setTimeout(reset, 2100);
   }
 
@@ -909,7 +926,21 @@
     setTally();
     verdict.className = 'verdict good';
     verdict.textContent = pick(HIT_LINES, streak);
+
+    if (streak >= 5) { setTimeout(showWin, 700); return; }
     setTimeout(reset, 1500);
+  }
+
+  function showWin(){
+    state = 'won';
+    winEl.classList.add('on');
+    winBtn.focus();
+  }
+
+  function unwin(){
+    winEl.classList.remove('on');
+    streak = 0;
+    reset();
   }
 
   function reset(){
@@ -919,6 +950,7 @@
 
   kickBtn.addEventListener('click', kick);
   bootBtn.addEventListener('click', unboot);
+  winBtn.addEventListener('click', unwin);
   document.addEventListener('keydown', function(e){
     if (e.code !== 'Space' && e.key !== ' ') return;
     var a = document.activeElement;
