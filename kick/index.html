@@ -438,7 +438,9 @@
   }
   .bloodv.on{opacity:var(--blood,0)}
 
-  body.ultra{animation:ultraShake 3.1s ease-in-out infinite}
+  /* never transform <body>: it would become the containing block for every
+     position:fixed element (the pinned bar, blood, heart) and push them off screen */
+  body.ultra .page{animation:ultraShake 3.1s ease-in-out infinite}
   @keyframes ultraShake{
     0%,100%{transform:translate(0,0)}
     23%{transform:translate(-1px,1px)}
@@ -1013,7 +1015,7 @@
   }
   .hp-blood rect{transform-origin:top center}
 
-  #hp.dead{animation:hpJolt .34s ease-out}
+  #hp.dead:not(.center){animation:hpJolt .34s ease-out}
   @keyframes hpJolt{
     0%{transform:translate(0,0)}
     25%{transform:translate(-4px,3px)}
@@ -2148,7 +2150,7 @@
 
   /* ---- horror: many casters, click every frame ---- */
   var Horror = (function(){
-    var layer, hint, bars = [], rafH = null, last = 0, running = false;
+    var layer, hint, bars = [], rafH = null, last = 0, running = false, clearT = null;
     var onClear = null, onFail = null, onKick = null, onShield = null;
     var tiers = false, tpEvery = 0, mage = false, grandOn = false;
     var nameFx = function(s){ return s; };   // set per wave; decays with the stage
@@ -2283,6 +2285,7 @@
       hint.textContent = 'Wave ' + wave + ' · ' + n + ' caster' + (n > 1 ? 's' : '') + ' — click every bar';
       layer.classList.add('on');
       running = true; last = 0;
+      clearTimeout(clearT);
       rafH = requestAnimationFrame(tick);
     }
 
@@ -2329,7 +2332,7 @@
       for (var i = 0; i < bars.length; i++) if (!bars[i].done) return;
       running = false;
       cancelAnimationFrame(rafH);
-      setTimeout(function(){ if (onClear) onClear(); }, 260);
+      clearT = setTimeout(function(){ if (onClear) onClear(); }, 260);
     }
 
     function tick(now){
@@ -2374,7 +2377,7 @@
             if (allDone){
               running = false;
               cancelAnimationFrame(rafH);
-              setTimeout(function(){ if (onClear) onClear(); }, 220);
+              clearT = setTimeout(function(){ if (onClear) onClear(); }, 220);
               return;
             }
             continue;
@@ -2407,6 +2410,7 @@
       clear: function(){
         running = false;
         cancelAnimationFrame(rafH);
+        clearTimeout(clearT);
         var l = document.getElementById('mirrors');
         for (var i = 0; i < bars.length; i++) if (bars[i].e.parentNode) bars[i].e.parentNode.removeChild(bars[i].e);
         bars = [];
@@ -2618,6 +2622,7 @@
       glyphEl    = document.querySelector('.glyph');
 
   var mode = 'gate', chIdx = 0, chTimes = [], chEarly = 0, chTimer = null;
+  var seqTimer = null, waveTimer = null, hBusy = false;
   var chTotal = 10, loop = true, gateTimer = null, ultraCdUntil = 0;
 
   /* a transformed ancestor (.page during a dim shift) breaks position:fixed,
@@ -2640,6 +2645,8 @@
 
   function clearTimers(){
     clearTimeout(chTimer);
+    clearTimeout(seqTimer);
+    clearTimeout(waveTimer);
     clearTimeout(gateTimer);
     clearTimeout(bigTimer);
     cancelAnimationFrame(raf);
@@ -2783,6 +2790,37 @@
     wanderRaf = requestAnimationFrame(wanderTick);
   }
 
+  /* the briefing behind the game rots along with everything else */
+  var pageText = null;
+
+  function snapshotPage(){
+    if (pageText) return;
+    pageText = [];
+    var sel = '.page h1, .page h2, .page p, .page li, .page .cls-spell, .page .cls-note, ' +
+              '.page .guild-n, .page .def-term, .page .def-body, .page td, .page .eyebrow';
+    Array.prototype.forEach.call(document.querySelectorAll(sel), function(el){
+      if (el.children.length) return;          // only leaf text, never touch markup
+      var txt = (el.textContent || '').trim();
+      if (!txt || txt.length > 220) return;
+      pageText.push({ el: el, txt: el.textContent });
+    });
+  }
+
+  function corruptPage(stage){
+    snapshotPage();
+    var lvl = stage >= 4 ? 3 : stage === 3 ? 2 : stage === 2 ? 1 : 0;
+    var share = stage >= 4 ? 1 : stage === 3 ? 0.75 : 0.4;
+    for (var i = 0; i < pageText.length; i++){
+      var r = pageText[i];
+      r.el.textContent = (lvl && Math.random() < share) ? corrupt(r.txt, lvl) : r.txt;
+    }
+  }
+
+  function restorePage(){
+    if (!pageText) return;
+    for (var i = 0; i < pageText.length; i++) pageText[i].el.textContent = pageText[i].txt;
+  }
+
   function setStage(n){
     var b = document.body.classList;
     b.remove('st1', 'st2', 'st3', 'st4');
@@ -2794,7 +2832,7 @@
   var GOALS = [10, 10, 6];                // big-bar kicks needed per stage
   var CUM = [10, 20, 26];                 // running totals
   var hPhase = 1, hBig = 0, hSmall = 0, hWaveNo = 0, hHeart = true;
-  var bigOn = false, bigT0 = 0, bigDur = 0, bigRaf = null, bigTimer = null;
+  var bigOn = false, bigT0 = 0, bigDur = 0, bigRaf = null, bigTimer = null, hCdUntil = 0;
 
   function hHud(){
     var done = hPhase > 1 ? hBig - CUM[hPhase - 2] : hBig;
@@ -2803,8 +2841,8 @@
   }
 
   function hStartRun(){
-    hPhase = 1; hBig = 0; hSmall = 0; hWaveNo = 0; hHeart = true;
-    fOn = false; fCount = 0;
+    hPhase = 1; hBig = 0; hSmall = 0; hWaveNo = 0; hHeart = true; hBusy = false;
+    fOn = false; fCount = 0; hCdUntil = 0;
     setStage(1);
     state = 'waiting';
     sim.dataset.state = 'waiting';
@@ -2911,8 +2949,11 @@
 
   function hAdvance(next){
     hPhase = next;
+    hBusy = true;                    // nothing may run behind the banner
     setStage(next);
     clearTimeout(chTimer);
+    clearTimeout(seqTimer);
+    clearTimeout(waveTimer);
     clearTimeout(bigTimer);
     cancelAnimationFrame(bigRaf);
     bigOn = false;
@@ -2998,7 +3039,9 @@
       var b = seq[i++];
       if (!b){
         pb.classList.remove('on');
+        hBusy = false;               // the stage is live again
         if (mode !== 'horror') return;
+        corruptPage(next);
         if (next === 4){ hFinal(); }
         else { hWave(); bigSchedule(next === 2 ? 1000 : 1200); }
         return;
@@ -3009,7 +3052,7 @@
         try { song.volume = 0.5; } catch (e){}
       }
       beat(b.t, b.htmlFn ? b.htmlFn() : b.html, b.plain);
-      chTimer = setTimeout(step, b.ms);
+      seqTimer = setTimeout(step, b.ms);
     })();
   }
 
@@ -3049,16 +3092,19 @@
       mage: !!cfg.mage,
       grand: !!cfg.grand,
       nameFx: function(s){ return corrupt(s, textLevel()); },
-      onKick: function(ms){ chTimes.push(ms); hSmall++; hHud(); },
+      onKick: function(ms){ if (hBusy) return; chTimes.push(ms); hSmall++; hHud(); },
       onClear: function(){
+        if (hBusy) return;
         Horror.clear();
-        if (mode === 'horror') chTimer = setTimeout(hWave, 550);
+        if (mode === 'horror') waveTimer = setTimeout(hWave, 550);
       },
       onFail: function(){
+        if (hBusy) return;
         setTimeout(function(){ Horror.clear(); }, 700);
         chFail();
       },
       onShield: function(){
+        if (hBusy) return;
         setTimeout(function(){ Horror.clear(); }, 700);
         chFail('shield');
       }
@@ -3107,8 +3153,31 @@
   }
 
   function bigKick(){
-    if (hPhase >= 4){ fHit(); return; }
-    if (!bigOn) return;
+    if (hPhase >= 4){ fHit(); return; }        // the last stage is a mash — spam is the point
+    if (hBusy) return;
+
+    var tnow = performance.now();
+
+    // pressing with nothing casting burns the interrupt
+    if (!bigOn){
+      if (tnow < hCdUntil) return;
+      chEarly++;
+      hCdUntil = tnow + 1400;
+      kickBtn.classList.add('cd');
+      kickBtn.style.setProperty('--cd', '1.4s');
+      setTimeout(function(){ kickBtn.classList.remove('cd'); }, 1400);
+      tagEl.textContent = 'interrupt on cooldown';
+      verdict.className = 'verdict bad';
+      verdict.textContent = 'Nothing was casting. Interrupt is down for 1.4 seconds — hope nothing starts.';
+      return;
+    }
+
+    // still on cooldown from an early press: the kick simply does not happen
+    if (tnow < hCdUntil){
+      verdict.className = 'verdict bad';
+      verdict.textContent = 'Interrupt on cooldown. You spent it on nothing.';
+      return;
+    }
     bigOn = false;
     cancelAnimationFrame(bigRaf);
     var ms = performance.now() - bigT0;
@@ -3176,6 +3245,8 @@
     if (page) page.className = 'page';
     document.body.classList.remove('st1', 'st2', 'st3', 'st4');
     setBarMotion(0);
+    restorePage();
+    hBusy = false;
     fOn = false;
     cancelAnimationFrame(fRaf);
     if (boEl) boEl.classList.remove('on');
@@ -3319,7 +3390,7 @@
       tagEl.textContent = 'saved';
       verdict.className = 'verdict bad';
       verdict.textContent = 'That would have killed you. It cost your heart. There is no second one.';
-      chTimer = setTimeout(function(){
+      waveTimer = setTimeout(function(){
         if (mode !== 'horror') return;
         hWave();
         bigSchedule(1300);
