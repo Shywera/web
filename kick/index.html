@@ -813,10 +813,11 @@
     50%{transform:scale(1.045)}
   }
   .phase-s{
-    margin-top:16px;
-    font-size:clamp(16px,2.6vw,20px);
+    margin-top:18px;
+    font-size:clamp(16px,2.6vw,19px);
+    line-height:1.5;
     color:#B9A6D0;
-    max-width:40ch;
+    max-width:46ch;
     margin-left:auto;margin-right:auto;
   }
   .phase-s b{color:#F0C868}
@@ -2413,14 +2414,17 @@
           Void.setDread(1);
           try { song.volume = 0.5; } catch (e){}
           beat('Phase 2', 'Triage.',
-            'Gold bars are <b>immune</b> — kick one and you are done. The rest are ranked: <b>red casts fastest</b>, then yellow, then green. Everything is quicker now, and they teleport.');
+            'Gold bars are <b>immune</b>. Kick one and you are done.<br><br>' +
+            'The rest are ranked by cast speed:<br>' +
+            '<b>red is fastest</b> — kick it first. Then yellow. Then green.<br><br>' +
+            'Everything is quicker now, and they teleport.');
 
           chTimer = setTimeout(function(){
             pb.classList.remove('on');
             if (mode !== 'horror') return;
             hWave();
-            bigSchedule(700);
-          }, 2400);
+            bigSchedule(1100);
+          }, 5600);
         }, 1200);
       }, 1900);
     }, 1900);
