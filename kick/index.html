@@ -865,6 +865,16 @@
     margin-left:auto;margin-right:auto;
   }
   .phase-s b{color:#F0C868}
+  .phase-skip{
+    margin-top:26px;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:#6B5F82;
+    animation:skipFade 2.4s ease-in-out infinite;
+  }
+  @keyframes skipFade{0%,100%{opacity:.35}50%{opacity:.9}}
 
   .hud{
     display:flex;
@@ -1436,6 +1446,8 @@
     color:#E7D2FF;
     text-shadow:0 0 26px rgba(160,90,240,.6);
   }
+  /* stop pulsing behind the game — it pulls the eye off the bars */
+  body.locked .lv-3{animation:none;box-shadow:none}
   .lv-3::after{opacity:1;box-shadow:0 0 26px #B98CE8}
 
   /* ---------- the rule ---------- */
@@ -2063,7 +2075,8 @@
   <div class="phase-inner">
     <p class="phase-k" id="phaseK"></p>
     <p class="phase-t" id="phaseT">Triage.</p>
-    <p class="phase-s" id="phaseS">Gold bars are <b>immune</b> — kick one and you are done. The rest are ranked: <b>red casts fastest</b>, then yellow, then green. And they teleport now.</p>
+    <p class="phase-s" id="phaseS"></p>
+    <p class="phase-skip">Space to skip</p>
   </div>
 </div>
 
@@ -2935,7 +2948,7 @@
       glyphEl    = document.querySelector('.glyph');
 
   var mode = 'gate', chIdx = 0, chTimes = [], chEarly = 0, chTimer = null;
-  var seqTimer = null, waveTimer = null, hBusy = false;
+  var seqTimer = null, waveTimer = null, hBusy = false, skipFn = null;
   var chTotal = 10, loop = true, gateTimer = null, ultraCdUntil = 0;
 
   /* a transformed ancestor (.page during a dim shift) breaks position:fixed,
@@ -3355,18 +3368,36 @@
 
     pb.classList.add('on');
     var i = 0;
+    var seqStart = performance.now();
+
+    function finish(){
+      skipFn = null;
+      pb.classList.remove('on');
+      hBusy = false;               // the stage is live again
+      if (mode !== 'horror') return;
+      corruptPage(next);
+      if (next === 4){ hFinal(); }
+      else { hWave(); bigSchedule(next === 2 ? 1000 : 1200); }
+    }
+
+    // Space jumps the briefing, but every pending side effect still fires
+    // (the heart is taken here, and skipping must not save it)
+    skipFn = function(){
+      if (performance.now() - seqStart < 600) return;
+      clearTimeout(seqTimer);
+      while (i < seq.length){
+        var b2 = seq[i++];
+        if (b2.act) b2.act();
+      }
+      Void.setDread(next === 2 ? 0.5 : 1);
+      try { song.volume = 0.5; } catch (e){}
+      finish();
+    };
+
     (function step(){
       if (mode !== 'horror') return;
       var b = seq[i++];
-      if (!b){
-        pb.classList.remove('on');
-        hBusy = false;               // the stage is live again
-        if (mode !== 'horror') return;
-        corruptPage(next);
-        if (next === 4){ hFinal(); }
-        else { hWave(); bigSchedule(next === 2 ? 1000 : 1200); }
-        return;
-      }
+      if (!b){ finish(); return; }
       if (b.act) b.act();
       if (b.last){
         Void.setDread(next === 2 ? 0.5 : 1);
@@ -3575,6 +3606,7 @@
     hpEl.classList.remove('front', 'center');
     hudEl.hidden = true;
     document.getElementById('phaseBanner').classList.remove('on');
+    skipFn = null;
     stopSong();
     bgSuspended = false;
     playBg();
@@ -4177,6 +4209,7 @@
     // horror: Space is the only way to kick the big bar, and must never scroll
     if (mode === 'horror'){
       e.preventDefault();
+      if (hBusy){ if (skipFn) skipFn(); return; }
       bigKick();
       return;
     }
