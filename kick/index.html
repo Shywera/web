@@ -1085,6 +1085,40 @@
     white-space:nowrap;
   }
 
+  /* ---------- master mute ---------- */
+  #mute{
+    position:fixed;
+    top:16px;right:16px;
+    z-index:75;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px 9px;
+    font-family:var(--mono);
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--dim);
+    background:rgba(18,20,31,.9);
+    border:1px solid var(--line-hot);
+    border-radius:2px;
+    cursor:pointer;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  #mute:hover{color:var(--text);border-color:var(--amber)}
+  #mute:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+  #mute .eq{display:flex;align-items:flex-end;gap:2px;height:12px}
+  #mute .eq i{
+    display:block;width:2px;background:var(--amber);
+    animation:eq .9s ease-in-out infinite;
+  }
+  #mute .eq i:nth-child(1){height:5px;animation-delay:0s}
+  #mute .eq i:nth-child(2){height:11px;animation-delay:.15s}
+  #mute .eq i:nth-child(3){height:7px;animation-delay:.3s}
+  @keyframes eq{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+  #mute.off .eq i{animation:none;transform:scaleY(.3);background:var(--dimmer)}
+
   /* ---------- steam-style achievement ---------- */
   #ach{
     position:fixed;
@@ -1914,6 +1948,7 @@
     <div>KICK OR LEAVE · pre-key briefing v1</div>
     <div><b>You received this link because you are in my group and I have been hurt before.</b></div>
     <div><b>No addons required. No logs will be linked. Press the button.</b></div>
+    <div><b>Music: "Monkeys Spinning Monkeys" — Kevin MacLeod (incompetech.com), licensed under Creative Commons: By Attribution 4.0.</b></div>
   </footer>
 
   </div>
@@ -1966,6 +2001,12 @@
 <div id="mirrors" aria-hidden="true"><div class="mhint" id="mhint"></div></div>
 
 <audio id="hsong" src="shrine.mp3" preload="none" loop></audio>
+<audio id="bgsong" src="bg.mp3" preload="auto" loop></audio>
+
+<button id="mute" type="button" aria-label="Toggle sound">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span id="muteTxt">Sound on</span>
+</button>
 
 <div id="ach" role="status" aria-live="polite">
   <div class="ach-ico">🦵</div>
@@ -2837,7 +2878,7 @@
       gateProg  = document.getElementById('gateProg'),
       levelsEl  = document.getElementById('levels');
 
-  var unlocked = false;
+  var unlocked = false, muted = false, bgSuspended = false;
 
   /* ---- challenge mode ---- */
   var chalEl    = document.getElementById('chal'),
@@ -2865,6 +2906,9 @@
       hBackBtn    = document.getElementById('hBack'),
       hCountEl    = document.getElementById('hCount'),
       song        = document.getElementById('hsong'),
+      bg          = document.getElementById('bgsong'),
+      muteBtn     = document.getElementById('mute'),
+      muteTxt     = document.getElementById('muteTxt'),
       hpEl        = document.getElementById('hp'),
       wipeEl     = document.getElementById('wipe'),
       wipeAgain  = document.getElementById('wipeAgain'),
@@ -3516,6 +3560,8 @@
     hudEl.hidden = true;
     document.getElementById('phaseBanner').classList.remove('on');
     stopSong();
+    bgSuspended = false;
+    playBg();
     Chaos.stop();
     Void.stop();
     Horror.clear();
@@ -3950,11 +3996,15 @@
   // audio needs a user gesture before it will play at all
   document.addEventListener('pointerdown', function armOnce(){
     Sfx.arm();
+    playBg();
     document.removeEventListener('pointerdown', armOnce);
   }, true);
+
+  muteBtn.addEventListener('click', function(){ setMuted(!muted); });
   document.addEventListener('keydown', function armKey(e){
     if (e.code !== 'Space' && e.key !== ' ') return;
     Sfx.arm();
+    playBg();
     document.removeEventListener('keydown', armKey, true);
   }, true);
 
@@ -3984,6 +4034,8 @@
     introEl.classList.add('on');
     hStartBtn.focus();
     Sfx.arm();
+    bgSuspended = true;
+    stopBg();
     playSong();
     // the heart is introduced in the middle, then takes its corner
     hpEl.classList.remove('dead');
@@ -3998,6 +4050,7 @@
   }
 
   function playSong(){
+    if (muted) return;
     try {
       song.volume = 0.5;
       if (!song.paused) return;
@@ -4008,6 +4061,30 @@
 
   function stopSong(){
     try { song.pause(); song.currentTime = 0; } catch (e){}
+  }
+
+  /* the page has its own loop; horror takes the stereo off it */
+  function playBg(){
+    if (muted || bgSuspended) return;
+    try {
+      bg.volume = 0.3;
+      if (!bg.paused) return;
+      var p = bg.play();
+      if (p && p.catch) p.catch(function(){});
+    } catch (e){}
+  }
+
+  function stopBg(){
+    try { bg.pause(); } catch (e){}
+  }
+
+  function setMuted(v){
+    muted = v;
+    muteBtn.classList.toggle('off', muted);
+    muteTxt.textContent = muted ? 'Sound off' : 'Sound on';
+    if (muted){ stopBg(); stopSong(); }
+    else if (bgSuspended) playSong();
+    else playBg();
   }
 
   function beginCountdown(withSong){
@@ -4043,7 +4120,9 @@
   });
   hStartBtn.addEventListener('click', function(){ beginCountdown(true); });
   hQuietBtn.addEventListener('click', function(){ beginCountdown(false); });
-  hBackBtn.addEventListener('click', function(){ hideIntro(); stopSong(); });
+  hBackBtn.addEventListener('click', function(){
+    hideIntro(); stopSong(); bgSuspended = false; playBg();
+  });
   voidAgain.addEventListener('click', function(){
     voidEnd.classList.remove('on');
     chCloseAnd(function(){ stopSim('Ready when you are.'); showIntro(); });
@@ -4089,6 +4168,14 @@
     e.preventDefault();
     kick();
   });
+
+  (function(){
+    var d = horrorStart.querySelector('.lv-desc');
+    if (!d) return;
+    var real = d.textContent;
+    d.textContent = corrupt(real, 3);
+    setInterval(function(){ d.textContent = corrupt(real, 3); }, 2600);
+  })();
 
   setTally();
   beginCast();
