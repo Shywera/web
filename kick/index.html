@@ -916,15 +916,22 @@
                transform .85s cubic-bezier(.5,0,.2,1);
   }
   #hp.on{display:flex}
+  /* on the intro the heart sits above the copy, never on top of it */
   #hp.center{
-    top:50%;left:50%;
-    transform:translate(-50%,-50%) scale(1.9);
+    top:64px;left:50%;
+    transform:translateX(-50%) scale(1.45);
     z-index:52;
     flex-direction:column;
-    gap:16px;
+    gap:10px;
     text-align:center;
   }
-  #hp.center .hp-label{font-size:12px;letter-spacing:.2em}
+  #hp.center .hp-label{font-size:11px;letter-spacing:.18em}
+  #hintro .boot-inner{padding-top:118px}
+  .boot{overflow-y:auto}
+  @media (max-height:760px){
+    #hp.center{top:42px;transform:translateX(-50%) scale(1.15)}
+    #hintro .boot-inner{padding-top:86px}
+  }
   .hp-art{position:relative;width:58px;height:58px}
   .hp-art svg{position:absolute;inset:0;width:58px;height:58px;overflow:visible}
 
