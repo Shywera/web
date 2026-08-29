@@ -655,6 +655,22 @@
   }
 
   body.horror .sim{background:rgba(10,7,18,.975)}
+  body.pinned .sim{transition:none}
+
+  /* the bar degrades as it goes: still, then moving, then glitching */
+  body.st3 .sim .bar-label .n{
+    text-shadow:1.6px 0 rgba(255,40,40,.9), -1.6px 0 rgba(60,220,255,.75);
+    animation:rgbJit .16s steps(2) infinite;
+  }
+  body.st3 .sim{border-color:#7A3F6B}
+  body.st4 .sim{
+    border-color:#8E2B2B;
+    animation:simGlitch 2.1s steps(1) infinite;
+  }
+  body.st4 .sim .bar-label .n{
+    text-shadow:2.2px 0 rgba(255,40,40,.95), -2.2px 0 rgba(60,220,255,.8);
+    animation:rgbJit .1s steps(2) infinite;
+  }
   body.horror .sim[data-state="casting"]{
     border-color:#C79BF0;
     box-shadow:0 0 0 2px rgba(199,155,240,.35), 0 0 60px rgba(160,90,240,.55);
@@ -926,6 +942,9 @@
     text-align:center;
   }
   #hp.center .hp-label{font-size:11px;letter-spacing:.18em}
+  /* during the transition the heart has to sit in front of the banner */
+  #hp.front{z-index:62}
+  #hp.front.center{top:50%;transform:translate(-50%,-50%) scale(1.9)}
   #hintro .boot-inner{padding-top:118px}
   .boot{overflow-y:auto}
   @media (max-height:760px){
@@ -1087,6 +1106,96 @@
     line-height:1.2;
   }
   .ach-s{font-family:var(--body);font-size:12px;color:#A8BCCE;line-height:1.35}
+
+  /* ---------- final stage: one caster, twenty seconds ---------- */
+  #bigone{
+    position:fixed;
+    left:50%;top:42%;
+    transform:translate(-50%,-50%);
+    width:min(620px,92vw);
+    z-index:42;
+    display:none;
+    flex-direction:column;
+    gap:14px;
+    align-items:center;
+  }
+  #bigone.on{display:flex}
+
+  .bo-name{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(26px,5vw,44px);
+    line-height:1;
+    color:#E7D2FF;
+    text-shadow:0 0 40px rgba(180,110,255,.7);
+    text-align:center;
+  }
+  .bo-bar{
+    position:relative;
+    width:100%;
+    height:74px;
+    background:#150C22;
+    border:2px solid #8E5ACB;
+    box-shadow:0 0 50px rgba(142,90,203,.55);
+    overflow:hidden;
+    cursor:crosshair;
+  }
+  .bo-fill{
+    position:absolute;inset:0 auto 0 0;
+    width:0%;
+    background:linear-gradient(180deg,#C79BF0,#5B2E96);
+  }
+  .bo-lab{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:#F2E7FF;
+    text-shadow:0 2px 6px rgba(0,0,0,.9);
+  }
+  .bo-bar.kicked{animation:boFlash .1s linear}
+  @keyframes boFlash{
+    0%{box-shadow:0 0 0 3px rgba(255,255,255,.85), 0 0 60px rgba(199,155,240,.9)}
+    100%{box-shadow:0 0 50px rgba(142,90,203,.55)}
+  }
+
+  .bo-meta{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    width:100%;
+    gap:20px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--dimmer);
+  }
+  .bo-count{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(40px,9vw,74px);
+    line-height:.9;
+    color:var(--gold, #E9A83C);
+    font-variant-numeric:tabular-nums;
+    text-shadow:0 0 34px rgba(233,168,60,.5);
+  }
+  .bo-count.hit{color:#7BE0AC;text-shadow:0 0 34px rgba(88,192,138,.6)}
+  .bo-clock{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(34px,7vw,58px);
+    line-height:.9;
+    color:#F2605D;
+    font-variant-numeric:tabular-nums;
+  }
+  .bo-clock.calm{color:var(--dim)}
+  .bo-nums{display:flex;align-items:flex-end;justify-content:space-between;width:100%;gap:18px}
+  .bo-nums span{display:block}
+  .bo-cap{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--dimmer)}
 
   .mbar.blink{animation:tp .26s ease-out}
   @keyframes tp{
@@ -1712,6 +1821,18 @@
   </div>
 </div>
 
+<div id="bigone" aria-hidden="true">
+  <p class="bo-name" id="boName">The Last One</p>
+  <div class="bo-bar" id="boBar">
+    <div class="bo-fill" id="boFill"></div>
+    <div class="bo-lab" id="boLab">SPAM SPACE</div>
+  </div>
+  <div class="bo-nums">
+    <span><span class="bo-count" id="boCount">0</span><span class="bo-cap" id="boCap">of 80 interrupts</span></span>
+    <span style="text-align:right"><span class="bo-clock" id="boClock">20.0</span><span class="bo-cap">seconds left</span></span>
+  </div>
+</div>
+
 <div id="hp" aria-hidden="true">
   <div class="hp-art">
     <svg class="hp-heart" viewBox="0 0 32 32">
@@ -2030,6 +2151,7 @@
     var layer, hint, bars = [], rafH = null, last = 0, running = false;
     var onClear = null, onFail = null, onKick = null, onShield = null;
     var tiers = false, tpEvery = 0, mage = false, grandOn = false;
+    var nameFx = function(s){ return s; };   // set per wave; decays with the stage
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function el(tag, cls){ var e = document.createElement(tag); if (cls) e.className = cls; return e; }
@@ -2046,10 +2168,22 @@
       return Math.max(window.innerHeight - r.top + 26, 140);
     }
 
+    var avoidRect = null;
+
+    function clashes(x, y, w){
+      if (!avoidRect) return false;
+      var a = avoidRect, pad = 18;
+      return !(x + w < a.left - pad || x > a.right + pad ||
+               y + 56 < a.top - pad || y > a.bottom + pad);
+    }
+
     function place(r, vw, vh){
       var maxY = vh - clearPx - 52;
-      r.x = 20 + Math.random() * Math.max(vw - r.w - 40, 10);
-      r.y = TOP_CLEAR + Math.random() * Math.max(maxY - TOP_CLEAR, 10);
+      for (var k = 0; k < 12; k++){
+        var nx = 20 + Math.random() * Math.max(vw - r.w - 40, 10);
+        var ny = TOP_CLEAR + Math.random() * Math.max(maxY - TOP_CLEAR, 10);
+        if (!clashes(nx, ny, r.w) || k === 11){ r.x = nx; r.y = ny; break; }
+      }
       r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
     }
 
@@ -2070,7 +2204,7 @@
         var sp = SPELLS[Math.floor(Math.random() * SPELLS.length)];
         var fill = el('i');
         var lab = el('span');
-        var nm = el('em'); nm.style.fontStyle = 'normal'; nm.textContent = sp.n;
+        var nm = el('em'); nm.style.fontStyle = 'normal'; nm.textContent = nameFx(sp.n);
         var tm = el('u'); tm.style.textDecoration = 'none';
         tm.style.fontFamily = '"JetBrains Mono", monospace';
         tm.style.fontSize = '12px';
@@ -2263,11 +2397,13 @@
       wave: function(o){
         onKick = o.onKick; onClear = o.onClear; onFail = o.onFail; onShield = o.onShield;
         tiers = !!o.tiers;
+        nameFx = o.nameFx || function(s){ return s; };
         tpEvery = o.tpEvery || 0;
         mage = !!o.mage;
         grandOn = !!o.grand;
         spawn(o.n, o.dMin, o.dMax, o.speed, o.wave);
       },
+      avoid: function(rect){ avoidRect = rect; },
       clear: function(){
         running = false;
         cancelAnimationFrame(rafH);
@@ -2581,7 +2717,80 @@
     }
   }
 
-  /* ---- horror: three stages, big bar on Space, small bars on click ---- */
+  /* ---- text decays as it goes: clean, frayed, glitched, gone ---- */
+  var Z_UP = ['̀','́','̂','̃','̄','̆','̇','̈','̊','̋','̈́','͊','͐','͗'];
+  var Z_DN = ['̖','̗','̘','̙','̜','̣','̤','̥','̮','̱','͈','͕'];
+  var Z_MID= ['̴','̵','̶','̷','̸'];
+  function zpick(a){ return a[Math.floor(Math.random() * a.length)]; }
+
+  // 1 frayed · 2 glitched · 3 unreadable · 4 gone
+  function corrupt(s, lvl){
+    if (!lvl || lvl <= 0) return s;
+    if (lvl >= 4) return s.replace(/[^\s]/g, '?');
+    var out = '';
+    for (var i = 0; i < s.length; i++){
+      out += s.charAt(i);
+      if (s.charAt(i) === ' ') continue;
+      var n = lvl === 1 ? (Math.random() < .45 ? 1 : 0)
+            : lvl === 2 ? 1 + Math.floor(Math.random() * 3)
+            :             4 + Math.floor(Math.random() * 4);
+      for (var j = 0; j < n; j++){
+        var r = Math.random();
+        out += r < .45 ? zpick(Z_UP) : r < .85 ? zpick(Z_DN) : zpick(Z_MID);
+      }
+    }
+    return out;
+  }
+
+  function textLevel(){
+    return hPhase >= 4 ? 3 : hPhase === 3 ? 2 : hPhase === 2 ? 1 : 0;
+  }
+
+  /* ---- the pinned bar: still, then drifting, then coming apart ---- */
+  var wanderRaf = null, wMode = 0, wx = 0, wy = 0, wvx = 0, wvy = 0, wLast = 0;
+
+  function setBarMotion(level){
+    cancelAnimationFrame(wanderRaf);
+    wMode = level;
+    wx = 0; wy = 0; wLast = 0;
+    if (!level){ sim.style.transform = ''; return; }
+    wvx = (Math.random() < .5 ? -1 : 1) * (level === 1 ? 30 : 52);
+    wvy = (Math.random() < .5 ? -1 : 1) * (level === 1 ? 18 : 34);
+    wanderRaf = requestAnimationFrame(wanderTick);
+  }
+
+  function wanderTick(now){
+    if (!wMode) return;
+    var dt = wLast ? Math.min((now - wLast) / 1000, .05) : 0;
+    wLast = now;
+    var r = sim.getBoundingClientRect();
+    // clamped so the bar is always fully on screen
+    var spanX = Math.max((window.innerWidth - r.width) / 2 - 14, 0);
+    var up    = Math.max(window.innerHeight - r.height - 108, 0);
+    wx += wvx * dt; wy += wvy * dt;
+    if (wx < -spanX || wx > spanX) wvx *= -1;
+    if (wy < -up || wy > 0) wvy *= -1;
+    wx = Math.max(-spanX, Math.min(spanX, wx));
+    wy = Math.max(-up, Math.min(0, wy));
+
+    var jit = '';
+    if (wMode >= 2 && Math.random() < .05){
+      jit = ' translate(' + ((Math.random() - .5) * 16).toFixed(1) + 'px,' +
+            ((Math.random() - .5) * 11).toFixed(1) + 'px) skewX(' +
+            ((Math.random() - .5) * 5).toFixed(1) + 'deg)';
+    }
+    sim.style.transform = 'translate(' + wx.toFixed(1) + 'px,' + wy.toFixed(1) + 'px)' + jit;
+    wanderRaf = requestAnimationFrame(wanderTick);
+  }
+
+  function setStage(n){
+    var b = document.body.classList;
+    b.remove('st1', 'st2', 'st3', 'st4');
+    b.add('st' + n);
+    setBarMotion(n === 1 ? 0 : n === 2 ? 1 : 2);
+  }
+
+  /* ---- horror: four stages, big bar on Space, small bars on click ---- */
   var GOALS = [10, 10, 6];                // big-bar kicks needed per stage
   var CUM = [10, 20, 26];                 // running totals
   var hPhase = 1, hBig = 0, hSmall = 0, hWaveNo = 0, hHeart = true;
@@ -2595,6 +2804,8 @@
 
   function hStartRun(){
     hPhase = 1; hBig = 0; hSmall = 0; hWaveNo = 0; hHeart = true;
+    fOn = false; fCount = 0;
+    setStage(1);
     state = 'waiting';
     sim.dataset.state = 'waiting';
     nameEl.textContent = 'Nothing casting… yet';
@@ -2609,27 +2820,108 @@
 
   function hProgress(){
     hHud();
+    if (hPhase >= 4) return false;
     if (hBig < CUM[hPhase - 1]) return false;
-    if (hPhase < 3){ hAdvance(hPhase + 1); return true; }
-    chIdx = hBig + hSmall;
+    hAdvance(hPhase + 1);
+    return true;
+  }
+
+  /* ---- final stage: one caster, twenty seconds, spam it down ---- */
+  var FINAL_GOAL = 80, FINAL_MS = 20000;
+  var fOn = false, fCount = 0, fT0 = 0, fCastT0 = 0, fCastDur = 0, fRaf = null;
+  var boEl, boBar, boFill, boLab, boCount, boClock, boName;
+
+  function hFinal(){
+    boEl    = document.getElementById('bigone');
+    boBar   = document.getElementById('boBar');
+    boFill  = document.getElementById('boFill');
+    boLab   = document.getElementById('boLab');
+    boCount = document.getElementById('boCount');
+    boClock = document.getElementById('boClock');
+    boName  = document.getElementById('boName');
+
+    document.getElementById('boCap').textContent = 'of ' + FINAL_GOAL + ' interrupts';
+    boName.textContent = corrupt('The Last One', 3);
+    boLab.textContent = 'SPAM SPACE';
+    boCount.textContent = '0';
+    boClock.textContent = (FINAL_MS / 1000).toFixed(1);
+    boEl.classList.add('on');
+    Horror.avoid(boEl.getBoundingClientRect());
+
+    fOn = true; fCount = 0;
+    fT0 = performance.now();
+    fNewCast();
+    fRaf = requestAnimationFrame(fTick);
+
+    // the small ones keep coming — this is the hard part
+    hWave();
+  }
+
+  function fNewCast(){
+    fCastT0 = performance.now();
+    fCastDur = 240 + Math.random() * 120;
+  }
+
+  function fTick(now){
+    if (!fOn) return;
+    var left = FINAL_MS - (now - fT0);
+    if (left <= 0){ fEnd(); return; }
+    boClock.textContent = (left / 1000).toFixed(1);
+    boClock.className = left < 5000 ? 'bo-clock' : 'bo-clock calm';
+
+    var p = (now - fCastT0) / fCastDur;
+    if (p >= 1){ fNewCast(); p = 0; }
+    boFill.style.width = (Math.min(p, 1) * 100).toFixed(1) + '%';
+    fRaf = requestAnimationFrame(fTick);
+  }
+
+  function fHit(){
+    if (!fOn) return;
+    fCount++;
+    boCount.textContent = String(fCount);
+    boCount.className = fCount >= FINAL_GOAL ? 'bo-count hit' : 'bo-count';
+    boBar.classList.remove('kicked');
+    void boBar.offsetWidth;
+    boBar.classList.add('kicked');
+    boFill.style.width = '0%';
+    Sfx.play('hit', 1.25, 0.4);
+    fNewCast();
+  }
+
+  function fEnd(){
+    fOn = false;
+    cancelAnimationFrame(fRaf);
     clearTimers();
     Horror.clear();
-    chResults();
-    return true;
+    Horror.avoid(null);
+    boEl.classList.remove('on');
+
+    if (fCount >= FINAL_GOAL){
+      chIdx = hBig + hSmall;
+      chResults();
+    } else {
+      voidTitle.textContent = 'Not Fast Enough.';
+      voidSay.textContent = fCount + ' interrupts in twenty seconds. It needed ' + FINAL_GOAL +
+        '. You got all the way here and then it simply out-cast you.';
+      endRunUi();
+      voidEnd.classList.add('on');
+      voidAgain.focus();
+    }
   }
 
   function hAdvance(next){
     hPhase = next;
+    setStage(next);
     clearTimeout(chTimer);
     clearTimeout(bigTimer);
     cancelAnimationFrame(bigRaf);
     bigOn = false;
     Horror.clear();
-    Void.setDread(0.35);
+    Void.setDread(next === 4 ? 1 : 0.35);
     hHud();
 
     fill.style.width = '0%';
-    nameEl.textContent = 'Nothing is casting.';
+    nameEl.textContent = corrupt('Nothing is casting.', textLevel());
     timerEl.textContent = '—';
     tagEl.textContent = 'silence';
     sim.dataset.state = 'waiting';
@@ -2637,73 +2929,88 @@
     try { song.volume = 0.22; } catch (e){}
 
     var pb = document.getElementById('phaseBanner');
-    var pk = document.getElementById('phaseK');
     var pt = document.getElementById('phaseT');
     var ps = document.getElementById('phaseS');
+    var lvl = next === 2 ? 1 : next === 3 ? 2 : 3;
 
-    function beat(k, t, s){
-      pk.textContent = k;
-      pt.textContent = t;
-      ps.innerHTML = s;
+    function beat(t, html, plain){
+      pt.textContent = corrupt(t, lvl);
+      if (plain != null) ps.textContent = plain; else ps.innerHTML = html || '';
       pt.style.animation = 'none';
       void pt.offsetWidth;
       pt.style.animation = '';
     }
 
-    pb.classList.add('on');
+    var RULES2 =
+      'These ones will not stand still. <b>Move your mouse at a mage and it teleports away</b> — each has only a couple of blinks in it.<br><br>' +
+      'Chase it until it is out of blinks, then kick it. The <b>Grand Mage</b> blinks four times.';
 
-    // the second stage is a short beat — the third is the one that earns a pause
+    var RULES3 =
+      '<span style="color:#7FE8AC">Green bars are friendly.</span> <b>Never kick an ally</b> — that ends the run.<br><br>' +
+      '<span style="color:#F2C877">Yellow is legendary.</span> Kick it once and it bubbles and blinks across the room. Kick it again to finish it. It casts slowly, so you have time.<br><br>' +
+      '<span style="color:#F0716D">Red is fast.</span> Go to it first. Everything else is a normal cast.';
+
+    // the last briefing is deliberately unreadable. work it out yourself.
+    var RULES4 = corrupt(
+      'There is one of them left and it will not stop casting. You have twenty seconds. ' +
+      'Interrupt it as many times as you possibly can and do not stop pressing. ' +
+      'The small ones are still coming and they will still kill you. Good luck.', 3);
+
+    var seq;
     if (next === 2){
-      Void.setDread(0.5);
-      try { song.volume = 0.5; } catch (e){}
-      beat('', 'They Blink.',
-        'These ones will not stand still. <b>Move your mouse at a mage and it teleports away</b> — each has only a couple of blinks in it.<br><br>' +
-        'Chase it until it is out of blinks, then kick it. The <b>Grand Mage</b> blinks four times.');
-      chTimer = setTimeout(function(){
-        pb.classList.remove('on');
-        if (mode !== 'horror') return;
-        hWave();
-        bigSchedule(1000);
-      }, 5200);
-      return;
+      seq = [
+        { t:'Quiet.', html:'Every caster is down. Nothing is coming.', ms:1700 },
+        { t:'That was the warm-up.', html:'', ms:1700 },
+        { t:'They Blink.', html:RULES2, ms:5200, last:true }
+      ];
+    } else if (next === 3){
+      seq = [
+        { t:'Silence.', html:'Nothing is coming.', ms:1900 },
+        { t:'You think you are done?', html:'', ms:1900 }
+      ];
+      if (hHeart){
+        // the heart is brought out in front of you and taken, slowly
+        seq.push({ t:'No.', html:'You still have your heart.', ms:1400,
+          act:function(){ hpEl.classList.add('front', 'center'); } });
+        seq.push({ t:'Give it here.', html:'', ms:2100,
+          act:function(){ hHeart = false; stabHeart('taken from you'); } });
+        seq.push({ t:'', html:'You go into this one with nothing.', ms:1300,
+          act:function(){ hpEl.classList.remove('center'); } });
+        seq.push({ t:'Triage.', html:RULES3, ms:7000, last:true,
+          act:function(){ hpEl.classList.remove('front'); } });
+      } else {
+        seq.push({ t:'No.', html:'And you already spent your heart.', ms:1500 });
+        seq.push({ t:'Triage.', html:RULES3, ms:7000, last:true });
+      }
+    } else {
+      seq = [
+        { t:'…', html:'', ms:1500 },
+        { t:'ARE YOU STILL THERE', html:'', ms:1600 },
+        { t:'THEY ARE ALL DEAD BUT ME', html:'', ms:1600 },
+        { t:'One Left.', plain:RULES4, ms:5600, last:true }
+      ];
     }
 
-    beat('', 'Silence.', 'Every caster is down. Nothing is coming.');
-
-    chTimer = setTimeout(function(){
+    pb.classList.add('on');
+    var i = 0;
+    (function step(){
       if (mode !== 'horror') return;
-      beat('', 'You think you are done?', '');
-
-      chTimer = setTimeout(function(){
+      var b = seq[i++];
+      if (!b){
+        pb.classList.remove('on');
         if (mode !== 'horror') return;
-
-        // an unspent heart is taken here — the last stage is sudden death either way
-        if (hHeart){
-          hHeart = false;
-          stabHeart('taken from you');
-          beat('', 'No.', 'And you will not need that heart.');
-        } else {
-          beat('', 'No.', '');
-        }
-
-        chTimer = setTimeout(function(){
-          if (mode !== 'horror') return;
-          Void.setDread(1);
-          try { song.volume = 0.5; } catch (e){}
-          beat('', 'Triage.',
-            '<span style="color:#7FE8AC">Green bars are friendly.</span> <b>Never kick an ally</b> — that ends the run.<br><br>' +
-            '<span style="color:#F2C877">Yellow is legendary.</span> Kick it once and it bubbles and blinks across the room. Kick it again to finish it. It casts slowly, so you have time.<br><br>' +
-            '<span style="color:#F0716D">Red is fast.</span> Go to it first. Everything else is a normal cast.');
-
-          chTimer = setTimeout(function(){
-            pb.classList.remove('on');
-            if (mode !== 'horror') return;
-            hWave();
-            bigSchedule(1200);
-          }, 7000);
-        }, 1200);
-      }, 1900);
-    }, 1900);
+        if (next === 4){ hFinal(); }
+        else { hWave(); bigSchedule(next === 2 ? 1000 : 1200); }
+        return;
+      }
+      if (b.act) b.act();
+      if (b.last){
+        Void.setDread(next === 2 ? 0.5 : 1);
+        try { song.volume = 0.5; } catch (e){}
+      }
+      beat(b.t, b.htmlFn ? b.htmlFn() : b.html, b.plain);
+      chTimer = setTimeout(step, b.ms);
+    })();
   }
 
   function hWave(){
@@ -2717,7 +3024,9 @@
     dimShift(st === 1 ? prog * 0.5 : st === 2 ? 0.7 : 1);
 
     var cfg;
-    if (st === 1){
+    if (st === 4){
+      cfg = { n: 2, dMin: 3.4, dMax: 4.4, speed: 70, tpEvery: 0, tiers: true };
+    } else if (st === 1){
       cfg = { n: 2 + Math.floor(Math.random() * 2), dMin: 3.0, dMax: 4.0,
               speed: 45 + prog * 70, tpEvery: 0 };
     } else if (st === 2){
@@ -2739,6 +3048,7 @@
       tiers: !!cfg.tiers,
       mage: !!cfg.mage,
       grand: !!cfg.grand,
+      nameFx: function(s){ return corrupt(s, textLevel()); },
       onKick: function(ms){ chTimes.push(ms); hSmall++; hHud(); },
       onClear: function(){
         Horror.clear();
@@ -2770,7 +3080,7 @@
     bigDur = (hPhase === 3 ? (1.5 + Math.random() * 0.6)
             : hPhase === 2 ? (1.6 + Math.random() * 0.7)
             :                (1.8 + Math.random() * 0.8)) * 1000;
-    nameEl.textContent = cur.n + '  —  SPACE';
+    nameEl.textContent = corrupt(cur.n, textLevel()) + '  —  SPACE';
     tagEl.textContent = 'big bar casting';
     sim.dataset.state = 'casting';
     bigOn = true;
@@ -2797,6 +3107,7 @@
   }
 
   function bigKick(){
+    if (hPhase >= 4){ fHit(); return; }
     if (!bigOn) return;
     bigOn = false;
     cancelAnimationFrame(bigRaf);
@@ -2863,6 +3174,13 @@
     kickBtn.classList.remove('cd');
     var page = document.querySelector('.page');
     if (page) page.className = 'page';
+    document.body.classList.remove('st1', 'st2', 'st3', 'st4');
+    setBarMotion(0);
+    fOn = false;
+    cancelAnimationFrame(fRaf);
+    if (boEl) boEl.classList.remove('on');
+    Horror.avoid(null);
+    hpEl.classList.remove('front', 'center');
     hudEl.hidden = true;
     document.getElementById('phaseBanner').classList.remove('on');
     stopSong();
