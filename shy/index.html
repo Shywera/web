@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Shy - WoW raiding application. Progression, logs, guild history, and a lemon cake recipe.">
+<meta name="description" content="Shy - WoW raiding application. Holy Paladin main, full progression history, Warcraft Logs and thirteen guilds.">
 <meta name="theme-color" content="#080A14">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="Who This Guy - Shy">
-<meta property="og:description" content="Flex raider, nine classes deep, seven disbands survived. Rank 1 holy paladin.">
+<meta property="og:description" content="Holy Paladin. Nine classes deep, seven disbands survived. Full progression, logs and receipts.">
 <meta property="og:url" content="https://kai-sol.com/shy/">
 <meta name="twitter:card" content="summary">
 <title>Who This Guy</title>
@@ -492,13 +492,294 @@
     color:var(--dimmer);
   }
 
+  /* ================= flash ================= */
+
+  /* scroll progress */
+  #prog{
+    position:fixed;
+    top:0;left:0;
+    height:2px;
+    width:0;
+    background:linear-gradient(90deg, var(--gold-deep), var(--gold-hot));
+    box-shadow:0 0 12px rgba(240,200,104,.7);
+    z-index:80;
+    pointer-events:none;
+  }
+
+  /* shimmering name */
+  h1{
+    background:linear-gradient(100deg,
+      var(--gold) 0%, var(--gold) 32%,
+      #FFF9EC 46%, var(--gold-hot) 54%,
+      var(--gold) 70%, var(--gold) 100%);
+    background-size:260% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:none;
+    filter:drop-shadow(0 0 34px rgba(240,200,104,.42));
+    animation:shimmer 7s linear infinite;
+  }
+  @keyframes shimmer{
+    0%{background-position:180% 0}
+    100%{background-position:-80% 0}
+  }
+
+  /* hero entrance */
+  .hero-inner > *{animation:riseIn .9s cubic-bezier(.2,.75,.25,1) backwards}
+  .hero-inner > .avatar-wrap{animation-delay:.05s}
+  .hero-inner > .titleline{animation-delay:.22s}
+  .hero-inner > h1{animation-delay:.32s, 0s}
+  .hero-inner > .subtitle{animation-delay:.46s}
+  .hero-inner > .stamp{animation-delay:.58s}
+  @keyframes riseIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:none}
+  }
+  .hero-inner > h1{
+    animation-name:riseIn, shimmer;
+    animation-duration:.9s, 7s;
+    animation-timing-function:cubic-bezier(.2,.75,.25,1), linear;
+    animation-iteration-count:1, infinite;
+    animation-fill-mode:backwards, none;
+  }
+
+  /* slow halo pulse behind the portrait */
+  .avatar-wrap::after{animation:halo 5.5s ease-in-out infinite}
+  @keyframes halo{
+    0%,100%{opacity:.75;transform:scale(1)}
+    50%{opacity:1;transform:scale(1.07)}
+  }
+
+  /* scroll reveals */
+  .reveal{
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity .75s cubic-bezier(.2,.7,.3,1), transform .75s cubic-bezier(.2,.7,.3,1);
+  }
+  .reveal.in{opacity:1;transform:none}
+
+  /* gold rule under every section eyebrow */
+  .sec-head{position:relative;padding-top:14px}
+  .sec-head::before{
+    content:"";
+    position:absolute;
+    top:0;left:0;
+    height:1px;
+    width:0;
+    background:linear-gradient(90deg, var(--gold-hot), rgba(240,200,104,0));
+    transition:width 1.1s cubic-bezier(.2,.7,.3,1) .1s;
+  }
+  .reveal.in .sec-head::before{width:min(190px,42%)}
+
+  /* stat tiles glow on hover */
+  .stat{transition:background .35s ease}
+  .stat:hover{background:linear-gradient(160deg, rgba(240,200,104,.1), rgba(240,200,104,0) 70%), var(--panel-2)}
+
+  /* progression bars (built by script) */
+  .tier{position:relative}
+  .tier-bar{
+    grid-column:1/-1;
+    height:2px;
+    background:var(--line);
+    margin-top:8px;
+    overflow:hidden;
+  }
+  .tier-bar i{
+    display:block;
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg, var(--gold-deep), var(--gold));
+    transition:width 1.15s cubic-bezier(.2,.7,.3,1);
+  }
+  .tier.peak .tier-bar i{
+    background:linear-gradient(90deg, var(--gold), var(--gold-hot));
+    box-shadow:0 0 14px rgba(240,200,104,.75);
+  }
+  .tier{transition:background .3s ease}
+  .tier:hover{background:linear-gradient(90deg, rgba(240,200,104,.07), transparent 80%)}
+
+  /* ---------- log cards ---------- */
+  .loggrid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(232px,1fr));
+    gap:10px;
+  }
+  .logcard{
+    --c:var(--gold);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding:16px 15px 15px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-bottom:none;
+    text-decoration:none;
+    color:inherit;
+    overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.7,.3,1), border-color .28s ease, background .28s ease;
+  }
+  .logcard::after{
+    content:"";
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:2px;
+    background:var(--c);
+    opacity:.5;
+    transition:opacity .28s ease, box-shadow .28s ease;
+  }
+  .logcard:hover,
+  .logcard:focus-visible{
+    transform:translateY(-3px);
+    border-color:var(--line-hot);
+    background:var(--panel-2);
+    outline:none;
+  }
+  .logcard:hover::after,
+  .logcard:focus-visible::after{opacity:1;box-shadow:0 0 18px var(--c)}
+  .logcard:focus-visible{box-shadow:0 0 0 2px var(--blue)}
+
+  .log-cls{
+    font-family:var(--mono);
+    font-size:10px;
+    font-weight:600;
+    letter-spacing:.17em;
+    text-transform:uppercase;
+    color:var(--c);
+  }
+  .log-name{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:25px;
+    line-height:1.04;
+    color:var(--text);
+    letter-spacing:-.01em;
+  }
+  .log-meta{font-size:13.5px;color:var(--dim);line-height:1.4}
+  .log-go{
+    margin-top:6px;
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--dimmer);
+    transition:color .28s ease;
+  }
+  .logcard:hover .log-go,
+  .logcard:focus-visible .log-go{color:var(--gold)}
+
+  /* card hovers elsewhere */
+  .cls,.take,.guild{transition:background .3s ease, border-color .3s ease}
+  .cls:hover{border-color:var(--line-hot);background:var(--panel-2)}
+  .guild:hover{background:rgba(240,200,104,.04)}
+
+  /* ---------- current main stage ---------- */
+  .mainstage{
+    position:relative;
+    display:grid;
+    grid-template-columns:1.35fr 1fr;
+    gap:26px 30px;
+    padding:26px 26px 28px;
+    border:1px solid var(--gold-deep);
+    background:
+      radial-gradient(120% 150% at 0% 0%, rgba(240,200,104,.13) 0%, rgba(240,200,104,0) 58%),
+      var(--panel);
+    overflow:hidden;
+  }
+  .mainstage::before{
+    content:"";
+    position:absolute;
+    top:-60%;right:-18%;
+    width:60%;height:220%;
+    background:radial-gradient(circle, rgba(240,200,104,.16) 0%, rgba(240,200,104,0) 65%);
+    pointer-events:none;
+  }
+  .ms-left,.ms-right{position:relative}
+  .ms-name{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(38px,7vw,58px);
+    line-height:.92;
+    letter-spacing:-.02em;
+    margin:.16em 0 0;
+    color:var(--gold-hot);
+    filter:drop-shadow(0 0 26px rgba(240,200,104,.4));
+  }
+  .ms-sub{color:var(--dim);font-size:15.5px;margin:.7em 0 0;line-height:1.5}
+  .ms-sub b{color:var(--text);font-weight:600}
+  .ms-link{
+    display:inline-block;
+    margin-top:16px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    padding:8px 15px 9px;
+    border:1px solid var(--gold-deep);
+    border-bottom:1px solid var(--gold-deep);
+    color:var(--gold);
+    transition:background .28s ease, color .28s ease, box-shadow .28s ease;
+  }
+  .ms-link:hover{
+    background:var(--gold);
+    color:#0A0B11;
+    border-color:var(--gold);
+    box-shadow:0 0 26px rgba(240,200,104,.45);
+  }
+  .ms-right{display:flex;flex-direction:column;gap:16px;justify-content:center}
+  .ms-stat{display:flex;flex-direction:column;gap:4px}
+  .ms-n{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(32px,5.4vw,46px);
+    line-height:.94;
+    color:var(--gold);
+    font-variant-numeric:tabular-nums;
+  }
+  .ms-l{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--dimmer);
+    line-height:1.55;
+  }
+  .ms-live{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--mint);
+  }
+  .ms-live::before{
+    content:"";
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--mint);
+    box-shadow:0 0 10px var(--mint);
+    animation:blip 2.4s ease-in-out infinite;
+  }
+  @keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+  @media (max-width:640px){
+    .mainstage{grid-template-columns:1fr;gap:22px}
+    .ms-right{flex-direction:row;gap:28px}
+  }
+
   @media (prefers-reduced-motion:reduce){
-    *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+    .reveal{opacity:1;transform:none}
+    h1{animation:none;background:none;color:var(--gold-hot);-webkit-text-fill-color:var(--gold-hot)}
   }
 </style>
 </head>
 <body>
 
+
+<div id="prog" aria-hidden="true"></div>
 
 <header class="hero">
   <canvas id="rays" aria-hidden="true"></canvas>
@@ -508,12 +789,34 @@
     </div>
     <p class="titleline">Holy Paladin · Rank 1 for a month straight</p>
     <h1>Shy</h1>
-    <p class="subtitle">Flex raider, <b>nine classes</b> deep, <b>seven disbands</b> survived. Currently a healer wannabe on an unknown main.</p>
+    <p class="subtitle">Flex raider, <b>nine classes</b> deep, <b>seven disbands</b> survived. Currently healing on <b>Shaiyex</b> — and looking for a guild that lasts.</p>
     <p class="stamp">This application was written in Castle Nathria (due to disbands) and is PROBABLY up to date.</p>
   </div>
 </header>
 
 <div class="page">
+
+  <section>
+    <div class="mainstage">
+      <div class="ms-left">
+        <p class="eyebrow">Current main</p>
+        <h2 class="ms-name">Shaiyex</h2>
+        <p class="ms-sub"><b>Lightforged Draenei · Holy Paladin</b><br>&lt;Deception&gt; · EU–Argent Dawn</p>
+        <a class="ms-link" href="https://raider.io/characters/eu/argent-dawn/Shaiyex" target="_blank" rel="noopener">Raider.IO profile</a>
+      </div>
+      <div class="ms-right">
+        <div class="ms-stat">
+          <span class="ms-n" data-count="2878.9" data-dec="1">2,878.9</span>
+          <span class="ms-l">Mythic+ score<br>current season, healer</span>
+        </div>
+        <div class="ms-stat">
+          <span class="ms-n" data-count="20530">20,530</span>
+          <span class="ms-l">Achievement<br>points</span>
+        </div>
+        <span class="ms-live">Raider.IO · 29 Aug 2026</span>
+      </div>
+    </div>
+  </section>
 
   <section>
     <div class="stats">
@@ -553,7 +856,8 @@
       <div class="kv-row"><span class="kv-k">Country</span><span class="kv-v">Croatia</span></div>
       <div class="kv-row"><span class="kv-k">Study</span><span class="kv-v">Graphic design — finished 17.09.2025</span></div>
       <div class="kv-row"><span class="kv-k">Work</span><span class="kv-v">Process engineer and procurement</span></div>
-      <div class="kv-row"><span class="kv-k">Current main</span><span class="kv-v">Unknown</span></div>
+      <div class="kv-row"><span class="kv-k">Current main</span><span class="kv-v">Shaiyex — Holy Paladin, EU–Argent Dawn</span></div>
+      <div class="kv-row"><span class="kv-k">Guild</span><span class="kv-v">&lt;Deception&gt;</span></div>
       <div class="kv-row"><span class="kv-k">Pronouns</span><span class="kv-v">Healer wannabe</span></div>
       <div class="kv-row"><span class="kv-k">Spot</span><span class="kv-v">Any — flex player</span></div>
     </div>
@@ -680,7 +984,7 @@
         <span class="tier-raid">Manaforge Omega</span>
         <span class="tier-prog">8/8 M</span>
         <span class="tier-wr">—</span>
-        <span class="tier-cls">Badkarma, Draenor</span>
+        <span class="tier-cls">Paladin · &lt;Badkarma&gt;, Draenor</span>
       </div>
     </div>
   </section>
@@ -741,51 +1045,77 @@
   <section>
     <div class="sec-head">
       <p class="eyebrow">Receipts</p>
-      <h2>Logs.</h2>
-      <p class="sec-lede">Current characters first, then the archive.</p>
+      <h2>Warcraft Logs.</h2>
+      <p class="sec-lede">Ten characters, seven expansions. Current mains first, then the archive — every link opens the parses directly.</p>
     </div>
 
-    <div class="links">
-      <div class="link-row">
-        <span class="link-what">Dimensius <span>Warlock — current</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/eu/argent-dawn/shyrilxz?zone=44" target="_blank" rel="noopener">warcraftlogs · shyrilxz</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Paladin reclear <span>Current</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/eu/ravencrest/shyabel?zone=44" target="_blank" rel="noopener">warcraftlogs · shyabel</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Last season main <span>No raiding</span></span>
-        <span class="link-a"><a href="https://raider.io/characters/eu/argent-dawn/Shyrawr" target="_blank" rel="noopener">raider.io · Shyrawr</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Mage <span>Queen Ansurek</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/eu/argent-dawn/shyveth?zone=38" target="_blank" rel="noopener">warcraftlogs · shyveth</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Rogue <span>Amirdrassil — all three specs</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/eu/ravencrest/shaiyex?zone=35" target="_blank" rel="noopener">warcraftlogs · shaiyex</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Priest <span>Aberrus — shadow and holy</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/eu/ravencrest/shyvella#zone=33" target="_blank" rel="noopener">warcraftlogs · shyvella</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Paladin <span>Most of BFA</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/eu/ravencrest/novaren?zone=24" target="_blank" rel="noopener">warcraftlogs · novaren</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Warrior <span>Sanctum, Sepulcher, Vault</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/id/60903228?zone=31" target="_blank" rel="noopener">warcraftlogs · 60903228</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Shaman <span>Fated</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/eu/ravencrest/shaiye?zone=29#partition=4&amp;difficulty=5" target="_blank" rel="noopener">warcraftlogs · shaiye</a></span>
-      </div>
-      <div class="link-row">
-        <span class="link-what">Monk <span>Castle Nathria</span></span>
-        <span class="link-a"><a href="https://www.warcraftlogs.com/character/eu/argent-dawn/shaiyex?zone=29#zone=26" target="_blank" rel="noopener">warcraftlogs · shaiyex</a></span>
-      </div>
+    <div class="loggrid">
+      <a class="logcard" style="--c:#F48CBA" href="https://raider.io/characters/eu/argent-dawn/Shaiyex" target="_blank" rel="noopener">
+        <span class="log-cls">Holy Paladin · Main</span>
+        <span class="log-name">Shaiyex</span>
+        <span class="log-meta">Argent Dawn · &lt;Deception&gt; · 2,878.9 M+</span>
+        <span class="log-go">Raider.IO →</span>
+      </a>
+      <a class="logcard" style="--c:#8788EE" href="https://www.warcraftlogs.com/character/eu/argent-dawn/shyrilxz?zone=44" target="_blank" rel="noopener">
+        <span class="log-cls">Warlock · Current</span>
+        <span class="log-name">Shyrilxz</span>
+        <span class="log-meta">Argent Dawn · Dimensius</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#F48CBA" href="https://www.warcraftlogs.com/character/eu/ravencrest/shyabel?zone=44" target="_blank" rel="noopener">
+        <span class="log-cls">Paladin · Current</span>
+        <span class="log-name">Shyabel</span>
+        <span class="log-meta">Ravencrest · Manaforge reclear</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#3FC7EB" href="https://www.warcraftlogs.com/character/eu/argent-dawn/shyveth?zone=38" target="_blank" rel="noopener">
+        <span class="log-cls">Mage</span>
+        <span class="log-name">Shyveth</span>
+        <span class="log-meta">Argent Dawn · Queen Ansurek</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#FFF468" href="https://www.warcraftlogs.com/character/eu/ravencrest/shaiyex?zone=35" target="_blank" rel="noopener">
+        <span class="log-cls">Rogue · All three specs</span>
+        <span class="log-name">Shaiyex</span>
+        <span class="log-meta">Ravencrest · Amirdrassil</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#FFFFFF" href="https://www.warcraftlogs.com/character/eu/ravencrest/shyvella#zone=33" target="_blank" rel="noopener">
+        <span class="log-cls">Priest · Shadow + Holy</span>
+        <span class="log-name">Shyvella</span>
+        <span class="log-meta">Ravencrest · Aberrus</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#F48CBA" href="https://www.warcraftlogs.com/character/eu/ravencrest/novaren?zone=24" target="_blank" rel="noopener">
+        <span class="log-cls">Paladin</span>
+        <span class="log-name">Novaren</span>
+        <span class="log-meta">Ravencrest · Most of BFA</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#C69B6D" href="https://www.warcraftlogs.com/character/id/60903228?zone=31" target="_blank" rel="noopener">
+        <span class="log-cls">Warrior · Arms + Fury</span>
+        <span class="log-name">Warrior</span>
+        <span class="log-meta">Sanctum · Sepulcher · Vault</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#0070DD" href="https://www.warcraftlogs.com/character/eu/ravencrest/shaiye?zone=29#partition=4&amp;difficulty=5" target="_blank" rel="noopener">
+        <span class="log-cls">Resto Shaman</span>
+        <span class="log-name">Shaiye</span>
+        <span class="log-meta">Ravencrest · Fated</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#00FF98" href="https://www.warcraftlogs.com/character/eu/argent-dawn/shaiyex?zone=29#zone=26" target="_blank" rel="noopener">
+        <span class="log-cls">Windwalker Monk</span>
+        <span class="log-name">Shaiyex</span>
+        <span class="log-meta">Argent Dawn · Castle Nathria</span>
+        <span class="log-go">Warcraft Logs →</span>
+      </a>
+      <a class="logcard" style="--c:#E8C36B" href="https://raider.io/characters/eu/argent-dawn/Shyrawr" target="_blank" rel="noopener">
+        <span class="log-cls">Last season main</span>
+        <span class="log-name">Shyrawr</span>
+        <span class="log-meta">Argent Dawn · No raiding</span>
+        <span class="log-go">Raider.IO →</span>
+      </a>
     </div>
   </section>
 
@@ -1025,6 +1355,87 @@
   size();
   window.addEventListener('resize', function(){ size(); if (reduce) draw(0); });
   if (reduce) { draw(0); } else { requestAnimationFrame(loop); }
+})();
+
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- scroll progress ---- */
+  var prog = document.getElementById('prog');
+  function onScroll(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? (window.scrollY / h) : 0;
+    prog.style.width = Math.min(Math.max(p, 0), 1) * 100 + '%';
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  onScroll();
+
+  /* ---- progression bars from the printed prog text ---- */
+  Array.prototype.forEach.call(document.querySelectorAll('.tier'), function(tier){
+    var txt = (tier.querySelector('.tier-prog') || {}).textContent || '';
+    var m = txt.match(/(\d+)\s*\/\s*(\d+)/);
+    if (!m) return;
+    var pct = Math.min(parseInt(m[1], 10) / parseInt(m[2], 10), 1) * 100;
+    var bar = document.createElement('span');
+    bar.className = 'tier-bar';
+    var fill = document.createElement('i');
+    bar.appendChild(fill);
+    tier.appendChild(bar);
+    tier.__fill = fill;
+    tier.__pct = pct;
+  });
+
+  /* ---- count-up numbers ---- */
+  function countUp(el){
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (isNaN(target)) return;
+    var dec = parseInt(el.getAttribute('data-dec') || '0', 10);
+    if (reduce) return;
+    var dur = 1250, t0 = null;
+    function step(t){
+      if (t0 === null) t0 = t;
+      var k = Math.min((t - t0) / dur, 1);
+      var eased = 1 - Math.pow(1 - k, 3);
+      el.textContent = (target * eased).toLocaleString('en-US', {
+        minimumFractionDigits: dec, maximumFractionDigits: dec
+      });
+      if (k < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---- reveal on scroll ---- */
+  var targets = [].concat(
+    Array.prototype.slice.call(document.querySelectorAll('.page > section')),
+    Array.prototype.slice.call(document.querySelectorAll('.page > footer'))
+  );
+  targets.forEach(function(el){ el.classList.add('reveal'); });
+
+  function activate(el){
+    el.classList.add('in');
+    Array.prototype.forEach.call(el.querySelectorAll('.tier'), function(tier, i){
+      if (!tier.__fill) return;
+      var pct = tier.__pct;
+      setTimeout(function(){ tier.__fill.style.width = pct + '%'; }, reduce ? 0 : 90 + i * 70);
+    });
+    Array.prototype.forEach.call(el.querySelectorAll('[data-count]'), countUp);
+  }
+
+  if (!('IntersectionObserver' in window)){
+    targets.forEach(activate);
+    return;
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      activate(e.target);
+      io.unobserve(e.target);
+    });
+  }, {rootMargin: '0px 0px -12% 0px', threshold: 0.08});
+
+  targets.forEach(function(el){ io.observe(el); });
 })();
 </script>
 
