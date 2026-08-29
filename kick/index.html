@@ -394,6 +394,144 @@
 
   .chal-actions{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:center;margin-top:24px}
 
+  /* ================= ULTRA HARD MODE ================= */
+  .ultra-btn{
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    padding:9px 14px 10px;
+    background:transparent;
+    color:#8E2B2B;
+    border:1px solid #4A1A1A;
+    border-radius:2px;
+    cursor:pointer;
+    transition:color .18s ease, border-color .18s ease, box-shadow .18s ease;
+  }
+  .ultra-btn:hover{color:#F2605D;border-color:var(--red);box-shadow:0 0 18px rgba(214,65,63,.35)}
+  .ultra-btn:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+  .ultra-btn.on{color:#F2605D;border-color:var(--red);box-shadow:0 0 22px rgba(214,65,63,.5)}
+
+  /* fullscreen clutter + blood */
+  #chaos{
+    position:fixed;
+    inset:0;
+    width:100%;height:100%;
+    pointer-events:none;
+    z-index:40;
+    display:none;
+  }
+  #chaos.on{display:block}
+
+  .bloodv{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:41;
+    opacity:0;
+    transition:opacity .5s ease;
+    background:
+      radial-gradient(120% 90% at 50% 120%, rgba(120,8,8,.62) 0%, rgba(120,8,8,0) 62%),
+      radial-gradient(90% 70% at 10% -10%, rgba(150,10,10,.5) 0%, rgba(150,10,10,0) 60%),
+      radial-gradient(90% 70% at 92% -6%, rgba(150,10,10,.45) 0%, rgba(150,10,10,0) 58%);
+  }
+  .bloodv.on{opacity:var(--blood,0)}
+
+  body.ultra{animation:ultraShake 3.1s ease-in-out infinite}
+  @keyframes ultraShake{
+    0%,100%{transform:translate(0,0)}
+    23%{transform:translate(-1px,1px)}
+    47%{transform:translate(1px,-1px)}
+    71%{transform:translate(-1px,-1px)}
+  }
+  body.ultra .sim{
+    border-color:#5A1E1E;
+    box-shadow:0 0 40px rgba(214,65,63,.22) inset, 0 0 26px rgba(214,65,63,.18);
+  }
+  body.ultra .glyph{border-color:#7A2626}
+
+  /* the tell: glyph flares just before a cast */
+  .glyph.tell{
+    animation:tellFlare .26s ease-out;
+    border-color:var(--red) !important;
+    color:#FF8A86;
+  }
+  @keyframes tellFlare{
+    0%{box-shadow:0 0 0 rgba(214,65,63,0);transform:scale(1)}
+    45%{box-shadow:0 0 26px rgba(255,90,86,.95);transform:scale(1.16)}
+    100%{box-shadow:0 0 0 rgba(214,65,63,0);transform:scale(1)}
+  }
+
+  /* interrupt on cooldown */
+  .kick-btn.cd{
+    background:#2A1414;
+    border-color:#5A1E1E;
+    color:#8E2B2B;
+    cursor:not-allowed;
+    position:relative;
+    overflow:hidden;
+  }
+  .kick-btn.cd::after{
+    content:"";
+    position:absolute;inset:0;
+    background:rgba(214,65,63,.22);
+    transform-origin:left;
+    animation:cdSweep var(--cd,1.5s) linear forwards;
+  }
+  @keyframes cdSweep{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+
+  /* wipe takeover */
+  .boot.wipe{
+    background:
+      radial-gradient(85% 65% at 50% 45%, rgba(150,10,10,.72) 0%, rgba(8,3,3,.98) 72%),
+      #080303;
+  }
+  .boot.wipe .boot-eyebrow{color:#F2605D}
+  .boot.wipe h2{
+    color:#FF4A46;
+    font-size:clamp(54px,15vw,132px);
+    text-shadow:0 0 60px rgba(255,60,56,.6), 0 0 130px rgba(255,60,56,.3);
+  }
+  .boot.wipe .boot-btn:hover{border-color:var(--red);color:#FF6B67}
+  /* ---------- glitch ---------- */
+  body.ultra .bar-label .n{
+    text-shadow:1.5px 0 rgba(255,40,40,.85), -1.5px 0 rgba(60,220,255,.7);
+    animation:rgbJit .18s steps(2) infinite;
+  }
+  @keyframes rgbJit{
+    0%{text-shadow:1.5px 0 rgba(255,40,40,.85), -1.5px 0 rgba(60,220,255,.7)}
+    50%{text-shadow:-2px 0 rgba(255,40,40,.85), 2px 0 rgba(60,220,255,.7)}
+  }
+  body.ultra .sim{animation:simGlitch 4.3s steps(1) infinite}
+  @keyframes simGlitch{
+    0%,88%,100%{transform:none;filter:none}
+    89%{transform:translateX(-4px) skewX(1.4deg);filter:hue-rotate(-18deg) saturate(1.5)}
+    91%{transform:translateX(5px) skewX(-1.6deg)}
+    93%{transform:translateX(-2px);filter:invert(.08)}
+    95%{transform:none}
+  }
+  .tear{
+    position:fixed;
+    left:0;right:0;
+    height:0;
+    z-index:42;
+    pointer-events:none;
+    background:linear-gradient(90deg,
+      rgba(255,40,40,.22), rgba(60,220,255,.18) 38%, rgba(255,255,255,.12) 62%, rgba(255,40,40,.2));
+    mix-blend-mode:screen;
+    display:none;
+  }
+  .tear.on{display:block}
+
+  .drips{
+    position:absolute;
+    top:0;left:0;right:0;
+    height:38vh;
+    pointer-events:none;
+    opacity:.9;
+  }
+
   /* win variant of the same takeover */
   .boot.win{
     background:
@@ -704,6 +842,7 @@
         <button class="kick-btn" id="kickBtn" type="button">KICK</button>
         <kbd>SPACE</kbd>
         <button class="chal-btn" id="chalStart" type="button">Challenge · 10 casts</button>
+        <button class="ultra-btn" id="ultraStart" type="button">Ultra · 15 casts</button>
         <span class="verdict" id="verdict">Press it before the bar fills. Five in a row and you're invited. Miss two and we're done.</span>
       </div>
 
@@ -986,6 +1125,23 @@
   </div>
 </div>
 
+<canvas id="chaos" aria-hidden="true"></canvas>
+<div class="bloodv" id="bloodv" aria-hidden="true"></div>
+<div class="tear" id="tear" aria-hidden="true"></div>
+
+<div class="boot wipe" id="wipe" role="dialog" aria-modal="true" aria-labelledby="wipeTitle">
+  <div class="boot-inner">
+    <p class="boot-eyebrow" id="wipeEyebrow">One cast. One wipe.</p>
+    <h2 id="wipeTitle">Raid Wiped.</h2>
+    <p id="wipeSay">—</p>
+    <p class="small" id="wipeSmall">This is what a missed kick actually costs. There is no partial credit at 2%.</p>
+    <div class="chal-actions">
+      <button class="boot-btn" id="wipeAgain" type="button">Pull again</button>
+      <button class="bail" id="wipeClose" type="button">I've seen enough</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var SPELLS = [
@@ -996,6 +1152,171 @@
     {n:"Mass Repentance",        d:2.1, note:"Stuns everyone 8 sec. We watch ourselves die."},
     {n:"Summon Reinforcements",  d:2.6, note:"Another pack. In a timed dungeon. Because of you."}
   ];
+
+  /* ---- ultra clutter engine ---- */
+  var Chaos = (function(){
+    var c, ctx, w = 0, h = 0, on = false, raf2 = null, last = 0, t = 0;
+    var voids = [], nums = [], sparks = [], drips = [];
+    var blood = 0, intensity = 0;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var HITS = ['-4.2M','-1.8M','-6.9M','-903K','-12.4M','-2.1M','CRIT','-5.5M'];
+
+    function size(){
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = window.innerWidth; h = window.innerHeight;
+      c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function seed(){
+      voids = []; nums = []; sparks = []; drips = [];
+      for (var i = 0; i < 7; i++) voids.push(mkVoid());
+      for (var j = 0; j < 26; j++) sparks.push(mkSpark());
+    }
+    function mkVoid(){
+      return {
+        x: Math.random() * w, y: Math.random() * h,
+        r: 60 + Math.random() * 150,
+        vx: (Math.random() - .5) * 26, vy: (Math.random() - .5) * 22,
+        hue: Math.random() < .5 ? 280 : 140,
+        a: .12 + Math.random() * .2
+      };
+    }
+    function mkSpark(){
+      return {
+        x: Math.random() * w, y: Math.random() * h,
+        r: .8 + Math.random() * 2.4,
+        vx: (Math.random() - .5) * 90, vy: -30 - Math.random() * 130,
+        a: .3 + Math.random() * .5
+      };
+    }
+    function mkNum(){
+      return {
+        x: Math.random() * w, y: h * (.25 + Math.random() * .5),
+        vy: -40 - Math.random() * 70, life: 1,
+        txt: HITS[Math.floor(Math.random() * HITS.length)],
+        sz: 15 + Math.random() * 22,
+        crit: Math.random() < .35
+      };
+    }
+    function mkDrip(){
+      return { x: Math.random() * w, y: 0, len: 20 + Math.random() * 60, v: 12 + Math.random() * 46, wdt: 1.5 + Math.random() * 5 };
+    }
+
+    function frame(now){
+      if (!on) return;
+      var dt = last ? Math.min((now - last) / 1000, .05) : 0;
+      last = now; t += dt;
+      ctx.clearRect(0, 0, w, h);
+
+      // void zones
+      ctx.globalCompositeOperation = 'lighter';
+      for (var i = 0; i < voids.length; i++){
+        var v = voids[i];
+        v.x += v.vx * dt; v.y += v.vy * dt;
+        if (v.x < -v.r) v.x = w + v.r; if (v.x > w + v.r) v.x = -v.r;
+        if (v.y < -v.r) v.y = h + v.r; if (v.y > h + v.r) v.y = -v.r;
+        var pulse = v.r * (1 + .07 * Math.sin(t * 2 + i));
+        var g = ctx.createRadialGradient(v.x, v.y, 0, v.x, v.y, pulse);
+        var al = v.a * (.55 + .45 * intensity);
+        g.addColorStop(0, 'hsla(' + v.hue + ',85%,55%,' + (al * .9).toFixed(3) + ')');
+        g.addColorStop(.62, 'hsla(' + v.hue + ',85%,45%,' + (al * .3).toFixed(3) + ')');
+        g.addColorStop(1, 'hsla(' + v.hue + ',85%,40%,0)');
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(v.x, v.y, pulse, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // sparks
+      for (var s = 0; s < sparks.length; s++){
+        var p = sparks[s];
+        p.x += p.vx * dt; p.y += p.vy * dt;
+        if (p.y < -10){ p.x = Math.random() * w; p.y = h + 10; }
+        ctx.fillStyle = 'rgba(255,190,110,' + (p.a * (.4 + .6 * intensity)).toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+
+      // floating damage
+      if (Math.random() < .06 + intensity * .16) nums.push(mkNum());
+      for (var n = nums.length - 1; n >= 0; n--){
+        var d = nums[n];
+        d.y += d.vy * dt; d.life -= dt * .55;
+        if (d.life <= 0){ nums.splice(n, 1); continue; }
+        ctx.font = '700 ' + d.sz.toFixed(0) + 'px "JetBrains Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = (d.crit ? 'rgba(255,214,90,' : 'rgba(255,110,105,') + d.life.toFixed(2) + ')';
+        ctx.fillText(d.txt, d.x, d.y);
+      }
+
+      // blood drips down the screen
+      if (blood > 0 && Math.random() < blood * .5) drips.push(mkDrip());
+      for (var k = drips.length - 1; k >= 0; k--){
+        var dr = drips[k];
+        dr.y += dr.v * dt;
+        if (dr.y - dr.len > h){ drips.splice(k, 1); continue; }
+        var lg = ctx.createLinearGradient(0, dr.y - dr.len, 0, dr.y);
+        lg.addColorStop(0, 'rgba(120,6,6,0)');
+        lg.addColorStop(1, 'rgba(168,10,10,' + (.5 + .4 * blood).toFixed(2) + ')');
+        ctx.fillStyle = lg;
+        ctx.fillRect(dr.x, dr.y - dr.len, dr.wdt, dr.len);
+        ctx.beginPath();
+        ctx.arc(dr.x + dr.wdt / 2, dr.y, dr.wdt * .75, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(168,10,10,' + (.55 + .35 * blood).toFixed(2) + ')';
+        ctx.fill();
+      }
+
+      // top blood curtain grows as it goes wrong
+      if (blood > 0){
+        var curtain = ctx.createLinearGradient(0, 0, 0, h * .34 * blood);
+        curtain.addColorStop(0, 'rgba(130,6,6,' + (.55 * blood).toFixed(3) + ')');
+        curtain.addColorStop(1, 'rgba(130,6,6,0)');
+        ctx.fillStyle = curtain;
+        ctx.fillRect(0, 0, w, h * .34 * blood);
+      }
+
+      raf2 = requestAnimationFrame(frame);
+    }
+
+    return {
+      start: function(){
+        c = document.getElementById('chaos');
+        if (!c || !c.getContext || reduce) return;
+        ctx = c.getContext('2d');
+        size(); seed();
+        blood = 0; intensity = 0; on = true; last = 0;
+        window.addEventListener('resize', size);
+        raf2 = requestAnimationFrame(frame);
+      },
+      stop: function(){
+        on = false;
+        cancelAnimationFrame(raf2);
+        window.removeEventListener('resize', size);
+        if (ctx) ctx.clearRect(0, 0, w, h);
+        blood = 0; intensity = 0;
+        document.getElementById('bloodv').style.setProperty('--blood', '0');
+      },
+      setBlood: function(p){
+        blood = Math.max(0, Math.min(p, 1));
+        intensity = blood;
+        document.getElementById('bloodv').style.setProperty('--blood', (blood * .85).toFixed(2));
+      },
+      surge: function(p){
+        if (reduce) return;
+        if (Math.random() > .45) return;
+        var tr = document.getElementById('tear');
+        tr.style.top = (Math.random() * 80 + 5) + 'vh';
+        tr.style.height = (2 + Math.random() * 26 * p) + 'px';
+        tr.classList.add('on');
+        setTimeout(function(){ tr.classList.remove('on'); }, 70 + Math.random() * 110);
+      },
+      burst: function(){
+        if (reduce) return;
+        for (var i = 0; i < 26; i++) drips.push(mkDrip());
+        for (var j = 0; j < 18; j++) nums.push(mkNum());
+      }
+    };
+  })();
 
   var MISS_LINES = [
     "LANDED — %s Well fucking done.",
@@ -1042,8 +1363,25 @@
       rHit      = document.getElementById('rHit'),
       rEarly    = document.getElementById('rEarly');
 
-  var CH_TOTAL = 10;
-  var mode = 'gate', chIdx = 0, chTimes = [], chMiss = 0, chEarly = 0, chTimer = null;
+  var ultraStart = document.getElementById('ultraStart'),
+      wipeEl     = document.getElementById('wipe'),
+      wipeAgain  = document.getElementById('wipeAgain'),
+      wipeClose  = document.getElementById('wipeClose'),
+      wipeSay    = document.getElementById('wipeSay'),
+      wipeTitle  = document.getElementById('wipeTitle'),
+      chaosEl    = document.getElementById('chaos'),
+      bloodEl    = document.getElementById('bloodv'),
+      tearEl     = document.getElementById('tear'),
+      glyphEl    = document.querySelector('.glyph');
+
+  var mode = 'gate', chIdx = 0, chTimes = [], chEarly = 0, chTimer = null;
+  var chTotal = 10, loop = true, gateTimer = null, ultraCdUntil = 0;
+
+  function clearTimers(){
+    clearTimeout(chTimer);
+    clearTimeout(gateTimer);
+    cancelAnimationFrame(raf);
+  }
 
   function msNote(ms){
     if (ms < 200) return 'That is not a human number.';
@@ -1053,60 +1391,97 @@
     return 'Slow, but it landed.';
   }
 
-  function rate(avg, kicked, early){
-    if (kicked === 0)  return {t:'Zero.',        c:'bad', s:'Ten casts. Not one interrupt. This is a webpage with a warning label on it and you went 0 for 10.'};
-    if (kicked < 5)    return {t:'Failed.',      c:'bad', s:'You caught ' + kicked + ' of 10. In a key that is ' + (10 - kicked) + ' casts straight into the healer.'};
-    if (avg < 220)     return {t:'Inhuman.',     c:'good', s:'Averaging ' + Math.round(avg) + 'ms. Either you main rogue or you are not a person. Either way, come to my key immediately.'};
-    if (avg < 300)     return {t:'Elite.',       c:'good', s:'Averaging ' + Math.round(avg) + 'ms. That is a real interrupt rotation. I would take you over most of my guild.'};
-    if (avg < 400)     return {t:'Sharp.',       c:'good', s:'Averaging ' + Math.round(avg) + 'ms. Comfortably above the median pug. You will catch everything that matters.'};
-    if (avg < 520)     return {t:'Acceptable.',  c:'mid', s:'Averaging ' + Math.round(avg) + 'ms. You will get most of them. Most. The ones you miss will be the important ones.'};
-    return {t:'Slow.', c:'bad', s:'Averaging ' + Math.round(avg) + 'ms. By the time you press it the cast has usually finished and the healer is usually dead.'};
+  function rate(avg, kicked, early, wasUltra, done, total){
+    var ms = Math.round(avg);
+    if (wasUltra){
+      return {t:'Untouchable.', c:'good', s:'Fifteen casts, zero misses, averaging ' + ms +
+        'ms — through blood, screen shake and everything else this page could throw at you. I have played with people who could not do that in a clean UI.'};
+    }
+    if (avg < 220) return {t:'Inhuman.',    c:'good', s:'All ' + total + ', averaging ' + ms + 'ms. Either you main rogue or you are not a person. Either way, come to my key immediately.'};
+    if (avg < 300) return {t:'Elite.',      c:'good', s:'All ' + total + ', averaging ' + ms + 'ms. That is a real interrupt rotation. I would take you over most of my guild.'};
+    if (avg < 400) return {t:'Sharp.',      c:'good', s:'All ' + total + ', averaging ' + ms + 'ms. Comfortably above the median pug — you will catch everything that matters.'};
+    if (avg < 520) return {t:'Acceptable.', c:'mid',  s:'All ' + total + ', averaging ' + ms + 'ms. Not one miss, which is what counts, but the slow ones would have been close.'};
+    return {t:'Survived.', c:'mid', s:'All ' + total + ', averaging ' + ms + 'ms. You never missed, but at that speed you are relying on long casts to save you.'};
   }
 
-  function startChallenge(){
-    clearTimeout(chTimer);
-    cancelAnimationFrame(raf);
+  function startRun(which){
+    clearTimers();
     chalEl.classList.remove('on');
-    mode = 'challenge';
-    chIdx = 0; chTimes = []; chMiss = 0; chEarly = 0;
-    chalStart.textContent = 'Abort challenge';
-    chalStart.classList.add('on');
+    wipeEl.classList.remove('on');
+    mode = which;
+    chTotal = (which === 'ultra') ? 15 : 10;
+    chIdx = 0; chTimes = []; chEarly = 0; ultraCdUntil = 0;
     kickBtn.textContent = 'KICK';
-    chalStart.blur();
+    kickBtn.classList.remove('cd');
+
+    chalStart.textContent = which === 'challenge' ? 'Abort challenge' : 'Challenge · 10 casts';
+    chalStart.classList.toggle('on', which === 'challenge');
+    ultraStart.textContent = which === 'ultra' ? 'Abort ultra' : 'Ultra · 15 casts';
+    ultraStart.classList.toggle('on', which === 'ultra');
+    chalStart.blur(); ultraStart.blur();
+
     verdict.className = 'verdict';
-    verdict.textContent = 'Ten casts, random gaps. Do not press early — that counts against you.';
+    if (which === 'ultra'){
+      document.body.classList.add('ultra');
+      chaosEl.classList.add('on');
+      bloodEl.classList.add('on');
+      Chaos.start();
+      Chaos.setBlood(0);
+      verdict.textContent = 'Fifteen casts. Watch the icon — it flares before every cast. One miss and the raid is over.';
+    } else {
+      verdict.textContent = 'Ten casts, random gaps. One miss ends the run. Do not press early.';
+    }
     chWait();
   }
 
-  function abortChallenge(){
-    clearTimeout(chTimer);
-    cancelAnimationFrame(raf);
+  function endRunUi(){
     mode = 'gate';
     chalStart.textContent = 'Challenge · 10 casts';
     chalStart.classList.remove('on');
-    chalStart.blur();
+    ultraStart.textContent = 'Ultra · 15 casts';
+    ultraStart.classList.remove('on');
+    document.body.classList.remove('ultra');
+    chaosEl.classList.remove('on');
+    bloodEl.classList.remove('on');
+    tearEl.classList.remove('on');
+    kickBtn.classList.remove('cd');
+    Chaos.stop();
+  }
+
+  function abortRun(){
+    clearTimers();
+    endRunUi();
     streak = 0; missStreak = 0;
     setTally();
     verdict.className = 'verdict';
-    verdict.textContent = 'Challenge abandoned. Back to normal casts.';
-    reset();
+    stopSim('Run abandoned. Press RUN IT AGAIN for normal casts.');
   }
 
   function chWait(){
     state = 'waiting';
     sim.dataset.state = 'waiting';
     fill.style.width = '0%';
-    nameEl.textContent = 'Waiting for the next cast…';
-    timerEl.textContent = chIdx + '/' + CH_TOTAL;
-    tagEl.textContent = 'cast ' + (chIdx + 1) + ' of ' + CH_TOTAL;
-    chTimer = setTimeout(chCast, 750 + Math.random() * 2500);
+    nameEl.textContent = mode === 'ultra' ? 'Something is about to cast…' : 'Waiting for the next cast…';
+    timerEl.textContent = chIdx + '/' + chTotal;
+    tagEl.textContent = 'cast ' + (chIdx + 1) + ' of ' + chTotal;
+
+    if (mode === 'ultra'){
+      var gap = 500 + Math.random() * 1900;
+      chTimer = setTimeout(function(){
+        glyphEl.classList.add('tell');
+        setTimeout(function(){ glyphEl.classList.remove('tell'); }, 260);
+        chTimer = setTimeout(chCast, 230);
+      }, gap);
+    } else {
+      chTimer = setTimeout(chCast, 750 + Math.random() * 2500);
+    }
   }
 
   function chCast(){
     cur = SPELLS[Math.floor(Math.random() * SPELLS.length)];
-    dur = 1.1 + Math.random() * 0.8;
+    dur = mode === 'ultra' ? (0.62 + Math.random() * 0.4) : (1.1 + Math.random() * 0.8);
     nameEl.textContent = cur.n;
-    tagEl.textContent = 'cast ' + (chIdx + 1) + ' of ' + CH_TOTAL;
+    tagEl.textContent = 'cast ' + (chIdx + 1) + ' of ' + chTotal;
     sim.dataset.state = 'casting';
     state = 'casting';
     start = performance.now();
@@ -1115,47 +1490,97 @@
 
   function chAdvance(){
     chIdx++;
-    chTimer = setTimeout(chIdx >= CH_TOTAL ? chResults : chWait, 900);
+    if (mode === 'ultra'){
+      Chaos.setBlood(chIdx / chTotal);
+      Chaos.surge(chIdx / chTotal);
+    }
+    chTimer = setTimeout(chIdx >= chTotal ? chResults : chWait, mode === 'ultra' ? 620 : 900);
   }
 
   function chResults(){
+    var wasUltra = (mode === 'ultra');
     state = 'idle';
+    clearTimers();
+
     var kicked = chTimes.length;
     var avg = kicked ? chTimes.reduce(function(a,b){ return a + b; }, 0) / kicked : 0;
     var best = kicked ? Math.min.apply(null, chTimes) : 0;
-    var r = rate(avg, kicked, chEarly);
+    var r = rate(avg, kicked, chEarly, wasUltra, chIdx, chTotal);
 
     rAvg.textContent   = kicked ? Math.round(avg) + 'ms' : '—';
     rBest.textContent  = kicked ? Math.round(best) + 'ms' : '—';
-    rHit.textContent   = kicked + '/' + CH_TOTAL;
+    rHit.textContent   = kicked + '/' + chTotal;
     rEarly.textContent = String(chEarly);
 
     chalTitle.textContent = r.t;
     chalTitle.className = r.c;
+    document.getElementById('chalEyebrow').textContent =
+      (wasUltra ? 'Ultra hard · ' : 'Challenge · ') + chTotal + ' casts';
 
     var extra = '';
-    if (chEarly >= 3) extra = ' You also kicked nothing ' + chEarly + ' times, which in a real pull is your interrupt on cooldown while the cast goes off.';
-    else if (chEarly > 0) extra = ' Plus ' + chEarly + ' early press' + (chEarly > 1 ? 'es' : '') + ' — watch the bar, not the vibes.';
+    if (chEarly >= 3) extra = ' You also kicked thin air ' + chEarly + ' times, which in a real pull is your interrupt on cooldown while the cast goes off.';
+    else if (chEarly > 0) extra = ' Plus ' + chEarly + ' early press' + (chEarly > 1 ? 'es' : '') + '.';
     chalSay.textContent = r.s + extra;
 
+    endRunUi();
     chalEl.classList.add('on');
     chalAgain.focus();
 
-    mode = 'gate';
-    chalStart.textContent = 'Challenge · 10 casts';
-    chalStart.classList.remove('on');
-
     if (!unlocked){
-      unlock('You did the full ten. That is more than enough — the page is open.', 'Unlocked by challenge');
+      unlock('You went the distance. The page is open.', 'Unlocked by challenge');
+    }
+  }
+
+  function chFail(){
+    var wasUltra = (mode === 'ultra');
+    clearTimers();
+    state = 'idle';
+    var kicked = chTimes.length;
+
+    if (wasUltra){
+      Chaos.setBlood(1);
+      Chaos.burst();
+      wipeTitle.textContent = 'Raid Wiped.';
+      wipeSay.textContent = 'You interrupted ' + kicked + ' of ' + chTotal +
+        ' before one got through. That is all it takes — one cast, one wipe, twenty-five minutes gone.';
+      setTimeout(function(){
+        endRunUi();
+        wipeEl.classList.add('on');
+        wipeAgain.focus();
+      }, 620);
+    } else {
+      var avg = kicked ? chTimes.reduce(function(a,b){ return a + b; }, 0) / kicked : 0;
+      var best = kicked ? Math.min.apply(null, chTimes) : 0;
+      rAvg.textContent   = kicked ? Math.round(avg) + 'ms' : '—';
+      rBest.textContent  = kicked ? Math.round(best) + 'ms' : '—';
+      rHit.textContent   = kicked + '/' + chTotal;
+      rEarly.textContent = String(chEarly);
+      chalTitle.textContent = 'Game over.';
+      chalTitle.className = 'bad';
+      document.getElementById('chalEyebrow').textContent = 'Failed on cast ' + (kicked + 1) + ' of ' + chTotal;
+      chalSay.textContent = kicked === 0
+        ? 'You missed the very first one. There were no other casts. Just the one.'
+        : 'You got ' + kicked + ' before one landed. One missed kick is a wipe — there is no version of this where the other nine matter.';
+      setTimeout(function(){
+        endRunUi();
+        chalEl.classList.add('on');
+        chalAgain.focus();
+      }, 700);
+    }
+
+    if (!unlocked && kicked >= 3){
+      unlock('You made it far enough. The page is open — go and read why it matters.', 'Unlocked the hard way');
     }
   }
 
   function chCloseAnd(fn){
     chalEl.classList.remove('on');
+    wipeEl.classList.remove('on');
     chalAgain.blur(); chalClose.blur();
+    wipeAgain.blur(); wipeClose.blur();
     streak = 0; missStreak = 0;
     setTally();
-    if (fn) fn(); else stopSim('Challenge over. Press RUN IT AGAIN for normal casts.');
+    if (fn) fn(); else stopSim('Run over. Press RUN IT AGAIN for normal casts.');
   }
 
   var state = 'idle', start = 0, dur = 2.2, cur = SPELLS[0], raf = null;
@@ -1201,18 +1626,17 @@
   }
 
   function land(){
-    if (mode === 'challenge'){
+    if (mode === 'challenge' || mode === 'ultra'){
       state = 'landed';
       sim.dataset.state = 'landed';
       fill.style.width = '100%';
       timerEl.textContent = 'MISS';
       tagEl.textContent = 'cast complete';
-      chMiss++;
       verdict.className = 'verdict bad';
-      verdict.textContent = 'Missed it. ' + cur.note;
+      verdict.textContent = cur.n.toUpperCase() + ' LANDED. ' + cur.note;
       sim.classList.add('hit');
       setTimeout(function(){ sim.classList.remove('hit'); }, 360);
-      chAdvance();
+      chFail();
       return;
     }
 
@@ -1229,8 +1653,10 @@
     setTimeout(function(){ sim.classList.remove('hit'); }, 360);
 
     // the takeover only gates the first run — once you're in, you're in
-    if (missStreak >= 2 && !unlocked) { setTimeout(boot, 700); return; }
-    setTimeout(reset, 2100);
+    if (missStreak >= 2 && !unlocked) { gateTimer = setTimeout(boot, 700); return; }
+    gateTimer = setTimeout(loop ? reset : function(){
+      stopSim('That is the run. Press RUN IT AGAIN if you want more.');
+    }, 2100);
   }
 
   function boot(){
@@ -1247,6 +1673,7 @@
   }
 
   function unlock(msg, label){
+    loop = false;
     gated.classList.remove('locked');
     gated.removeAttribute('aria-hidden');
     gate.classList.add('done');
@@ -1260,16 +1687,32 @@
   }
 
   function kick(){
-    if (mode === 'challenge'){
+    if (mode === 'challenge' || mode === 'ultra'){
+      var now = performance.now();
+
+      if (mode === 'ultra' && now < ultraCdUntil){
+        verdict.className = 'verdict bad';
+        verdict.textContent = 'Interrupt on cooldown. You spent it on nothing.';
+        return;
+      }
       if (state === 'waiting'){
         chEarly++;
         verdict.className = 'verdict bad';
-        verdict.textContent = 'Early. You kicked thin air — in a real pull that is a 15 second cooldown spent on nothing.';
+        if (mode === 'ultra'){
+          ultraCdUntil = now + 1500;
+          kickBtn.classList.add('cd');
+          kickBtn.style.setProperty('--cd', '1.5s');
+          setTimeout(function(){ kickBtn.classList.remove('cd'); }, 1500);
+          verdict.textContent = 'Early. Interrupt is now on cooldown for 1.5 seconds — pray nothing casts.';
+        } else {
+          verdict.textContent = 'Early. You kicked thin air — in a real pull that is a cooldown spent on nothing.';
+        }
         return;
       }
       if (state !== 'casting') return;
+
       cancelAnimationFrame(raf);
-      var ms = performance.now() - start;
+      var ms = now - start;
       chTimes.push(ms);
       state = 'interrupted';
       sim.dataset.state = 'interrupted';
@@ -1293,8 +1736,10 @@
     verdict.className = 'verdict good';
     verdict.textContent = pick(HIT_LINES, streak);
 
-    if (streak >= 5 && !unlocked) { setTimeout(showWin, 700); return; }
-    setTimeout(reset, 1500);
+    if (streak >= 5 && !unlocked) { gateTimer = setTimeout(showWin, 700); return; }
+    gateTimer = setTimeout(loop ? reset : function(){
+      stopSim('That is the run. Press RUN IT AGAIN if you want more.');
+    }, 1500);
   }
 
   function showWin(){
@@ -1330,10 +1775,12 @@
   }
 
   function restart(){
+    clearTimers();
     kickBtn.textContent = 'KICK';
     verdict.className = 'verdict';
     verdict.textContent = 'Again. Same rules, no stakes — the page is already open.';
     streak = 0; missStreak = 0;
+    loop = true;
     setTally();
     reset();
   }
@@ -1342,16 +1789,31 @@
   bootBtn.addEventListener('click', unboot);
   winBtn.addEventListener('click', unwin);
 
+  var lastRun = 'challenge';
+
   chalStart.addEventListener('click', function(){
-    if (mode === 'challenge') abortChallenge(); else startChallenge();
+    if (mode === 'challenge') { abortRun(); return; }
+    lastRun = 'challenge';
+    startRun('challenge');
   });
-  chalAgain.addEventListener('click', function(){ chCloseAnd(startChallenge); });
+  ultraStart.addEventListener('click', function(){
+    if (mode === 'ultra') { abortRun(); return; }
+    lastRun = 'ultra';
+    startRun('ultra');
+  });
+  chalAgain.addEventListener('click', function(){
+    chCloseAnd(function(){ startRun(lastRun); });
+  });
   chalClose.addEventListener('click', function(){ chCloseAnd(null); });
+  wipeAgain.addEventListener('click', function(){
+    chCloseAnd(function(){ startRun('ultra'); });
+  });
+  wipeClose.addEventListener('click', function(){ chCloseAnd(null); });
   document.addEventListener('keydown', function(e){
     if (e.code !== 'Space' && e.key !== ' ') return;
     // once the sim has settled, Space belongs to the page again (scrolling)
     if (state === 'done') return;
-    if (chalEl.classList.contains('on')) return;
+    if (chalEl.classList.contains('on') || wipeEl.classList.contains('on')) return;
     var a = document.activeElement;
     if (a && (a.tagName === 'INPUT' || a.tagName === 'BUTTON')) return;
     e.preventDefault();
