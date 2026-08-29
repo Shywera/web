@@ -326,6 +326,74 @@
   .boot-btn:hover{border-color:var(--red);color:#F2605D}
   .boot-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
 
+  /* ---------- challenge mode ---------- */
+  .chal-btn{
+    font-family:var(--mono);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    padding:9px 14px 10px;
+    background:transparent;
+    color:var(--dim);
+    border:1px solid var(--line-hot);
+    border-radius:2px;
+    cursor:pointer;
+    transition:color .18s ease, border-color .18s ease;
+  }
+  .chal-btn:hover{color:var(--text);border-color:var(--violet)}
+  .chal-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+  .chal-btn.on{color:var(--red);border-color:var(--red)}
+
+  .sim[data-state="waiting"] .bar{opacity:.4}
+  .sim[data-state="waiting"] .bar-label{color:var(--dimmer)}
+  .sim[data-state="waiting"] .glyph{opacity:.3}
+
+  .boot.chal{
+    background:
+      radial-gradient(90% 70% at 50% 40%, rgba(70,52,18,.6) 0%, rgba(10,11,17,.97) 70%),
+      var(--ink);
+  }
+  .boot.chal .boot-eyebrow{color:var(--amber)}
+  .boot.chal h2{font-size:clamp(40px,11vw,86px)}
+  .boot.chal h2.good{color:#7BE0AC;text-shadow:0 0 40px rgba(88,192,138,.4)}
+  .boot.chal h2.mid{color:var(--amber);text-shadow:0 0 40px rgba(233,168,60,.4)}
+  .boot.chal h2.bad{color:#F2605D;text-shadow:0 0 40px rgba(214,65,63,.4)}
+  .boot.chal .boot-btn:hover{border-color:var(--amber);color:var(--amber)}
+
+  .res{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    margin-top:26px;
+  }
+  .res-cell{
+    background:var(--panel);
+    padding:14px 10px 15px;
+    display:flex;flex-direction:column;gap:5px;
+  }
+  .res-n{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(21px,4.4vw,30px);
+    line-height:1;
+    color:var(--text);
+    font-variant-numeric:tabular-nums;
+  }
+  .res-l{
+    font-family:var(--mono);
+    font-size:9.5px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    color:var(--dimmer);
+    line-height:1.4;
+  }
+  @media (max-width:520px){.res{grid-template-columns:repeat(2,1fr)}}
+
+  .chal-actions{display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;justify-content:center;margin-top:24px}
+
   /* win variant of the same takeover */
   .boot.win{
     background:
@@ -635,6 +703,7 @@
       <div class="sim-foot">
         <button class="kick-btn" id="kickBtn" type="button">KICK</button>
         <kbd>SPACE</kbd>
+        <button class="chal-btn" id="chalStart" type="button">Challenge · 10 casts</button>
         <span class="verdict" id="verdict">Press it before the bar fills. Five in a row and you're invited. Miss two and we're done.</span>
       </div>
 
@@ -896,6 +965,27 @@
   </div>
 </div>
 
+<div class="boot chal" id="chal" role="dialog" aria-modal="true" aria-labelledby="chalTitle">
+  <div class="boot-inner">
+    <p class="boot-eyebrow" id="chalEyebrow">Challenge complete · 10 casts</p>
+    <h2 id="chalTitle">—</h2>
+
+    <div class="res">
+      <div class="res-cell"><span class="res-n" id="rAvg">—</span><span class="res-l">Average<br>reaction</span></div>
+      <div class="res-cell"><span class="res-n" id="rBest">—</span><span class="res-l">Fastest<br>kick</span></div>
+      <div class="res-cell"><span class="res-n" id="rHit">—</span><span class="res-l">Casts<br>interrupted</span></div>
+      <div class="res-cell"><span class="res-n" id="rEarly">—</span><span class="res-l">Kicked<br>thin air</span></div>
+    </div>
+
+    <p id="chalSay">—</p>
+
+    <div class="chal-actions">
+      <button class="boot-btn" id="chalAgain" type="button">Run it again</button>
+      <button class="bail" id="chalClose" type="button">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   var SPELLS = [
@@ -940,6 +1030,134 @@
 
   var unlocked = false;
 
+  /* ---- challenge mode ---- */
+  var chalEl    = document.getElementById('chal'),
+      chalStart = document.getElementById('chalStart'),
+      chalAgain = document.getElementById('chalAgain'),
+      chalClose = document.getElementById('chalClose'),
+      chalTitle = document.getElementById('chalTitle'),
+      chalSay   = document.getElementById('chalSay'),
+      rAvg      = document.getElementById('rAvg'),
+      rBest     = document.getElementById('rBest'),
+      rHit      = document.getElementById('rHit'),
+      rEarly    = document.getElementById('rEarly');
+
+  var CH_TOTAL = 10;
+  var mode = 'gate', chIdx = 0, chTimes = [], chMiss = 0, chEarly = 0, chTimer = null;
+
+  function msNote(ms){
+    if (ms < 200) return 'That is not a human number.';
+    if (ms < 280) return 'Genuinely fast.';
+    if (ms < 380) return 'Clean.';
+    if (ms < 500) return 'Fine. Would have caught it.';
+    return 'Slow, but it landed.';
+  }
+
+  function rate(avg, kicked, early){
+    if (kicked === 0)  return {t:'Zero.',        c:'bad', s:'Ten casts. Not one interrupt. This is a webpage with a warning label on it and you went 0 for 10.'};
+    if (kicked < 5)    return {t:'Failed.',      c:'bad', s:'You caught ' + kicked + ' of 10. In a key that is ' + (10 - kicked) + ' casts straight into the healer.'};
+    if (avg < 220)     return {t:'Inhuman.',     c:'good', s:'Averaging ' + Math.round(avg) + 'ms. Either you main rogue or you are not a person. Either way, come to my key immediately.'};
+    if (avg < 300)     return {t:'Elite.',       c:'good', s:'Averaging ' + Math.round(avg) + 'ms. That is a real interrupt rotation. I would take you over most of my guild.'};
+    if (avg < 400)     return {t:'Sharp.',       c:'good', s:'Averaging ' + Math.round(avg) + 'ms. Comfortably above the median pug. You will catch everything that matters.'};
+    if (avg < 520)     return {t:'Acceptable.',  c:'mid', s:'Averaging ' + Math.round(avg) + 'ms. You will get most of them. Most. The ones you miss will be the important ones.'};
+    return {t:'Slow.', c:'bad', s:'Averaging ' + Math.round(avg) + 'ms. By the time you press it the cast has usually finished and the healer is usually dead.'};
+  }
+
+  function startChallenge(){
+    clearTimeout(chTimer);
+    cancelAnimationFrame(raf);
+    chalEl.classList.remove('on');
+    mode = 'challenge';
+    chIdx = 0; chTimes = []; chMiss = 0; chEarly = 0;
+    chalStart.textContent = 'Abort challenge';
+    chalStart.classList.add('on');
+    kickBtn.textContent = 'KICK';
+    chalStart.blur();
+    verdict.className = 'verdict';
+    verdict.textContent = 'Ten casts, random gaps. Do not press early — that counts against you.';
+    chWait();
+  }
+
+  function abortChallenge(){
+    clearTimeout(chTimer);
+    cancelAnimationFrame(raf);
+    mode = 'gate';
+    chalStart.textContent = 'Challenge · 10 casts';
+    chalStart.classList.remove('on');
+    chalStart.blur();
+    streak = 0; missStreak = 0;
+    setTally();
+    verdict.className = 'verdict';
+    verdict.textContent = 'Challenge abandoned. Back to normal casts.';
+    reset();
+  }
+
+  function chWait(){
+    state = 'waiting';
+    sim.dataset.state = 'waiting';
+    fill.style.width = '0%';
+    nameEl.textContent = 'Waiting for the next cast…';
+    timerEl.textContent = chIdx + '/' + CH_TOTAL;
+    tagEl.textContent = 'cast ' + (chIdx + 1) + ' of ' + CH_TOTAL;
+    chTimer = setTimeout(chCast, 750 + Math.random() * 2500);
+  }
+
+  function chCast(){
+    cur = SPELLS[Math.floor(Math.random() * SPELLS.length)];
+    dur = 1.1 + Math.random() * 0.8;
+    nameEl.textContent = cur.n;
+    tagEl.textContent = 'cast ' + (chIdx + 1) + ' of ' + CH_TOTAL;
+    sim.dataset.state = 'casting';
+    state = 'casting';
+    start = performance.now();
+    raf = requestAnimationFrame(tick);
+  }
+
+  function chAdvance(){
+    chIdx++;
+    chTimer = setTimeout(chIdx >= CH_TOTAL ? chResults : chWait, 900);
+  }
+
+  function chResults(){
+    state = 'idle';
+    var kicked = chTimes.length;
+    var avg = kicked ? chTimes.reduce(function(a,b){ return a + b; }, 0) / kicked : 0;
+    var best = kicked ? Math.min.apply(null, chTimes) : 0;
+    var r = rate(avg, kicked, chEarly);
+
+    rAvg.textContent   = kicked ? Math.round(avg) + 'ms' : '—';
+    rBest.textContent  = kicked ? Math.round(best) + 'ms' : '—';
+    rHit.textContent   = kicked + '/' + CH_TOTAL;
+    rEarly.textContent = String(chEarly);
+
+    chalTitle.textContent = r.t;
+    chalTitle.className = r.c;
+
+    var extra = '';
+    if (chEarly >= 3) extra = ' You also kicked nothing ' + chEarly + ' times, which in a real pull is your interrupt on cooldown while the cast goes off.';
+    else if (chEarly > 0) extra = ' Plus ' + chEarly + ' early press' + (chEarly > 1 ? 'es' : '') + ' — watch the bar, not the vibes.';
+    chalSay.textContent = r.s + extra;
+
+    chalEl.classList.add('on');
+    chalAgain.focus();
+
+    mode = 'gate';
+    chalStart.textContent = 'Challenge · 10 casts';
+    chalStart.classList.remove('on');
+
+    if (!unlocked){
+      unlock('You did the full ten. That is more than enough — the page is open.', 'Unlocked by challenge');
+    }
+  }
+
+  function chCloseAnd(fn){
+    chalEl.classList.remove('on');
+    chalAgain.blur(); chalClose.blur();
+    streak = 0; missStreak = 0;
+    setTally();
+    if (fn) fn(); else stopSim('Challenge over. Press RUN IT AGAIN for normal casts.');
+  }
+
   var state = 'idle', start = 0, dur = 2.2, cur = SPELLS[0], raf = null;
   var hits = 0, miss = 0, streak = 0, missStreak = 0;
 
@@ -983,6 +1201,21 @@
   }
 
   function land(){
+    if (mode === 'challenge'){
+      state = 'landed';
+      sim.dataset.state = 'landed';
+      fill.style.width = '100%';
+      timerEl.textContent = 'MISS';
+      tagEl.textContent = 'cast complete';
+      chMiss++;
+      verdict.className = 'verdict bad';
+      verdict.textContent = 'Missed it. ' + cur.note;
+      sim.classList.add('hit');
+      setTimeout(function(){ sim.classList.remove('hit'); }, 360);
+      chAdvance();
+      return;
+    }
+
     state = 'landed';
     sim.dataset.state = 'landed';
     fill.style.width = '100%';
@@ -1027,6 +1260,28 @@
   }
 
   function kick(){
+    if (mode === 'challenge'){
+      if (state === 'waiting'){
+        chEarly++;
+        verdict.className = 'verdict bad';
+        verdict.textContent = 'Early. You kicked thin air — in a real pull that is a 15 second cooldown spent on nothing.';
+        return;
+      }
+      if (state !== 'casting') return;
+      cancelAnimationFrame(raf);
+      var ms = performance.now() - start;
+      chTimes.push(ms);
+      state = 'interrupted';
+      sim.dataset.state = 'interrupted';
+      tagEl.textContent = 'interrupted';
+      fill.style.width = ((ms / (dur * 1000)) * 100).toFixed(1) + '%';
+      timerEl.textContent = Math.round(ms) + 'ms';
+      verdict.className = 'verdict good';
+      verdict.textContent = Math.round(ms) + ' ms. ' + msNote(ms);
+      chAdvance();
+      return;
+    }
+
     if (state === 'done') { restart(); return; }
     if (state !== 'casting') return;
     cancelAnimationFrame(raf);
@@ -1086,10 +1341,17 @@
   kickBtn.addEventListener('click', kick);
   bootBtn.addEventListener('click', unboot);
   winBtn.addEventListener('click', unwin);
+
+  chalStart.addEventListener('click', function(){
+    if (mode === 'challenge') abortChallenge(); else startChallenge();
+  });
+  chalAgain.addEventListener('click', function(){ chCloseAnd(startChallenge); });
+  chalClose.addEventListener('click', function(){ chCloseAnd(null); });
   document.addEventListener('keydown', function(e){
     if (e.code !== 'Space' && e.key !== ' ') return;
     // once the sim has settled, Space belongs to the page again (scrolling)
     if (state === 'done') return;
+    if (chalEl.classList.contains('on')) return;
     var a = document.activeElement;
     if (a && (a.tagName === 'INPUT' || a.tagName === 'BUTTON')) return;
     e.preventDefault();
