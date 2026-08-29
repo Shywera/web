@@ -1719,7 +1719,7 @@
       <button class="lv lv-3" id="horrorStart" type="button">
         <span class="lv-no">III</span>
         <span class="lv-name">Horror</span>
-        <span class="lv-desc">Four stages. Mouse and keyboard at the same time, mages that blink out of your click, allies you must not touch, and something watching.</span>
+        <span class="lv-desc">Mouse and keyboard at the same time, mages that blink out of your click, allies you must not touch, and something watching.</span>
         <span class="lv-meta">Endurance · one heart</span>
         <span class="lv-cta">Enter →</span>
       </button>
@@ -3570,7 +3570,7 @@
   function abortRun(){
     clearTimers();
     endRunUi();
-    hpEl.classList.remove('on', 'dead');
+    hpEl.classList.remove('on', 'center', 'front', 'dead');
     streak = 0; missStreak = 0;
     setTally();
     verdict.className = 'verdict';
@@ -3777,7 +3777,7 @@
     chalAgain.blur(); chalClose.blur();
     wipeAgain.blur(); wipeClose.blur();
     voidAgain.blur(); voidClose.blur();
-    hpEl.classList.remove('on', 'dead');
+    hpEl.classList.remove('on', 'center', 'front', 'dead');
     streak = 0; missStreak = 0;
     setTally();
     if (fn) fn(); else stopSim('Run over. Press RUN IT AGAIN for normal casts.');
@@ -4121,7 +4121,10 @@
   hStartBtn.addEventListener('click', function(){ beginCountdown(true); });
   hQuietBtn.addEventListener('click', function(){ beginCountdown(false); });
   hBackBtn.addEventListener('click', function(){
-    hideIntro(); stopSong(); bgSuspended = false; playBg();
+    hideIntro();
+    // the heart is only introduced for a run — backing out takes it away again
+    hpEl.classList.remove('on', 'center', 'front', 'dead');
+    stopSong(); bgSuspended = false; playBg();
   });
   voidAgain.addEventListener('click', function(){
     voidEnd.classList.remove('on');
