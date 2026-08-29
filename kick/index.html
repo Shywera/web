@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Mandatory pre-key briefing for pug DPS. Interrupt the cast bar, learn your kick, or leave the group.">
+<meta name="theme-color" content="#0A0B11">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kick or Leave">
+<meta property="og:description" content="You have an interrupt. Use it or get out. Mandatory pre-key briefing.">
+<meta property="og:url" content="https://kai-sol.com/kick/">
+<meta name="twitter:card" content="summary">
+<title>Kick or Leave</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Grenze+Gotisch:wght@600;800&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+  :root{
+    --ink:#0A0B11;
+    --panel:#12141F;
+    --panel-2:#191C2A;
+    --line:#2A2E42;
+    --line-hot:#3D4260;
+    --text:#E8E6E0;
+    --dim:#9698AE;
+    --dimmer:#6B6D82;
+    --amber:#E9A83C;
+    --red:#D6413F;
+    --green:#58C08A;
+    --violet:#9A6FE0;
+
+    --display:"Grenze Gotisch", "Trajan Pro", Georgia, serif;
+    --body:"Archivo", "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono:"JetBrains Mono", "Consolas", ui-monospace, monospace;
+
+    --wrap:74ch;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(120% 80% at 50% -10%, #171A2A 0%, rgba(23,26,42,0) 60%),
+      var(--ink);
+    color:var(--text);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .page{
+    max-width:var(--wrap);
+    margin:0 auto;
+    padding:clamp(28px,6vw,64px) clamp(18px,5vw,28px) 96px;
+    display:flex;
+    flex-direction:column;
+    gap:clamp(52px,9vw,88px);
+  }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--amber);
+    margin:0;
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(44px,10.5vw,84px);
+    line-height:.92;
+    letter-spacing:-.01em;
+    text-wrap:balance;
+    margin:.28em 0 0;
+  }
+  h1 .beg{color:var(--red)}
+
+  h2{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(30px,6vw,44px);
+    line-height:1;
+    text-wrap:balance;
+    margin:0;
+  }
+
+  .lede{
+    font-size:clamp(17px,2.4vw,19.5px);
+    color:var(--dim);
+    max-width:58ch;
+    margin:1.1em 0 0;
+  }
+  .lede strong{color:var(--text);font-weight:600}
+
+  p{margin:1em 0 0}
+  section > p:first-of-type{margin-top:.9em}
+
+  .sec-head{display:flex;flex-direction:column;gap:.5em}
+  .sec-lede{color:var(--dim);max-width:60ch}
+  .sec-lede strong{color:var(--text);font-weight:600}
+
+  /* ---------- shared panel chrome (sharp corners, WoW UI frame) ---------- */
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:2px;
+  }
+
+  /* ---------- hero cast simulator ---------- */
+  .sim{
+    margin-top:clamp(30px,6vw,44px);
+    padding:20px 20px 22px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .sim.hit{animation:shake .34s cubic-bezier(.36,.07,.19,.97)}
+  @keyframes shake{
+    10%,90%{transform:translateX(-2px)}
+    30%,70%{transform:translateX(4px)}
+    50%{transform:translateX(-5px)}
+  }
+
+  .caster{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:14px;
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--dimmer);
+  }
+  .caster b{color:var(--red);font-weight:700;letter-spacing:.1em}
+
+  .bar-row{display:flex;align-items:center;gap:12px}
+
+  .glyph{
+    flex:0 0 auto;
+    width:42px;height:42px;
+    border:1px solid var(--line-hot);
+    background:linear-gradient(150deg,#2B2136,#171525);
+    display:grid;place-items:center;
+    font-family:var(--display);
+    font-size:24px;
+    color:var(--amber);
+  }
+
+  .bar{
+    position:relative;
+    flex:1 1 auto;
+    height:42px;
+    background:var(--panel-2);
+    border:1px solid var(--line-hot);
+    overflow:hidden;
+  }
+  .fill{
+    position:absolute;inset:0 auto 0 0;
+    width:0%;
+    background:linear-gradient(180deg,#F2BE5E,#D18E22);
+    box-shadow:0 0 18px rgba(233,168,60,.35);
+  }
+  .bar-label{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 12px;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--text);
+    gap:12px;
+  }
+  .bar-label .t{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px}
+  .bar-label .n{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  .sim-foot{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:14px 18px;
+  }
+
+  .kick-btn{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:22px;
+    letter-spacing:.04em;
+    padding:9px 26px 11px;
+    color:#0A0B11;
+    background:var(--amber);
+    border:1px solid #F2BE5E;
+    border-radius:2px;
+    cursor:pointer;
+    transition:transform .06s ease, background .15s ease;
+  }
+  .kick-btn:hover{background:#F2BE5E}
+  .kick-btn:active{transform:translateY(1px)}
+  .kick-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+
+  .verdict{
+    font-family:var(--mono);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.03em;
+    line-height:1.5;
+    color:var(--dimmer);
+    flex:1 1 260px;
+    min-height:1.5em;
+  }
+  .verdict.good{color:var(--green)}
+  .verdict.bad{color:var(--red)}
+
+  .tally{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.06em;
+    color:var(--dimmer);
+    font-variant-numeric:tabular-nums;
+    border-top:1px solid var(--line);
+    padding-top:12px;
+    margin-top:2px;
+  }
+  .tally b{color:var(--text);font-weight:700}
+  .tally .rate-bad{color:var(--red)}
+
+  kbd{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.12em;
+    padding:5px 12px 6px;
+    color:var(--text);
+    background:var(--panel-2);
+    border:1px solid var(--line-hot);
+    border-bottom-width:3px;
+    border-radius:3px;
+    line-height:1;
+  }
+
+  /* ---------- full-screen fail takeover ---------- */
+  .boot{
+    position:fixed;
+    inset:0;
+    z-index:50;
+    display:none;
+    place-items:center;
+    padding:24px;
+    background:
+      radial-gradient(90% 70% at 50% 40%, rgba(122,20,19,.55) 0%, rgba(10,11,17,.97) 70%),
+      var(--ink);
+    backdrop-filter:blur(3px);
+  }
+  .boot.on{display:grid;animation:bootin .22s ease-out}
+  @keyframes bootin{from{opacity:0}to{opacity:1}}
+
+  .boot-inner{max-width:56ch;text-align:center}
+  .boot-eyebrow{
+    font-family:var(--mono);
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--red);
+    margin:0;
+  }
+  .boot h2{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(52px,15vw,124px);
+    line-height:.86;
+    color:#F2605D;
+    margin:.16em 0 0;
+    text-shadow:0 0 40px rgba(214,65,63,.4);
+  }
+  .boot p{color:var(--dim);font-size:17px;line-height:1.55;margin:1.1em 0 0}
+  .boot p strong{color:var(--text);font-weight:600}
+  .boot .small{font-size:14.5px;color:var(--dimmer)}
+  .boot-btn{
+    margin-top:26px;
+    font-family:var(--display);
+    font-weight:800;
+    font-size:21px;
+    letter-spacing:.03em;
+    padding:9px 26px 11px;
+    color:var(--text);
+    background:transparent;
+    border:1px solid var(--line-hot);
+    border-radius:2px;
+    cursor:pointer;
+    transition:border-color .15s ease,color .15s ease;
+  }
+  .boot-btn:hover{border-color:var(--red);color:#F2605D}
+  .boot-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+
+  /* ---------- the rule ---------- */
+  .rule-body{max-width:62ch}
+  .rule-body p{color:var(--dim)}
+  .rule-body strong{color:var(--text);font-weight:600}
+
+  .stakes{
+    margin-top:26px;
+    padding:18px 20px;
+    border-left:2px solid var(--red);
+    background:var(--panel);
+    font-size:19px;
+    line-height:1.5;
+  }
+
+  /* ---------- combat log ---------- */
+  .log{
+    margin-top:26px;
+    padding:16px 18px;
+    font-family:var(--mono);
+    font-size:12.5px;
+    line-height:1.85;
+    overflow-x:auto;
+    white-space:nowrap;
+    color:var(--dimmer);
+  }
+  .log .ts{color:#4E5068}
+  .log .miss{color:var(--red)}
+  .log .ok{color:var(--green)}
+  .log .end{color:var(--amber)}
+  .log .say{color:var(--violet)}
+
+  /* ---------- class table ---------- */
+  .grid{
+    margin-top:28px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(214px,1fr));
+    gap:10px;
+  }
+  .cls{
+    --c:var(--text);
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:13px 14px 14px;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+  .cls-name{
+    font-family:var(--body);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--c);
+    display:flex;align-items:center;gap:8px;
+  }
+  .cls-name::before{
+    content:"";
+    width:8px;height:8px;
+    background:var(--c);
+    flex:0 0 auto;
+  }
+  .cls-spell{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:23px;
+    line-height:1.05;
+    color:var(--text);
+  }
+  .cls-cd{
+    font-family:var(--mono);
+    font-size:11.5px;
+    letter-spacing:.08em;
+    color:var(--dimmer);
+    font-variant-numeric:tabular-nums;
+  }
+  .cls-note{font-size:13.5px;line-height:1.45;color:var(--dim);margin:0}
+  .cls.excused .cls-spell{color:var(--dimmer)}
+
+  /* ---------- two-column term lists ---------- */
+  .deflist{
+    margin-top:26px;
+    display:flex;
+    flex-direction:column;
+    border-top:1px solid var(--line);
+  }
+  .def-item{
+    display:grid;
+    grid-template-columns:minmax(130px,1fr) 2.2fr;
+    gap:6px 22px;
+    padding:14px 2px;
+    border-bottom:1px solid var(--line);
+    align-items:baseline;
+  }
+  .def-term{
+    font-family:var(--mono);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--violet);
+  }
+  .def-term.excuse{
+    color:var(--red);
+    text-transform:none;
+    letter-spacing:.02em;
+    font-size:13px;
+    text-decoration:line-through;
+    text-decoration-thickness:1px;
+  }
+  .def-body{color:var(--dim);font-size:15.5px;line-height:1.5}
+  @media (max-width:520px){.def-item{grid-template-columns:1fr}}
+
+  /* ---------- pledge ---------- */
+  .pledge{padding:22px 22px 24px;display:flex;flex-direction:column;gap:4px}
+  .oath{
+    display:flex;
+    gap:13px;
+    align-items:flex-start;
+    padding:12px 0;
+    border-bottom:1px solid var(--line);
+    cursor:pointer;
+    font-size:16px;
+    line-height:1.45;
+    color:var(--dim);
+    transition:color .15s ease;
+  }
+  .oath:hover{color:var(--text)}
+  .oath input{
+    appearance:none;
+    flex:0 0 auto;
+    width:19px;height:19px;
+    margin:2px 0 0;
+    border:1px solid var(--line-hot);
+    background:var(--panel-2);
+    border-radius:1px;
+    cursor:pointer;
+    display:grid;place-items:center;
+  }
+  .oath input:checked{background:var(--green);border-color:var(--green)}
+  .oath input:checked::after{
+    content:"";
+    width:5px;height:10px;
+    border:solid #0A0B11;
+    border-width:0 2.5px 2.5px 0;
+    transform:translateY(-1px) rotate(43deg);
+  }
+  .oath input:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+  .oath:has(input:checked){color:var(--text)}
+
+  .ready-row{display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;margin-top:20px}
+  .ready-btn{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:24px;
+    letter-spacing:.03em;
+    padding:10px 30px 12px;
+    color:#0A0B11;
+    background:var(--green);
+    border:1px solid #6FD5A0;
+    border-radius:2px;
+    cursor:pointer;
+  }
+  .ready-btn:disabled{
+    background:var(--panel-2);
+    border-color:var(--line);
+    color:var(--dimmer);
+    cursor:not-allowed;
+  }
+  .ready-btn:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+
+  .bail{
+    background:none;
+    border:none;
+    padding:0;
+    font-family:var(--body);
+    font-size:14.5px;
+    color:var(--dimmer);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    cursor:pointer;
+  }
+  .bail:hover{color:var(--red)}
+  .bail:focus-visible{outline:2px solid var(--violet);outline-offset:3px}
+
+  .result{
+    margin-top:20px;
+    padding:18px 20px;
+    border:1px solid var(--line-hot);
+    border-radius:2px;
+    background:var(--panel-2);
+  }
+  .result[hidden]{display:none}
+  .result h3{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:28px;
+    line-height:1;
+    margin:0 0 .4em;
+  }
+  .result.pass h3{color:var(--green)}
+  .result.out h3{color:var(--red)}
+  .result p{color:var(--dim);margin:.3em 0 0;font-size:15.5px}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-top:22px;
+    font-family:var(--mono);
+    font-size:12px;
+    line-height:1.9;
+    letter-spacing:.04em;
+    color:var(--dimmer);
+  }
+  footer b{color:var(--dim);font-weight:400}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  }
+</style>
+</head>
+<body>
+
+
+<div class="page">
+
+  <header>
+    <p class="eyebrow">Mandatory briefing Â· you have been invited provisionally</p>
+    <h1>You Have An Interrupt.<br><span class="beg">Use It Or Get Out.</span></h1>
+    <p class="lede">You're one of three pug DPS I have never met, and history says at least one of you is about to cost us this key by standing there watching a cast bar fill up like it's a screensaver. <strong>So before you press Ready, do the thing below once.</strong> One button. It's not a raid mechanic.</p>
+
+    <div class="sim panel" id="sim" data-state="idle">
+      <div class="caster">
+        <span><b>Trash Pack</b> Â· elite Â· not marked, because nobody ever marks</span>
+        <span id="simTag">casting</span>
+      </div>
+
+      <div class="bar-row">
+        <div class="glyph" aria-hidden="true">âœ¦</div>
+        <div class="bar" role="progressbar" aria-label="Enemy cast bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar">
+          <div class="fill" id="fill"></div>
+          <div class="bar-label">
+            <span class="n" id="spellName">Shadow Bolt Volley</span>
+            <span class="t" id="timer">2.2</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sim-foot">
+        <button class="kick-btn" id="kickBtn" type="button">KICK</button>
+        <kbd>SPACE</kbd>
+        <span class="verdict" id="verdict">Press it before the bar fills. That's the whole game. That is the entire thing I am asking of you.</span>
+      </div>
+
+      <p class="tally" id="tally">Interrupted <b>0</b> Â· Missed <b>0</b> Â· Success rate <b>â€”</b></p>
+    </div>
+  </header>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">The one rule</p>
+      <h2>Can't kick, can't CC? Leave. Now. Not at the last boss.</h2>
+    </div>
+
+    <div class="rule-body">
+      <p>I mean it and I'm not being polite about it. Drop group at the summoning stone and I'll thank you. Drop group at 4% on the last boss with the key already bricked and 31 minutes of four other people's evening in the bin, and I will remember your name, your realm, and your transmog.</p>
+      <p><strong>I do not care about your damage.</strong> I have never once looked at a wipe and thought "man, if that Warlock had 40k more DPS." I have looked at a wipe four hundred times and thought "nobody pressed the button."</p>
+      <p>You can be a 2.4k IO god. If you don't kick, you're a very well-geared spectator, and I'd rather bring a Fury Warrior who has never seen a boss but knows what Pummel does.</p>
+
+      <p class="stakes">One interrupt is worth more than every cooldown you own, because a dead healer does zero DPS â€” and about four seconds later, so do you.</p>
+    </div>
+
+    <div class="log panel" aria-label="Combat log from last night's key">
+      <div><span class="ts">[22:14:03]</span> Pull started. Timer: 3:41 remaining. Everything is fine.</div>
+      <div><span class="ts">[22:14:09]</span> Trash Pack begins casting <b>Shadow Bolt Volley</b>. (Kickable. Very kickable. Extremely kickable.)</div>
+      <div><span class="ts">[22:14:11]</span> <span class="miss">Shadow Bolt Volley â€” NOT INTERRUPTED.</span> Three interrupts available. Zero used.</div>
+      <div><span class="ts">[22:14:11]</span> <span class="miss">Healer dies.</span></div>
+      <div><span class="ts">[22:14:13]</span> <span class="say">Hunter:</span> "heals??"</div>
+      <div><span class="ts">[22:14:14]</span> Mage uses Ice Block. Mage dies 6 sec later anyway.</div>
+      <div><span class="ts">[22:14:16]</span> <span class="say">Warlock:</span> "kick was cd"</div>
+      <div><span class="ts">[22:14:16]</span> Warlock's interrupt: <b>off cooldown for 47 seconds.</b></div>
+      <div><span class="ts">[22:14:22]</span> <span class="ok">Rogue interrupts Shadow Bolt Volley.</span> Everyone is already dead. Well done.</div>
+      <div><span class="ts">[22:14:31]</span> <span class="say">Hunter:</span> "tank pulled too much"</div>
+      <div><span class="ts">[22:14:39]</span> <span class="end">Key depleted. +12 â†’ +11.</span></div>
+      <div><span class="ts">[22:14:41]</span> Hunter has left the group.</div>
+      <div><span class="ts">[22:14:41]</span> Hunter's damage: 1st. Hunter's interrupts: <b>0</b>.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Step one Â· find yours</p>
+      <h2>Every class has one. Including yours.</h2>
+    </div>
+    <p class="sec-lede">Find your class. Put that spell on a key your thumb reaches without thinking. Not page 2 of your bars. Not a macro you've never pressed. Not <em>"I know where it is"</em> â€” you don't, or we wouldn't be here.</p>
+
+    <div class="grid">
+      <div class="cls" style="--c:#C41E3A">
+        <div class="cls-name">Death Knight</div>
+        <div class="cls-spell">Mind Freeze</div>
+        <div class="cls-cd">15s cooldown</div>
+        <p class="cls-note">Costs runic power you were about to waste on a Death Coil anyway.</p>
+      </div>
+      <div class="cls" style="--c:#A330C9">
+        <div class="cls-name">Demon Hunter</div>
+        <div class="cls-spell">Disrupt</div>
+        <div class="cls-cd">15s cooldown</div>
+        <p class="cls-note">You press double jump 40 times a pull and Disrupt zero. Reallocate.</p>
+      </div>
+      <div class="cls" style="--c:#FF7C0A">
+        <div class="cls-name">Druid</div>
+        <div class="cls-spell">Skull Bash</div>
+        <div class="cls-cd">15s Â· Solar Beam 60s (Balance)</div>
+        <p class="cls-note">Solar Beam silences the entire pack. Boomies have had it for 15 years and still open with Starfire.</p>
+      </div>
+      <div class="cls" style="--c:#33937F">
+        <div class="cls-name">Evoker</div>
+        <div class="cls-spell">Quell</div>
+        <div class="cls-cd">40s cooldown</div>
+        <p class="cls-note">Long CD means you get to be picky. That is not the same as being exempt.</p>
+      </div>
+      <div class="cls" style="--c:#AAD372">
+        <div class="cls-name">Hunter</div>
+        <div class="cls-spell">Counter Shot</div>
+        <div class="cls-cd">24s Â· Muzzle 15s (Survival)</div>
+        <p class="cls-note">Ranged. You don't even have to walk. Hunters miss the most kicks in this game and it is not close.</p>
+      </div>
+      <div class="cls" style="--c:#3FC7EB">
+        <div class="cls-name">Mage</div>
+        <div class="cls-spell">Counterspell</div>
+        <div class="cls-cd">24s cooldown</div>
+        <p class="cls-note">Locks the school for 6 sec. The best interrupt in the game, owned by the class most likely to be Ice Blocked in a corner typing "sry".</p>
+      </div>
+      <div class="cls" style="--c:#00FF98">
+        <div class="cls-name">Monk</div>
+        <div class="cls-spell">Spear Hand Strike</div>
+        <div class="cls-cd">15s cooldown</div>
+        <p class="cls-note">You are standing directly on top of the cast bar. Physically. Press it.</p>
+      </div>
+      <div class="cls" style="--c:#F48CBA">
+        <div class="cls-name">Paladin</div>
+        <div class="cls-spell">Rebuke</div>
+        <div class="cls-cd">15s cooldown</div>
+        <p class="cls-note">A kick, a stun, a blind and a bubble. If a caster gets a spell off next to you it's personal.</p>
+      </div>
+      <div class="cls excused" style="--c:#FFFFFF">
+        <div class="cls-name">Priest</div>
+        <div class="cls-spell">Silence</div>
+        <div class="cls-cd">45s Â· Shadow only</div>
+        <p class="cls-note">Holy and Disc: genuinely no interrupt. You are the only excused player in the game. Everyone else, sit down.</p>
+      </div>
+      <div class="cls" style="--c:#FFF468">
+        <div class="cls-name">Rogue</div>
+        <div class="cls-spell">Kick</div>
+        <div class="cls-cd">15s cooldown</div>
+        <p class="cls-note">The spell is named Kick. This website is named after your button. There is no deeper hint available.</p>
+      </div>
+      <div class="cls" style="--c:#0070DD">
+        <div class="cls-name">Shaman</div>
+        <div class="cls-spell">Wind Shear</div>
+        <div class="cls-cd">12s cooldown</div>
+        <p class="cls-note">Shortest interrupt in the game. If you miss one you are actively choosing to.</p>
+      </div>
+      <div class="cls" style="--c:#8788EE">
+        <div class="cls-name">Warlock</div>
+        <div class="cls-spell">Spell Lock</div>
+        <div class="cls-cd">24s Â· Felhunter</div>
+        <p class="cls-note">Yes it's on the pet. Yes that means the Felhunter. No, "but Imp damage" is not a sentence I'm hearing tonight.</p>
+      </div>
+      <div class="cls" style="--c:#C69B6D">
+        <div class="cls-name">Warrior</div>
+        <div class="cls-spell">Pummel</div>
+        <div class="cls-cd">15s cooldown</div>
+        <p class="cls-note">Free. Instant. Unchanged since 2004. There has never been a valid reason to miss one.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Step two Â· when your kick is down</p>
+      <h2>"Kick CD" is not a personality.</h2>
+    </div>
+    <p class="sec-lede">It's the start of a sentence, not the end of one. The cast still has to stop, and every one of these stops it:</p>
+
+    <div class="deflist">
+      <div class="def-item">
+        <span class="def-term">Stun</span>
+        <span class="def-body">Stops the cast, buys four seconds. Most of you own one and have never pressed it outside a duel.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Fear / Blind</span>
+        <span class="def-body">Stops the cast, moves the mob. Great on the edge of a pack. Career-ending in the middle of one. Aim.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Sheep / Hex</span>
+        <span class="def-body">For the second caster. At the pull. Not after it has already cast twice and killed someone.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Grip / Knock</span>
+        <span class="def-body">Death Grip, Typhoon, Ring of Peace. Free interrupts that 90% of pugs forget exist.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term">Rotate</span>
+        <span class="def-body">Three DPS with 15-second kicks covers literally every cast in the dungeon. Nobody has to call it. Just don't all press it on the same one and then all be on CD for the next one â€” which is exactly what you're going to do.</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Step three Â· pre-emptive rebuttals</p>
+      <h2>Things you will not be typing tonight.</h2>
+    </div>
+    <p class="sec-lede">I've heard all of them. Save yourself the keystrokes.</p>
+
+    <div class="deflist">
+      <div class="def-item">
+        <span class="def-term excuse">"kick cd"</span>
+        <span class="def-body">Your kick is 15 seconds. The pull was 40 seconds ago. We can both see the same combat log.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term excuse">"sry dc"</span>
+        <span class="def-body">You're typing.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term excuse">"first time this dungeon"</span>
+        <span class="def-body">The dungeon journal is the J key. It has been the J key for a decade. Also, the cast bar is right there â€” you don't need to have read anything to press a button when a bar appears.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term excuse">"tank pulled too much"</span>
+        <span class="def-body">I pulled two packs because there is a timer, and the timer is the entire point of the game mode you queued for.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term excuse">"healer diff"</span>
+        <span class="def-body">The healer was healing through a spell you were supposed to stop. That's not a diff, that's a job you outsourced.</span>
+      </div>
+      <div class="def-item">
+        <span class="def-term excuse">"check meters"</span>
+        <span class="def-body">Nobody in the history of World of Warcraft has finished a timed key and asked to see the meter. We ask to see the timer.</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow">Ready check</p>
+      <h2>Sign it or I'm re-listing the key.</h2>
+    </div>
+
+    <div class="pledge panel">
+      <label class="oath"><input type="checkbox" class="ox"><span>I know exactly which key my interrupt is on. Right now. Without opening my spellbook to check.</span></label>
+      <label class="oath"><input type="checkbox" class="ox"><span>I will watch cast bars instead of my own damage meter.</span></label>
+      <label class="oath"><input type="checkbox" class="ox"><span>When my kick is down I will stun, sheep, grip or fear â€” not type "kick cd" and keep casting.</span></label>
+      <label class="oath"><input type="checkbox" class="ox"><span>If we wipe I will not blame the tank or the healer. I will look at my own interrupt count first.</span></label>
+
+      <div class="ready-row">
+        <button class="ready-btn" id="readyBtn" type="button" disabled>I'M READY</button>
+        <button class="bail" id="bailBtn" type="button">I can't do any of this â†’</button>
+      </div>
+
+      <div class="result pass" id="resPass" hidden>
+        <h3>Fine. You're in.</h3>
+        <p>Invite accepted. Don't make me send you this link a second time â€” there is no second link, there's just a kick from the group.</p>
+      </div>
+
+      <div class="result out" id="resOut" hidden>
+        <h3>Then leave. Genuinely.</h3>
+        <p>And I mean that with real respect: telling me now is worth more than the last twelve people who found out at the third boss. Drop group, no drama, come back when it's on a keybind.</p>
+        <p>The key will still be here. It'll just be one key lower, because of you.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>KICK OR LEAVE Â· pre-key briefing v1</div>
+    <div><b>You received this link because you are in my group and I have been hurt before.</b></div>
+    <div><b>No addons required. No logs will be linked. Press the button.</b></div>
+  </footer>
+
+</div>
+
+<div class="boot" id="boot" role="dialog" aria-modal="true" aria-labelledby="bootTitle">
+  <div class="boot-inner">
+    <p class="boot-eyebrow">Three casts. Zero interrupts.</p>
+    <h2 id="bootTitle">Fuck Off Out Of My Key.</h2>
+    <p>You missed <strong>three casts in a row</strong> on a webpage with one button, a warning label, a giant flashing bar, and absolutely nothing else happening on screen.</p>
+    <p class="small">This is precisely what happens at the third boss, except there we also lose 35 minutes, a key level, and any remaining faith in the group finder.</p>
+    <button class="boot-btn" id="bootBtn" type="button">Let me try again</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SPELLS = [
+    {n:"Shadow Bolt Volley",     d:2.2, note:"Hits the whole group for half their health."},
+    {n:"Consuming Void",         d:2.0, note:"One-shots whoever is lowest. Statistically that's you."},
+    {n:"Healing Surge",          d:1.8, note:"The mob heals to full. The timer does not."},
+    {n:"Blast Wave",             d:2.4, note:"Knocks the healer into the next pack."},
+    {n:"Mass Repentance",        d:2.1, note:"Stuns everyone 8 sec. We watch ourselves die."},
+    {n:"Summon Reinforcements",  d:2.6, note:"Another pack. In a timed dungeon. Because of you."}
+  ];
+
+  var MISS_LINES = [
+    "LANDED â€” %s Well fucking done.",
+    "MISSED AGAIN. Two for two. Are you alt-tabbed or just built like this?",
+    "THREE. One button. On a website. With a warning on it.",
+    "Four. Genuinely, what are you doing.",
+    "Five. The healer has stopped healing you and I'm backing them.",
+    "At this point I'm choosing to believe this is a bit."
+  ];
+
+  var HIT_LINES = [
+    "INTERRUPTED. That's it. That's the entire job. You can do this.",
+    "Two in a row. Already above the median pug.",
+    "Three. This would be a personal record for most of my DPS.",
+    "Four. Genuinely, where have you been all season.",
+    "Okay you've made your point. Please come to my key."
+  ];
+
+  var sim     = document.getElementById('sim'),
+      fill    = document.getElementById('fill'),
+      bar     = document.getElementById('bar'),
+      timerEl = document.getElementById('timer'),
+      nameEl  = document.getElementById('spellName'),
+      tagEl   = document.getElementById('simTag'),
+      verdict = document.getElementById('verdict'),
+      tally   = document.getElementById('tally'),
+      kickBtn = document.getElementById('kickBtn'),
+      bootEl  = document.getElementById('boot'),
+      bootBtn = document.getElementById('bootBtn');
+
+  var state = 'idle', start = 0, dur = 2.2, cur = SPELLS[0], raf = null;
+  var hits = 0, miss = 0, streak = 0, missStreak = 0;
+
+  function setTally(){
+    var tot = hits + miss;
+    var rate = tot ? Math.round(hits / tot * 100) : null;
+    var rateTxt = rate === null ? 'â€”' : rate + '%';
+    var cls = (rate !== null && rate < 50) ? ' class="rate-bad"' : '';
+    tally.innerHTML = 'Interrupted <b>' + hits + '</b> Â· Missed <b>' + miss +
+      '</b> Â· Success rate <b' + cls + '>' + rateTxt + '</b>';
+  }
+
+  function pick(list, i){
+    return list[Math.min(i, list.length) - 1];
+  }
+
+  function beginCast(){
+    cur = SPELLS[Math.floor(Math.random() * SPELLS.length)];
+    dur = cur.d;
+    nameEl.textContent = cur.n;
+    tagEl.textContent = 'casting';
+    sim.dataset.state = 'casting';
+    state = 'casting';
+    start = performance.now();
+    raf = requestAnimationFrame(tick);
+  }
+
+  function tick(now){
+    if (state !== 'casting') return;
+    var el = (now - start) / 1000;
+    var p = Math.min(el / dur, 1);
+    fill.style.width = (p * 100) + '%';
+    timerEl.textContent = Math.max(dur - el, 0).toFixed(1);
+    bar.setAttribute('aria-valuenow', Math.round(p * 100));
+    if (p >= 1) { land(); return; }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function land(){
+    state = 'landed';
+    sim.dataset.state = 'landed';
+    fill.style.width = '100%';
+    timerEl.textContent = '0.0';
+    tagEl.textContent = 'cast complete';
+    miss++; missStreak++; streak = 0;
+    setTally();
+    verdict.className = 'verdict bad';
+    verdict.textContent = pick(MISS_LINES, missStreak).replace('%s', cur.note);
+    sim.classList.add('hit');
+    setTimeout(function(){ sim.classList.remove('hit'); }, 360);
+
+    if (missStreak >= 3) { setTimeout(boot, 700); return; }
+    setTimeout(reset, 2100);
+  }
+
+  function boot(){
+    state = 'booted';
+    bootEl.classList.add('on');
+    bootBtn.focus();
+  }
+
+  function unboot(){
+    bootEl.classList.remove('on');
+    missStreak = 0;
+    reset();
+  }
+
+  function kick(){
+    if (state !== 'casting') return;
+    cancelAnimationFrame(raf);
+    state = 'interrupted';
+    sim.dataset.state = 'interrupted';
+    tagEl.textContent = 'interrupted';
+    hits++; streak++; missStreak = 0;
+    setTally();
+    verdict.className = 'verdict good';
+    verdict.textContent = pick(HIT_LINES, streak);
+    setTimeout(reset, 1500);
+  }
+
+  function reset(){
+    fill.style.width = '0%';
+    beginCast();
+  }
+
+  kickBtn.addEventListener('click', kick);
+  bootBtn.addEventListener('click', unboot);
+  document.addEventListener('keydown', function(e){
+    if (e.code !== 'Space' && e.key !== ' ') return;
+    var a = document.activeElement;
+    if (a && (a.tagName === 'INPUT' || a.tagName === 'BUTTON')) return;
+    e.preventDefault();
+    kick();
+  });
+
+  setTally();
+  beginCast();
+
+  // ---- ready check ----
+  var boxes    = Array.prototype.slice.call(document.querySelectorAll('.ox')),
+      readyBtn = document.getElementById('readyBtn'),
+      bailBtn  = document.getElementById('bailBtn'),
+      resPass  = document.getElementById('resPass'),
+      resOut   = document.getElementById('resOut');
+
+  function sync(){
+    readyBtn.disabled = !boxes.every(function(b){ return b.checked; });
+  }
+  boxes.forEach(function(b){ b.addEventListener('change', sync); });
+  sync();
+
+  readyBtn.addEventListener('click', function(){
+    resOut.hidden = true;
+    resPass.hidden = false;
+  });
+  bailBtn.addEventListener('click', function(){
+    resPass.hidden = true;
+    resOut.hidden = false;
+  });
+})();
+</script>
+
+</body>
+</html>
