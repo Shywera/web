@@ -990,7 +990,8 @@
   }
 
   .hp-crack{opacity:0;stroke:#3A0808;stroke-width:2.2;fill:none;stroke-linecap:round}
-  .hp-knife{opacity:0;transform:translate(34px,-46px) rotate(38deg);transform-origin:50% 50%}
+  /* blade points down-left into the heart, handle up-right */
+  .hp-knife{opacity:0;transform:translate(52px,-60px) rotate(225deg);transform-origin:50% 50%}
   .hp-blood{opacity:0}
 
   .hp-label{
@@ -1022,9 +1023,9 @@
   }
   #hp.dead .hp-label{color:#8E2B2B;text-shadow:none}
   @keyframes plunge{
-    0%{opacity:0;transform:translate(40px,-54px) rotate(38deg)}
+    0%{opacity:0;transform:translate(52px,-60px) rotate(225deg)}
     60%{opacity:1}
-    100%{opacity:1;transform:translate(6px,-8px) rotate(38deg)}
+    100%{opacity:1;transform:translate(17px,-22px) rotate(225deg)}
   }
   @keyframes bleed{
     0%{transform:scaleY(0);opacity:.9}
