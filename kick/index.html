@@ -2034,25 +2034,38 @@
 
     function el(tag, cls){ var e = document.createElement(tag); if (cls) e.className = cls; return e; }
 
-    var BOTTOM_CLEAR = 150; // keep clear of the pinned big bar
+    // measured, not guessed: never let a bar slide under the pinned big bar
+    var TOP_CLEAR = 96;      // clears the heart in the corner
+    var clearPx = 150;
+
+    function measureClear(){
+      var s = document.getElementById('sim');
+      if (!s) return 150;
+      var r = s.getBoundingClientRect();
+      if (!r.height) return 150;
+      return Math.max(window.innerHeight - r.top + 26, 140);
+    }
 
     function place(r, vw, vh){
+      var maxY = vh - clearPx - 52;
       r.x = 20 + Math.random() * Math.max(vw - r.w - 40, 10);
-      r.y = 80 + Math.random() * Math.max(vh - 80 - BOTTOM_CLEAR - 50, 10);
+      r.y = TOP_CLEAR + Math.random() * Math.max(maxY - TOP_CLEAR, 10);
       r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
     }
 
     function spawn(n, durMin, durMax, speed, wave){
       layer = document.getElementById('mirrors');
       hint  = document.getElementById('mhint');
+      clearPx = measureClear();
       var vw = window.innerWidth, vh = window.innerHeight;
       var bw = Math.min(300, Math.max(190, vw * 0.24));
 
       for (var i = 0; i < n; i++){
         var b = el('div', 'mbar');
         b.style.width = bw + 'px';
+        var maxY0 = vh - clearPx - 52;
         var x = 20 + Math.random() * Math.max(vw - bw - 40, 10);
-        var y = 90 + Math.random() * Math.max(vh - 230, 10);
+        var y = TOP_CLEAR + Math.random() * Math.max(maxY0 - TOP_CLEAR, 10);
 
         var sp = SPELLS[Math.floor(Math.random() * SPELLS.length)];
         var fill = el('i');
@@ -2157,7 +2170,7 @@
         r.left--;
         var vw2 = window.innerWidth, vh2 = window.innerHeight;
         r.x = Math.max(12, Math.min(vw2 - r.w - 12, vw2 - r.x - r.w));
-        r.y = Math.max(76, Math.min(vh2 - BOTTOM_CLEAR - 20, vh2 - r.y - 90));
+        r.y = Math.max(TOP_CLEAR, Math.min(vh2 - clearPx - 52, vh2 - r.y - 90));
         r.vx *= -1; r.vy *= -1;
         r.zoomUntil = performance.now() + 620;
         r.e.classList.add('bubbled');
@@ -2197,8 +2210,11 @@
 
         if (!reduce && now > r.zoomUntil){
           r.x += r.vx * dt; r.y += r.vy * dt;
+          var floorY = vh - clearPx - 52;
           if (r.x < 8 || r.x > vw - r.w - 8) r.vx *= -1;
-          if (r.y < 76 || r.y > vh - BOTTOM_CLEAR) r.vy *= -1;
+          if (r.y < TOP_CLEAR || r.y > floorY) r.vy *= -1;
+          if (r.y > floorY) r.y = floorY;
+          if (r.y < TOP_CLEAR) r.y = TOP_CLEAR;
           r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
         }
 
@@ -2468,6 +2484,24 @@
   var mode = 'gate', chIdx = 0, chTimes = [], chEarly = 0, chTimer = null;
   var chTotal = 10, loop = true, gateTimer = null, ultraCdUntil = 0;
 
+  /* a transformed ancestor (.page during a dim shift) breaks position:fixed,
+     so the bar is lifted out of .page for the duration of a run */
+  var simHome = null, simNext = null;
+
+  function pinSim(){
+    if (simHome) return;
+    simHome = sim.parentNode;
+    simNext = sim.nextSibling;
+    document.body.appendChild(sim);
+  }
+
+  function unpinSim(){
+    if (!simHome) return;
+    if (simNext && simNext.parentNode === simHome) simHome.insertBefore(sim, simNext);
+    else simHome.appendChild(sim);
+    simHome = null; simNext = null;
+  }
+
   function clearTimers(){
     clearTimeout(chTimer);
     clearTimeout(gateTimer);
@@ -2514,6 +2548,7 @@
     kickBtn.classList.remove('cd');
     document.body.classList.add('pinned', 'locked');
     document.documentElement.classList.add('locked');
+    pinSim();
     hpEl.classList.remove('dead');
     hpEl.classList.add('on');
     hpEl.querySelector('.hp-label').innerHTML = '1 HP<span>one cast kills you</span>';
@@ -2820,6 +2855,7 @@
     document.body.classList.remove('pinned');
     document.body.classList.remove('locked');
     document.documentElement.classList.remove('locked');
+    unpinSim();
     // the heart stays until the dialog is dismissed, so the stab can finish playing
     chaosEl.classList.remove('on');
     bloodEl.classList.remove('on');
