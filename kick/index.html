@@ -642,6 +642,23 @@
   /* no scrolling mid-run — you cannot lose the bar */
   html.locked, body.locked{overflow:hidden !important}
 
+  /* nothing is selectable mid-run: dragging across the briefing while
+     you click bars would smear a selection over the whole page */
+  body.locked, body.locked *{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+  /* and the game chrome is never selectable, run or not */
+  .sim, .mbar, #bigone, #hp, #ach, #mirrors, .boot, .phase, .gate{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+  .mbar, .bo-bar{-webkit-user-drag:none}
+
   body.pinned .sim{
     position:fixed;
     left:50%;
@@ -1028,7 +1045,7 @@
   .mbar.mage i{background:linear-gradient(180deg,#7FD3F0,#2A7CA8)}
   .mbar.mage span{color:#BFE6F5}
   .mbar.mage::before{
-    content:"MAGE — BLINKS " attr(data-esc) "x";
+    content:"MAGE — " attr(data-esc) " BLINKS LEFT";
     color:#7FD3F0;
   }
   .mbar.grand{
@@ -1041,7 +1058,7 @@
   .mbar.grand i{background:linear-gradient(180deg,#D9B6FF,#6A3FA8)}
   .mbar.grand span{color:#E7D2FF;font-size:15.5px}
   .mbar.grand::before{
-    content:"GRAND MAGE — BLINKS " attr(data-esc) "x";
+    content:"GRAND MAGE — " attr(data-esc) " BLINKS LEFT";
     color:#D9B6FF;
     font-weight:700;
   }
@@ -2172,21 +2189,45 @@
 
     var avoidRect = null;
 
-    function clashes(x, y, w){
-      if (!avoidRect) return false;
-      var a = avoidRect, pad = 18;
+    var BAR_H = 56;
+
+    function boxHit(x, y, w, a, pad){
       return !(x + w < a.left - pad || x > a.right + pad ||
-               y + 56 < a.top - pad || y > a.bottom + pad);
+               y + BAR_H < a.top - pad || y > a.bottom + pad);
+    }
+
+    // live rect of the pinned bar — it moves, so this is read fresh
+    function simRect(){
+      var s = document.getElementById('sim');
+      if (!s) return null;
+      var q = s.getBoundingClientRect();
+      return q.height ? q : null;
+    }
+
+    function clashes(x, y, w, self){
+      if (avoidRect && boxHit(x, y, w, avoidRect, 18)) return true;
+      var sr = simRect();
+      if (sr && boxHit(x, y, w, sr, 14)) return true;
+      for (var i = 0; i < bars.length; i++){
+        var o = bars[i];
+        if (o === self || o.done) continue;
+        if (boxHit(x, y, w, { left:o.x, right:o.x + o.w, top:o.y, bottom:o.y + BAR_H }, 16)) return true;
+      }
+      return false;
     }
 
     function place(r, vw, vh){
       var maxY = vh - clearPx - 52;
-      for (var k = 0; k < 12; k++){
+      var bestX = r.x, bestY = r.y, found = false;
+      for (var k = 0; k < 40; k++){
         var nx = 20 + Math.random() * Math.max(vw - r.w - 40, 10);
         var ny = TOP_CLEAR + Math.random() * Math.max(maxY - TOP_CLEAR, 10);
-        if (!clashes(nx, ny, r.w) || k === 11){ r.x = nx; r.y = ny; break; }
+        bestX = nx; bestY = ny;
+        if (!clashes(nx, ny, r.w, r)){ found = true; break; }
       }
+      r.x = bestX; r.y = bestY;
       r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
+      return found;
     }
 
     function spawn(n, durMin, durMax, speed, wave){
@@ -2251,26 +2292,10 @@
           if (isGrand){
             rec.w = Math.min(360, Math.max(250, window.innerWidth * 0.3));
             b.style.width = rec.w + 'px';
-            rec.dur = (5.4 + Math.random() * 1.2) * 1000;
+            rec.dur = (8.5 + Math.random() * 1.5) * 1000;
             tag.textContent = 'Grand Mage';
           }
           b.setAttribute('data-esc', rec.escapes);
-          b.addEventListener('pointerenter', (function(r){
-            return function(){
-              if (!running || r.done || !r.escapes) return;
-              var t2 = performance.now();
-              if (t2 < r.escCd) return;
-              r.escapes--;
-              r.escCd = t2 + 260;
-              r.e.setAttribute('data-esc', r.escapes);
-              if (!r.escapes) r.e.classList.add('spent');
-              place(r, window.innerWidth, window.innerHeight);
-              r.e.classList.remove('blink');
-              void r.e.offsetWidth;
-              r.e.classList.add('blink');
-              Sfx.play('hit', 1.9, 0.28);
-            };
-          })(rec));
         }
 
         b.style.transform = 'translate(' + rec.x + 'px,' + rec.y + 'px)';
@@ -2299,6 +2324,19 @@
         r.e.classList.add('hitbad');
         r.tm.textContent = 'ALLY';
         if (onShield) onShield();
+        return;
+      }
+
+      // a mage with blinks left escapes the click instead of dying
+      if (r.escapes > 0){
+        r.escapes--;
+        r.e.setAttribute('data-esc', r.escapes);
+        if (!r.escapes) r.e.classList.add('spent');
+        place(r, window.innerWidth, window.innerHeight);
+        r.e.classList.remove('blink');
+        void r.e.offsetWidth;
+        r.e.classList.add('blink');
+        Sfx.play('hit', 1.9, 0.3);
         return;
       }
 
@@ -2340,6 +2378,7 @@
       var dt = last ? Math.min((now - last) / 1000, .05) : 0;
       last = now;
       var vw = window.innerWidth, vh = window.innerHeight;
+      var liveSim = simRect();
 
       for (var i = 0; i < bars.length; i++){
         var r = bars[i];
@@ -2352,6 +2391,12 @@
           if (r.y < TOP_CLEAR || r.y > floorY) r.vy *= -1;
           if (r.y > floorY) r.y = floorY;
           if (r.y < TOP_CLEAR) r.y = TOP_CLEAR;
+
+          // the pinned bar moves in later stages — never drift on top of it
+          if (liveSim && boxHit(r.x, r.y, r.w, liveSim, 12)){
+            r.y = Math.max(TOP_CLEAR, liveSim.top - BAR_H - 14);
+            if (r.vy > 0) r.vy *= -1;
+          }
           r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
         }
 
@@ -2691,6 +2736,7 @@
     kickBtn.classList.remove('cd');
     document.body.classList.add('pinned', 'locked');
     document.documentElement.classList.add('locked');
+    try { window.getSelection().removeAllRanges(); } catch (e){}
     pinSim();
     hpEl.classList.remove('dead');
     hpEl.classList.add('on');
@@ -2983,8 +3029,8 @@
     }
 
     var RULES2 =
-      'These ones will not stand still. <b>Move your mouse at a mage and it teleports away</b> — each has only a couple of blinks in it.<br><br>' +
-      'Chase it until it is out of blinks, then kick it. The <b>Grand Mage</b> blinks four times.';
+      'These ones do not die on the first click. <b>Click a mage and it blinks somewhere else</b> — each has only a couple of blinks in it.<br><br>' +
+      'Keep clicking until the label turns green, then the next click kills it. The <b>Grand Mage</b> blinks four times first.';
 
     var RULES3 =
       '<span style="color:#7FE8AC">Green bars are friendly.</span> <b>Never kick an ally</b> — that ends the run.<br><br>' +
@@ -3017,11 +3063,11 @@
           act:function(){ hHeart = false; stabHeart('taken from you'); } });
         seq.push({ t:'', html:'You go into this one with nothing.', ms:1300,
           act:function(){ hpEl.classList.remove('center'); } });
-        seq.push({ t:'Triage.', html:RULES3, ms:7000, last:true,
+        seq.push({ t:'Triage.', html:RULES3, ms:11000, last:true,
           act:function(){ hpEl.classList.remove('front'); } });
       } else {
         seq.push({ t:'No.', html:'And you already spent your heart.', ms:1500 });
-        seq.push({ t:'Triage.', html:RULES3, ms:7000, last:true });
+        seq.push({ t:'Triage.', html:RULES3, ms:11000, last:true });
       }
     } else {
       seq = [
@@ -3073,7 +3119,7 @@
       cfg = { n: 2 + Math.floor(Math.random() * 2), dMin: 3.0, dMax: 4.0,
               speed: 45 + prog * 70, tpEvery: 0 };
     } else if (st === 2){
-      cfg = { n: 2 + Math.floor(Math.random() * 2), dMin: 3.4, dMax: 4.4,
+      cfg = { n: 2 + Math.floor(Math.random() * 2), dMin: 5.2, dMax: 6.6,
               speed: 55 + prog * 70, tpEvery: 0,
               mage: true, grand: Math.random() < 0.45 };
     } else {
@@ -3679,6 +3725,11 @@
     setTally();
     reset();
   }
+
+  // block selection and dragging outright while a run is live
+  function inRun(){ return document.body.classList.contains('locked'); }
+  document.addEventListener('selectstart', function(e){ if (inRun()) e.preventDefault(); });
+  document.addEventListener('dragstart',   function(e){ if (inRun()) e.preventDefault(); });
 
   // audio needs a user gesture before it will play at all
   document.addEventListener('pointerdown', function armOnce(){
