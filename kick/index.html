@@ -2086,7 +2086,7 @@
     <h2 id="introTitle">It Is Already Casting.</h2>
 
     <ul class="rules">
-      <li><b>Click</b> every small cast bar. They drift, and they teleport.</li>
+      <li><b>Click</b> every small cast bar. They drift, and some do not die on the first click.</li>
       <li><b>Space</b> kicks the big bar in the panel. It casts at the same time.</li>
       <li>It escalates. Twice. You will be told when.</li>
       <li>You get <b>one heart</b>. It buys you exactly one mistake, and you do not get to keep it.</li>
@@ -3429,8 +3429,9 @@
               speed: 55 + prog * 70, tpEvery: 0,
               mage: true, grand: true };
     } else {
+      // no blinking here — teleporting is the mage stage's trick, not this one
       cfg = { n: 3 + Math.floor(Math.random() * 2), dMin: 2.0, dMax: 2.6,
-              speed: 90 + prog * 90, tpEvery: 2000, tiers: true };
+              speed: 90 + prog * 90, tpEvery: 0, tiers: true };
     }
 
     Horror.wave({
