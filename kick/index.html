@@ -665,10 +665,181 @@
   }
   .boot.void .boot-btn:hover{border-color:#8E5ACB;color:#C79BF0}
 
+  /* horror intro */
+  .rules{
+    list-style:none;
+    padding:0;
+    margin:22px auto 0;
+    max-width:44ch;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    text-align:left;
+  }
+  .rules li{
+    font-size:15.5px;
+    line-height:1.45;
+    color:var(--dim);
+    padding-left:18px;
+    position:relative;
+  }
+  .rules li::before{
+    content:"";
+    position:absolute;
+    left:0;top:.62em;
+    width:6px;height:6px;
+    background:#8E5ACB;
+  }
+  .rules b{color:#C79BF0;font-weight:700}
+
+  .startbtn{
+    margin-top:30px;
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(30px,7vw,52px);
+    letter-spacing:.06em;
+    padding:16px 54px 20px;
+    color:#0A0611;
+    background:#B98CE8;
+    border:1px solid #D9C0F5;
+    border-radius:2px;
+    cursor:pointer;
+    box-shadow:0 0 44px rgba(160,90,240,.5);
+    transition:transform .1s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .startbtn:hover{background:#C79BF0;box-shadow:0 0 70px rgba(180,110,255,.75)}
+  .startbtn:active{transform:translateY(2px)}
+  .startbtn:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+
+  .countdown{
+    margin-top:24px;
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(84px,24vw,200px);
+    line-height:.85;
+    color:#C79BF0;
+    text-shadow:0 0 70px rgba(160,90,240,.75);
+    font-variant-numeric:tabular-nums;
+    animation:tickPop .95s ease-out;
+  }
+  .countdown[hidden]{display:none}
+  @keyframes tickPop{
+    0%{transform:scale(1.55);opacity:0}
+    28%{transform:scale(1);opacity:1}
+    100%{transform:scale(.94);opacity:.75}
+  }
+  .intro-foot{display:flex;flex-wrap:wrap;gap:12px 22px;justify-content:center;margin-top:22px}
+
+  /* shielded casts — phase 2 */
+  .mbar.shield{
+    border-color:#8A6A2A;
+    border-width:2px;
+    background:rgba(30,22,10,.94);
+    box-shadow:0 0 26px rgba(200,150,50,.4);
+  }
+  .mbar.shield i{background:linear-gradient(180deg,#6B5A2E,#3A3018)}
+  .mbar.shield span{color:#D8C48A}
+  .mbar.shield::before{
+    content:"⛨ IMMUNE — DO NOT KICK";
+    position:absolute;
+    top:-16px;left:0;
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:.13em;
+    color:#C8A030;
+  }
+
+  /* phase banner */
+  .phase{
+    position:fixed;
+    inset:0;
+    z-index:60;
+    display:none;
+    place-items:center;
+    pointer-events:none;
+    background:radial-gradient(70% 50% at 50% 50%, rgba(60,10,90,.75) 0%, rgba(3,1,7,.92) 75%);
+  }
+  .phase.on{display:grid;animation:phaseIn .4s ease-out}
+  @keyframes phaseIn{from{opacity:0}to{opacity:1}}
+  .phase-inner{text-align:center;padding:20px}
+  .phase-k{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.4em;
+    text-transform:uppercase;
+    color:#C79BF0;
+    margin:0;
+  }
+  .phase-t{
+    font-family:var(--display);
+    font-weight:800;
+    font-size:clamp(50px,15vw,150px);
+    line-height:.85;
+    margin:.1em 0 0;
+    color:#E7D2FF;
+    text-shadow:0 0 60px rgba(180,110,255,.85), 0 0 140px rgba(140,60,220,.5);
+    animation:phasePulse 1.6s ease-in-out infinite;
+  }
+  @keyframes phasePulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.045)}
+  }
+  .phase-s{
+    margin-top:16px;
+    font-size:clamp(16px,2.6vw,20px);
+    color:#B9A6D0;
+    max-width:40ch;
+    margin-left:auto;margin-right:auto;
+  }
+  .phase-s b{color:#F0C868}
+
+  .hud{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 18px;
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    color:var(--dimmer);
+    font-variant-numeric:tabular-nums;
+    border-top:1px solid var(--line);
+    padding-top:12px;
+    margin-top:2px;
+  }
+  .hud b{color:var(--text);font-weight:700}
+  .hud .ph{color:#C79BF0}
+  .hud[hidden]{display:none}
+
+  /* phase 2 priority tiers — red casts fastest */
+  .mbar.p-red{border-color:#E04B47;box-shadow:0 0 26px rgba(224,75,71,.5)}
+  .mbar.p-red i{background:linear-gradient(180deg,#F0716D,#A82A28)}
+  .mbar.p-red::before{content:"PRIORITY 1 — FASTEST";color:#F0716D}
+  .mbar.p-yel{border-color:#E9A83C;box-shadow:0 0 22px rgba(233,168,60,.4)}
+  .mbar.p-yel i{background:linear-gradient(180deg,#F2C877,#B87F1E)}
+  .mbar.p-yel::before{content:"PRIORITY 2";color:#F2C877}
+  .mbar.p-grn{border-color:#4FA574;box-shadow:0 0 18px rgba(79,165,116,.35)}
+  .mbar.p-grn i{background:linear-gradient(180deg,#7FD9A8,#3B7F58)}
+  .mbar.p-grn::before{content:"PRIORITY 3 — SLOWEST";color:#7FD9A8}
+  .mbar.p-red::before,.mbar.p-yel::before,.mbar.p-grn::before{
+    position:absolute;
+    top:-16px;left:0;
+    font-family:var(--mono);
+    font-size:9px;
+    letter-spacing:.13em;
+  }
+
+  .mbar.blink{animation:tp .26s ease-out}
+  @keyframes tp{
+    0%{opacity:.15;filter:blur(6px) brightness(2.4)}
+    55%{opacity:.5;filter:blur(2px) brightness(1.5)}
+    100%{opacity:1;filter:none}
+  }
+
   @media (prefers-reduced-motion:reduce){
     .page{transition:none}
     .page.dimflip,.page.dimspin,.page.dimskew{transform:none}
     body.horror .sim{transition:none}
+    .countdown{animation:none}
   }
 
   /* win variant of the same takeover */
@@ -987,6 +1158,7 @@
       </div>
 
       <p class="tally" id="tally">Interrupted <b>0</b> · Missed <b>0</b> · Success rate <b>—</b></p>
+      <p class="hud" id="hud" hidden></p>
     </div>
   </header>
 
@@ -1269,6 +1441,38 @@
 <canvas id="voidc" aria-hidden="true"></canvas>
 <div id="mirrors" aria-hidden="true"><div class="mhint" id="mhint"></div></div>
 
+<audio id="hsong" src="shrine.mp3" preload="none" loop></audio>
+
+<div class="phase" id="phaseBanner" aria-hidden="true">
+  <div class="phase-inner">
+    <p class="phase-k" id="phaseK">Phase 2</p>
+    <p class="phase-t" id="phaseT">Triage.</p>
+    <p class="phase-s" id="phaseS">Gold bars are <b>immune</b> — kick one and you are done. The rest are ranked: <b>red casts fastest</b>, then yellow, then green. And they teleport now.</p>
+  </div>
+</div>
+
+<div class="boot void" id="hintro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+  <div class="boot-inner">
+    <p class="boot-eyebrow">Horror mode · two phases</p>
+    <h2 id="introTitle">It Is Already Casting.</h2>
+
+    <ul class="rules">
+      <li><b>Click</b> every small cast bar. They drift, and they teleport.</li>
+      <li><b>Space</b> kicks the big bar in the panel. It casts at the same time.</li>
+      <li>Land <b>20 big kicks</b> to reach phase two. It gets worse there.</li>
+      <li>One cast finishing anywhere ends the run.</li>
+    </ul>
+
+    <button class="startbtn" id="hStart" type="button">START</button>
+    <div class="countdown" id="hCount" hidden>5</div>
+
+    <div class="intro-foot">
+      <button class="bail" id="hStartQuiet" type="button">Start without music</button>
+      <button class="bail" id="hBack" type="button">Back out</button>
+    </div>
+  </div>
+</div>
+
 <div class="boot void" id="voidend" role="dialog" aria-modal="true" aria-labelledby="voidTitle">
   <div class="boot-inner">
     <p class="boot-eyebrow" id="voidEyebrow">It found you.</p>
@@ -1475,10 +1679,17 @@
   /* ---- horror: many casters, click every frame ---- */
   var Horror = (function(){
     var layer, hint, bars = [], rafH = null, last = 0, running = false;
-    var onClear = null, onFail = null, onKick = null;
+    var onClear = null, onFail = null, onKick = null, onShield = null;
+    var shieldRate = 0, tpEvery = 0, prio = false;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function el(tag, cls){ var e = document.createElement(tag); if (cls) e.className = cls; return e; }
+
+    function place(r, vw, vh){
+      r.x = 20 + Math.random() * Math.max(vw - r.w - 40, 10);
+      r.y = 90 + Math.random() * Math.max(vh - 230, 10);
+      r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
+    }
 
     function spawn(n, durMin, durMax, speed, wave){
       layer = document.getElementById('mirrors');
@@ -1505,14 +1716,27 @@
         b.appendChild(fill); b.appendChild(lab); b.appendChild(tag);
         if (Math.random() < 0.45) b.classList.add('flip');
 
+        var shielded = Math.random() < shieldRate;
+        if (shielded) b.classList.add('shield');
+
+        var secs = durMin + Math.random() * (durMax - durMin);
+        if (prio && !shielded){
+          var roll = Math.random();
+          if (roll < .34){ b.classList.add('p-red'); secs = 1.35 + Math.random() * 0.5; }
+          else if (roll < .67){ b.classList.add('p-yel'); secs = 2.2 + Math.random() * 0.6; }
+          else { b.classList.add('p-grn'); secs = 3.3 + Math.random() * 0.9; }
+        }
+
         var rec = {
           e: b, fill: fill, tm: tm, w: bw,
           x: x, y: y,
           vx: (Math.random() - .5) * speed,
           vy: (Math.random() - .5) * speed * .7,
-          dur: (durMin + Math.random() * (durMax - durMin)) * 1000,
+          dur: secs * 1000,
           delay: Math.random() * 380,
-          t0: 0, done: false, born: performance.now()
+          done: false, born: performance.now(),
+          shield: shielded,
+          tpAt: tpEvery > 0 ? performance.now() + tpEvery * (0.6 + Math.random() * 0.9) : Infinity
         };
         b.style.transform = 'translate(' + x + 'px,' + y + 'px)';
         b.addEventListener('pointerdown', (function(r){
@@ -1531,6 +1755,16 @@
 
     function hit(r){
       if (!running || r.done) return;
+
+      if (r.shield){
+        running = false;
+        cancelAnimationFrame(rafH);
+        r.e.classList.add('hitbad');
+        r.tm.textContent = 'IMMUNE';
+        if (onShield) onShield();
+        return;
+      }
+
       r.done = true;
       r.e.classList.add('hitok');
       r.tm.textContent = Math.round(performance.now() - r.born) + 'ms';
@@ -1560,10 +1794,33 @@
           r.e.style.transform = 'translate(' + r.x.toFixed(1) + 'px,' + r.y.toFixed(1) + 'px)';
         }
 
+        if (now > r.tpAt && !reduce){
+          place(r, vw, vh);
+          r.e.classList.remove('blink');
+          void r.e.offsetWidth;
+          r.e.classList.add('blink');
+          r.tpAt = now + tpEvery * (0.6 + Math.random() * 0.9);
+        }
+
         var el2 = now - r.born - r.delay;
         if (el2 < 0){ r.fill.style.width = '0%'; r.tm.textContent = '—'; continue; }
         var p = el2 / r.dur;
         if (p >= 1){
+          if (r.shield){
+            r.done = true;
+            r.fill.style.width = '100%';
+            r.e.style.opacity = '.25';
+            r.tm.textContent = 'fizzled';
+            var allDone = true;
+            for (var q = 0; q < bars.length; q++) if (!bars[q].done) allDone = false;
+            if (allDone){
+              running = false;
+              cancelAnimationFrame(rafH);
+              setTimeout(function(){ if (onClear) onClear(); }, 220);
+              return;
+            }
+            continue;
+          }
           running = false;
           cancelAnimationFrame(rafH);
           r.fill.style.width = '100%';
@@ -1579,9 +1836,12 @@
     }
 
     return {
-      wave: function(n, dMin, dMax, speed, waveNo, cbKick, cbClear, cbFail){
-        onKick = cbKick; onClear = cbClear; onFail = cbFail;
-        spawn(n, dMin, dMax, speed, waveNo);
+      wave: function(o){
+        onKick = o.onKick; onClear = o.onClear; onFail = o.onFail; onShield = o.onShield;
+        shieldRate = o.shieldRate || 0;
+        tpEvery = o.tpEvery || 0;
+        prio = !!o.prio;
+        spawn(o.n, o.dMin, o.dMax, o.speed, o.wave);
       },
       clear: function(){
         running = false;
@@ -1778,6 +2038,13 @@
       voidClose   = document.getElementById('voidClose'),
       voidSay     = document.getElementById('voidSay'),
       voidTitle   = document.getElementById('voidTitle'),
+      hudEl       = document.getElementById('hud'),
+      introEl     = document.getElementById('hintro'),
+      hStartBtn   = document.getElementById('hStart'),
+      hQuietBtn   = document.getElementById('hStartQuiet'),
+      hBackBtn    = document.getElementById('hBack'),
+      hCountEl    = document.getElementById('hCount'),
+      song        = document.getElementById('hsong'),
       wipeEl     = document.getElementById('wipe'),
       wipeAgain  = document.getElementById('wipeAgain'),
       wipeClose  = document.getElementById('wipeClose'),
@@ -1794,7 +2061,10 @@
   function clearTimers(){
     clearTimeout(chTimer);
     clearTimeout(gateTimer);
+    clearTimeout(bigTimer);
     cancelAnimationFrame(raf);
+    cancelAnimationFrame(bigRaf);
+    bigOn = false;
   }
 
   function msNote(ms){
@@ -1808,8 +2078,9 @@
   function rate(avg, kicked, early, wasUltra, wasHorror, total){
     var ms = Math.round(avg);
     if (wasHorror){
-      return {t:'You Are Not Human.', c:'good', s:'Thirteen casters, all of them moving, the room folding in on itself, and not one cast went off. Averaging ' + ms +
-        'ms per interrupt. I do not believe you and I want you in my key immediately.'};
+      return {t:'You Survived.', c:'good', s:
+        (hBig + hSmall) + ' interrupts in total — ' + hBig + ' on the big bar, ' + hSmall +
+        ' on the small ones. Both phases cleared. Nothing got a cast off.'};
     }
     if (wasUltra){
       return {t:'Untouchable.', c:'good', s:'Fifteen casts, zero misses, averaging ' + ms +
@@ -1852,46 +2123,163 @@
     } else if (which === 'horror'){
       document.body.classList.add('horror');
       Void.start();
-      Void.setDread(0);
-      verdict.textContent = 'They all cast at once. Click every bar before any of them finish. Space will not save you here.';
-      hWave();
+      verdict.textContent = 'Click the small bars. SPACE for the big one. Both are live.';
+      hStartRun();
     } else {
       verdict.textContent = 'Ten casts, random gaps. One miss ends the run. Do not press early.';
       chWait();
     }
   }
 
-  /* ---- horror waves ---- */
+  /* ---- horror: two phases, big bar on Space, small bars on click ---- */
+  var P1_GOAL = 20, P2_GOAL = 12;
+  var hPhase = 1, hBig = 0, hSmall = 0, hWaveNo = 0;
+  var bigOn = false, bigT0 = 0, bigDur = 0, bigRaf = null, bigTimer = null;
+
+  function hHud(){
+    var goal = hPhase === 1 ? P1_GOAL : P2_GOAL;
+    var got  = hPhase === 1 ? hBig : (hBig - P1_GOAL);
+    hudEl.innerHTML = '<span class="ph">Phase ' + hPhase + '</span> · Big bar <b>' + got + '</b>/' + goal +
+      ' · Small kicks <b>' + hSmall + '</b>';
+  }
+
+  function hStartRun(){
+    hPhase = 1; hBig = 0; hSmall = 0; hWaveNo = 0;
+    hudEl.hidden = false;
+    hHud();
+    Void.setDread(0);
+    hWave();
+    bigSchedule(1400);
+  }
+
+  function hProgress(){
+    hHud();
+    if (hPhase === 1 && hBig >= P1_GOAL){ hPhase2(); return true; }
+    if (hPhase === 2 && hBig >= P1_GOAL + P2_GOAL){
+      chIdx = hBig + hSmall;
+      clearTimers();
+      Horror.clear();
+      chResults();
+      return true;
+    }
+    return false;
+  }
+
+  function hPhase2(){
+    hPhase = 2;
+    clearTimeout(chTimer);
+    clearTimeout(bigTimer);
+    cancelAnimationFrame(bigRaf);
+    bigOn = false;
+    Horror.clear();
+    Void.setDread(1);
+    hHud();
+
+    nameEl.textContent = 'It shields itself.';
+    timerEl.textContent = '—';
+    sim.dataset.state = 'waiting';
+
+    var pb = document.getElementById('phaseBanner');
+    pb.classList.add('on');
+    setTimeout(function(){
+      pb.classList.remove('on');
+      if (mode !== 'horror') return;
+      hWave();
+      bigSchedule(900);
+    }, 2600);
+  }
+
   function hWave(){
-    var left = chTotal - chIdx;
-    var p = chIdx / chTotal;
-    var n = Math.min(left, 2 + Math.floor(Math.random() * 2) + Math.round(p * 2));
-    var dMin = 2.5 - p * 0.9;
-    var dMax = 3.4 - p * 1.1;
-    var speed = 40 + p * 150;
+    if (mode !== 'horror') return;
+    hWaveNo++;
+    var p2 = hPhase === 2;
+    var prog = p2 ? (hBig - P1_GOAL) / P2_GOAL : hBig / P1_GOAL;
 
-    Void.setDread(p);
-    dimShift(p);
+    Void.setDread(p2 ? 1 : prog * 0.8);
+    dimShift(p2 ? 1 : prog);
 
-    state = 'casting';
-    sim.dataset.state = 'casting';
-    nameEl.textContent = n + ' casters. All of them real.';
-    timerEl.textContent = chIdx + '/' + chTotal;
-    tagEl.textContent = 'wave ' + (Math.floor(p * 6) + 1);
-
-    Horror.wave(n, dMin, dMax, speed, Math.floor(p * 6) + 1,
-      function(ms){ chTimes.push(ms); },
-      function(){
-        chIdx += n;
+    Horror.wave({
+      n: p2 ? (3 + Math.floor(Math.random() * 3)) : (2 + Math.floor(Math.random() * 2)),
+      dMin: p2 ? 2.2 : 2.9,
+      dMax: p2 ? 3.0 : 3.8,
+      speed: p2 ? (140 + prog * 130) : (50 + prog * 90),
+      wave: hWaveNo,
+      shieldRate: p2 ? 0.26 : 0,
+      tpEvery: p2 ? 1250 : 2400,
+      prio: p2,
+      onKick: function(ms){ chTimes.push(ms); hSmall++; hHud(); },
+      onClear: function(){
         Horror.clear();
-        if (chIdx >= chTotal){ chResults(); }
-        else { chTimer = setTimeout(hWave, 600); }
+        if (mode === 'horror') chTimer = setTimeout(hWave, 550);
       },
-      function(){
+      onFail: function(){
         setTimeout(function(){ Horror.clear(); }, 700);
         chFail();
+      },
+      onShield: function(){
+        setTimeout(function(){ Horror.clear(); }, 700);
+        chFail('shield');
       }
-    );
+    });
+  }
+
+  /* the big bar — Space only */
+  function bigSchedule(delay){
+    if (mode !== 'horror') return;
+    var base = hPhase === 2 ? 1500 : 2200;
+    bigTimer = setTimeout(bigCast, delay != null ? delay : base + Math.random() * (hPhase === 2 ? 1500 : 2400));
+  }
+
+  function bigCast(){
+    if (mode !== 'horror') return;
+    cur = SPELLS[Math.floor(Math.random() * SPELLS.length)];
+    bigDur = (hPhase === 2 ? (1.05 + Math.random() * 0.55) : (1.6 + Math.random() * 0.8)) * 1000;
+    nameEl.textContent = cur.n + '  —  SPACE';
+    tagEl.textContent = 'big bar casting';
+    sim.dataset.state = 'casting';
+    bigOn = true;
+    bigT0 = performance.now();
+    bigRaf = requestAnimationFrame(bigTick);
+  }
+
+  function bigTick(now){
+    if (!bigOn) return;
+    var e = now - bigT0;
+    var p = Math.min(e / bigDur, 1);
+    fill.style.width = (p * 100) + '%';
+    timerEl.textContent = Math.max((bigDur - e) / 1000, 0).toFixed(1);
+    if (p >= 1){
+      bigOn = false;
+      sim.dataset.state = 'landed';
+      fill.style.width = '100%';
+      timerEl.textContent = 'CAST';
+      nameEl.textContent = cur.n + ' LANDED';
+      chFail('big');
+      return;
+    }
+    bigRaf = requestAnimationFrame(bigTick);
+  }
+
+  function bigKick(){
+    if (!bigOn) return;
+    bigOn = false;
+    cancelAnimationFrame(bigRaf);
+    var ms = performance.now() - bigT0;
+    chTimes.push(ms);
+    hBig++;
+    sim.dataset.state = 'interrupted';
+    timerEl.textContent = Math.round(ms) + 'ms';
+    nameEl.textContent = 'Interrupted';
+    tagEl.textContent = 'big bar down';
+    if (hProgress()) return;
+    setTimeout(function(){
+      if (mode === 'horror' && !bigOn){
+        sim.dataset.state = 'waiting';
+        nameEl.textContent = 'Nothing casting… yet';
+        timerEl.textContent = '—';
+      }
+    }, 500);
+    bigSchedule();
   }
 
   function dimShift(p){
@@ -1924,6 +2312,9 @@
     kickBtn.classList.remove('cd');
     var page = document.querySelector('.page');
     if (page) page.className = 'page';
+    hudEl.hidden = true;
+    document.getElementById('phaseBanner').classList.remove('on');
+    stopSong();
     Chaos.stop();
     Void.stop();
     Horror.clear();
@@ -1991,8 +2382,20 @@
 
     rAvg.textContent   = kicked ? Math.round(avg) + 'ms' : '—';
     rBest.textContent  = kicked ? Math.round(best) + 'ms' : '—';
-    rHit.textContent   = kicked + '/' + chTotal;
-    rEarly.textContent = String(chEarly);
+
+    var lHit = rHit.parentNode.querySelector('.res-l');
+    var lEarly = rEarly.parentNode.querySelector('.res-l');
+    if (wasHorror){
+      rHit.textContent = String(hBig);
+      lHit.innerHTML = 'Big bar<br>interrupts';
+      rEarly.textContent = String(hSmall);
+      lEarly.innerHTML = 'Small bar<br>interrupts';
+    } else {
+      rHit.textContent = kicked + '/' + chTotal;
+      lHit.innerHTML = 'Casts<br>interrupted';
+      rEarly.textContent = String(chEarly);
+      lEarly.innerHTML = 'Kicked<br>thin air';
+    }
 
     chalTitle.textContent = r.t;
     chalTitle.className = r.c;
@@ -2013,7 +2416,7 @@
     }
   }
 
-  function chFail(){
+  function chFail(reason){
     var wasUltra = (mode === 'ultra');
     var wasHorror = (mode === 'horror');
     clearTimers();
@@ -2022,9 +2425,20 @@
 
     if (wasHorror){
       Void.setDread(1);
-      voidTitle.textContent = 'Consumed.';
-      voidSay.textContent = 'One of them finished casting. You interrupted ' + kicked + ' of ' + chTotal +
-        ' before the pack ate the group. In a real pull nobody would even tell you which one you missed.';
+      var tot = hBig + hSmall;
+      if (reason === 'shield'){
+        voidTitle.textContent = 'Immune.';
+        voidSay.textContent = 'You kicked a cast that could not be kicked. ' + tot + ' interrupts (' +
+          hBig + ' big, ' + hSmall + ' small) and it ended on the one bar you were supposed to leave alone.';
+      } else if (reason === 'big'){
+        voidTitle.textContent = 'Consumed.';
+        voidSay.textContent = 'The big bar finished while you were chasing the small ones. ' + tot +
+          ' interrupts — ' + hBig + ' big, ' + hSmall + ' small. Phase ' + hPhase + '.';
+      } else {
+        voidTitle.textContent = 'Consumed.';
+        voidSay.textContent = 'One of them got its cast off. ' + tot + ' interrupts — ' + hBig +
+          ' big, ' + hSmall + ' small. Phase ' + hPhase + '.';
+      }
       setTimeout(function(){
         endRunUi();
         voidEnd.classList.add('on');
@@ -2302,20 +2716,82 @@
     lastRun = 'ultra';
     startRun('ultra');
   });
+  var introTimer = null;
+
+  function showIntro(){
+    hStartBtn.hidden = false;
+    hCountEl.hidden = true;
+    hQuietBtn.hidden = false;
+    hBackBtn.hidden = false;
+    introEl.classList.add('on');
+    hStartBtn.focus();
+  }
+
+  function hideIntro(){
+    clearTimeout(introTimer);
+    introEl.classList.remove('on');
+    hStartBtn.blur(); hQuietBtn.blur(); hBackBtn.blur();
+  }
+
+  function playSong(){
+    try {
+      song.currentTime = 0;
+      song.volume = 0.55;
+      var p = song.play();
+      if (p && p.catch) p.catch(function(){});
+    } catch (e){}
+  }
+
+  function stopSong(){
+    try { song.pause(); song.currentTime = 0; } catch (e){}
+  }
+
+  function beginCountdown(withSong){
+    if (withSong) playSong();
+    hStartBtn.hidden = true;
+    hQuietBtn.hidden = true;
+    hBackBtn.hidden = true;
+    var n = 5;
+    hCountEl.hidden = false;
+    hCountEl.textContent = String(n);
+    (function step(){
+      introTimer = setTimeout(function(){
+        n--;
+        if (n <= 0){
+          hideIntro();
+          lastRun = 'horror';
+          startRun('horror');
+          return;
+        }
+        hCountEl.classList.remove('countdown');
+        void hCountEl.offsetWidth;
+        hCountEl.classList.add('countdown');
+        hCountEl.textContent = String(n);
+        step();
+      }, 1000);
+    })();
+  }
+
   horrorStart.addEventListener('click', function(){
     if (mode === 'horror') { abortRun(); return; }
-    lastRun = 'horror';
-    startRun('horror');
+    showIntro();
   });
+  hStartBtn.addEventListener('click', function(){ beginCountdown(true); });
+  hQuietBtn.addEventListener('click', function(){ beginCountdown(false); });
+  hBackBtn.addEventListener('click', hideIntro);
   voidAgain.addEventListener('click', function(){
     voidEnd.classList.remove('on');
-    chCloseAnd(function(){ startRun('horror'); });
+    chCloseAnd(function(){ stopSim('Ready when you are.'); showIntro(); });
   });
   voidClose.addEventListener('click', function(){
     voidEnd.classList.remove('on');
     chCloseAnd(null);
   });
   chalAgain.addEventListener('click', function(){
+    if (lastRun === 'horror'){
+      chCloseAnd(function(){ stopSim('Ready when you are.'); showIntro(); });
+      return;
+    }
     chCloseAnd(function(){ startRun(lastRun); });
   });
   chalClose.addEventListener('click', function(){ chCloseAnd(null); });
@@ -2327,8 +2803,9 @@
     if (e.code !== 'Space' && e.key !== ' ') return;
     // once the sim has settled, Space belongs to the page again (scrolling)
     if (state === 'done') return;
-    if (chalEl.classList.contains('on') || wipeEl.classList.contains('on') || voidEnd.classList.contains('on')) return;
-    if (mode === 'horror') return;
+    if (chalEl.classList.contains('on') || wipeEl.classList.contains('on') ||
+        voidEnd.classList.contains('on') || introEl.classList.contains('on')) return;
+    if (mode === 'horror'){ e.preventDefault(); bigKick(); return; }
     var a = document.activeElement;
     if (a && (a.tagName === 'INPUT' || a.tagName === 'BUTTON')) return;
     e.preventDefault();
