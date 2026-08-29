@@ -310,6 +310,54 @@
   .boot.win h2{color:#6FD5A0;text-shadow:0 0 40px rgba(88,192,138,.4)}
   .boot.win .boot-btn:hover{border-color:var(--green);color:#6FD5A0}
 
+  /* ---------- gate ---------- */
+  .gate{
+    padding:15px 18px;
+    border-left:2px solid var(--amber);
+    background:var(--panel);
+    display:flex;
+    flex-wrap:wrap;
+    align-items:baseline;
+    gap:6px 16px;
+  }
+  .gate-label{
+    font-family:var(--mono);
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--amber);
+  }
+  .gate-text{color:var(--dim);font-size:15px;line-height:1.5;flex:1 1 260px}
+  .gate-prog{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.06em;
+    color:var(--dimmer);
+    font-variant-numeric:tabular-nums;
+    width:100%;
+  }
+  .gate-prog b{color:var(--text);font-weight:700}
+  .gate.done{border-left-color:var(--green)}
+  .gate.done .gate-label{color:var(--green)}
+
+  .gated{
+    display:flex;
+    flex-direction:column;
+    gap:clamp(52px,9vw,88px);
+    transition:filter .55s ease, opacity .55s ease;
+  }
+  .gated.locked{
+    filter:blur(7px) saturate(.35);
+    opacity:.4;
+    max-height:300px;
+    overflow:hidden;
+    pointer-events:none;
+    user-select:none;
+    -webkit-mask-image:linear-gradient(#000 15%, transparent 95%);
+    mask-image:linear-gradient(#000 15%, transparent 95%);
+  }
+
   /* ---------- the rule ---------- */
   .rule-body{max-width:62ch}
   .rule-body p{color:var(--dim)}
@@ -539,7 +587,7 @@
   <header>
     <p class="eyebrow">Mandatory briefing Â· you have been invited provisionally</p>
     <h1>You Have An Interrupt.<br><span class="beg">Use It Or Get Out.</span></h1>
-    <p class="lede">You're one of three pug DPS I have never met, and history says at least one of you is about to cost us this key by standing there watching a cast bar fill up like it's a screensaver. <strong>So before you press Ready, do the thing below once.</strong> One button. It's not a raid mechanic.</p>
+    <p class="lede">You're one of three pug DPS I have never met, and history says at least one of you is about to cost us this key by standing there watching a cast bar fill up like it's a screensaver. <strong>So before you read a single word of the rest of this page, you're going to prove you can press one button.</strong> It's not a raid mechanic. It's a bar and a key.</p>
 
     <div class="sim panel" id="sim" data-state="idle">
       <div class="caster">
@@ -567,6 +615,14 @@
       <p class="tally" id="tally">Interrupted <b>0</b> Â· Missed <b>0</b> Â· Success rate <b>â€”</b></p>
     </div>
   </header>
+
+  <div class="gate" id="gate">
+    <span class="gate-label" id="gateLabel">Locked</span>
+    <span class="gate-text" id="gateText">The rest of this page is locked until you settle the bar above. Kick <strong>5 in a row</strong> and you're in. Miss <strong>2 in a row</strong> and you're out. Either way you get to read it â€” the difference is how.</span>
+    <span class="gate-prog" id="gateProg">Streak <b>0</b>/5 Â· Misses <b>0</b>/2</span>
+  </div>
+
+  <div class="gated locked" id="gated" aria-hidden="true">
 
   <section>
     <div class="sec-head">
@@ -790,6 +846,8 @@
     <div><b>No addons required. No logs will be linked. Press the button.</b></div>
   </footer>
 
+  </div>
+
 </div>
 
 <div class="boot" id="boot" role="dialog" aria-modal="true" aria-labelledby="bootTitle">
@@ -798,7 +856,7 @@
     <h2 id="bootTitle">Fuck Off Out Of My Key.</h2>
     <p>You missed <strong>two casts in a row</strong> on a webpage with one button, a warning label, a giant flashing bar, and absolutely nothing else happening on screen.</p>
     <p class="small">This is precisely what happens at the third boss, except there we also lose 35 minutes, a key level, and any remaining faith in the group finder.</p>
-    <button class="boot-btn" id="bootBtn" type="button">Let me try again</button>
+    <button class="boot-btn" id="bootBtn" type="button">Fine. Teach me to kick.</button>
   </div>
 </div>
 
@@ -808,7 +866,7 @@
     <h2 id="winTitle">Come To My Key.</h2>
     <p>Five in a row. That is <strong>five more than the Hunter from last night</strong> managed across an entire dungeon while sitting at the top of the meter.</p>
     <p class="small">Invite is open. Bring the thumb. Say nothing about damage and we'll get along fine.</p>
-    <button class="boot-btn" id="winBtn" type="button">Run it back</button>
+    <button class="boot-btn" id="winBtn" type="button">Read the briefing</button>
   </div>
 </div>
 
@@ -847,7 +905,14 @@
       bootEl  = document.getElementById('boot'),
       bootBtn = document.getElementById('bootBtn'),
       winEl   = document.getElementById('win'),
-      winBtn  = document.getElementById('winBtn');
+      winBtn  = document.getElementById('winBtn'),
+      gated   = document.getElementById('gated'),
+      gate    = document.getElementById('gate'),
+      gateLabel = document.getElementById('gateLabel'),
+      gateText  = document.getElementById('gateText'),
+      gateProg  = document.getElementById('gateProg');
+
+  var unlocked = false;
 
   var state = 'idle', start = 0, dur = 2.2, cur = SPELLS[0], raf = null;
   var hits = 0, miss = 0, streak = 0, missStreak = 0;
@@ -859,6 +924,10 @@
     var cls = (rate !== null && rate < 50) ? ' class="rate-bad"' : '';
     tally.innerHTML = 'Interrupted <b>' + hits + '</b> Â· Missed <b>' + miss +
       '</b> Â· Success rate <b' + cls + '>' + rateTxt + '</b>';
+
+    gateProg.innerHTML = unlocked
+      ? 'Page unlocked Â· Interrupted <b>' + hits + '</b> Â· Missed <b>' + miss + '</b>'
+      : 'Streak <b>' + streak + '</b>/5 Â· Misses <b>' + missStreak + '</b>/2';
   }
 
   function pick(list, i){
@@ -913,7 +982,21 @@
   function unboot(){
     bootEl.classList.remove('on');
     missStreak = 0;
+    unlock('You failed your way in. The rest of the page is open â€” read it properly this time.', 'Unlocked the hard way');
     reset();
+  }
+
+  function unlock(msg, label){
+    gated.classList.remove('locked');
+    gated.removeAttribute('aria-hidden');
+    gate.classList.add('done');
+    gateLabel.textContent = label;
+    gateText.textContent = msg;
+    unlocked = true;
+    setTally();
+    setTimeout(function(){
+      gate.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 350);
   }
 
   function kick(){
@@ -940,6 +1023,7 @@
   function unwin(){
     winEl.classList.remove('on');
     streak = 0;
+    unlock('Five for five. You clearly do not need the rest of this page, but read it anyway â€” the class table is at least useful.', 'Unlocked');
     reset();
   }
 
