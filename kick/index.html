@@ -2452,6 +2452,7 @@
       var vw = window.innerWidth, vh = window.innerHeight;
       var bw = Math.min(300, Math.max(190, vw * 0.24));
 
+      var redCount = 0;
       for (var i = 0; i < n; i++){
         var b = el('div', 'mbar');
         b.style.width = bw + 'px';
@@ -2480,6 +2481,11 @@
           else if (roll < .44){ kind = 'legend'; secs = 4.8 + Math.random() * 1.4; }
           else if (roll < .74){ kind = 'red';    secs = 1.05 + Math.random() * 0.40; }
           else { kind = 'norm'; secs = 1.95 + Math.random() * 0.55; }
+          // never more than two fast ones at once — four is unreadable
+          if (kind === 'red'){
+            if (redCount >= 2){ kind = 'norm'; secs = 1.95 + Math.random() * 0.55; }
+            else redCount++;
+          }
           b.classList.add('k-' + kind);
         }
         var shielded = (kind === 'friend');
@@ -2501,7 +2507,7 @@
         // mages blink away when you reach for them
         if (mage && !shielded){
           var isGrand = grandOn && i === 0;
-          rec.escapes = isGrand ? 4 : (1 + Math.floor(Math.random() * 2));
+          rec.escapes = isGrand ? 4 : 2;
           rec.escCd = 0;
           b.classList.add(isGrand ? 'grand' : 'mage');
           if (isGrand){
@@ -2509,6 +2515,7 @@
             b.style.width = rec.w + 'px';
             rec.dur = (8.5 + Math.random() * 1.5) * 1000;
             tag.textContent = 'Grand Mage';
+            place(rec, vw, vh);
           }
           b.setAttribute('data-esc', rec.escapes);
         }
@@ -3389,7 +3396,7 @@
     } else if (st === 2){
       cfg = { n: 2 + Math.floor(Math.random() * 2), dMin: 5.2, dMax: 6.6,
               speed: 55 + prog * 70, tpEvery: 0,
-              mage: true, grand: Math.random() < 0.45 };
+              mage: true, grand: true };
     } else {
       cfg = { n: 3 + Math.floor(Math.random() * 2), dMin: 2.0, dMax: 2.6,
               speed: 90 + prog * 90, tpEvery: 2000, tiers: true };
