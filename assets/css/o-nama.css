@@ -1,5 +1,5 @@
 /* ============================================================
-   KAI-SOL · KAI Solutions
+   KAI-SOL
    o-nama.css: stranica "O nama" (priča firme + "KAI-SOL ukratko").
    Nadopunjuje base.css (nikad ga ne mijenja).
    ============================================================ */
@@ -31,6 +31,10 @@
   width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center;
   font-size: .68rem; font-weight: 700; background: rgba(52,211,153,.15); color: var(--success); }
 
+/* ---------- Dvoje ljudi (umjesto jednog "foundera") ---------- */
+.duo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.duo-grid .founder-card { position: static; }
+
 /* ---------- Principi ---------- */
 .principles { background: linear-gradient(180deg, var(--surface), var(--bg-2));
   border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(28px, 4vw, 44px); }
@@ -61,6 +65,7 @@
 @media (max-width: 940px) {
   .story-grid { grid-template-columns: 1fr; }
   .founder-card { position: static; max-width: 420px; margin-inline: auto; }
+  .duo-grid { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
   .principles ul { grid-template-columns: 1fr; }
   .proof-grid { grid-template-columns: repeat(2, 1fr); gap: 30px 20px; }
 }

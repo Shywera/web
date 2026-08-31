@@ -9,15 +9,18 @@
 }
 .hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
 .hero-copy h1 { margin: 22px 0 22px; }
-.hero-copy .lead { max-width: 40ch; }
+.hero-copy .lead { max-width: 42ch; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
 .hero-trust { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 32px; }
 .hero-trust li { display: flex; align-items: center; gap: 8px; font-size: .92rem; color: var(--text-soft); }
 .hero-trust svg { width: 18px; height: 18px; color: var(--success); }
 
-/* Mock dashboard vizual */
+/* Dinamička riječ u eyebrowu ("Web · Dizajn · Hosting · IT podrška") */
+.eyebrow .type-word { color: var(--accent-2); font-weight: 700; }
+
+/* ---------- Vizual: stranica koja se sama gradi ---------- */
 .hero-visual { position: relative; }
-.mock {
+.builder-mock {
   position: relative; z-index: 2; background: linear-gradient(180deg, var(--surface-2), var(--bg-2));
   border: 1px solid var(--border-2); border-radius: var(--radius-lg); box-shadow: var(--shadow);
   overflow: hidden; animation: floaty 7s ease-in-out infinite;
@@ -27,20 +30,58 @@
 .mock-top .dot { width: 11px; height: 11px; border-radius: 50%; background: #33405f; }
 .mock-top .dot:nth-child(1){ background:#ff5f57; } .mock-top .dot:nth-child(2){ background:#febc2e; } .mock-top .dot:nth-child(3){ background:#28c840; }
 .mock-title { margin-left: 10px; font-family: var(--font-head); font-size: .82rem; color: var(--muted); }
-.mock-body { padding: 20px; display: grid; gap: 16px; }
-.mock-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-.ms { background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px; }
-.ms-k { display: block; font-size: .68rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
-.ms b { display: block; font-family: var(--font-head); font-size: 1.35rem; color: #fff; margin: 3px 0; }
-.ms i { font-style: normal; font-size: .72rem; color: var(--success); }
-.mock-bars { display: flex; align-items: flex-end; gap: 8px; height: 92px; padding: 6px 2px; }
-.mock-bars span { flex: 1; height: var(--h); background: var(--grad); border-radius: 5px 5px 0 0; opacity: .85; }
-.mock-rows { display: grid; gap: 8px; }
-.mock-row { display: flex; align-items: center; gap: 10px; font-size: .82rem; color: var(--text-soft); background: rgba(255,255,255,.02); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 12px; }
-.pill { font-size: .68rem; font-weight: 600; padding: 3px 9px; border-radius: 999px; font-family: var(--font-head); }
-.pill.ok { background: rgba(52,211,153,.15); color: var(--success); }
-.pill.go { background: rgba(91,140,255,.15); color: var(--accent); }
-.pill.wait { background: rgba(167,139,250,.15); color: var(--accent-3); }
+
+.builder-canvas { position: relative; height: 340px; padding: 26px 24px; overflow: hidden; }
+
+/* Faza 1: sivi kostur (wireframe) */
+.bp-skel-group { position: absolute; inset: 26px 24px; animation: bp-skel-cycle 9s ease-in-out infinite; }
+.bp-skel { background: rgba(255,255,255,.07); border-radius: 6px; }
+.bp-skel-nav { height: 16px; width: 55%; margin-bottom: 26px; }
+.bp-skel-hero { height: 54px; width: 90%; margin-bottom: 18px; }
+.bp-skel-row { display: flex; gap: 12px; }
+.bp-skel-row .bp-skel { flex: 1; height: 90px; }
+@keyframes bp-skel-cycle {
+  0%   { opacity: 1; }
+  34%  { opacity: 1; }
+  44%  { opacity: 0; }
+  96%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Faza 2: gotov, obojan layout */
+.bp-final-group { position: absolute; inset: 26px 24px; opacity: 0; animation: bp-final-cycle 9s ease-in-out infinite; }
+.bp-final-nav { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; }
+.bp-dotlogo { width: 16px; height: 16px; border-radius: 5px; background: var(--grad); flex: 0 0 auto; }
+.bp-navline { height: 10px; width: 46px; border-radius: 4px; background: rgba(255,255,255,.16); }
+.bp-navline.short { width: 30px; }
+.bp-navline:last-child { margin-left: auto; }
+.bp-final-hero { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+.bp-h { display: block; height: 16px; width: 78%; border-radius: 4px; background: var(--grad); }
+.bp-h.short { width: 46%; opacity: .7; }
+.bp-btn { display: block; margin-top: 6px; height: 30px; width: 130px; border-radius: 999px; background: var(--grad); box-shadow: var(--shadow-glow); }
+.bp-final-row { display: flex; gap: 12px; }
+.bp-final-card { flex: 1; padding: 14px; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px solid var(--border); }
+.bp-ico { display: block; width: 22px; height: 22px; border-radius: 6px; background: var(--grad-soft); border: 1px solid var(--border); margin-bottom: 10px; }
+.bp-l { display: block; height: 8px; width: 70%; border-radius: 3px; background: rgba(255,255,255,.14); }
+.bp-l + .bp-l { margin-top: 6px; width: 50%; }
+@keyframes bp-final-cycle {
+  0%   { opacity: 0; }
+  38%  { opacity: 0; }
+  50%  { opacity: 1; }
+  90%  { opacity: 1; }
+  98%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* "Kursor" koji crta stranicu tijekom faze kostura */
+.bp-cursor { position: absolute; z-index: 3; width: 22px; height: 22px; color: var(--accent-2); filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); animation: bp-cursor-cycle 9s ease-in-out infinite; }
+@keyframes bp-cursor-cycle {
+  0%   { top: 30px;  left: 30px;  opacity: 1; }
+  34%  { top: 200px; left: 260px; opacity: 1; }
+  40%  { opacity: 0; }
+  100% { opacity: 0; top: 30px; left: 30px; }
+}
+
 .mock-float {
   position: absolute; z-index: 3; font-family: var(--font-head); font-size: .82rem; font-weight: 600;
   padding: 10px 15px; border-radius: 12px; background: rgba(16,24,43,.9); border: 1px solid var(--border-2);
@@ -81,6 +122,14 @@
 .pain h3 { margin: 10px 0 10px; }
 .pain p { font-size: .96rem; color: var(--muted); }
 
+/* ---------- Ponuda: 4 stupa ---------- */
+.pillars { gap: 20px; }
+.pillar .ico svg { width: 24px; height: 24px; }
+.pillar .pillar-price { margin-top: 14px; font-family: var(--font-head); font-weight: 600; font-size: .92rem; color: var(--accent-2); }
+.pillar .pillar-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--text); }
+.pillar .pillar-link svg { width: 15px; height: 15px; transition: transform .2s; }
+.pillar:hover .pillar-link svg { transform: translateX(3px); }
+
 /* ---------- Case teaser (dokaz + zašto mi) ---------- */
 .case-teaser { position: relative; overflow: hidden; border: 1px solid var(--border-2); border-radius: var(--radius-lg); background: linear-gradient(120deg, var(--surface-2), var(--bg-2)); padding: clamp(34px,5vw,60px); }
 .case-teaser::before { content: ""; position: absolute; inset: 0; background: radial-gradient(560px 280px at 88% 0%, rgba(34,211,238,.14), transparent 65%); pointer-events: none; }
@@ -92,7 +141,7 @@
 .case-copy .btn { margin-top: 26px; }
 .case-list { position: relative; display: grid; gap: 14px; }
 
-/* ---------- Paketi ---------- */
+/* ---------- Paketi (teaser) ---------- */
 .pkg { display: flex; flex-direction: column; }
 .pkg-step { font-family: var(--font-head); font-size: .76rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-2); }
 .pkg h3 { margin: 10px 0 4px; }
@@ -119,8 +168,11 @@
   .hero-visual { max-width: 480px; margin-inline: auto; }
   .stats-grid { grid-template-columns: repeat(2,1fr); gap: 32px 20px; }
   .case-grid { grid-template-columns: 1fr; gap: 36px; }
+  .pillars.grid-4 { grid-template-columns: repeat(2,1fr); }
   .mf1 { left: 0; } .mf2 { right: 0; }
 }
 @media (max-width: 620px) {
   .mock-float { display: none; }
+  .pillars.grid-4 { grid-template-columns: 1fr; }
+  .builder-canvas { height: 300px; }
 }

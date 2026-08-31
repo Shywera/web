@@ -73,4 +73,70 @@
 
   // Godina u footeru
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+
+  // Typewriter: ciklički ispisuje riječi iz data-words ("Web izrada|Dizajn|...")
+  var typers = document.querySelectorAll("[data-typewriter]");
+  if (typers.length && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    typers.forEach(function (el) {
+      var words = (el.dataset.words || el.textContent).split("|").filter(Boolean);
+      if (words.length < 2) return;
+      var caret = document.createElement("span");
+      caret.className = "type-caret";
+      el.after(caret);
+      var wi = 0, ci = 0, deleting = false;
+      var tick = function () {
+        var word = words[wi];
+        ci += deleting ? -1 : 1;
+        el.textContent = word.slice(0, ci);
+        var delay = deleting ? 40 : 80;
+        if (!deleting && ci === word.length) { delay = 1400; deleting = true; }
+        else if (deleting && ci === 0) { deleting = false; wi = (wi + 1) % words.length; delay = 300; }
+        setTimeout(tick, delay);
+      };
+      setTimeout(tick, 1200);
+    });
+  }
+
+  // Magnetični gumbi: lagano prate kursor unutar svog okvira
+  var magnets = document.querySelectorAll(".btn-magnetic");
+  if (magnets.length && window.matchMedia("(hover: hover)").matches) {
+    magnets.forEach(function (btn) {
+      btn.addEventListener("mousemove", function (e) {
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width / 2;
+        var y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = "translate(" + x * 0.18 + "px, " + y * 0.35 + "px)";
+      });
+      btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
+    });
+  }
+
+  // Konfigurator paketa (usluge.html): zbraja odabrane usluge i sprema odabir u CTA link
+  var configurator = document.querySelector(".configurator");
+  if (configurator) {
+    var boxes = configurator.querySelectorAll('input[type="checkbox"]');
+    var onetimeEl = document.getElementById("confOnetime");
+    var monthlyEl = document.getElementById("confMonthly");
+    var cta = document.getElementById("confCta");
+    var recalc = function () {
+      var onetime = 0, monthly = 0, labels = [];
+      boxes.forEach(function (b) {
+        if (!b.checked) return;
+        onetime += Number(b.dataset.onetime || 0);
+        monthly += Number(b.dataset.monthly || 0);
+        if (b.dataset.label) labels.push(b.dataset.label);
+      });
+      if (onetimeEl) onetimeEl.textContent = onetime + " €";
+      if (monthlyEl) monthlyEl.textContent = monthly + " €/mj";
+      if (cta) {
+        var params = new URLSearchParams();
+        params.set("paket", labels.join(", ") || "Upit bez odabira");
+        params.set("jednokratno", onetime);
+        params.set("mjesecno", monthly);
+        cta.href = "kontakt.html?" + params.toString();
+      }
+    };
+    boxes.forEach(function (b) { b.addEventListener("change", recalc); });
+    recalc();
+  }
 })();

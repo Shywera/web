@@ -1,8 +1,8 @@
 /* ============================================================
-   KAI-SOL · KAI Solutions
+   KAI-SOL — web, dizajn, hosting i IT podrška
    base.css: dizajn-sistem (tokeni, tipografija, layout,
    header, footer, gumbi, kartice, animacije)
-   Tamna "tech" tema. Dijeli ga svaka stranica.
+   Tamna tema. Dijeli ga svaka stranica.
    ============================================================ */
 
 /* ---------- Reset ---------- */
@@ -100,6 +100,10 @@ section { position: relative; }
   border: 1px solid var(--border);
 }
 .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 12px var(--accent-2); }
+
+/* ---------- Typewriter caret (za dinamičnu riječ u eyebrowu/naslovu) ---------- */
+.type-caret { display: inline-block; width: 2px; margin-left: 2px; background: var(--accent-2); animation: caret-blink 1s step-end infinite; }
+@keyframes caret-blink { 50% { opacity: 0; } }
 
 .section-head { max-width: 720px; margin-bottom: 54px; }
 .section-head.center { margin-inline: auto; text-align: center; }
