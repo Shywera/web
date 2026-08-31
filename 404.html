@@ -5,34 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stranica nije pronađena | KAI-SOL</title>
   <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#08090a" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
   <style>
-    .nf { min-height: 70vh; display: grid; place-items: center; text-align: center; padding: 60px 20px; }
-    .nf b { display: block; font-family: var(--font-display); font-style: italic; font-size: clamp(4rem, 12vw, 7rem); font-weight: 500; line-height: 1; color: var(--accent); }
-    .nf h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 14px 0 10px; }
-    .nf p { color: var(--muted); margin-bottom: 28px; }
+    .notfound { min-height: 72vh; display: grid; place-items: center; text-align: center; padding: 60px 0; }
+    .notfound__code { font-family: var(--font-display); font-style: italic; font-size: clamp(4.5rem, 14vw, 9rem); line-height: 1; color: var(--accent); }
+    .notfound h1 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin: 18px 0 12px; }
+    .notfound p { max-width: 46ch; margin: 0 auto 30px; color: var(--muted); }
+    .notfound__row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav">
-      <a href="index.html" class="brand" aria-label="KAI-SOL početna">KAI-SOL</a>
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="brand" aria-label="KAI-SOL, početna">
+        KAI-SOL<span class="brand__dot" aria-hidden="true"></span>
+      </a>
+      <a href="kontakt.html" class="btn btn--ghost">Kontakt</a>
     </div>
   </header>
+
   <main>
-    <div class="nf">
+    <div class="container notfound">
       <div>
-        <b>404</b>
-        <h1>Stranica nije pronađena</h1>
-        <p>Ova poveznica vodi u prazno. Vratimo vas na početnu.</p>
-        <a href="index.html" class="btn btn-primary btn-lg">Natrag na početnu</a>
+        <div class="notfound__code">404</div>
+        <h1>Ova stranica ne postoji</h1>
+        <p>
+          Poveznica je vjerojatno zastarjela ili je u adresi omaška. Vratimo vas na početnu,
+          odande se lako dolazi do svega ostaloga.
+        </p>
+        <div class="notfound__row">
+          <a href="index.html" class="btn btn--primary btn--lg">Natrag na početnu</a>
+          <a href="usluge.html" class="btn btn--ghost btn--lg">Pogledajte usluge</a>
+        </div>
       </div>
     </div>
   </main>
-  <script src="assets/js/script.js"></script>
+
+  <script src="assets/js/app.js"></script>
 </body>
 </html>

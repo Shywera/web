@@ -3,222 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>O nama | KAI-SOL</title>
-  <meta name="description" content="Dvoje ljudi, jedan cilj: jedan vodi dizajn i razvoj, drugi poslovnu stranu, cijene i ugovore. Web koji dobro izgleda i ima smisla u poslovnim brojkama." />
-  <meta name="theme-color" content="#0b0a08" />
+  <title>O nama: dizajn, sociologija i infrastruktura | KAI-SOL</title>
+  <meta name="description" content="KAI-SOL vode dvoje ljudi: jedan pokriva dizajn, kod i sociologiju odlučivanja, drugi infrastrukturu, ekonomiju i prodaju. Iskustvo iz izgradnje stvarnih poslovnih sustava." />
+  <meta name="theme-color" content="#08090a" />
   <meta property="og:title" content="O nama | KAI-SOL" />
-  <meta property="og:description" content="Dizajn i razvoj s jedne strane, poslovna strana i prodaja s druge. Zato naše stranice izgledaju dobro i imaju smisla u brojkama." />
+  <meta property="og:description" content="Dvoje ljudi, dvije discipline: dizajn i sociologija s jedne, infrastruktura i ekonomija s druge strane." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kai-sol.com/o-nama.html" />
+  <meta property="og:locale" content="hr_HR" />
+  <link rel="canonical" href="https://kai-sol.com/o-nama.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="canonical" href="https://kai-sol.com/o-nama.html" />
-  <meta property="og:url" content="https://kai-sol.com/o-nama.html" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="assets/css/base.css" />
-  <link rel="stylesheet" href="assets/css/o-nama.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-  <!-- ============ HEADER + FULLSCREEN MENI (identično na svim stranicama) ============ -->
-  <header class="site-header">
-    <div class="container nav">
-      <a href="index.html" class="brand" aria-label="KAI-SOL početna">KAI-SOL</a>
-      <button class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="siteMenu">
-        <span class="menu-label-open">Meni</span><span class="menu-label-close">Zatvori</span>
-        <span class="menu-btn-icon"><span></span><span></span></span>
+  <!-- ================= ZAGLAVLJE ================= -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="brand" aria-label="KAI-SOL, početna">
+        KAI-SOL<span class="brand__dot" aria-hidden="true"></span>
+      </a>
+      <nav class="nav" id="glavnaNavigacija" aria-label="Glavna navigacija">
+        <a href="index.html#razumijemo">Izazovi</a>
+        <a href="index.html#partnerstvo">Pristup</a>
+        <a href="usluge.html">Usluge i cijene</a>
+        <a href="o-nama.html" class="is-active">O nama</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <a href="kontakt.html" class="btn btn--primary header__cta">Zatražite ponudu</a>
+      <button class="nav-toggle" aria-label="Otvorite izbornik" aria-expanded="false" aria-controls="glavnaNavigacija">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
-  <nav id="siteMenu" class="site-menu" aria-label="Glavna navigacija">
-    <div class="site-menu-inner container">
-      <ol class="site-menu-links">
-        <li><a href="index.html">Početna</a></li>
-        <li><a href="usluge.html">Usluge i cijene</a></li>
-        <li><a href="iskustvo.html">Iskustvo</a></li>
-        <li><a href="o-nama.html" class="active">O nama</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-      </ol>
-      <div class="site-menu-foot">
-        <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
-        <a href="kontakt.html" class="btn btn-primary">Zatražite ponudu</a>
-      </div>
-    </div>
-  </nav>
 
   <main>
-
-    <!-- ============ PAGE HERO ============ -->
+    <!-- ================= ZAGLAVLJE STRANICE ================= -->
     <section class="page-hero">
       <div class="container">
         <span class="eyebrow" data-reveal>O nama</span>
-        <h1 data-reveal data-delay="1">Dvoje ljudi, <span class="gradient-text">jedan cilj.</span></h1>
+        <h1 data-reveal data-delay="1">Dvoje ljudi,<br /><em>dvije discipline</em></h1>
         <p class="lead" data-reveal data-delay="2">
-          Jedan vodi dizajn i razvoj, drugi poslovnu stranu i prodaju. Zato naši
-          projekti izgledaju dobro i imaju smisla u brojkama, ne samo na prezentaciji.
+          Nismo agencija s dugim popisom odjela. Upravo zato znate tko radi na vašem projektu,
+          s kim razgovarate i tko odgovara kada nešto zapne.
         </p>
       </div>
     </section>
 
-    <!-- ============ PRIČA ============ -->
-    <section class="section-tight">
+    <!-- ================= PRIČA ================= -->
+    <section class="section--tight">
       <div class="container">
-        <div class="story-grid">
-          <div class="story-copy" data-reveal>
+        <div class="story" data-reveal>
+          <div>
             <h2>Kako je KAI-SOL nastao</h2>
-            <p>
-              Prije nego smo počeli raditi web stranice za druge, gradili smo softver
-              koji danas svaki dan koristi proizvodna firma: skladište, narudžbe,
-              ponude, evidencije. Iz tog iskustva došla je ideja: puno malih i srednjih
-              firmi ima sličan problem, stranicu koja izgleda kao da nikog ne zanima,
-              ili je uopće nemaju.
+            <p style="margin-top:22px">
+              Prije nego što smo počeli izrađivati stranice za druge, godinama smo gradili poslovne
+              sustave koji se svakodnevno koriste u stvarnoj proizvodnji: vođenje skladišta, narudžbe,
+              kalkulacije i evidencije. Naučili smo ondje nešto što se teško nauči iz priručnika, kako
+              izgleda softver kojim se ljudi služe pod pritiskom, u smjeni, bez volje za objašnjenjima.
             </p>
             <p>
-              Spojili smo dvije stvari koje rijetko dolaze zajedno: dizajn koji stvarno
-              privlači pažnju i razumijevanje kako firma posluje, prodaje i zarađuje.
-              Web stranica nije samo lijepa slika, ona je alat koji donosi upite.
+              Iz toga je proizašao naš pristup web stranicama. Posjetitelj koji dolazi na vašu stranicu
+              nema strpljenja ni vremena, kao ni radnik u pogonu. Ako u nekoliko sekundi ne pronađe ono
+              zbog čega je došao, odlazi. Zadatak dizajna nije da bude lijep, nego da čovjeku olakša
+              odluku.
             </p>
             <p>
-              <strong>KAI-SOL postoji da vam napravi upravo to.</strong> Ne prodajemo
-              gotove predloške ni prazna obećanja o "modernom dizajnu". Gradimo
-              stranice s razlogom iza svakog elementa.
+              <strong>KAI-SOL je nastao da taj pristup ponudi malim i srednjim tvrtkama</strong>, onima
+              koje nemaju vlastiti marketinški odjel ni informatičara, a trebaju digitalni nastup koji
+              radi svoj posao i tehniku koja ne pada.
             </p>
           </div>
 
-          <div class="duo-grid" data-reveal data-delay="1">
-            <aside class="founder-card">
-              <div class="founder-avatar" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><circle cx="11" cy="11" r="2"/></svg>
-              </div>
-              <h3>Dizajn i razvoj</h3>
-              <p class="founder-role">Web razvoj · dizajn · korisničko iskustvo</p>
-              <ul class="founder-facts">
-                <li>Programira i dizajnira svaku stranicu osobno</li>
-                <li>Pozadina u sociologiji: prati kako ljudi stvarno gledaju i klikaju</li>
-                <li>Iskustvo iz izgradnje internih poslovnih sustava</li>
-              </ul>
-            </aside>
-            <aside class="founder-card">
-              <div class="founder-avatar" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/><path d="m7 14 4-4 3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-              <h3>Poslovna strana</h3>
-              <p class="founder-role">Prodaja · ekonomija · domene i ugovori</p>
-              <ul class="founder-facts">
-                <li>Vodi razgovore s klijentima, cijene i ugovore</li>
-                <li>Pozadina u ekonomiji i prodaji</li>
-                <li>Brine da ponuda ima smisla za vaš proračun, ne samo za naš portfolio</li>
-              </ul>
-            </aside>
-          </div>
+          <aside class="story__aside">
+            <h3>Ukratko</h3>
+            <p>Mala postava, jasna podjela odgovornosti.</p>
+            <ul class="facts">
+              <li>Dizajn i razvoj rade dvije osobe, bez podugovaranja</li>
+              <li>Iskustvo iz izgradnje poslovnih sustava u proizvodnji</li>
+              <li>Fiksne cijene i opseg dogovoren prije početka</li>
+              <li>Vlasništvo nad kodom, sadržajem i domenom ostaje vaše</li>
+            </ul>
+          </aside>
         </div>
       </div>
     </section>
 
-    <!-- ============ ŠTO TO ZNAČI ZA VAS ============ -->
+    <!-- ================= PARTNERSTVO ================= -->
     <section class="section">
       <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow" data-reveal>Zašto je to bitno</span>
-          <h2 data-reveal data-delay="1">Što to znači za vas</h2>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Podjela uloga</span>
+          <h2>Tko što radi</h2>
         </div>
-        <div class="grid grid-2">
-          <article class="card" data-reveal>
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5" stroke-linecap="round"/></svg></div>
-            <h3>Dizajn temeljen na ponašanju ljudi</h3>
-            <p>Raspored, boje i tekst na stranici biramo prema tome što stvarno navodi posjetitelja na klik, ne prema osobnom ukusu.</p>
+        <div class="duo">
+          <article class="duo__card" data-reveal>
+            <span class="duo__role">Dizajn · Kod · Sociologija</span>
+            <h3>Kako ljudi doista odlučuju</h3>
+            <p>
+              Sociološka pozadina znači da raspored elemenata, boje i tekst nisu stvar osobnoga ukusa,
+              nego proučenoga ponašanja. Gdje pogled prvo pada, koji podatak gradi povjerenje, a koji
+              korak izaziva otpor, pitanja su na koja odgovaramo prije nego što nacrtamo prvi zaslon.
+            </p>
+            <ul class="duo__list">
+              <li>Dizajn, korisnički tok i arhitektura koda</li>
+              <li>Tekstovi pisani prema pitanjima koja kupac stvarno ima</li>
+              <li>Izrada i održavanje tehničkog dijela rješenja</li>
+            </ul>
           </article>
-          <article class="card" data-reveal data-delay="1">
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 9h8M8 13h5M21 12a9 9 0 1 1-4.4-7.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h3>Jedan tim, jedan dogovor</h3>
-            <p>Dizajn, razvoj i poslovni razgovor prolaze kroz iste dvije osobe. Nema prebacivanja između agencije, dizajnera i freelancera.</p>
-          </article>
-          <article class="card" data-reveal data-delay="2">
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" stroke-linecap="round"/></svg></div>
-            <h3>Razumijemo i poslovnu stranu</h3>
-            <p>Cijena, rok i ono što stranica treba postići dogovaraju se jasno, na jeziku brojki, ne samo dizajnerskog žargona.</p>
-          </article>
-          <article class="card" data-reveal data-delay="3">
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v6l4 2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h3>Ostajemo i nakon lansiranja</h3>
-            <p>Hosting, sitne izmjene i podrška idu uz stranicu. Ne nestanemo dan nakon što je stranica objavljena.</p>
+
+          <article class="duo__card" data-reveal data-delay="1">
+            <span class="duo__role">Infrastruktura · Ekonomija · Prodaja</span>
+            <h3>Da brojke imaju smisla</h3>
+            <p>
+              Drugi dio para brine o onome što nastup drži na nogama i o tome da suradnja bude
+              isplativa objema stranama: poslužitelji, domene, ugovori i jasna računica prije nego
+              što bilo što potpišete.
+            </p>
+            <ul class="duo__list">
+              <li>Domene, poslužitelji i infrastruktura</li>
+              <li>Ponude, ugovori i transparentne cijene</li>
+              <li>Poslovni razgovor i dugoročna suradnja s klijentima</li>
+            </ul>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- ============ PRINCIPI ============ -->
-    <section class="section-tight">
+    <!-- ================= ISKUSTVO ================= -->
+    <section class="section section--line">
       <div class="container">
-        <div class="principles" data-reveal>
-          <h2>Principi rada</h2>
-          <ul>
-            <li><strong>Jasna cijena prije početka:</strong> znate iznos i rok prije nego bilo što potpišete.</li>
-            <li><strong>Dizajn s razlogom:</strong> svaki element ima svrhu, ne postoji "jer tako izgleda ljepše".</li>
-            <li><strong>Stranica je vaša:</strong> kod, sadržaj i domena ostaju u vašem vlasništvu.</li>
-            <li><strong>Podrška se ne gasi lansiranjem:</strong> ostajemo dostupni i nakon što je stranica gotova.</li>
-          </ul>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Iskustvo iza nas</span>
+          <h2>Sustavi koji rade<br />svaki radni dan</h2>
+          <p class="lead">
+            KAI-SOL je mlada tvrtka, ali iskustvo iza nje nije. Prije web usluga izgradili smo i uveli
+            sustave koji se i danas koriste u svakodnevnoj proizvodnji.
+          </p>
         </div>
-      </div>
-    </section>
 
-    <!-- ============ CTA ============ -->
-    <section class="section">
-      <div class="container">
-        <div class="final-cta" data-reveal>
-          <div class="final-glow" aria-hidden="true"></div>
-          <h2>Popričajmo <span class="gradient-text">o vašem projektu.</span></h2>
-          <p>Kratak razgovor bez obveze: recite nam što vas muči, predložit ćemo rješenje i okvirnu cijenu.</p>
-          <div class="cta-row">
-            <a href="kontakt.html" class="btn btn-primary btn-lg">
-              Zatražite ponudu
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="mailto:info@kai-sol.com" class="btn btn-ghost btn-lg">info@kai-sol.com</a>
+        <div class="proof" data-reveal data-delay="1">
+          <div class="proof__item">
+            <b>1.500+</b>
+            <span>skladišnih pozicija pod nadzorom sustava koji smo izradili</span>
+          </div>
+          <div class="proof__item">
+            <b>4</b>
+            <span>veća poslovna sustava uvedena u stvarni pogon, ne u demonstraciju</span>
+          </div>
+          <div class="proof__item">
+            <b>13+</b>
+            <span>automatiziranih procesa koji su prije toga bili ručni posao</span>
           </div>
         </div>
+
+        <div class="callout" data-reveal data-delay="2" style="margin-top:30px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01" stroke-linecap="round"/></svg>
+          <p>
+            Navedeni sustavi izrađeni su za proizvodnu tvrtku u kojoj jedan od nas radi kao tehnolog.
+            Navodimo ih kao dokaz sposobnosti, bez naziva tvrtke i povjerljivih podataka. Naši web
+            projekti za klijente tek nastaju, pa prve suradnje sklapamo pod povoljnijim uvjetima.
+          </p>
+        </div>
       </div>
     </section>
 
+    <!-- ================= NAČELA ================= -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Načela rada</span>
+          <h2>Četiri obećanja kojih se držimo</h2>
+        </div>
+        <div class="grid grid--2" data-reveal data-delay="1">
+          <article class="card">
+            <h3>Cijena poznata prije početka</h3>
+            <p>Opseg, rok i iznos stoje u pisanoj ponudi. Ako se opseg tijekom rada mijenja, o tome razgovaramo unaprijed, a ne na računu.</p>
+          </article>
+          <article class="card">
+            <h3>Svaka odluka ima razlog</h3>
+            <p>Ako ne možemo objasniti čemu neki element služi, taj element nema mjesta na stranici. Dizajn nije ukras, nego alat.</p>
+          </article>
+          <article class="card">
+            <h3>Sve ostaje vaše</h3>
+            <p>Kod, sadržaj, domena i pristupni podaci vode se na vaše ime. Ako jednoga dana krenete dalje s nekim drugim, ništa vas ne zadržava.</p>
+          </article>
+          <article class="card">
+            <h3>Iskrena procjena</h3>
+            <p>Ako procijenimo da vam projekt ne treba ili da ga ne možemo kvalitetno izvesti, reći ćemo to otvoreno umjesto da prodamo uslugu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ZAVRŠNI POZIV ================= -->
+    <section class="cta-final">
+      <div class="container" data-reveal>
+        <span class="eyebrow">Sljedeći korak</span>
+        <h2>Upoznajmo se kroz kratak razgovor</h2>
+        <p>
+          Petnaest minuta obično je dovoljno da zaključimo ima li smisla surađivati. Bez obveze
+          i bez prodajnog pritiska.
+        </p>
+        <div class="cta-final__row">
+          <a href="kontakt.html" class="btn btn--primary btn--lg">Javite nam se</a>
+          <a href="usluge.html" class="btn btn--ghost btn--lg">Pogledajte cijene</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- ============ FOOTER (identičan na svim stranicama) ============ -->
-  <footer class="site-footer">
+  <!-- ================= PODNOŽJE ================= -->
+  <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-about">
-          <a href="index.html" class="brand">KAI-SOL</a>
-          <p>Web stranice, dizajn, hosting i IT podrška za male i srednje firme.</p>
+      <div class="footer__grid">
+        <div class="footer__about">
+          <a href="index.html" class="brand">KAI-SOL<span class="brand__dot" aria-hidden="true"></span></a>
+          <p>Web stranice, dizajn, hosting i poslovna IT podrška za male i srednje tvrtke.</p>
         </div>
-        <div>
-          <h4>Usluge</h4>
-          <a href="usluge.html#web">Web izrada</a>
-          <a href="usluge.html#dizajn">Dizajn</a>
-          <a href="usluge.html#skrb">Hosting i skrb</a>
-          <a href="usluge.html#it">IT podrška</a>
-        </div>
-        <div>
-          <h4>Firma</h4>
-          <a href="o-nama.html">O nama</a>
-          <a href="iskustvo.html">Iskustvo</a>
-          <a href="kontakt.html">Kontakt</a>
-        </div>
-        <div>
-          <h4>Kontakt</h4>
-          <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
-          <a href="kontakt.html">Zatražite ponudu</a>
+        <div class="footer__links">
+          <div>
+            <h4>Usluge</h4>
+            <a href="usluge.html#web">Web razvoj i dizajn</a>
+            <a href="usluge.html#odrzavanje">Mjesečno održavanje</a>
+            <a href="usluge.html#hosting">Hosting</a>
+            <a href="usluge.html#it">IT podrška</a>
+          </div>
+          <div>
+            <h4>Tvrtka</h4>
+            <a href="o-nama.html">O nama</a>
+            <a href="usluge.html">Cijene</a>
+            <a href="kontakt.html">Kontakt</a>
+          </div>
+          <div>
+            <h4>Kontakt</h4>
+            <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
+            <a href="kontakt.html">Zatražite ponudu</a>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
+      <div class="footer__bottom">
         <span>© <span data-year>2026</span> KAI-SOL. Sva prava pridržana.</span>
-        <div class="socials">
-          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.57-2.3 3.2V21H9z"/></svg></a>
-          <a href="mailto:info@kai-sol.com" aria-label="Email"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round"/></svg></a>
-        </div>
+        <span>Izrađeno u Hrvatskoj</span>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/script.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>

@@ -3,405 +3,332 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usluge i cijene: web, dizajn, hosting, IT podrška | KAI-SOL</title>
-  <meta name="description" content="Web izrada od 490 €, dizajn od 350 €, hosting i skrb od 19 €/mj, IT podrška za ured i server od 149 €/mj. Sastavite paket i vidite okvirnu cijenu odmah." />
-  <meta name="theme-color" content="#0b0a08" />
+  <title>Usluge i cijene: izrada web stranica, hosting i IT podrška | KAI-SOL</title>
+  <meta name="description" content="Izrada web stranica od 490 €, mjesečni paket održavanja od 49 €/mj, upravljani hosting od 19 €/mj i poslovna IT podrška od 149 €/mj. Jasan opseg i fiksna cijena prije početka." />
+  <meta name="theme-color" content="#08090a" />
   <meta property="og:title" content="Usluge i cijene | KAI-SOL" />
-  <meta property="og:description" content="Web, dizajn, hosting i IT podrška, pojedinačno ili u paketu. Cijene jasne prije početka." />
+  <meta property="og:description" content="Web razvoj, mjesečno održavanje, upravljani hosting i poslovna IT podrška. Cijene i opseg jasni prije potpisa." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kai-sol.com/usluge.html" />
+  <meta property="og:locale" content="hr_HR" />
+  <link rel="canonical" href="https://kai-sol.com/usluge.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="canonical" href="https://kai-sol.com/usluge.html" />
-  <meta property="og:url" content="https://kai-sol.com/usluge.html" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="assets/css/base.css" />
-  <link rel="stylesheet" href="assets/css/usluge.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
 
-  <!-- ============ HEADER + FULLSCREEN MENI (identično na svim stranicama) ============ -->
-  <header class="site-header">
-    <div class="container nav">
-      <a href="index.html" class="brand" aria-label="KAI-SOL početna">KAI-SOL</a>
-      <button class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="siteMenu">
-        <span class="menu-label-open">Meni</span><span class="menu-label-close">Zatvori</span>
-        <span class="menu-btn-icon"><span></span><span></span></span>
+  <!-- ================= ZAGLAVLJE ================= -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="brand" aria-label="KAI-SOL, početna">
+        KAI-SOL<span class="brand__dot" aria-hidden="true"></span>
+      </a>
+      <nav class="nav" id="glavnaNavigacija" aria-label="Glavna navigacija">
+        <a href="index.html#razumijemo">Izazovi</a>
+        <a href="index.html#partnerstvo">Pristup</a>
+        <a href="usluge.html" class="is-active">Usluge i cijene</a>
+        <a href="o-nama.html">O nama</a>
+        <a href="kontakt.html">Kontakt</a>
+      </nav>
+      <a href="kontakt.html" class="btn btn--primary header__cta">Zatražite ponudu</a>
+      <button class="nav-toggle" aria-label="Otvorite izbornik" aria-expanded="false" aria-controls="glavnaNavigacija">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
-  <nav id="siteMenu" class="site-menu" aria-label="Glavna navigacija">
-    <div class="site-menu-inner container">
-      <ol class="site-menu-links">
-        <li><a href="index.html">Početna</a></li>
-        <li><a href="usluge.html" class="active">Usluge i cijene</a></li>
-        <li><a href="iskustvo.html">Iskustvo</a></li>
-        <li><a href="o-nama.html">O nama</a></li>
-        <li><a href="kontakt.html">Kontakt</a></li>
-      </ol>
-      <div class="site-menu-foot">
-        <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
-        <a href="kontakt.html" class="btn btn-primary">Zatražite ponudu</a>
-      </div>
-    </div>
-  </nav>
 
   <main>
-
-    <!-- ============ PAGE HERO ============ -->
+    <!-- ================= ZAGLAVLJE STRANICE ================= -->
     <section class="page-hero">
-      <div class="page-hero-glow" aria-hidden="true"></div>
       <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow" data-reveal>Usluge i cijene</span>
-          <h1 data-reveal data-delay="1">Četiri usluge,<br /><span class="gradient-text">jedan tim</span></h1>
-          <p class="lead" data-reveal data-delay="2">
-            Naručite samo web stranicu ili sve zajedno: dizajn, hosting i podršku.
-            Cijene ispod su okvirni početci, konačan iznos dogovaramo prije početka rada.
-          </p>
-        </div>
-        <div class="steps-strip" data-reveal data-delay="3" aria-hidden="true">
-          <div class="ss-item ss-hl"><span class="ss-n">1</span> Web izrada · od 490 €</div>
-          <span class="ss-arrow">→</span>
-          <div class="ss-item"><span class="ss-n">2</span> Dizajn · od 350 €</div>
-          <span class="ss-arrow">→</span>
-          <div class="ss-item"><span class="ss-n">3</span> Hosting i skrb · od 19 €/mj</div>
-          <span class="ss-arrow">→</span>
-          <div class="ss-item"><span class="ss-n">4</span> IT podrška · od 149 €/mj</div>
-        </div>
+        <span class="eyebrow" data-reveal>Usluge i cijene</span>
+        <h1 data-reveal data-delay="1">Jasan opseg,<br /><em>poštena cijena</em></h1>
+        <p class="lead" data-reveal data-delay="2">
+          Cijene navedene ovdje početne su i služe kao orijentacija. Konačan iznos dogovaramo
+          nakon kratkoga razgovora, kada znamo što vam doista treba, a što možemo mirne savjesti
+          izostaviti.
+        </p>
       </div>
     </section>
 
-    <!-- ============ 1: WEB IZRADA ============ -->
-    <section class="section" id="web">
+    <!-- ================= 1. WEB RAZVOJ ================= -->
+    <section class="section--tight" id="web">
       <div class="container">
-        <article class="pkg-detail featured" data-reveal>
-          <span class="pkg-flag">Glavna usluga</span>
-          <header class="pkg-head">
-            <div class="pkg-head-copy">
-              <span class="pkg-step">Usluga 1</span>
-              <h2>Web izrada</h2>
-              <p class="lead">Stranica napravljena za vaš posao, ne prepravljen tuđi predložak. Radi brzo i izgleda dobro na mobitelu, tabletu i računalu.</p>
+        <article class="detail" data-reveal>
+          <div class="detail__head">
+            <div>
+              <span class="eyebrow">Usluga 01</span>
+              <h2>Web razvoj i dizajn</h2>
+              <p>
+                Stranica izrađena za vaše poslovanje, a ne preuređeni tuđi predložak. Prije prve
+                linije koda dogovaramo što stranica treba postići i kako ćemo to prepoznati.
+              </p>
             </div>
-            <div class="pkg-price-box">
-              <span class="pp-amount">od 490 €</span>
-              <span class="pp-note">jednokratno · po opsegu</span>
-            </div>
-          </header>
-
-          <div class="pkg-cols">
-            <div class="pkg-col">
-              <h3>Tri razine izrade</h3>
-              <ul class="check-list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Landing / vizitka</strong> — jedna stranica, predstavljanje posla i kontakt, od 490 €</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Poslovna stranica</strong> — do 6 stranica, usluge, o nama, blog ili novosti, od 990 €</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Webshop / napredno</strong> — online prodaja ili poseban sustav, po dogovoru</span></li>
-              </ul>
-            </div>
-            <div class="pkg-col">
-              <h3>Uvijek uključeno</h3>
-              <ul class="check-list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Dizajn prilagođen mobitelu, tabletu i računalu</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Osnovna SEO priprema, da vas Google zna pronaći</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Povezivanje domene i pomoć oko kupnje ako je nemate</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Kratka obuka: kako sami izmijeniti tekst i slike</span></li>
-              </ul>
+            <div class="detail__price">
+              <strong>od 490 €</strong>
+              <span>jednokratno, prema opsegu</span>
             </div>
           </div>
 
-          <div class="pkg-callout">
+          <div class="tiers">
+            <div class="tier">
+              <h3>Landing stranica</h3>
+              <div class="tier__price">490 €<small>jednokratno</small></div>
+              <p>Jedna stranica koja predstavlja ponudu i vodi posjetitelja do kontakta.</p>
+              <ul class="checklist">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Dizajn po mjeri i tekstualna struktura</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Kontaktna forma i postavljanje domene</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Rok izrade: tjedan do dva</li>
+              </ul>
+              <a href="kontakt.html" class="btn btn--ghost btn--block">Zatražite ponudu</a>
+            </div>
+
+            <div class="tier tier--featured">
+              <span class="pill tier__flag">Najčešći izbor</span>
+              <h3>Poslovna stranica</h3>
+              <div class="tier__price">990 €<small>jednokratno</small></div>
+              <p>Do šest stranica: usluge, o nama, reference, novosti i kontakt.</p>
+              <ul class="checklist">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Sve iz landing paketa</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Struktura prilagođena tražilicama</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Obuka za samostalno uređivanje sadržaja</li>
+              </ul>
+              <a href="kontakt.html" class="btn btn--primary btn--block">Zatražite ponudu</a>
+            </div>
+
+            <div class="tier">
+              <h3>Web trgovina i posebna rješenja</h3>
+              <div class="tier__price">od 1.990 €<small>prema dogovoru</small></div>
+              <p>Online prodaja ili sustav povezan s vašim poslovnim procesima.</p>
+              <ul class="checklist">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Katalog, košarica i način plaćanja</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Povezivanje s postojećim sustavima</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Opseg i rok utvrđeni prije početka</li>
+              </ul>
+              <a href="kontakt.html" class="btn btn--ghost btn--block">Zatražite ponudu</a>
+            </div>
+          </div>
+
+          <div class="callout">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.01" stroke-linecap="round"/></svg>
             <p>
-              <strong>Zašto raspon, a ne jedna cijena?</strong> Vizitka i webshop nisu isti posao.
-              Nakon kratkog razgovora o tome što vam treba, dobivate fiksnu ponudu s cijenom i rokom, prije nego bilo što potpišete.
+              <strong>Zašto raspon, a ne jedna brojka?</strong> Vizitka i web trgovina nisu isti posao.
+              Nakon razgovora dobivate pisanu ponudu s fiksnom cijenom i rokom, a ta se brojka poslije
+              ne mijenja.
             </p>
           </div>
-
-          <div class="pkg-cta">
-            <a href="kontakt.html" class="btn btn-primary btn-lg">
-              Zatražite ponudu za web stranicu
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
         </article>
       </div>
     </section>
 
-    <!-- ============ 2: DIZAJN ============ -->
-    <section class="section" id="dizajn">
+    <!-- ================= 2. MJESEČNO ODRŽAVANJE ================= -->
+    <section class="section--tight" id="odrzavanje">
       <div class="container">
-        <article class="pkg-detail" data-reveal>
-          <header class="pkg-head">
-            <div class="pkg-head-copy">
-              <span class="pkg-step">Usluga 2</span>
-              <h2>Dizajn</h2>
-              <p class="lead">Samostalno ili uz web stranicu: dizajn koji se osmišljava prema tome kako ljudi stvarno gledaju i odlučuju, ne po trenutnom trendu.</p>
-            </div>
-            <div class="pkg-price-box">
-              <span class="pp-amount">od 350 €</span>
-              <span class="pp-note">jednokratno · po opsegu</span>
-            </div>
-          </header>
-
-          <div class="pkg-cols">
-            <div class="pkg-col">
-              <h3>Što radimo</h3>
-              <ul class="check-list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Vizualni identitet</strong>: logo, boje, tipografija, od 350 €</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>UI/UX redizajn</strong> postojeće stranice ili aplikacije, od 690 €</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Marketinški materijali</strong>: objave za društvene mreže, prezentacije, letci, od 150 € po paketu</span></li>
-              </ul>
-            </div>
-            <div class="pkg-col">
-              <h3>Zašto to nije samo estetika</h3>
-              <p class="pkg-text">
-                Dizajn odlučuje hoće li posjetitelj ostati ili otići za tri sekunde.
-                Radimo ga zajedno s prodajnom stranom, tako da svaka stranica i
-                slika ima svrhu: prijenos poruke koja vodi do klika, poziva ili upita.
+        <article class="detail" data-reveal>
+          <div class="detail__head">
+            <div>
+              <span class="eyebrow">Usluga 02</span>
+              <h2>Mjesečni paket održavanja</h2>
+              <p>
+                Stranica nakon lansiranja treba pažnju: sigurnosna ažuriranja, izmjene sadržaja i
+                postupna poboljšanja. Preuzimamo to u cijelosti, vi se vraćate svojemu poslu.
               </p>
-              <div class="grow-tags">
-                <span class="tag">Vizualni identitet</span>
-                <span class="tag">UI/UX</span>
-                <span class="tag">Materijali za marketing</span>
-              </div>
+            </div>
+            <div class="detail__price">
+              <strong>od 49 €/mj</strong>
+              <span>otkazivo svaki mjesec</span>
             </div>
           </div>
 
-          <div class="pkg-cta">
-            <a href="kontakt.html" class="btn btn-primary btn-lg">
-              Zatražite ponudu za dizajn
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
+          <div class="tiers">
+            <div class="tier">
+              <h3>Osnovni</h3>
+              <div class="tier__price">19 €<small>mjesečno</small></div>
+              <p>Minimum koji svaka poslovna stranica treba imati.</p>
+              <ul class="checklist">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Hosting, SSL certifikat i domena</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Automatske sigurnosne kopije</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Nadzor dostupnosti stranice</li>
+              </ul>
+              <a href="kontakt.html" class="btn btn--ghost btn--block">Odaberite paket</a>
+            </div>
+
+            <div class="tier tier--featured">
+              <span class="pill tier__flag">Potpuno održavanje</span>
+              <h3>Standardni</h3>
+              <div class="tier__price">49 €<small>mjesečno</small></div>
+              <p>Za tvrtke koje redovito mijenjaju sadržaj i žele mirniju glavu.</p>
+              <ul class="checklist">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Sve iz osnovnog paketa</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Do dva sata izmjena mjesečno</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Prednost pri javljanju, odgovor isti radni dan</li>
+              </ul>
+              <a href="kontakt.html" class="btn btn--primary btn--block">Odaberite paket</a>
+            </div>
+
+            <div class="tier">
+              <h3>Prošireni</h3>
+              <div class="tier__price">99 €<small>mjesečno</small></div>
+              <p>Kada stranica treba rasti, a ne samo stajati na mjestu.</p>
+              <ul class="checklist">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Sve iz standardnog paketa</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Mjesečni izvještaj o posjetima i upitima</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Redovita poboljšanja sadržaja i brzine</li>
+              </ul>
+              <a href="kontakt.html" class="btn btn--ghost btn--block">Odaberite paket</a>
+            </div>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- ============ 3: HOSTING I SKRB ============ -->
-    <section class="section" id="skrb">
+    <!-- ================= 3. HOSTING ================= -->
+    <section class="section--tight" id="hosting">
       <div class="container">
-        <article class="pkg-detail" data-reveal>
-          <header class="pkg-head">
-            <div class="pkg-head-copy">
-              <span class="pkg-step">Usluga 3</span>
-              <h2>Hosting i mjesečna skrb</h2>
-              <p class="lead">Stranica nakon lansiranja ne smije ostati sama. Skrb se plaća mjesečno i otkaziva je kad god poželite.</p>
+        <article class="detail" data-reveal>
+          <div class="detail__head">
+            <div>
+              <span class="eyebrow">Usluga 03</span>
+              <h2>Upravljani hosting i infrastruktura</h2>
+              <p>
+                Domene, certifikati i poslužitelji vođeni s naše strane, s jasnom evidencijom
+                datuma obnove. Ne morate poznavati tehničku terminologiju da bi sve radilo pouzdano.
+              </p>
             </div>
-            <div class="pkg-price-box">
-              <span class="pp-amount">od 19 €</span>
-              <span class="pp-note">/mj · tri razine</span>
+            <div class="detail__price">
+              <strong>od 19 €/mj</strong>
+              <span>uključeno u pakete održavanja</span>
             </div>
-          </header>
+          </div>
 
-          <div class="pkg-cols">
-            <div class="pkg-col">
-              <h3>Basic — 19 €/mj</h3>
-              <ul class="check-list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Hosting i SSL certifikat</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Automatske sigurnosne kopije</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Nadzor dostupnosti stranice</span></li>
-              </ul>
-              <h3 style="margin-top:22px">Standard — 49 €/mj</h3>
-              <ul class="check-list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sve iz Basic, plus do 2 h sitnih izmjena mjesečno</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Prioritetna podrška, odgovor isti radni dan</span></li>
+          <div class="detail__cols">
+            <div>
+              <h4>Što preuzimamo</h4>
+              <ul class="checklist">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Registracija i pravovremena obnova domena</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Postavljanje i obnova SSL certifikata</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Sigurnosne kopije s povremenom provjerom obnove</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Nadzor dostupnosti i reakcija na ispade</li>
               </ul>
             </div>
-            <div class="pkg-col">
-              <h3>Premium — 99 €/mj</h3>
-              <ul class="check-list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sve iz Standard, plus redovita ažuriranja dizajna i sadržaja</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Mjesečni izvještaj o posjetiteljima i upitima</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Kratko mjesečno savjetovanje o sljedećim koracima</span></li>
-              </ul>
-              <div class="own-box">
+            <div>
+              <h4>Ako već imate hosting</h4>
+              <p>
+                Nema potrebe da bilo što selite. Možemo raditi na vašoj postojećoj infrastrukturi,
+                pregledati postavke i preporučiti samo ono što doista treba promijeniti. Ako pak
+                želite sve na jednome mjestu, selidbu odrađujemo mi, bez prekida rada stranice.
+              </p>
+              <div class="callout">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg>
-                <p><strong>Bez ugovorne obveze na godinu dana.</strong> Otkažete kad želite, stranica i dalje ostaje vaša.</p>
+                <p><strong>Pristupni podaci ostaju vaši.</strong> Domena i hosting vode se na vaše ime, mi smo samo ovlašteni za upravljanje.</p>
               </div>
             </div>
           </div>
-
-          <div class="pkg-cta">
-            <a href="#konfigurator" class="btn btn-primary btn-lg">
-              Sastavite svoj paket
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
         </article>
       </div>
     </section>
 
-    <!-- ============ 4: IT PODRŠKA ============ -->
-    <section class="section" id="it">
+    <!-- ================= 4. IT PODRŠKA ================= -->
+    <section class="section--tight" id="it">
       <div class="container">
-        <article class="pkg-detail" data-reveal>
-          <header class="pkg-head">
-            <div class="pkg-head-copy">
-              <span class="pkg-step">Usluga 4</span>
-              <h2>IT podrška za ured i server</h2>
-              <p class="lead">Nije samo web: brinemo i o tehnici koja drži cijeli ured u pogonu. Dostupno i firmama koje s nama nemaju web suradnju.</p>
+        <article class="detail" data-reveal>
+          <div class="detail__head">
+            <div>
+              <span class="eyebrow">Usluga 04</span>
+              <h2>Poslovna IT podrška</h2>
+              <p>
+                Tehnička okosnica ureda: radne stanice, mreža, poslužitelji i zaštita poslovnih
+                podataka. Usluga je dostupna i tvrtkama s kojima ne surađujemo na web projektu.
+              </p>
             </div>
-            <div class="pkg-price-box">
-              <span class="pp-amount">od 149 €</span>
-              <span class="pp-note">/mj · po broju uređaja</span>
+            <div class="detail__price">
+              <strong>od 149 €/mj</strong>
+              <span>prema broju uređaja</span>
             </div>
-          </header>
+          </div>
 
-          <div class="pkg-cols">
-            <div class="pkg-col">
-              <h3>Što pokrivamo</h3>
-              <ul class="check-list">
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Radne stanice, printeri i uredska mreža</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Server i sigurnosne kopije poslovnih podataka</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Daljinska podrška, uz izlazak na teren po potrebi</span></li>
-                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Savjet prije kupnje nove opreme, bez preprodaje po naknadi</span></li>
+          <div class="detail__cols">
+            <div>
+              <h4>Područja koja pokrivamo</h4>
+              <ul class="checklist">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Radne stanice, pisači i uredska mreža</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Poslužitelji i sigurnosne kopije poslovnih podataka</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Daljinska podrška uz izlazak na teren po potrebi</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>Savjet prije nabave opreme, bez preprodaje uz maržu</li>
               </ul>
             </div>
-            <div class="pkg-col">
-              <h3>Dva modela suradnje</h3>
-              <p class="pkg-text">
-                <strong>Mjesečni ugovor</strong> — fiksna mjesečna naknada prema broju uređaja,
-                s prioritetnim odzivom kad nešto stane.<br /><br />
-                <strong>Pojedinačna intervencija</strong> — bez ugovora, plaća se satnica
-                po dolasku ili rješavanju problema.
+            <div>
+              <h4>Dva načina suradnje</h4>
+              <p>
+                <strong>Mjesečni ugovor</strong> donosi fiksnu naknadu prema broju uređaja i
+                prednost pri javljanju kada nešto stane.
+              </p>
+              <p>
+                <strong>Plaćanje po intervenciji</strong> nema mjesečnu obvezu; naplaćuje se
+                stvarno utrošeno vrijeme, uz prethodno dogovorenu satnicu.
               </p>
             </div>
           </div>
-
-          <div class="pkg-cta">
-            <a href="kontakt.html" class="btn btn-primary btn-lg">
-              Zatražite ponudu za IT podršku
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-          </div>
         </article>
       </div>
     </section>
 
-    <!-- ============ KONFIGURATOR PAKETA ============ -->
-    <section class="section-tight" id="konfigurator">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow" data-reveal>Sastavite paket</span>
-          <h2 data-reveal data-delay="1">Odaberite što vam treba, cijena se sama zbroji</h2>
-        </div>
-        <div class="card configurator" data-reveal>
-          <div class="conf-options">
-            <label class="conf-opt">
-              <input type="checkbox" data-onetime="490" data-label="Web izrada" checked />
-              <span><span class="conf-name">Web izrada</span><em>od 490 € jednokratno</em></span>
-            </label>
-            <label class="conf-opt">
-              <input type="checkbox" data-onetime="350" data-label="Dizajn" />
-              <span><span class="conf-name">Dizajn</span><em>od 350 € jednokratno</em></span>
-            </label>
-            <label class="conf-opt">
-              <input type="checkbox" data-monthly="19" data-label="Hosting i skrb" checked />
-              <span><span class="conf-name">Hosting i skrb</span><em>od 19 €/mj</em></span>
-            </label>
-            <label class="conf-opt">
-              <input type="checkbox" data-monthly="149" data-label="IT podrška" />
-              <span><span class="conf-name">IT podrška</span><em>od 149 €/mj</em></span>
-            </label>
-          </div>
-          <div class="conf-total">
-            <div><span>Jednokratno</span><b id="confOnetime">0 €</b></div>
-            <div><span>Mjesečno</span><b id="confMonthly">0 €</b></div>
-          </div>
-          <a href="kontakt.html" id="confCta" class="btn btn-primary btn-lg">Pošaljite upit za ovaj paket</a>
-          <p class="conf-note">Okvirna procjena, ne konačna ponuda. Točnu cijenu dobivate nakon kratkog razgovora o vašem projektu.</p>
+    <!-- ================= ZAVRŠNI POZIV ================= -->
+    <section class="cta-final">
+      <div class="container" data-reveal>
+        <span class="eyebrow">Sljedeći korak</span>
+        <h2>Niste sigurni što vam od ovoga treba?</h2>
+        <p>
+          To je posve u redu i češće je pravilo nego iznimka. Opišite nam situaciju u nekoliko
+          rečenica pa ćemo predložiti najmanji smisleni opseg, ne najveći mogući račun.
+        </p>
+        <div class="cta-final__row">
+          <a href="kontakt.html" class="btn btn--primary btn--lg">Zatražite ponudu</a>
+          <a href="mailto:info@kai-sol.com" class="btn btn--ghost btn--lg">info@kai-sol.com</a>
         </div>
       </div>
     </section>
-
-    <!-- ============ FAQ ============ -->
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow" data-reveal>Česta pitanja</span>
-          <h2 data-reveal data-delay="1">Ono što biste nas ionako pitali</h2>
-        </div>
-        <div class="grid grid-2 faqs">
-          <div class="faq" data-reveal>
-            <h3>Moramo li uzeti sve četiri usluge?</h3>
-            <p>Ne. Web izrada je glavna usluga, a dizajn, hosting i IT podrška naručuju se posebno, po potrebi. Neki klijenti dođu samo po IT podršku za ured.</p>
-          </div>
-          <div class="faq" data-reveal data-delay="1">
-            <h3>Koliko traje izrada stranice?</h3>
-            <p>Landing stranica tipično tjedan do dva, poslovna stranica dva do četiri tjedna, ovisno o sadržaju koji nam pripremite. Rok se dogovara prije početka.</p>
-          </div>
-          <div class="faq" data-reveal data-delay="2">
-            <h3>Što ako već imamo domenu i hosting?</h3>
-            <p>Bez problema, radimo i s njima. Ako želite da sve bude na jednom mjestu, možemo i to preseliti u naš paket skrbi.</p>
-          </div>
-          <div class="faq" data-reveal data-delay="3">
-            <h3>Radite li samo u Hrvatskoj?</h3>
-            <p>Većina posla se odradi na daljinu, pa lokacija rijetko igra ulogu. Za IT podršku na terenu dogovaramo doseg unaprijed.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ZAVRŠNI CTA ============ -->
-    <section class="section">
-      <div class="container">
-        <div class="cta-band" data-reveal>
-          <div class="cta-glow" aria-hidden="true"></div>
-          <h2>Recite nam što vam treba</h2>
-          <p>
-            Kratak razgovor, bez obveze: kažete što vas muči, mi predložimo rješenje
-            i okvirnu cijenu u roku 24 h radnim danom.
-          </p>
-          <div class="cta-actions">
-            <a href="kontakt.html" class="btn btn-primary btn-lg">
-              Zatražite ponudu
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </a>
-            <a href="mailto:info@kai-sol.com" class="btn btn-ghost btn-lg">info@kai-sol.com</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
   </main>
 
-  <!-- ============ FOOTER (identičan na svim stranicama) ============ -->
-  <footer class="site-footer">
+  <!-- ================= PODNOŽJE ================= -->
+  <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-about">
-          <a href="index.html" class="brand">KAI-SOL</a>
-          <p>Web stranice, dizajn, hosting i IT podrška za male i srednje firme.</p>
+      <div class="footer__grid">
+        <div class="footer__about">
+          <a href="index.html" class="brand">KAI-SOL<span class="brand__dot" aria-hidden="true"></span></a>
+          <p>Web stranice, dizajn, hosting i poslovna IT podrška za male i srednje tvrtke.</p>
         </div>
-        <div>
-          <h4>Usluge</h4>
-          <a href="usluge.html#web">Web izrada</a>
-          <a href="usluge.html#dizajn">Dizajn</a>
-          <a href="usluge.html#skrb">Hosting i skrb</a>
-          <a href="usluge.html#it">IT podrška</a>
-        </div>
-        <div>
-          <h4>Firma</h4>
-          <a href="o-nama.html">O nama</a>
-          <a href="iskustvo.html">Iskustvo</a>
-          <a href="kontakt.html">Kontakt</a>
-        </div>
-        <div>
-          <h4>Kontakt</h4>
-          <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
-          <a href="kontakt.html">Zatražite ponudu</a>
+        <div class="footer__links">
+          <div>
+            <h4>Usluge</h4>
+            <a href="usluge.html#web">Web razvoj i dizajn</a>
+            <a href="usluge.html#odrzavanje">Mjesečno održavanje</a>
+            <a href="usluge.html#hosting">Hosting</a>
+            <a href="usluge.html#it">IT podrška</a>
+          </div>
+          <div>
+            <h4>Tvrtka</h4>
+            <a href="o-nama.html">O nama</a>
+            <a href="usluge.html">Cijene</a>
+            <a href="kontakt.html">Kontakt</a>
+          </div>
+          <div>
+            <h4>Kontakt</h4>
+            <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
+            <a href="kontakt.html">Zatražite ponudu</a>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
+      <div class="footer__bottom">
         <span>© <span data-year>2026</span> KAI-SOL. Sva prava pridržana.</span>
-        <div class="socials">
-          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.4 8.65 21 11 21 14.1V21h-4v-6.1c0-1.45-.03-3.3-2-3.3-2 0-2.3 1.57-2.3 3.2V21H9z"/></svg></a>
-          <a href="mailto:info@kai-sol.com" aria-label="Email"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6" stroke-linecap="round"/></svg></a>
-        </div>
+        <span>Izrađeno u Hrvatskoj</span>
       </div>
     </div>
   </footer>
 
-  <script src="assets/js/script.js"></script>
+  <script src="assets/js/app.js"></script>
 </body>
 </html>
