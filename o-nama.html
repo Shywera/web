@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>O nama | KAI-SOL</title>
   <meta name="description" content="Dvoje ljudi, jedan cilj: jedan vodi dizajn i razvoj, drugi poslovnu stranu, cijene i ugovore. Web koji dobro izgleda i ima smisla u poslovnim brojkama." />
-  <meta name="theme-color" content="#080b14" />
+  <meta name="theme-color" content="#0b0a08" />
   <meta property="og:title" content="O nama | KAI-SOL" />
   <meta property="og:description" content="Dizajn i razvoj s jedne strane, poslovna strana i prodaja s druge. Zato naše stranice izgledaju dobro i imaju smisla u brojkama." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="canonical" href="https://kai-sol.com/o-nama.html" />
   <meta property="og:url" content="https://kai-sol.com/o-nama.html" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
@@ -20,21 +20,31 @@
 </head>
 <body>
 
-  <!-- ============ HEADER (identičan na svim stranicama) ============ -->
+  <!-- ============ HEADER + FULLSCREEN MENI (identično na svim stranicama) ============ -->
   <header class="site-header">
     <div class="container nav">
-      <a href="index.html" class="brand" aria-label="KAI-SOL početna"><span class="logo">K</span><span>KAI-SOL<small>Web · Dizajn · Hosting</small></span></a>
-      <nav class="nav-links" aria-label="Glavna navigacija">
-        <a href="index.html">Početna</a>
-        <a href="usluge.html">Usluge i cijene</a>
-        <a href="iskustvo.html">Iskustvo</a>
-        <a href="o-nama.html" class="active">O nama</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="kontakt.html" class="btn btn-primary nav-cta">Zatražite ponudu</a>
-      </nav>
-      <button class="nav-toggle" aria-label="Otvori izbornik" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a href="index.html" class="brand" aria-label="KAI-SOL početna">KAI-SOL</a>
+      <button class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="siteMenu">
+        <span class="menu-label-open">Meni</span><span class="menu-label-close">Zatvori</span>
+        <span class="menu-btn-icon"><span></span><span></span></span>
+      </button>
     </div>
   </header>
+  <nav id="siteMenu" class="site-menu" aria-label="Glavna navigacija">
+    <div class="site-menu-inner container">
+      <ol class="site-menu-links">
+        <li><a href="index.html">Početna</a></li>
+        <li><a href="usluge.html">Usluge i cijene</a></li>
+        <li><a href="iskustvo.html">Iskustvo</a></li>
+        <li><a href="o-nama.html" class="active">O nama</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ol>
+      <div class="site-menu-foot">
+        <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
+        <a href="kontakt.html" class="btn btn-primary">Zatražite ponudu</a>
+      </div>
+    </div>
+  </nav>
 
   <main>
 
@@ -177,7 +187,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-about">
-          <a href="index.html" class="brand"><span class="logo">K</span><span>KAI-SOL<small>Web · Dizajn · Hosting</small></span></a>
+          <a href="index.html" class="brand">KAI-SOL</a>
           <p>Web stranice, dizajn, hosting i IT podrška za male i srednje firme.</p>
         </div>
         <div>

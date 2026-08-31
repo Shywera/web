@@ -1,4 +1,5 @@
-/* KAI-SOL · interakcije: sticky header, mobilni meni, reveal on scroll, brojači */
+/* KAI-SOL · interakcije: sticky header, fullscreen meni, reveal/focus-pull,
+   kursor "baterijska lampa", magnetični gumbi, konfigurator paketa */
 (function () {
   "use strict";
 
@@ -11,17 +12,18 @@
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Mobilni meni
-  const toggle = document.querySelector(".nav-toggle");
-  const links = document.querySelector(".nav-links");
-  if (toggle && links) {
-    toggle.addEventListener("click", () => {
-      const open = links.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    links.querySelectorAll("a").forEach((a) =>
-      a.addEventListener("click", () => links.classList.remove("open"))
-    );
+  // Fullscreen meni
+  const menuBtn = document.querySelector(".menu-btn");
+  const menu = document.getElementById("siteMenu");
+  if (menuBtn && menu) {
+    const setOpen = (open) => {
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.classList.toggle("open", open);
+      document.body.classList.toggle("menu-open", open);
+    };
+    menuBtn.addEventListener("click", () => setOpen(menuBtn.getAttribute("aria-expanded") !== "true"));
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+    window.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
   }
 
   // Reveal on scroll
@@ -42,6 +44,12 @@
   } else {
     revealables.forEach((el) => el.classList.add("in"));
   }
+
+  // Focus-pull: naslov "dolazi u fokus" kratko nakon učitavanja stranice
+  const focusables = document.querySelectorAll("[data-focus]");
+  focusables.forEach((el, i) => {
+    setTimeout(() => el.classList.add("in"), 200 + i * 140);
+  });
 
   // Brojači (data-count)
   const counters = document.querySelectorAll("[data-count]");
@@ -73,6 +81,25 @@
 
   // Godina u footeru
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+
+  // Kursor "baterijska lampa": samo na uređajima s mišem, poštuje reduced-motion
+  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const spot = document.createElement("div");
+    spot.className = "spotlight";
+    document.body.appendChild(spot);
+    let raf = null;
+    window.addEventListener("mousemove", (e) => {
+      spot.classList.add("active");
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        spot.style.setProperty("--mx", (e.clientX / window.innerWidth) * 100 + "%");
+        spot.style.setProperty("--my", (e.clientY / window.innerHeight) * 100 + "%");
+        raf = null;
+      });
+    });
+    document.addEventListener("mouseleave", () => spot.classList.remove("active"));
+  }
 
   // Typewriter: ciklički ispisuje riječi iz data-words ("Web izrada|Dizajn|...")
   var typers = document.querySelectorAll("[data-typewriter]");
@@ -108,6 +135,25 @@
         btn.style.transform = "translate(" + x * 0.18 + "px, " + y * 0.35 + "px)";
       });
       btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
+    });
+  }
+
+  // Popis usluga s kursor-prikazom cijene (desktop)
+  var floatItems = document.querySelectorAll("[data-hover-price]");
+  if (floatItems.length && window.matchMedia("(hover: hover)").matches) {
+    var floatEl = document.createElement("div");
+    floatEl.className = "price-float";
+    document.body.appendChild(floatEl);
+    floatItems.forEach(function (item) {
+      item.addEventListener("mouseenter", function () {
+        floatEl.textContent = item.dataset.hoverPrice;
+        floatEl.classList.add("show");
+      });
+      item.addEventListener("mousemove", function (e) {
+        floatEl.style.left = e.clientX + "px";
+        floatEl.style.top = e.clientY + "px";
+      });
+      item.addEventListener("mouseleave", function () { floatEl.classList.remove("show"); });
     });
   }
 

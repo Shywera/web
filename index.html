@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KAI-SOL | Web stranice koje prodaju, dizajn, hosting i IT podrška</title>
   <meta name="description" content="Izrada web stranica koje ljudi zapamte, uz dizajn, hosting i mjesečnu skrb na jednom mjestu. Radimo i IT podršku za ured i server. Zatražite besplatnu ponudu." />
-  <meta name="theme-color" content="#080b14" />
+  <meta name="theme-color" content="#0b0a08" />
   <meta property="og:title" content="KAI-SOL | Web stranice koje prodaju" />
   <meta property="og:description" content="Web, dizajn, hosting i IT podrška na jednom mjestu. Stranica koja se vidi, učitava brzo i donosi upite." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="canonical" href="https://kai-sol.com/" />
   <meta property="og:url" content="https://kai-sol.com/" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
@@ -20,222 +20,133 @@
 </head>
 <body>
 
-  <!-- ============ HEADER (identičan na svim stranicama) ============ -->
+  <!-- ============ HEADER + FULLSCREEN MENI (identično na svim stranicama) ============ -->
   <header class="site-header">
     <div class="container nav">
-      <a href="index.html" class="brand" aria-label="KAI-SOL početna">
-        <span class="logo">K</span>
-        <span>KAI-SOL<small>Web · Dizajn · Hosting</small></span>
-      </a>
-      <nav class="nav-links" aria-label="Glavna navigacija">
-        <a href="index.html" class="active">Početna</a>
-        <a href="usluge.html">Usluge i cijene</a>
-        <a href="iskustvo.html">Iskustvo</a>
-        <a href="o-nama.html">O nama</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="kontakt.html" class="btn btn-primary nav-cta">Zatražite ponudu</a>
-      </nav>
-      <button class="nav-toggle" aria-label="Otvori izbornik" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <a href="index.html" class="brand" aria-label="KAI-SOL početna">KAI-SOL</a>
+      <button class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="siteMenu">
+        <span class="menu-label-open">Meni</span><span class="menu-label-close">Zatvori</span>
+        <span class="menu-btn-icon"><span></span><span></span></span>
       </button>
     </div>
   </header>
+  <nav id="siteMenu" class="site-menu" aria-label="Glavna navigacija">
+    <div class="site-menu-inner container">
+      <ol class="site-menu-links">
+        <li><a href="index.html" class="active">Početna</a></li>
+        <li><a href="usluge.html">Usluge i cijene</a></li>
+        <li><a href="iskustvo.html">Iskustvo</a></li>
+        <li><a href="o-nama.html">O nama</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ol>
+      <div class="site-menu-foot">
+        <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
+        <a href="kontakt.html" class="btn btn-primary">Zatražite ponudu</a>
+      </div>
+    </div>
+  </nav>
 
   <main>
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="container hero-inner">
+      <div class="container">
         <div class="hero-copy">
           <span class="eyebrow" data-reveal>
-            <span class="type-word" data-typewriter data-words="Web izrada|Dizajn|Hosting|IT podrška">Web izrada</span>
+            <span data-typewriter data-words="Web izrada|Dizajn|Hosting|IT podrška">Web izrada</span>
           </span>
-          <h1 data-reveal data-delay="1">
-            Web stranica koja<br /><span class="gradient-text">stvarno prodaje.</span>
+          <h1>
+            <span data-focus>Web stranica koja</span>
+            <span data-focus><em class="accent">stvarno prodaje.</em></span>
           </h1>
           <p class="lead" data-reveal data-delay="2">
             Radimo stranice koje ljudi zapamte i na koje se vrate: dizajn osmišljen
             prema tome kako ljudi stvarno gledaju i klikaju, ne po osjećaju. Uz to
-            hosting, održavanje i podrška, sve na jednom mjestu i s jednim računom.
+            hosting, održavanje i podrška, sve na jednom mjestu.
           </p>
           <div class="hero-cta" data-reveal data-delay="3">
-            <a href="kontakt.html" class="btn btn-primary btn-lg btn-magnetic">
-              Zatražite ponudu
+            <a href="kontakt.html" class="btn btn-primary btn-lg btn-magnetic">Zatražite ponudu</a>
+            <a href="usluge.html" class="link-arrow">
+              Pogledajte ponudu i cijene
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a>
-            <a href="usluge.html" class="btn btn-ghost btn-lg">Pogledajte ponudu i cijene</a>
           </div>
-          <ul class="hero-trust" data-reveal data-delay="4">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Dizajn i razvoj pod istim krovom</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Hosting i podrška uključeni</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg> Cijena jasna prije početka</li>
-          </ul>
-        </div>
-
-        <!-- Vizual: stranica koja se sama gradi -->
-        <div class="hero-visual" data-reveal data-delay="2" aria-hidden="true">
-          <div class="builder-mock">
-            <div class="mock-top">
-              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-              <span class="mock-title">vasafirma.hr</span>
-            </div>
-            <div class="builder-canvas">
-              <div class="bp-skel-group">
-                <div class="bp-skel bp-skel-nav"></div>
-                <div class="bp-skel bp-skel-hero"></div>
-                <div class="bp-skel-row">
-                  <div class="bp-skel"></div>
-                  <div class="bp-skel"></div>
-                  <div class="bp-skel"></div>
-                </div>
-              </div>
-              <div class="bp-final-group">
-                <div class="bp-final-nav">
-                  <span class="bp-dotlogo"></span>
-                  <span class="bp-navline"></span>
-                  <span class="bp-navline short"></span>
-                </div>
-                <div class="bp-final-hero">
-                  <span class="bp-h"></span>
-                  <span class="bp-h short"></span>
-                  <span class="bp-btn"></span>
-                </div>
-                <div class="bp-final-row">
-                  <div class="bp-final-card"><span class="bp-ico"></span><span class="bp-l"></span><span class="bp-l"></span></div>
-                  <div class="bp-final-card"><span class="bp-ico"></span><span class="bp-l"></span><span class="bp-l"></span></div>
-                  <div class="bp-final-card"><span class="bp-ico"></span><span class="bp-l"></span><span class="bp-l"></span></div>
-                </div>
-              </div>
-              <svg class="bp-cursor" viewBox="0 0 24 24" fill="currentColor"><path d="m4 3 6 17 2.5-7.5L20 10z"/></svg>
-            </div>
-          </div>
-          <div class="mock-float mf1">⚡ Brzo se učitava</div>
-          <div class="mock-float mf2">✓ Radi na svakom uređaju</div>
         </div>
       </div>
-    </section>
-
-    <!-- ============ ZAŠTO JE DIZAJN BITAN (podaci) ============ -->
-    <section class="section-tight stats-band">
-      <div class="container">
-        <div class="stats-grid">
-          <div class="stat" data-reveal><b>75%</b><span>procjeni vjerodostojnosti firme temelji se na izgledu web stranice</span></div>
-          <div class="stat" data-reveal data-delay="1"><b>0,05 s</b><span>toliko treba posjetitelju da stvori prvi dojam o stranici</span></div>
-          <div class="stat" data-reveal data-delay="2"><b>94%</b><span>prvog dojma o firmi dolazi isključivo iz dizajna</span></div>
-          <div class="stat" data-reveal data-delay="3"><b>3 s</b><span>koliko posjetitelj čeka prije nego ode sa spore stranice</span></div>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>Web izrada <em>—</em> Dizajn <em>—</em> Hosting i skrb <em>—</em> IT podrška <em>—</em> Web izrada <em>—</em> Dizajn <em>—</em> Hosting i skrb <em>—</em> IT podrška <em>—</em></span>
+          <span>Web izrada <em>—</em> Dizajn <em>—</em> Hosting i skrb <em>—</em> IT podrška <em>—</em> Web izrada <em>—</em> Dizajn <em>—</em> Hosting i skrb <em>—</em> IT podrška <em>—</em></span>
         </div>
-        <p class="stats-note" data-reveal>Prema poznatim istraživanjima web korisničkog iskustva (Stanford, Google). Stranica koja izgleda staro ili radi sporo svaki dan tiho gubi upite.</p>
       </div>
     </section>
 
     <!-- ============ ZNACI DA STRANICA KOŠTA ============ -->
-    <section class="section">
+    <section class="section signs">
       <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow" data-reveal>Prepoznajete li se?</span>
-          <h2 data-reveal data-delay="1">Četiri znaka da vas stranica košta klijente</h2>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Prepoznajete li se?</span>
+          <h2>Četiri znaka da vas stranica<br />košta klijente</h2>
         </div>
-        <div class="grid grid-2 pains">
-          <div class="pain" data-reveal>
-            <span class="pain-n">01</span>
-            <h3>Stranica izgleda kao iz 2015.</h3>
-            <p>Ljudi u sekundi procijene firmu po stranici. Zastarjeli dizajn šalje poruku da je i posao zastario, makar to nije istina.</p>
-          </div>
-          <div class="pain" data-reveal data-delay="1">
-            <span class="pain-n">02</span>
-            <h3>Google vas ne pronalazi</h3>
-            <p>Ako stranica nije tehnički posložena, ne postoji za veliku većinu ljudi koji vas traže. Upiti idu konkurenciji koja se pojavi prva.</p>
-          </div>
-          <div class="pain" data-reveal data-delay="2">
-            <span class="pain-n">03</span>
-            <h3>Radi, dok se ne pokvari</h3>
-            <p>Bez hostinga, sigurnosnih kopija i nadzora, jedan pad servera ili istekla domena znače dane bez stranice, baš kad je najbitnije.</p>
-          </div>
-          <div class="pain" data-reveal data-delay="3">
-            <span class="pain-n">04</span>
-            <h3>Nitko u firmi ne zna popraviti sitnicu</h3>
-            <p>Promjena cijene, slike ili radnog vremena čeka tjednima jer nema koga pitati. Sitne izmjene ne bi trebale biti projekt.</p>
-          </div>
+        <div class="grid grid-2" data-reveal data-delay="1">
+          <div><span class="sign-n">01</span><h3>Stranica izgleda kao iz 2015.</h3><p>Ljudi u sekundi procijene firmu po stranici. Zastarjeli dizajn šalje poruku da je i posao zastario.</p></div>
+          <div><span class="sign-n">02</span><h3>Google vas ne pronalazi</h3><p>Ako stranica nije tehnički posložena, ne postoji za veliku većinu ljudi koji vas traže.</p></div>
+          <div><span class="sign-n">03</span><h3>Radi, dok se ne pokvari</h3><p>Bez hostinga i sigurnosnih kopija, jedan pad servera znači dane bez stranice.</p></div>
+          <div><span class="sign-n">04</span><h3>Nitko ne zna popraviti sitnicu</h3><p>Promjena cijene ili slike čeka tjednima jer nema koga pitati.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- ============ PONUDA: 4 STUPA ============ -->
+    <!-- ============ USLUGE: INDEX POPIS ============ -->
     <section class="section" id="ponuda">
       <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow" data-reveal>Što nudimo</span>
-          <h2 data-reveal data-delay="1">Sve što stranici treba, na jednom mjestu</h2>
-          <p data-reveal data-delay="2">Web izrada je glavna usluga, a dizajn, hosting i podrška idu uz nju, ili posebno, po potrebi.</p>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Što nudimo</span>
+          <h2>Sve što stranici treba,<br />na jednom mjestu</h2>
         </div>
-        <div class="grid grid-4 pillars">
-          <article class="card pillar" data-reveal>
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M3 6h18M3 18h18" stroke-linecap="round"/></svg></div>
+        <div class="service-index" data-reveal data-delay="1">
+          <a href="usluge.html#web" class="service-row" data-hover-price="od 490 €">
+            <span class="idx-num">01</span>
             <h3>Web izrada</h3>
-            <p>Landing stranice, poslovni sajtovi i webshopovi, brzi i prilagođeni mobitelu od prvog dana.</p>
-            <div class="pillar-price">od 490 € jednokratno</div>
-            <a href="usluge.html#web" class="pillar-link">Detalji <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-          <article class="card pillar" data-reveal data-delay="1">
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
+            <span class="idx-note">od 490 €</span>
+            <svg class="idx-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="idx-desc">Landing stranice, poslovni sajtovi i webshopovi, brzi i prilagođeni mobitelu.</span>
+          </a>
+          <a href="usluge.html#dizajn" class="service-row" data-hover-price="od 350 €">
+            <span class="idx-num">02</span>
             <h3>Dizajn</h3>
-            <p>Vizualni identitet, UI/UX i marketinški materijali koji izgledaju i prodaju, ne samo lijepo stoje.</p>
-            <div class="pillar-price">od 350 € jednokratno</div>
-            <a href="usluge.html#dizajn" class="pillar-link">Detalji <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-          <article class="card pillar" data-reveal data-delay="2">
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div>
+            <span class="idx-note">od 350 €</span>
+            <svg class="idx-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="idx-desc">Vizualni identitet, UI/UX i marketinški materijali koji izgledaju i prodaju.</span>
+          </a>
+          <a href="usluge.html#skrb" class="service-row" data-hover-price="od 19 €/mj">
+            <span class="idx-num">03</span>
             <h3>Hosting i skrb</h3>
-            <p>Hosting, sigurnosne kopije, nadzor i sitne izmjene svaki mjesec, bez da se vi time bavite.</p>
-            <div class="pillar-price">od 19 €/mj</div>
-            <a href="usluge.html#skrb" class="pillar-link">Detalji <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
-          <article class="card pillar" data-reveal data-delay="3">
-            <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4" stroke-linecap="round"/></svg></div>
+            <span class="idx-note">od 19 €/mj</span>
+            <svg class="idx-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="idx-desc">Hosting, sigurnosne kopije, nadzor i sitne izmjene svaki mjesec.</span>
+          </a>
+          <a href="usluge.html#it" class="service-row" data-hover-price="od 149 €/mj">
+            <span class="idx-num">04</span>
             <h3>IT i podrška ureda</h3>
-            <p>Održavanje radnih stanica, mreže, servera i backupa. Netko na telefonu kad tehnika zapne.</p>
-            <div class="pillar-price">od 149 €/mj</div>
-            <a href="usluge.html#it" class="pillar-link">Detalji <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-          </article>
+            <span class="idx-note">od 149 €/mj</span>
+            <svg class="idx-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="idx-desc">Radne stanice, mreža, server i backup. Netko na telefonu kad tehnika zapne.</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- ============ DOKAZ + ZAŠTO KAI-SOL ============ -->
-    <section class="section" id="dokaz">
+    <!-- ============ DOKAZ ============ -->
+    <section class="section section-border" id="dokaz">
       <div class="container">
-        <div class="case-teaser" data-reveal>
-          <div class="case-grid">
-            <div class="case-copy">
-              <span class="eyebrow">Dokaz, ne obećanja</span>
-              <h2>Iza dizajna stoji netko tko razumije i poslovanje</h2>
-              <p>
-                Prije KAI-SOL-a gradili smo softver koji danas svaki dan koristi
-                proizvodna firma: skladište, narudžbe, ponude, evidencije. To iskustvo
-                donosimo u svaki web projekt, znamo kako firma stvarno radi, ne samo
-                kako stranica treba izgledati.
-              </p>
-              <p>
-                Spajamo dizajn koji privlači pažnju sa sustavom koji stoji iza njega:
-                brz, siguran i lako održiv.
-              </p>
-              <a href="iskustvo.html" class="btn btn-ghost">Pogledajte iskustvo →</a>
-            </div>
-            <div class="case-list" data-reveal data-delay="1">
-              <div class="mini ok">
-                <div class="mini-c">✓</div>
-                <div><strong>Dizajn i razvoj rade zajedno</strong>, ne prolaze kroz tri agencije i pet ugovora.</div>
-              </div>
-              <div class="mini ok">
-                <div class="mini-c">✓</div>
-                <div><strong>Netko tko razumije prodaju i brojke</strong>, ne samo piksele, prati svaki projekt.</div>
-              </div>
-              <div class="mini ok">
-                <div class="mini-c">✓</div>
-                <div><strong>Stranica ne ostaje sama nakon lansiranja</strong>: hosting, backup i podrška idu uz nju.</div>
-              </div>
-            </div>
-          </div>
+        <div class="quote-block" data-reveal>
+          <span class="eyebrow" style="margin-bottom:26px">Dokaz, ne obećanja</span>
+          <blockquote>
+            "Prije KAI-SOL-a gradili smo softver koji danas svaki dan koristi
+            proizvodna firma. To iskustvo donosimo u svaki web projekt, znamo
+            kako firma stvarno radi, ne samo kako stranica treba izgledati."
+          </blockquote>
+          <cite>KAI-SOL — dizajn i razvoj, poslovna strana</cite>
         </div>
       </div>
     </section>
@@ -243,51 +154,32 @@
     <!-- ============ PAKETI (teaser) ============ -->
     <section class="section" id="paketi">
       <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow" data-reveal>Kako radimo</span>
-          <h2 data-reveal data-delay="1">Od prve skice do mjesečne skrbi</h2>
-          <p data-reveal data-delay="2">Sastavite paket koji vam treba i vidite okvirnu cijenu odmah.</p>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Kako radimo</span>
+          <h2>Od prve skice<br />do mjesečne skrbi</h2>
         </div>
-        <div class="grid grid-3 pkgs">
-          <article class="card pkg" data-reveal>
-            <span class="pkg-step">Korak 1</span>
+        <div class="grid grid-3" data-reveal data-delay="1">
+          <div class="pkg-mini">
+            <span class="eyebrow">Korak 1</span>
             <h3>Izrada stranice</h3>
-            <div class="pkg-price">od 490 €<small> jednokratno</small></div>
+            <div class="pkg-mini-price">od 490 €</div>
             <p>Dizajn i razvoj, prilagođeno mobitelu, spremno za tjedan-dva.</p>
-            <ul class="pkg-list">
-              <li>Dizajn po mjeri, ne gotov predložak</li>
-              <li>Brzo učitavanje i osnovna SEO priprema</li>
-              <li>Kontakt forma i povezivanje s domenom</li>
-            </ul>
-            <p class="pkg-note">Opseg i konačna cijena dogovaraju se prije početka.</p>
-            <a href="usluge.html#web" class="btn btn-ghost">Detalji →</a>
-          </article>
-          <article class="card pkg featured" data-reveal data-delay="1">
-            <span class="pkg-step">Korak 2</span>
+            <a href="usluge.html#web" class="link-arrow">Detalji <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <div class="pkg-mini">
+            <span class="eyebrow">Korak 2</span>
             <h3>Hosting i skrb</h3>
-            <div class="pkg-price">od 19 €<small> /mj</small></div>
+            <div class="pkg-mini-price">od 19 €/mj</div>
             <p>Stranica ostaje online, sigurna i ažurna, bez da vi o tome brinete.</p>
-            <ul class="pkg-list">
-              <li>Hosting, SSL i sigurnosne kopije</li>
-              <li>Sitne izmjene sadržaja uključene</li>
-              <li>Prioritetna podrška kad zatreba</li>
-            </ul>
-            <p class="pkg-note">Otkazivo svaki mjesec, bez skrivenih uvjeta.</p>
-            <a href="usluge.html#konfigurator" class="btn btn-ghost">Sastavite paket →</a>
-          </article>
-          <article class="card pkg" data-reveal data-delay="2">
-            <span class="pkg-step">Korak 3</span>
+            <a href="usluge.html#konfigurator" class="link-arrow">Sastavite paket <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+          <div class="pkg-mini">
+            <span class="eyebrow">Korak 3</span>
             <h3>IT podrška</h3>
-            <div class="pkg-price">po dogovoru</div>
-            <p>Za sve što nije samo web: uredska mreža, radne stanice, server, backup.</p>
-            <ul class="pkg-list">
-              <li>Daljinska i terenska podrška</li>
-              <li>Mjesečni ugovor ili pojedinačna intervencija</li>
-              <li>Vrijedi i bez web suradnje s nama</li>
-            </ul>
-            <p class="pkg-note">Cijena ovisi o broju uređaja i opsegu.</p>
-            <a href="usluge.html#it" class="btn btn-ghost">Detalji →</a>
-          </article>
+            <div class="pkg-mini-price">po dogovoru</div>
+            <p>Za sve što nije samo web: mreža, radne stanice, server, backup.</p>
+            <a href="usluge.html#it" class="link-arrow">Detalji <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
         </div>
       </div>
     </section>
@@ -295,41 +187,26 @@
     <!-- ============ FAQ ============ -->
     <section class="section" id="faq">
       <div class="container">
-        <div class="section-head center">
-          <span class="eyebrow" data-reveal>Česta pitanja</span>
-          <h2 data-reveal data-delay="1">Ono što svi pitaju prije prvog razgovora</h2>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">Česta pitanja</span>
+          <h2>Ono što svi pitaju<br />prije prvog razgovora</h2>
         </div>
-        <div class="grid grid-2 faqs">
-          <div class="faq" data-reveal>
+        <div class="faq-list" data-reveal data-delay="1">
+          <div class="faq-row">
             <h3>Moram li posebno kupovati hosting?</h3>
-            <p>Ne. Hosting je dio mjesečnog paketa skrbi. Ako već imate hosting ili domenu, možemo raditi i s njima, provjerimo zajedno što ima smisla.</p>
+            <p>Ne. Hosting je dio mjesečnog paketa skrbi. Ako već imate hosting ili domenu, možemo raditi i s njima.</p>
           </div>
-          <div class="faq" data-reveal data-delay="1">
+          <div class="faq-row">
             <h3>Imamo staru stranicu, možete li je samo osvježiti?</h3>
             <p>Da. Redizajn postojeće stranice je čest posao: zadržimo ono što radi, popravimo dizajn, brzinu i mobilnu verziju.</p>
           </div>
-          <div class="faq" data-reveal data-delay="2">
-            <h3>Nemamo IT osobu u firmi, tko pomaže ako nešto zapne?</h3>
-            <p>Mi. IT i podrška ureda pokrivaju upravo to, radne stanice, mrežu, printere i server, daljinski ili na licu mjesta.</p>
+          <div class="faq-row">
+            <h3>Nemamo IT osobu, tko pomaže ako nešto zapne?</h3>
+            <p>Mi. IT i podrška ureda pokrivaju upravo to, radne stanice, mrežu, printere i server.</p>
           </div>
-          <div class="faq" data-reveal data-delay="3">
+          <div class="faq-row">
             <h3>Radite li i bez web stranice, samo IT podršku?</h3>
             <p>Da, IT podrška za ured i server je zasebna usluga, dostupna i firmama koje ne rade s nama na web projektu.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CTA ============ -->
-    <section class="section">
-      <div class="container">
-        <div class="cta-band" data-reveal>
-          <div class="cta-glow" aria-hidden="true"></div>
-          <h2>Krenimo od kratkog razgovora</h2>
-          <p>Recite nam što vas muči, mi predložimo rješenje i okvirnu cijenu. Bez obveze, bez pritiska.</p>
-          <div class="hero-cta">
-            <a href="kontakt.html" class="btn btn-primary btn-lg btn-magnetic">Zatražite ponudu</a>
-            <a href="mailto:info@kai-sol.com" class="btn btn-ghost btn-lg">info@kai-sol.com</a>
           </div>
         </div>
       </div>
@@ -339,9 +216,14 @@
   <!-- ============ FOOTER (identičan na svim stranicama) ============ -->
   <footer class="site-footer">
     <div class="container">
+      <div class="footer-cta" data-reveal>
+        <span class="eyebrow" style="margin-bottom:24px">Krenimo</span>
+        <h2>Recite nam što<br /><em class="accent">vas muči.</em></h2>
+        <a href="kontakt.html" class="btn btn-primary btn-lg btn-magnetic">Zatražite ponudu</a>
+      </div>
       <div class="footer-grid">
         <div class="footer-about">
-          <a href="index.html" class="brand"><span class="logo">K</span><span>KAI-SOL<small>Web · Dizajn · Hosting</small></span></a>
+          <a href="index.html" class="brand">KAI-SOL</a>
           <p>Web stranice, dizajn, hosting i IT podrška za male i srednje firme.</p>
         </div>
         <div>

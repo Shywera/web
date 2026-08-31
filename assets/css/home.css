@@ -1,178 +1,69 @@
 /* home.css: stilovi specifični za početnu stranicu (index.html) */
 
 /* ---------- Hero ---------- */
-.hero { position: relative; padding: clamp(56px, 8vw, 110px) 0 clamp(40px, 6vw, 80px); overflow: hidden; }
-.hero-glow {
-  position: absolute; top: -20%; right: -10%; width: 780px; height: 780px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(91,140,255,.28), rgba(34,211,238,.12) 42%, transparent 66%);
-  filter: blur(20px); pointer-events: none; z-index: 0;
+.hero { position: relative; min-height: calc(100vh - 84px); min-height: calc(100svh - 84px); display: flex; flex-direction: column; justify-content: center; padding: 40px 0 0; overflow: hidden; }
+.hero-copy { max-width: 960px; }
+.hero-copy h1 { margin: 26px 0 30px; }
+.hero-copy h1 span[data-focus] { display: block; }
+.hero-copy .lead { max-width: 46ch; margin-bottom: 40px; }
+.hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; }
+
+/* Traka koja se beskonačno pomiče (marquee) */
+.ticker { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; margin-top: clamp(50px, 8vw, 96px); }
+.ticker-track { display: flex; width: max-content; animation: ticker 26s linear infinite; padding: 22px 0; }
+.ticker-track span { font-family: var(--font-display); font-style: italic; font-size: clamp(1.3rem, 2.6vw, 2rem); color: var(--muted); white-space: nowrap; padding-right: 3rem; }
+.ticker-track span em { color: var(--accent); font-style: italic; padding: 0 3rem 0 0; }
+@keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- Znakovi (bolne točke) — hairline grid ---------- */
+.signs .grid > * { padding: 40px clamp(24px, 3vw, 44px); }
+.sign-n { font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--accent); display: block; margin-bottom: 18px; }
+.signs h3 { margin-bottom: 12px; font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; }
+.signs p { font-size: .98rem; }
+
+/* ---------- Popis usluga (index-style) ---------- */
+.service-index { border-top: 1px solid var(--border); }
+.service-row {
+  display: flex; align-items: baseline; gap: 28px; padding: 34px 0;
+  border-bottom: 1px solid var(--border); cursor: default;
+  transition: padding-left .35s var(--ease), background .35s;
 }
-.hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
-.hero-copy h1 { margin: 22px 0 22px; }
-.hero-copy .lead { max-width: 42ch; }
-.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
-.hero-trust { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 32px; }
-.hero-trust li { display: flex; align-items: center; gap: 8px; font-size: .92rem; color: var(--text-soft); }
-.hero-trust svg { width: 18px; height: 18px; color: var(--success); }
+.service-row:hover { padding-left: 18px; background: var(--surface); }
+.service-row .idx-num { font-family: var(--font-body); font-size: .82rem; color: var(--muted); flex: 0 0 34px; }
+.service-row h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.7rem, 3.4vw, 2.6rem); flex: 1; transition: color .3s; }
+.service-row:hover h3 { color: var(--accent); }
+.service-row .idx-desc { flex: 0 0 100%; order: 4; margin-top: 6px; padding-left: 62px; font-size: .95rem; color: var(--muted); max-width: 52ch; }
+.service-row .idx-note { flex: 0 0 auto; font-family: var(--font-body); font-weight: 600; font-size: .92rem; color: var(--text-soft); white-space: nowrap; }
+.service-row .idx-arrow { flex: 0 0 auto; width: 18px; height: 18px; color: var(--muted); transition: transform .3s var(--ease), color .3s; }
+.service-row:hover .idx-arrow { transform: translateX(4px); color: var(--accent); }
 
-/* Dinamička riječ u eyebrowu ("Web · Dizajn · Hosting · IT podrška") */
-.eyebrow .type-word { color: var(--accent-2); font-weight: 700; }
+/* ---------- Dokaz: veliki citat ---------- */
+.quote-block { max-width: 900px; }
+.quote-block blockquote { font-family: var(--font-display); font-style: italic; font-weight: 400; font-size: clamp(1.6rem, 3.4vw, 2.5rem); color: var(--text); line-height: 1.35; }
+.quote-block cite { display: block; margin-top: 28px; font-style: normal; font-family: var(--font-body); font-size: .9rem; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
 
-/* ---------- Vizual: stranica koja se sama gradi ---------- */
-.hero-visual { position: relative; }
-.builder-mock {
-  position: relative; z-index: 2; background: linear-gradient(180deg, var(--surface-2), var(--bg-2));
-  border: 1px solid var(--border-2); border-radius: var(--radius-lg); box-shadow: var(--shadow);
-  overflow: hidden; animation: floaty 7s ease-in-out infinite;
-}
-@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-.mock-top { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid var(--border); background: rgba(255,255,255,.02); }
-.mock-top .dot { width: 11px; height: 11px; border-radius: 50%; background: #33405f; }
-.mock-top .dot:nth-child(1){ background:#ff5f57; } .mock-top .dot:nth-child(2){ background:#febc2e; } .mock-top .dot:nth-child(3){ background:#28c840; }
-.mock-title { margin-left: 10px; font-family: var(--font-head); font-size: .82rem; color: var(--muted); }
+/* ---------- Paketi (teaser, minimalno) ---------- */
+.pkg-mini { padding: 40px clamp(24px, 3vw, 40px); }
+.pkg-mini .eyebrow { margin-bottom: 20px; }
+.pkg-mini h3 { margin-bottom: 10px; }
+.pkg-mini .pkg-mini-price { font-family: var(--font-display); font-style: italic; font-size: 1.5rem; color: var(--accent); margin-bottom: 18px; }
+.pkg-mini p { font-size: .95rem; margin-bottom: 22px; }
 
-.builder-canvas { position: relative; height: 340px; padding: 26px 24px; overflow: hidden; }
-
-/* Faza 1: sivi kostur (wireframe) */
-.bp-skel-group { position: absolute; inset: 26px 24px; animation: bp-skel-cycle 9s ease-in-out infinite; }
-.bp-skel { background: rgba(255,255,255,.07); border-radius: 6px; }
-.bp-skel-nav { height: 16px; width: 55%; margin-bottom: 26px; }
-.bp-skel-hero { height: 54px; width: 90%; margin-bottom: 18px; }
-.bp-skel-row { display: flex; gap: 12px; }
-.bp-skel-row .bp-skel { flex: 1; height: 90px; }
-@keyframes bp-skel-cycle {
-  0%   { opacity: 1; }
-  34%  { opacity: 1; }
-  44%  { opacity: 0; }
-  96%  { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-/* Faza 2: gotov, obojan layout */
-.bp-final-group { position: absolute; inset: 26px 24px; opacity: 0; animation: bp-final-cycle 9s ease-in-out infinite; }
-.bp-final-nav { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; }
-.bp-dotlogo { width: 16px; height: 16px; border-radius: 5px; background: var(--grad); flex: 0 0 auto; }
-.bp-navline { height: 10px; width: 46px; border-radius: 4px; background: rgba(255,255,255,.16); }
-.bp-navline.short { width: 30px; }
-.bp-navline:last-child { margin-left: auto; }
-.bp-final-hero { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
-.bp-h { display: block; height: 16px; width: 78%; border-radius: 4px; background: var(--grad); }
-.bp-h.short { width: 46%; opacity: .7; }
-.bp-btn { display: block; margin-top: 6px; height: 30px; width: 130px; border-radius: 999px; background: var(--grad); box-shadow: var(--shadow-glow); }
-.bp-final-row { display: flex; gap: 12px; }
-.bp-final-card { flex: 1; padding: 14px; border-radius: 10px; background: rgba(255,255,255,.03); border: 1px solid var(--border); }
-.bp-ico { display: block; width: 22px; height: 22px; border-radius: 6px; background: var(--grad-soft); border: 1px solid var(--border); margin-bottom: 10px; }
-.bp-l { display: block; height: 8px; width: 70%; border-radius: 3px; background: rgba(255,255,255,.14); }
-.bp-l + .bp-l { margin-top: 6px; width: 50%; }
-@keyframes bp-final-cycle {
-  0%   { opacity: 0; }
-  38%  { opacity: 0; }
-  50%  { opacity: 1; }
-  90%  { opacity: 1; }
-  98%  { opacity: 0; }
-  100% { opacity: 0; }
-}
-
-/* "Kursor" koji crta stranicu tijekom faze kostura */
-.bp-cursor { position: absolute; z-index: 3; width: 22px; height: 22px; color: var(--accent-2); filter: drop-shadow(0 2px 6px rgba(0,0,0,.5)); animation: bp-cursor-cycle 9s ease-in-out infinite; }
-@keyframes bp-cursor-cycle {
-  0%   { top: 30px;  left: 30px;  opacity: 1; }
-  34%  { top: 200px; left: 260px; opacity: 1; }
-  40%  { opacity: 0; }
-  100% { opacity: 0; top: 30px; left: 30px; }
-}
-
-.mock-float {
-  position: absolute; z-index: 3; font-family: var(--font-head); font-size: .82rem; font-weight: 600;
-  padding: 10px 15px; border-radius: 12px; background: rgba(16,24,43,.9); border: 1px solid var(--border-2);
-  backdrop-filter: blur(6px); box-shadow: var(--shadow);
-}
-.mf1 { top: 18%; left: -8%; color: var(--accent-2); animation: floaty 5s ease-in-out infinite; }
-.mf2 { bottom: 12%; right: -6%; color: var(--success); animation: floaty 6s ease-in-out .5s infinite; }
-
-/* ---------- Stats band ---------- */
-.stats-band { border-block: 1px solid var(--border); background: rgba(255,255,255,.015); }
-.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; text-align: center; }
-.stat b { display: block; font-family: var(--font-head); font-size: clamp(2rem,4vw,2.9rem); }
-.stat b, .stat b span { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.stat span:not([data-count]) { -webkit-text-fill-color: initial; color: var(--muted); font-size: .92rem; }
-
-/* ---------- Mini checklist (dokaz / zašto mi) ---------- */
-.mini { display: flex; gap: 14px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px 18px; font-size: .95rem; color: var(--text-soft); }
-.mini.ok { border-color: rgba(52,211,153,.35); background: rgba(52,211,153,.06); }
-.mini-c { flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: .8rem; font-weight: 700; background: rgba(52,211,153,.18); color: var(--success); }
-.mini strong { color: #fff; }
+/* ---------- FAQ minimal ---------- */
+.faq-list { border-top: 1px solid var(--border); max-width: 900px; }
+.faq-row { padding: 30px 0; border-bottom: 1px solid var(--border); }
+.faq-row h3 { font-family: var(--font-display); font-weight: 500; font-style: italic; font-size: 1.3rem; margin-bottom: 10px; }
+.faq-row p { font-size: .97rem; }
 
 /* ---------- CTA band ---------- */
-.cta-band { position: relative; overflow: hidden; text-align: center; padding: clamp(48px,7vw,80px) 30px; border-radius: var(--radius-lg); border: 1px solid var(--border-2); background: linear-gradient(180deg,var(--surface-2),var(--bg-2)); }
-.cta-glow { position: absolute; inset: 0; background: radial-gradient(600px 300px at 50% 0%, rgba(91,140,255,.22), transparent 70%); pointer-events: none; }
-.cta-band > * { position: relative; z-index: 1; }
-.cta-band h2 { margin-bottom: 14px; }
-.cta-band p { max-width: 52ch; margin: 0 auto 30px; color: var(--text-soft); font-size: 1.08rem; }
-.cta-band .hero-cta { justify-content: center; margin-top: 0; }
-
-/* ---------- Stats note ---------- */
-.stats-note { text-align: center; margin-top: 26px; font-size: .85rem; color: var(--muted); max-width: 70ch; margin-inline: auto; }
-
-/* ---------- Bolne točke ---------- */
-.pains { gap: 20px; }
-.pain { position: relative; background: linear-gradient(180deg,var(--surface),var(--bg-2)); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 26px 24px; transition: transform .35s var(--ease), border-color .35s; }
-.pain:hover { transform: translateY(-4px); border-color: var(--border-2); }
-.pain-n { font-family: var(--font-head); font-weight: 700; font-size: .85rem; color: var(--accent-2); letter-spacing: 2px; }
-.pain h3 { margin: 10px 0 10px; }
-.pain p { font-size: .96rem; color: var(--muted); }
-
-/* ---------- Ponuda: 4 stupa ---------- */
-.pillars { gap: 20px; }
-.pillar .ico svg { width: 24px; height: 24px; }
-.pillar .pillar-price { margin-top: 14px; font-family: var(--font-head); font-weight: 600; font-size: .92rem; color: var(--accent-2); }
-.pillar .pillar-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--text); }
-.pillar .pillar-link svg { width: 15px; height: 15px; transition: transform .2s; }
-.pillar:hover .pillar-link svg { transform: translateX(3px); }
-
-/* ---------- Case teaser (dokaz + zašto mi) ---------- */
-.case-teaser { position: relative; overflow: hidden; border: 1px solid var(--border-2); border-radius: var(--radius-lg); background: linear-gradient(120deg, var(--surface-2), var(--bg-2)); padding: clamp(34px,5vw,60px); }
-.case-teaser::before { content: ""; position: absolute; inset: 0; background: radial-gradient(560px 280px at 88% 0%, rgba(34,211,238,.14), transparent 65%); pointer-events: none; }
-.case-grid { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
-.case-copy { position: relative; }
-.case-copy h2 { margin: 16px 0 14px; }
-.case-copy > p { color: var(--text-soft); }
-.case-copy p + p { margin-top: 14px; }
-.case-copy .btn { margin-top: 26px; }
-.case-list { position: relative; display: grid; gap: 14px; }
-
-/* ---------- Paketi (teaser) ---------- */
-.pkg { display: flex; flex-direction: column; }
-.pkg-step { font-family: var(--font-head); font-size: .76rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-2); }
-.pkg h3 { margin: 10px 0 4px; }
-.pkg-price { font-family: var(--font-head); font-weight: 700; font-size: 1.7rem; color: #fff; margin: 6px 0 12px; }
-.pkg-price small { font-family: var(--font-body); font-weight: 500; font-size: .82rem; color: var(--muted); margin-left: 6px; }
-.pkg > p { font-size: .95rem; }
-.pkg-list { margin: 16px 0; display: grid; gap: 9px; }
-.pkg-list li { position: relative; padding-left: 26px; font-size: .92rem; color: var(--text-soft); }
-.pkg-list li::before { content: "✓"; position: absolute; left: 0; color: var(--success); font-weight: 700; }
-.pkg-note { font-size: .82rem; color: var(--muted); font-style: italic; margin-bottom: 18px; }
-.pkg .btn { margin-top: auto; align-self: flex-start; }
-.pkg.featured { border-color: rgba(91,140,255,.5); box-shadow: var(--shadow-glow); }
-.pkg.featured::after { opacity: .55; }
-
-/* ---------- FAQ ---------- */
-.faqs { gap: 20px; }
-.faq { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 26px 22px; }
-.faq h3 { font-size: 1.1rem; margin-bottom: 10px; }
-.faq p { font-size: .95rem; color: var(--muted); }
+.cta-band { text-align: left; }
+.cta-band h2 { max-width: 18ch; margin-bottom: 30px; }
+.cta-band p { max-width: 52ch; margin-bottom: 34px; color: var(--text-soft); font-size: 1.08rem; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 940px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-  .hero-visual { max-width: 480px; margin-inline: auto; }
-  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 32px 20px; }
-  .case-grid { grid-template-columns: 1fr; gap: 36px; }
-  .pillars.grid-4 { grid-template-columns: repeat(2,1fr); }
-  .mf1 { left: 0; } .mf2 { right: 0; }
-}
-@media (max-width: 620px) {
-  .mock-float { display: none; }
-  .pillars.grid-4 { grid-template-columns: 1fr; }
-  .builder-canvas { height: 300px; }
+@media (max-width: 720px) {
+  .service-row { flex-wrap: wrap; padding: 26px 0; }
+  .service-row:hover { padding-left: 0; }
+  .service-row .idx-desc { padding-left: 0; }
+  .service-row .idx-note { order: 3; }
 }

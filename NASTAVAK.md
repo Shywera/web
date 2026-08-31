@@ -3,6 +3,33 @@
 > Ovaj dokument je **handoff za nastavak rada** (npr. Claude Code na drugom računalu).
 > Sadrži kontekst projekta, poslovnu strategiju i popis onoga što još treba napraviti.
 
+## 0. Dizajn v2 (2026-08-31, isti dan kao pivot)
+
+Korisnik je odmah nakon pivota (vidi 1a niže) tražio **potpuno drugi vizualni stil**:
+"design heavy, minimalistic yet clever", nadahnuto s korisnikove osobne stranice
+shaiyex.com, izričito **bez plave** (stari dizajn-sistem bio je plavo/cyan/ljubičasti
+gradijent) i "landing page koja oduzima dah". Rezultat, dizajn-sistem v2:
+
+- **Boje:** topla gotovo-crna pozadina (`--bg:#0b0a08`), krem tekst, JEDAN signalni
+  akcent `--accent:#ff5a2b` (topla crveno-narančasta "flare"), bez gradijenata.
+- **Tipografija:** Fraunces (display serif, kurziv za naglaske/citate) + Inter (tijelo/UI).
+  Učitani samo statični rezovi 300/400/500/600 (+ 400/500 italic) — u CSS-u koristiti
+  SAMO te brojeve za `font-weight` na `var(--font-display)`, ne proizvoljne (npr. 420),
+  jer browser inače samo zaokruži na najbliži učitani rez.
+- **Layout motiv:** "hairline grid" — `.grid`/`.grid-2/3/4` u base.css crtaju 1px linije
+  između ćelija (swiss/editorial osjećaj) umjesto starih kartica sa sjenom/gradijentom.
+  Stranice koje trebaju običan razmak (npr. kontakt.html dvije kolone) to eksplicitno
+  poništavaju (`background:none;border:none;gap:Npx`), vidi kontakt.css.
+- **Navigacija:** fullscreen preklopni izbornik (`.site-menu`, gumb `.menu-btn`) umjesto
+  klasičnog horizontalnog menija — identičan na svim stranicama, radi i na mobitelu bez
+  posebne mobilne verzije.
+- **"Wow" elementi na indexu:** naslov koji "dolazi u fokus" (blur+scale animacija pri
+  učitavanju, `[data-focus]` u base.css/script.js), kursor "baterijska lampa" (`.spotlight`,
+  samo desktop s mišem), beskonačna traka usluga (`.ticker`), popis usluga u stilu indexa
+  časopisa s cijenom koja prati kursor na hoveru (`data-hover-price`, `.price-float`).
+- Favicon promijenjen: sad je to jednostavna topla točka na tamnoj pozadini (echo
+  "spotlighta"), ne stari plavi gradijent "K".
+
 ---
 
 ## 1. Što je ovo
