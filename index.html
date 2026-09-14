@@ -17,6 +17,78 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="assets/css/base.css" />
   <link rel="stylesheet" href="assets/css/home.css" />
+<style>
+  /* ====== ZASTO MI: namjerno neumjestan gumb ======================
+     Nista odavde ne dira dizajn-sistem: vlastite boje, vlastiti font,
+     vlastite animacije. Poanta je da izgleda kao da je s druge
+     stranice, pa je i izolirano kao da jest. ====================== */
+  .zasto-mi{
+    display:block;position:relative;isolation:isolate;
+    margin:0 auto;padding:clamp(18px,3.4vw,34px) clamp(16px,4vw,48px);
+    max-width:min(1120px,calc(100% - 32px));
+    text-align:center;text-decoration:none;overflow:hidden;
+    border:3px solid #000;border-radius:2px;
+    background:linear-gradient(90deg,#ff004c,#ff8a00,#ffe600,#00ff90,
+               #00e5ff,#b14bff,#ff004c);
+    background-size:400% 100%;
+    animation:zm-rgb 3.2s linear infinite;
+    box-shadow:0 0 0 3px #fff,0 10px 40px rgba(0,0,0,.45);
+  }
+  @keyframes zm-rgb{to{background-position:400% 0}}
+  .zasto-mi-in{
+    display:block;position:relative;color:#000;
+    font-family:Impact,"Haettenschweiler","Arial Narrow",system-ui,sans-serif;
+    font-size:clamp(30px,7.4vw,74px);line-height:.94;letter-spacing:.02em;
+    text-transform:uppercase;
+  }
+  /* dvije kopije teksta, pomaknute i obojane, koje se povremeno rezu:
+     jeftina kromatska aberacija bez ijedne slike */
+  .zasto-mi-in::before,.zasto-mi-in::after{
+    content:attr(data-text);position:absolute;left:0;top:0;width:100%;
+  }
+  .zasto-mi-in::before{
+    transform:translateX(-3px);text-shadow:2px 0 #00e5ff;
+    animation:zm-g1 2.6s steps(1) infinite;
+  }
+  .zasto-mi-in::after{
+    transform:translateX(3px);text-shadow:-2px 0 #ff004c;
+    animation:zm-g2 3.3s steps(1) infinite;
+  }
+  @keyframes zm-g1{
+    0%,64%,100%{clip-path:inset(100% 0 0 0)}
+    66%{clip-path:inset(8% 0 76% 0)}
+    72%{clip-path:inset(62% 0 18% 0)}
+    78%{clip-path:inset(34% 0 44% 0)}
+  }
+  @keyframes zm-g2{
+    0%,40%,100%{clip-path:inset(100% 0 0 0)}
+    44%{clip-path:inset(70% 0 10% 0)}
+    50%{clip-path:inset(20% 0 62% 0)}
+    56%{clip-path:inset(46% 0 30% 0)}
+  }
+  .zasto-mi-sub{
+    display:block;margin-top:10px;color:#000;
+    font-family:"Courier New",ui-monospace,monospace;font-weight:700;
+    font-size:clamp(10px,1.5vw,14px);letter-spacing:.34em;
+    text-transform:uppercase;
+  }
+  .zasto-mi:hover{animation-duration:.7s}
+  .zasto-mi:hover .zasto-mi-in{animation:zm-shake .18s infinite}
+  @keyframes zm-shake{
+    0%,100%{transform:translate(0,0)}
+    25%{transform:translate(-2px,1px)}
+    50%{transform:translate(2px,-1px)}
+    75%{transform:translate(-1px,-2px)}
+  }
+  .zasto-mi:focus-visible{outline:4px solid #000;outline-offset:6px}
+  /* Trepce i pomice se, pa mora postojati izlaz za one koji to ne zele.
+     Boje ostaju, gibanje staje. */
+  @media (prefers-reduced-motion: reduce){
+    .zasto-mi,.zasto-mi:hover{animation:none;background-position:22% 0}
+    .zasto-mi-in::before,.zasto-mi-in::after{animation:none;content:none}
+    .zasto-mi:hover .zasto-mi-in{animation:none}
+  }
+</style>
 </head>
 <body>
 
@@ -47,6 +119,13 @@
   </nav>
 
   <main>
+
+    <!-- ============ ZASTO MI (namjerno neumjestan) ============ -->
+    <a class="zasto-mi" href="zasto-nas.html">
+      <span class="zasto-mi-in" data-text="ZAŠTO MI">ZAŠTO MI</span>
+      <span class="zasto-mi-sub">Kliknite ako se usudite &middot; pojačajte zvuk</span>
+    </a>
+
     <!-- ============ HERO ============ -->
     <section class="hero">
       <div class="container">
