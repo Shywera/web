@@ -976,13 +976,10 @@
 
   /* ---- floating abuse ---- */
   var POPS = [
-    "CANVA USER","CANVA USER","COMIC SANS","PAPYRUS","WORDART","PREDLOŽAK",
-    "WIX","8 MB SLIKA","STOCK RUKOVANJE","MAKE IT POP","LOGO VEĆI","CAROUSEL",
-    "AUTOPLAY GLAZBA","LOREM IPSUM","12 FONTOVA","DROP SHADOW",
-    "NEĆAK JE RADIO","BOOTSTRAP DEFAULT","JPG LOGO","CENTRIRANO U WORDU",
-    "GRADIENT DUGA","NEMA MOBILNE","PAPIR IZ 2009","THEMEFOREST",
-    "POŠALJI PSD","MOŽE DO SUTRA","SAMO MALA IZMJENA","VIDI KONKURENTA",
-    "PLAĆAM KAD PRORADI","PDF U SLIDERU"
+    "CANVA USER","COMIC SANS","PREDLOŽAK","WIX","8 MB SLIKA",
+    "LOREM IPSUM","12 FONTOVA","DROP SHADOW","NEĆAK JE RADIO","JPG LOGO",
+    "CENTRIRANO U WORDU","POŠALJI PSD","MOŽE DO SUTRA","SAMO MALA IZMJENA",
+    "PDF U SLIDERU"
   ];
   var POPC   = ['#00E5FF','#B14BFF','#FF2E6A','#C6FF3D','#FFFFFF'];
   /* pooled: creating and binning elements every beat was costing frames,
@@ -1045,12 +1042,9 @@
 
   /* ---- slam stamp ---- */
   var STAMPS = [
-    "CANVA USER","PREDLOŽAK","COMIC SANS","LOGO VEĆI","MAKE IT POP",
-    "8 MB SLIKA","NEMA MOBILNE","LOREM IPSUM","WORDART","CAROUSEL",
-    "NEĆAK JE RADIO","JPG LOGO","12 FONTOVA","THEMEFOREST","WIX",
-    "AUTOPLAY","PAPYRUS","STOCK FOTKA","DROP SHADOW","MOŽE DO SUTRA",
-    "SAMO MALA IZMJENA","VIDI KONKURENTA","GRADIENT DUGA","CENTRIRANO",
-    "PDF U SLIDERU","TREBA NAM BLOG","BEŽ IZ 2009"
+    "CANVA USER","PREDLOŽAK","COMIC SANS","8 MB SLIKA","LOREM IPSUM",
+    "NEĆAK JE RADIO","JPG LOGO","12 FONTOVA","WIX","DROP SHADOW",
+    "MOŽE DO SUTRA","SAMO MALA IZMJENA","PDF U SLIDERU"
   ];
   /* shuffle once so the order is never the same twice, then walk it in
      sequence, which is what actually stops the same word coming back */
@@ -1106,7 +1100,7 @@
     }
     var e = document.createElement('div');
     e.className = 'toast';
-    e.innerHTML = '<span class="ico">&#9733;</span><span><span class="tt">Achievement earned</span><br>' +
+    e.innerHTML = '<span class="ico">&#9733;</span><span><span class="tt">Postignuće otključano</span><br>' +
                   '<span class="tn"></span></span>';
     e.querySelector('.tn').textContent = ACH[ai++ % ACH.length];
     toastEl.appendChild(e);
@@ -1131,12 +1125,9 @@
 
   (function(){
     var W = [
-      'CANVA USER','PREDLOŽAK','TO NIJE DIZAJN','COMIC SANS','LOGO VEĆI',
-      'MAKE IT POP','8 MB SLIKA','NEMA MOBILNE','LOREM IPSUM','WORDART',
-      'CAROUSEL','NEĆAK JE RADIO','JPG LOGO','12 FONTOVA','THEMEFOREST',
-      'WIX','AUTOPLAY GLAZBA','PAPYRUS','STOCK FOTKA','DROP SHADOW',
-      'MOŽE DO SUTRA','SAMO MALA IZMJENA','VIDI KONKURENTA','GRADIENT DUGA',
-      'PDF U SLIDERU','BEŽ IZ 2009'
+      'CANVA USER','PREDLOŽAK','TO NIJE DIZAJN','COMIC SANS','8 MB SLIKA',
+      'LOREM IPSUM','NEĆAK JE RADIO','JPG LOGO','12 FONTOVA','WIX',
+      'DROP SHADOW','MOŽE DO SUTRA','SAMO MALA IZMJENA','PDF U SLIDERU'
     ];
     var s = [], prev = -1, n;
     for (var i = 0; i < 190; i++){
@@ -1159,7 +1150,7 @@
     { b: 20, k: '', t: 'CANVA USER',    s: '' },
     { b: 40, k: '', t: 'PREDLOŽAK',     s: '' },
     { b: 68, k: '', t: 'TO NIJE DIZAJN',s: '' },
-    { b: 134, k: '', t: 'STANI',        s: '' }
+    { b: 134, k: '', t: '',             s: '' }
   ];
   var LEAD = 0;
   var phase = 0, ph = 0, calm = false;
@@ -1230,8 +1221,7 @@
   ));
   var SWAPW = [
     'TO JE CANVA','TO NIJE DIZAJN','KUPIO SI PREDLOŽAK','COMIC SANS',
-    'LOGO TI JE U JPG-U','NEMAŠ MOBILNU','TO JE WORDART','MAKE IT POP',
-    'OSAM FONTOVA','NEĆAK TI JE RADIO','TO JE CANVA'
+    'LOGO TI JE U JPG-U','OSAM FONTOVA','NEĆAK TI JE RADIO'
   ];
   var swapping = false, cutSaved = '', swapWord = 'TO JE CANVA', sw = 0;
 
