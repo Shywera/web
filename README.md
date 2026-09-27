@@ -1,7 +1,7 @@
 # KAI-SOL — web stranica
 
-Poslovna web stranica tvrtke KAI-SOL: izrada web stranica, dizajn, hosting i mjesečna
-skrb, te IT podrška za ured i server. Statični HTML/CSS/JS, bez frameworka i build koraka.
+Poslovna web stranica tvrtke KAI-SOL: izrada web stranica, dizajn, hosting i mjesečno
+održavanje, te IT podrška za ured i server. Statični HTML/CSS/JS, bez frameworka i build koraka.
 
 **Live:** https://kai-sol.com
 

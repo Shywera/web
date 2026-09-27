@@ -16,3 +16,6 @@ node_modules/
 
 # Claude
 .claude/
+
+# Hallmark alat (lokalno stanje)
+.hallmark/

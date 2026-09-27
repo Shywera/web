@@ -1,0 +1,81 @@
+/* ============================================================
+   tokens.css — KAI-SOL design tokens
+   Hallmark v1.1.0 · emitted 27.09.2026
+
+   Boje su OKLCH prijevod postojeće KAI-SOL palete iz base.css.
+   Vrijednosti su vizualno identične starim hex tokenima:
+   paper #0b0a08 · ink #f3eee3 · accent #ff5a2b (flare).
+   Ni jedna boja nije izmišljena, samo prevedena u OKLCH.
+   ============================================================ */
+
+:root {
+  /* ---- Paper i tinta (tamna tema) ---- */
+  --color-paper:      oklch(14.5% 0.005 85.9);   /* #0b0a08 */
+  --color-paper-2:    oklch(17.8% 0.006 78.0);   /* ~#121110, chroma >= 0.005 (gate 22) */
+  --color-paper-3:    oklch(19.7% 0.007 78.2);   /* #171512 */
+  --color-ink:        oklch(95.0% 0.016 86.4);   /* #f3eee3 */
+  --color-ink-2:      oklch(81.7% 0.025 83.4);   /* #cbc2b1 */
+  --color-ink-3:      oklch(63.0% 0.025 78.1);   /* posvijetljen s #83796a za 4.5:1 (gate 40) */
+  --color-rule:       oklch(27.5% 0.012 78.1);   /* #2b2721 */
+  --color-rule-2:     oklch(33.1% 0.017 82.3);   /* #3a352c */
+
+  /* ---- Akcent: jedan topli signal, bez plave ---- */
+  --color-accent:     oklch(68.3% 0.209 35.9);   /* #ff5a2b */
+  --color-accent-2:   oklch(82.4% 0.149 73.3);   /* #ffb547 */
+  --color-accent-ink: oklch(48.0% 0.170 36.6);   /* akcent na svijetloj podlozi, 4.5:1 (gate 40) */
+  --color-on-accent:  oklch(14.5% 0.005 85.9);   /* tekst na akcentu, nikad bijeli */
+  --color-ok:         oklch(80.8% 0.110 136.7);
+  --color-focus:      oklch(82.4% 0.149 73.3);
+  --color-accent-glow: oklch(68.3% 0.209 35.9 / 0.09);  /* sjaj kursora, gate 48 */
+
+  /* ---- Svijetla traka (inverzna sekcija) ---- */
+  --color-paper-lt:   oklch(95.0% 0.016 86.4);
+  --color-ink-lt:     oklch(18.0% 0.010 80.0);
+  --color-ink-lt-2:   oklch(45.0% 0.018 80.0);
+  --color-rule-lt:    oklch(85.0% 0.014 86.0);
+
+
+  /* ---- Tipografija ---- */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --text-display:   clamp(2.9rem, 6.4vw, 5.6rem);
+  --text-display-s: clamp(2.2rem, 4.4vw, 3.4rem);
+  --text-4xl:       clamp(1.7rem, 2.8vw, 2.4rem);
+  --text-2xl:       clamp(1.25rem, 1.8vw, 1.5rem);
+  --text-lg:        1.125rem;
+  --text-base:      1rem;
+  --text-sm:        0.9rem;
+  --text-xs:        0.78rem;
+
+  --track-display: -0.018em;
+  --track-wide: 0.14em;
+
+  /* ---- Prostor: 4pt skala ---- */
+  --space-2xs: 4px;
+  --space-xs:  8px;
+  --space-sm:  12px;
+  --space-md:  20px;
+  --space-lg:  32px;
+  --space-xl:  48px;
+  --space-2xl: 72px;
+  --space-3xl: 112px;
+  --space-4xl: 160px;
+  --page-gutter: clamp(20px, 4vw, 48px);
+  --measure: 62ch;
+
+  /* ---- Linije i radijusi ---- */
+  --rule-hair: 1px;
+  --rule-thick: 2px;
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-pill: 999px;
+
+  /* ---- Gibanje: tri imenovana easinga, bez bounce ---- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+  --ease-in-out: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  --dur-fast: 120ms;
+  --dur-base: 240ms;
+  --dur-slow: 520ms;
+}

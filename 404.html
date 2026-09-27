@@ -4,35 +4,86 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stranica nije pronađena | KAI-SOL</title>
-  <meta name="robots" content="noindex" />
+  <meta name="description" content="Ova poveznica vodi u prazno. Vratite se na početnu stranicu KAI-SOL." />
+  <meta name="theme-color" content="#0b0a08" />
+  <meta property="og:title" content="Stranica nije pronađena | KAI-SOL" />
+  <meta property="og:description" content="Ova poveznica vodi u prazno. Vratite se na početnu stranicu KAI-SOL." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kai-sol.com/404.html" />
+  <link rel="canonical" href="https://kai-sol.com/404.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="assets/css/base.css" />
-  <style>
-    .nf { min-height: 70vh; display: grid; place-items: center; text-align: center; padding: 60px 20px; }
-    .nf b { display: block; font-family: var(--font-display); font-style: italic; font-size: clamp(4rem, 12vw, 7rem); font-weight: 500; line-height: 1; color: var(--accent); }
-    .nf h1 { font-size: clamp(1.4rem, 3vw, 2rem); margin: 14px 0 10px; }
-    .nf p { color: var(--muted); margin-bottom: 28px; }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/kai.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav">
-      <a href="index.html" class="brand" aria-label="KAI-SOL početna">KAI-SOL</a>
-    </div>
-  </header>
-  <main>
-    <div class="nf">
-      <div>
-        <b>404</b>
-        <h1>Stranica nije pronađena</h1>
-        <p>Ova poveznica vodi u prazno. Vratimo vas na početnu.</p>
-        <a href="index.html" class="btn btn-primary btn-lg">Natrag na početnu</a>
+
+  <header class="mast">
+    <div class="shell mast-in">
+      <a href="/index.html" class="wordmark" aria-label="KAI-SOL početna">KAI-SOL</a>
+      <div class="mast-right">
+        <a class="mast-mail" href="mailto:info@kai-sol.com">info@kai-sol.com</a>
+        <button class="menu-btn" aria-haspopup="true" aria-expanded="false" aria-controls="siteMenu">
+          <span class="lbl-open">Meni</span><span class="lbl-close">Zatvori</span>
+          <span class="menu-btn-bars" aria-hidden="true"><span></span><span></span></span>
+        </button>
       </div>
     </div>
+  </header>
+
+  <nav id="siteMenu" class="menu" aria-label="Glavna navigacija">
+    <div class="shell menu-in">
+      <ol class="menu-links">
+        <li><a href="/index.html">Početna</a></li>
+        <li><a href="/usluge.html">Usluge i cijene</a></li>
+        <li><a href="/iskustvo.html">Iskustvo</a></li>
+        <li><a href="/o-nama.html">O nama</a></li>
+        <li><a href="/kontakt.html">Kontakt</a></li>
+      </ol>
+      <div class="menu-foot">
+        <a href="mailto:info@kai-sol.com" class="tlink">info@kai-sol.com</a>
+        <a href="/kontakt.html" class="chip chip--solid">Zatražite ponudu</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="shell">
+      <div class="nf">
+        <p class="nf-code">404</p>
+        <h1 class="mw-head">Stranica nije pronađena.</h1>
+        <p class="lede">Ova poveznica vodi u prazno. Vratimo vas na početnu.</p>
+        <p class="mt-md">
+          <a href="/" class="chip chip--solid chip--lg">Natrag na početnu</a>
+        </p>
+      </div>
+    </section>
+
   </main>
-  <script src="assets/js/script.js"></script>
+
+  <footer class="foot">
+    <div class="shell">
+      <p class="foot-line">Recite nam što <span class="mark">vas muči</span>.</p>
+      <p class="mt-lg">
+        <a href="/kontakt.html" class="chip chip--solid chip--lg">Zatražite ponudu</a>
+      </p>
+      <div class="foot-meta">
+        <span>&copy; <span data-year>2026</span> KAI-SOL</span>
+        <span class="foot-nav">
+          <a href="/index.html">Početna</a>
+          <a href="/usluge.html">Usluge i cijene</a>
+          <a href="/iskustvo.html">Iskustvo</a>
+          <a href="/o-nama.html">O nama</a>
+          <a href="/kontakt.html">Kontakt</a>
+          <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/kai.js"></script>
 </body>
 </html>

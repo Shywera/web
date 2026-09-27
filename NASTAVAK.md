@@ -38,7 +38,7 @@ Marketinška web stranica za **KAI-SOL** — malu firmu koju vode dvoje ljudi, s
 
 1. **Web izrada** (glavna usluga) — landing stranice, poslovni sajtovi, webshopovi
 2. **Dizajn** — vizualni identitet, UI/UX, marketinški materijali
-3. **Hosting i mjesečna skrb** — hosting, backup, sitne izmjene, podrška (pretplata)
+3. **Hosting i mjesečno održavanje** — hosting, backup, sitne izmjene, podrška (pretplata)
 4. **IT podrška za ured i server** — radne stanice, mreža, backup, daljinska i terenska podrška
 
 - **Jezik:** hrvatski
@@ -76,7 +76,7 @@ agencije gdje klijent prolazi kroz više ljudi i ugovora.
 tržištu, orijentacija je bila "okvirno tržište Zagreb, profesionalno ali povoljno"):**
 - Web izrada: landing od 490 €, poslovna stranica od 990 €, webshop od 1.990 €/po dogovoru
 - Dizajn: vizualni identitet od 350 €, UI/UX redizajn od 690 €, marketing materijali od 150 €
-- Hosting i skrb (mjesečno): Basic 19 €, Standard 49 €, Premium 99 €
+- Hosting i održavanje (mjesečno): Basic 19 €, Standard 49 €, Premium 99 €
 - IT podrška: mjesečni ugovor od 149 €/mj (po broju uređaja), ili satnica po intervenciji
 
 **Poseban "wow" element (jedinstvena animacija):** na indexu, hero vizual je mock
