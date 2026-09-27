@@ -1,4 +1,4 @@
-# Design — KAI-SOL
+# Design: KAI-SOL
 
 A locked design system for kai-sol.com. Every page reads this file before emitting code.
 Do not regenerate it per page: extend or amend it when the system needs to grow.
@@ -19,26 +19,26 @@ like a well-set document about a business, not like a product launch.
 
 Three page types. Pages within a type share the type's shape and vary only in content.
 
-- **Marketing pages** (`index`, `usluge`) — **Index-First**. The page IS a priced index.
+- **Marketing pages** (`index`, `usluge`): **Index-First**. The page IS a priced index.
   No decorative hero, no narrative build-up. A masthead statement, then dense typographic
   rows that name a service, its price, and where it goes. Variation knob: row density
   (index = 4 rows, compact) vs (usluge = 4 rows, expanded with detail columns).
-- **Content pages** (`iskustvo`, `o-nama`) — **Long Document**. Continuous prose with
+- **Content pages** (`iskustvo`, `o-nama`): **Long Document**. Continuous prose with
   inline heads and a narrow measure. Figures sit inline, not in cards. The page is
   literature about the work. Variation knob: numbered case sections (iskustvo) vs
   unnumbered narrative (o-nama).
-- **Action page** (`kontakt`) — **Ledger**. Two columns: what happens after you write,
+- **Action page** (`kontakt`): **Ledger**. Two columns: what happens after you write,
   numbered, on the left; the form on the right. Nothing else on the page.
-- **Utility** (`404`) — a single statement and one link.
+- **Utility** (`404`): a single statement and one link.
 
-**Out of system:** `zasto-nas.html` itself — the interactive piece behind the door. It
+**Out of system:** `zasto-nas.html` itself, the interactive piece behind the door. It
 carries its own palette, fonts and logic. Do not bring it into this system and do not
 clean it up; it is the one place on the site that is allowed to be loud.
 
 **The door into it is in system.** Amended 27.09.2026: the RGB glitch button that used to
 sit on the homepage is gone. Inside a restrained editorial system it stopped reading as a
 deliberate joke and started reading as leftover from the old site. The invitation is now a
-`.door` block — display type, a numbered meta list, one accent hairline that draws in on
+`.door` block: display type, a numbered meta list, one accent hairline that draws in on
 hover, and a plain note that the destination has sound. Same promise, no rainbow. The
 site therefore has **no loud element on its own surfaces**; the loudness lives behind one
 clearly-marked link.
@@ -91,7 +91,7 @@ emphasis inside running paragraphs.
 - `--text-display-s` clamp(2.2rem, 4.4vw, 3.4rem)
 - `--text-4xl`       clamp(1.7rem, 2.8vw, 2.4rem)
 - `--text-2xl`       clamp(1.25rem, 1.8vw, 1.5rem)
-- Prose measure: 62ch on content pages, 46ch for ledes. Never outside 45–75ch.
+- Prose measure: 62ch on content pages, 46ch for ledes. Never outside 45 to 75ch.
 
 ## Spacing
 
@@ -108,7 +108,7 @@ page has rhythm. Equal whitespace between every section is a named anti-pattern.
   centred link list. Escape closes, `aria-expanded` stays in sync.
 - **Footer: Ft5 Statement**, site-wide. One large roman closing line per page, then
   wordmark, links and copyright in small muted type. **No four-column sitemap and no
-  social-icon row** — that shape is the single most recognisable AI footer.
+  social-icon row**, because that shape is the single most recognisable AI footer.
 
 Closing lines by page: index *"Recite nam što vas muči."* · usluge *"Cijena prije
 početka, ne poslije."* · iskustvo *"Budite među prvim web klijentima."* · o-nama
@@ -118,11 +118,11 @@ početka, ne poslije."* · iskustvo *"Budite među prvim web klijentima."* · o-
 
 Three primitives on the whole site. Cut before adding.
 
-1. **Entrance** — one orchestrated reveal on first load, staggered by `--i`. Not a
+1. **Entrance**: one orchestrated reveal on first load, staggered by `--i`. Not a
    fade-up per section on scroll; the page settles once and stays settled.
-2. **Rule-draw** — an accent hairline draws in under an index row on hover/focus,
+2. **Rule-draw**: an accent hairline draws in under an index row on hover/focus,
    via `transform: scaleX()`. Never animate `width`.
-3. **Spotlight** — a soft accent glow follows the cursor, desktop pointers only.
+3. **Spotlight**: a soft accent glow follows the cursor, desktop pointers only.
 
 Easings: `--ease-out` `--ease-in` `--ease-in-out`. Never the browser default `ease`,
 never bounce or overshoot on UI state. Animate `transform` and `opacity` only.
@@ -161,12 +161,12 @@ Static HTML, one shared stylesheet, one shared script. **No framework, no build 
 bundler, no runtime dependency except Google Fonts.** Deploys unchanged through GitHub
 Actions to GitHub Pages at kai-sol.com.
 
-- `assets/css/tokens.css` — every colour, type, space, motion token
-- `assets/css/kai.css` — the system: reset, masthead, index, long document, ledger,
+- `assets/css/tokens.css`: every colour, type, space, motion token
+- `assets/css/kai.css`: the system: reset, masthead, index, long document, ledger,
   footer. Carries the Hallmark stamp on line 1.
-- `assets/js/kai.js` — menu, entrance, spotlight, package configurator, live metrics
+- `assets/js/kai.js`: menu, entrance, spotlight, package configurator, live metrics
 - `assets/css/base.css`, `home.css`, `usluge.css`, `iskustvo.css`, `kontakt.css`,
-  `o-nama.css`, `assets/js/script.js` — **legacy.** Still on disk for `zasto-nas.html`
+  `o-nama.css`, `assets/js/script.js`: **legacy.** Still on disk for `zasto-nas.html`
   and for rollback. No redesigned page links them.
 
 ## Exports
