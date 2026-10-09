@@ -589,32 +589,3 @@ a.info-v:active { color: var(--color-accent-2); }
   .door::before { transition: none; }
   .door-title { transition: none; }
 }
-
-/* Figures: inline editorial images for Long Document pages. Added 09.10.2026. */
-.shot { margin: 0; }
-.shot img {
-  display: block; width: 100%; height: auto;
-  aspect-ratio: 3 / 2; object-fit: cover;
-  background: var(--color-paper-2);
-  border: var(--rule-hair) solid var(--color-rule);
-}
-.shot figcaption {
-  margin-top: var(--space-sm); max-width: 58ch;
-  font-size: var(--text-sm); line-height: 1.5; color: var(--color-ink-3);
-}
-.shots {
-  display: grid; gap: var(--space-lg);
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-/* A figure block that follows prose carries its own leading, so the markup
-   needs no spacing utility. Two classes, so it beats the .shot reset above.
-   A figure INSIDE a .split is a grid item: the grid gap already spaces it. */
-.split + .shot,
-.split + .shots { margin-top: var(--space-2xl); }
-
-@media (max-width: 40rem) {
-  .shots { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
-  .shot img { aspect-ratio: 4 / 3; }
-  .split + .shot,
-  .split + .shots { margin-top: var(--space-xl); }
-}

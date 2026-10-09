@@ -23,7 +23,7 @@ Three page types. Pages within a type share the type's shape and vary only in co
   No decorative hero, no narrative build-up. A masthead statement, then dense typographic
   rows that name a service, its price, and where it goes. Variation knob: row density
   (index = 4 rows, compact) vs (usluge = 4 rows, expanded with detail columns).
-- **Content pages** (`iskustvo`, `o-nama`, `best-view`): **Long Document**. Continuous prose with
+- **Content pages** (`iskustvo`, `o-nama`): **Long Document**. Continuous prose with
   inline heads and a narrow measure. Figures sit inline, not in cards. The page is
   literature about the work. Variation knob: numbered case sections (iskustvo) vs
   unnumbered narrative (o-nama).
@@ -31,7 +31,9 @@ Three page types. Pages within a type share the type's shape and vary only in co
   numbered, on the left; the form on the right. Nothing else on the page.
 - **Utility** (`404`): a single statement and one link.
 
-**Out of system:** `zasto-nas.html` itself, the interactive piece behind the door. It
+**Out of system:** `zasto-nas.html`, the interactive piece behind the door, and
+`best-view.html`, the Watamu apartment page (see Amendments, 09.10.2026). Both are
+self-contained. `zasto-nas.html`
 carries its own palette, fonts and logic. Do not bring it into this system and do not
 clean it up; it is the one place on the site that is allowed to be loud.
 
@@ -178,41 +180,46 @@ a token pipeline, generate the other formats from that file, not from the page C
 
 ## Amendments
 
-### 09.10.2026 · Figures and the first out-of-nav document
+### 09.10.2026 - best-view.html leaves the system
 
-Two things the system did not have before.
+A page about a holiday apartment in Watamu, Kenya. It was first built inside this system
+as a Long Document and it was wrong: the warm near-black paper fought seven bright
+photographs of an equatorial bay, and a dark editorial document is the wrong register for
+hospitality. It is now **out of system**, the second page to be so after `zasto-nas.html`.
 
-**1. A figure style.** `kai.css` carried no image or figure rule at all, because no
-redesigned page had used one. Added `.shot` (a single inline figure) and `.shots` (a
-two-up grid of them), both token-only:
+**What out of system means here.** `best-view.html` links neither `tokens.css` nor
+`kai.css`. Its palette, its two fonts and its whole stylesheet live in one `<style>` block
+in the page. Nothing it does can reach the five business pages, and nothing in the locked
+system constrains it. The figure styles briefly added to `kai.css` for the first version
+were reverted, because no page in the system uses them: a design system should not carry
+rules nothing references.
 
-- `.shot img` is full-width, `aspect-ratio: 3 / 2`, `object-fit: cover`, one hairline
-  rule in `--color-rule`, `--color-paper-2` behind it while it loads
-- `.shot figcaption` is `--text-sm` in `--color-ink-3`, capped at 58ch so captions obey
-  the same measure discipline as prose
-- `.shots` uses `repeat(2, minmax(0, 1fr))` per the accessibility floor, and collapses to
-  one column at `max-width: 40rem`, where the crop also opens to `4 / 3` because a 3:2
-  frame goes thin on a phone
+**Its own system, recorded so it can be rebuilt:**
 
-The breakpoint is 40rem deliberately: the stylesheet already has 64rem and 40rem, and a
-third breakpoint for one component is how a system starts to rot. Figures stay two-up on
-tablet, where two 290px frames still read, and stack on phones.
+- Macrostructure **08 Photographic**: full-bleed photographic plates alternating with
+  narrow text bands. The image edge is the divider; there are no rules between sections.
+  Captions are factual, naming the time of day or the thing in frame, never selling.
+- Nav **N9 Edge-aligned minimal**, footer **Ft4 Dense colophon**. Deliberately not the
+  system's N6 Masthead and Ft5 Statement, so the page does not half-belong.
+- Light limewash paper `oklch(96.4% 0.012 84)`, carved-hardwood ink `oklch(25% 0.02 48)`,
+  terracotta accent `oklch(53% 0.132 42)`, one deep palm green for a single rule.
+- Display **Marcellus**, body **Karla**. Marcellus ships one weight and no italic, which
+  enforces the roman-headings rule structurally rather than by discipline.
+- Motion: two primitives only, an opening fade on the hero plate and an underline draw on
+  the one nav link. The macrostructure's instruction is to let the photographs work.
 
-**Images carry `width`/`height` attributes and `loading="lazy"` on everything below the
-first.** No layout shift, no eager fetch of seven photographs on a phone connection.
+**What carried over from the locked system, because it is right everywhere:** roman
+headings with no italic, no eyebrow labels, tokens only with no raw colour values outside
+`:root`, `overflow-x: clip` on `html` and `body`, `minmax(0, 1fr)` on grid tracks, and the
+no-invented-numbers rule. 200 m2, 70 m2 and 2 bedrooms are owner-supplied. Rates, ratings,
+distances and sleeping capacity are absent because they are in none of the three permitted
+categories. A closing note states the page was built from photographs and supplied
+details, not from a stay.
 
-**2. `best-view.html`, a document about a property.** A Long Document variation: prose
-with inline figures, a `.spec` block for supplied facts, one `.ord--2` list of caveats.
-It reviews a holiday apartment in Watamu.
+**Still not in the nav and not in the sitemap**, on the same reasoning as before: the
+business site sells web development, and a page about an apartment in Kenya would blur
+that in the masthead. Direct link only.
 
-It is **not in the nav**, same as `zasto-nas.html`, for a reason worth stating. The
-business site sells web development; a page about an apartment is not that, and putting
-it in the masthead would blur what kai-sol is. Reachable by direct link only. If it ever
-needs a home in the nav, it belongs under a portfolio heading as an example of a
-single-object page, not as a listing in its own right.
-
-**Copy rule it had to respect:** the review is written from photographs and owner-supplied
-details, not from a stay, and the page says so in a closing `.note`. The no-invented-
-numbers rule bites hard here: 200 m2, 70 m2 and 2 bedrooms are owner-supplied and may
-appear. Price, star rating, review score, distance to the beach, wifi speed and sleeping
-capacity are none of the three permitted categories and are absent.
+**The precedent this sets.** A page may leave the system when its content has a genuinely
+different register, but it leaves *completely*: own stylesheet, own fonts, own palette, no
+shared classes in either direction. Half-in pages are how a design system dies.
