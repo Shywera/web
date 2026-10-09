@@ -23,7 +23,7 @@ Three page types. Pages within a type share the type's shape and vary only in co
   No decorative hero, no narrative build-up. A masthead statement, then dense typographic
   rows that name a service, its price, and where it goes. Variation knob: row density
   (index = 4 rows, compact) vs (usluge = 4 rows, expanded with detail columns).
-- **Content pages** (`iskustvo`, `o-nama`): **Long Document**. Continuous prose with
+- **Content pages** (`iskustvo`, `o-nama`, `best-view`): **Long Document**. Continuous prose with
   inline heads and a narrow measure. Figures sit inline, not in cards. The page is
   literature about the work. Variation knob: numbered case sections (iskustvo) vs
   unnumbered narrative (o-nama).
@@ -173,3 +173,46 @@ Actions to GitHub Pages at kai-sol.com.
 
 `assets/css/tokens.css` is the portable export. If this project ever moves to Tailwind or
 a token pipeline, generate the other formats from that file, not from the page CSS.
+
+---
+
+## Amendments
+
+### 09.10.2026 · Figures and the first out-of-nav document
+
+Two things the system did not have before.
+
+**1. A figure style.** `kai.css` carried no image or figure rule at all, because no
+redesigned page had used one. Added `.shot` (a single inline figure) and `.shots` (a
+two-up grid of them), both token-only:
+
+- `.shot img` is full-width, `aspect-ratio: 3 / 2`, `object-fit: cover`, one hairline
+  rule in `--color-rule`, `--color-paper-2` behind it while it loads
+- `.shot figcaption` is `--text-sm` in `--color-ink-3`, capped at 58ch so captions obey
+  the same measure discipline as prose
+- `.shots` uses `repeat(2, minmax(0, 1fr))` per the accessibility floor, and collapses to
+  one column at `max-width: 40rem`, where the crop also opens to `4 / 3` because a 3:2
+  frame goes thin on a phone
+
+The breakpoint is 40rem deliberately: the stylesheet already has 64rem and 40rem, and a
+third breakpoint for one component is how a system starts to rot. Figures stay two-up on
+tablet, where two 290px frames still read, and stack on phones.
+
+**Images carry `width`/`height` attributes and `loading="lazy"` on everything below the
+first.** No layout shift, no eager fetch of seven photographs on a phone connection.
+
+**2. `best-view.html`, a document about a property.** A Long Document variation: prose
+with inline figures, a `.spec` block for supplied facts, one `.ord--2` list of caveats.
+It reviews a holiday apartment in Watamu.
+
+It is **not in the nav**, same as `zasto-nas.html`, for a reason worth stating. The
+business site sells web development; a page about an apartment is not that, and putting
+it in the masthead would blur what kai-sol is. Reachable by direct link only. If it ever
+needs a home in the nav, it belongs under a portfolio heading as an example of a
+single-object page, not as a listing in its own right.
+
+**Copy rule it had to respect:** the review is written from photographs and owner-supplied
+details, not from a stay, and the page says so in a closing `.note`. The no-invented-
+numbers rule bites hard here: 200 m2, 70 m2 and 2 bedrooms are owner-supplied and may
+appear. Price, star rating, review score, distance to the beach, wifi speed and sleeping
+capacity are none of the three permitted categories and are absent.
