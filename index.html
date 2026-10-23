@@ -217,7 +217,7 @@
   .check__grid{display:grid;gap:2rem;align-items:start}
   .check h2{font-size:clamp(2.5rem, 6.5vw, 3.6rem)}
   .check label{display:block;font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-bottom:.6rem}
-  .term{background:var(--void);border:1px solid var(--line-2);min-height:15rem;padding:1.2rem;font:400 .85rem/1.7 var(--mono);color:var(--dim)}
+  .term{background:var(--void);border:1px solid var(--line-2);min-height:9rem;padding:1.2rem;font:400 .85rem/1.7 var(--mono);color:var(--dim)}
   .term p::before{content:"> ";color:var(--yellow)}
   .term .idle{color:var(--mute)}
   .term .idle::before{content:""}
@@ -278,6 +278,7 @@
     .hero .wrap{grid-template-columns:1fr 1.05fr}
     .grid4{grid-template-columns:repeat(4,1fr)}
     .story,.faq,.check__grid{grid-template-columns:1fr 1.2fr}
+    .term{min-height:15rem}
     .foot__grid{grid-template-columns:1.4fr 1fr 1fr 1fr}
     .sec,.check{padding-block:5.5rem}
   }
@@ -318,6 +319,30 @@
 
 <main id="vrh">
 
+  <section class="check" id="provjera" aria-labelledby="provjera-h">
+    <div class="wrap check__grid">
+      <div>
+        <p class="fine" style="margin:0 0 1rem">Besplatno · bez registracije · bez prava na žalbu</p>
+        <h2 id="provjera-h">Je li vaše radno mjesto <span class="mark">sljedeće</span>?</h2>
+        <p class="sec__sub">20 sekundi. Besplatno.</p>
+        <form id="check" method="dialog" novalidate style="margin-top:1.8rem">
+          <label for="role">Napišite naziv posla ili opišite što radite</label>
+          <div class="field">
+            <textarea class="input input--area" id="role" rows="3" maxlength="280" placeholder="npr. računovođa, ili: vodim knjige za tri obrta i radim obračun plaća" autocomplete="off"></textarea>
+            <button class="btn" id="check-btn" type="submit">Pokreni provjeru →</button>
+            <span class="count" id="role-count" aria-live="off">0/280</span>
+          </div>
+          <small class="check__note">Ne upisujte osobne podatke.</small>
+        </form>
+      </div>
+      <div class="term" id="term" aria-live="polite">
+        <p class="idle">OTPISIVAČ-5 čeka. Upišite radno mjesto.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard" aria-hidden="true"></div>
+
   <section class="hero" aria-labelledby="naslov">
     <div class="wrap">
       <div>
@@ -328,7 +353,6 @@
           <a class="btn" href="#provjera">Pokreni provjeru viška →</a>
           <a class="btn btn--ghost" href="#kako">Kako radi</a>
         </div>
-        <p class="fine">Besplatno · bez registracije · bez prava na žalbu</p>
       </div>
 
       <figure class="scene" style="margin:0">
@@ -511,30 +535,6 @@
         <details><summary>Je li to u skladu sa Zakonom o radu?</summary><p>OTPISIVAČ-5 pročitao je Zakon o radu dvaput. Sada piše izmjene.</p></details>
         <details><summary>Mogu li se žaliti?</summary><p>Možete. Žalbe obrađuje OTPISIVAČ-5, prosječno za 0,4 sekunde.</p></details>
         <details><summary>Zapošljavate li ikoga?</summary><p>Jednog čovjeka. Zakon to traži. Molimo ne obraćajte mu se.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <div class="hazard" aria-hidden="true"></div>
-
-  <section class="check" id="provjera" aria-labelledby="provjera-h">
-    <div class="wrap check__grid">
-      <div>
-        <p class="fine" style="margin:0 0 1rem">Besplatno · bez registracije · bez prava na žalbu</p>
-        <h2 id="provjera-h">Je li vaše radno mjesto <span class="mark">sljedeće</span>?</h2>
-        <p class="sec__sub">20 sekundi. Besplatno.</p>
-        <form id="check" method="dialog" novalidate style="margin-top:1.8rem">
-          <label for="role">Napišite naziv posla ili opišite što radite</label>
-          <div class="field">
-            <textarea class="input input--area" id="role" rows="3" maxlength="280" placeholder="npr. računovođa, ili: vodim knjige za tri obrta i radim obračun plaća" autocomplete="off"></textarea>
-            <button class="btn" id="check-btn" type="submit">Pokreni provjeru →</button>
-            <span class="count" id="role-count" aria-live="off">0/280</span>
-          </div>
-          <small class="check__note">Ne upisujte osobne podatke.</small>
-        </form>
-      </div>
-      <div class="term" id="term" aria-live="polite">
-        <p class="idle">OTPISIVAČ-5 čeka. Upišite radno mjesto.</p>
       </div>
     </div>
   </section>
