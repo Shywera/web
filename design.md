@@ -226,10 +226,10 @@ shared classes in either direction. Half-in pages are how a design system dies.
 
 ### 23.10.2026 - zastarjelo.html, the third page out of system
 
-A Croatian satire page in the manner of deprecation.org: an "AI vendor" that sells the
-retirement of human jobs, written deadpan. His request. It is a joke page, so it leaves the
-system completely, on the precedent above: own `<style>` block, own fonts, own palette, no
-shared classes, no `tokens.css` or `kai.css`.
+A Croatian landing page for an "AI vendor" that sells the retirement of human jobs,
+written deadpan, made for a friend. His request. Its register has nothing to do with the
+business pages, so it leaves the system completely, on the precedent above: own `<style>`
+block, own fonts, own palette, no shared classes, no `tokens.css` or `kai.css`.
 
 **Its own system, recorded so it can be rebuilt:**
 
@@ -249,6 +249,5 @@ shared classes, no `tokens.css` or `kai.css`.
   name and `method="dialog"`, so it cannot submit anywhere even without JavaScript.
 
 **The one rule it breaks on purpose:** no invented numbers. Every figure on the page is
-part of the joke, and the page says so in a yellow "Satira. Nitko nije otpušten." bar with
-a credit to deprecation.org. That is why it is `noindex`, outside the nav and the sitemap,
-and reached by direct link only.
+part of the fiction of an invented company, which is why the page is `noindex`, outside
+the nav and the sitemap, and reached by direct link only.
