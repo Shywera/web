@@ -209,9 +209,6 @@
   .faq details p{color:var(--dim);padding:0 2rem 1.2rem 0;max-width:62ch}
 
   /* Signup */
-  .sign{border:2px solid var(--yellow);background:var(--s1);box-shadow:0 0 40px -12px color-mix(in srgb, var(--yellow) 45%, transparent);padding:2rem 1.4rem;display:grid;gap:1.6rem;align-items:center}
-  .sign h2{font-size:clamp(2.3rem, 6vw, 3.2rem)}
-  .hand{font:500 1.25rem/1.2 var(--hand);color:var(--dim);margin-top:.7rem}
   .field{display:flex;gap:.6rem;flex-wrap:wrap}
   .input{flex:1 1 14rem;min-width:0;background:var(--void);border:1px solid var(--line-2);color:var(--white);font:400 .95rem/1 var(--sans);padding:.85rem .9rem}
   .input::placeholder{color:var(--mute)}
@@ -219,8 +216,7 @@
   .input:focus-visible{outline:2px solid var(--yellow);outline-offset:0;border-color:var(--yellow)}
   .input--area{flex-basis:100%;resize:vertical;min-height:5.5rem;line-height:1.5}
   .count{font:500 .7rem/1 var(--mono);color:var(--mute);margin-left:auto;align-self:center}
-  .sign small,.check__note{display:block;font-size:.78rem;color:var(--mute);margin-top:.7rem}
-  .sign__done{color:var(--yellow);font-weight:600;margin-top:.8rem}
+  .check__note{display:block;font-size:.78rem;color:var(--mute);margin-top:.7rem}
 
   .hazard{height:14px;background:repeating-linear-gradient(-45deg, var(--yellow) 0 14px, var(--pen) 14px 28px)}
 
@@ -291,7 +287,6 @@
     .hero .wrap{grid-template-columns:1fr 1.05fr}
     .grid4{grid-template-columns:repeat(4,1fr)}
     .story,.faq,.check__grid{grid-template-columns:1fr 1.2fr}
-    .sign{grid-template-columns:1fr 1fr;padding:2.6rem 2.4rem}
     .foot__grid{grid-template-columns:1.4fr 1fr 1fr 1fr}
     .sec,.check{padding-block:5.5rem}
   }
@@ -541,26 +536,6 @@
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="pretplata-h">
-    <div class="wrap">
-      <div class="sign">
-        <div>
-          <h2 id="pretplata-h">Saznajte prije <span class="mark">svog radnog mjesta</span>.</h2>
-          <p class="hand">psst. i vaše radno mjesto je već na listi ;)</p>
-        </div>
-        <form id="sign" method="dialog" novalidate>
-          <label class="sr" for="sign-mail">E-mail adresa</label>
-          <div class="field">
-            <input class="input" id="sign-mail" type="email" placeholder="vi@covjek.hr" autocomplete="off">
-            <button class="btn" type="submit">Pretplati se</button>
-          </div>
-          <small>Besplatno. Odjava bilo kad. Da, stroj ih čita prvi.</small>
-          <p class="sign__done" id="sign-done" role="status" hidden></p>
-        </form>
-      </div>
-    </div>
-  </section>
-
   <div class="hazard" aria-hidden="true"></div>
 
   <section class="check" id="provjera" aria-labelledby="provjera-h">
@@ -576,7 +551,7 @@
             <button class="btn" id="check-btn" type="submit">Pokreni provjeru →</button>
             <span class="count" id="role-count" aria-live="off">0/280</span>
           </div>
-          <small class="check__note">Ništa se ne šalje ni ne sprema. Provjera se računa u vašem pregledniku.</small>
+          <small class="check__note">Ne upisujte osobne podatke.</small>
         </form>
       </div>
       <div class="term" id="term" aria-live="polite">
@@ -710,18 +685,6 @@
     }
   }
 
-  /* Signup: nothing is sent anywhere */
-  var sign = document.getElementById("sign");
-  if (sign) sign.addEventListener("submit", function(e){
-    e.preventDefault();
-    var mail = document.getElementById("sign-mail"), done = document.getElementById("sign-done");
-    done.hidden = false;
-    done.textContent = mail.value.trim()
-      ? "Primljeno. OTPISIVAČ-5 pročitao je vašu adresu i proglasio je viškom."
-      : "Prazna adresa. Stroj je ipak zadovoljan: i to je jedna osoba manje.";
-    mail.value = "";
-  });
-
   /* Redundancy check. OTPISIVAČ-5 answers through the API when API_URL is set;
      the local table below answers when it isn't, or when the API fails.
      e is how exposed the work is to AI and automation (0 hands-on, 1 pure screen work),
@@ -834,8 +797,6 @@
   }
 
   var check = document.getElementById("check"), term = document.getElementById("term"), btn = document.getElementById("check-btn");
-  var note = document.querySelector(".check__note");
-  if (API_URL && note) note.textContent = "Opis posla šalje se OTPISIVAČU-5 (AI servisu) na procjenu i čuva se uz nju, da isti posao uvijek dobije isti odgovor. Ne upisujte osobne podatke.";
   var roleEl = document.getElementById("role"), countEl = document.getElementById("role-count");
   if (roleEl && countEl) {
     roleEl.addEventListener("input", function(){ countEl.textContent = roleEl.value.length + "/280"; });
