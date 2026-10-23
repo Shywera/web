@@ -746,6 +746,9 @@
 
   function render(v){
     if (v.special) return '<div class="verdict"><strong class="ok">' + v.special + '</strong><span>' + esc(v.komentar) + '</span></div>';
+    if (v.vrsta === "izmisljeno" || v.vrsta === "nerazumljivo") return '<div class="verdict"><strong class="ok">' +
+      (v.vrsta === "izmisljeno" ? "IZVAN NADLEŽNOSTI" : "NEKLASIFICIRANO") + '</strong>' +
+      '<span>Radno mjesto: ' + esc(v.naziv) + '</span><em>' + esc(v.komentar) + '</em></div>';
     var p = clamp(v.vjerojatnost, 0, 100);
     var label = p >= 70 ? "VIŠAK" : p >= 35 ? "NA LISTI" : "ZASAD SIGURNO";
     return '<div class="verdict"><strong' + (p < 35 ? ' class="ok"' : '') + '>' + label + '</strong>' +
