@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Satira. Ukidamo ljudska radna mjesta pouzdano, brzo i uz otpremninu koja stane u kuvertu.">
+<meta name="theme-color" content="#0c0c0e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vaše radno mjesto, zastarjelo.">
+<meta property="og:description" content="Ukidamo ljudska radna mjesta pouzdano, brzo i uz otpremninu koja stane u kuvertu. (Satira.)">
+<meta property="og:url" content="https://kai-sol.com/zastarjelo.html">
+<meta property="og:locale" content="hr_HR">
+<meta name="twitter:card" content="summary">
+<title>Zastarjelo | Vaše radno mjesto, zastarjelo</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%230c0c0e'/%3E%3Crect x='1' y='2' width='6' height='4' fill='%23f5c518'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23000'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+
+<style>
+  :root{
+    color-scheme: dark;
+    --bg:#0c0c0e;
+    --void:#0a0a0b;
+    --s1:#131416;
+    --s2:#1a1b1e;
+    --s3:#232428;
+    --line:#2e3035;
+    --line-2:#43464d;
+    --dim:#c0c3c9;
+    --mute:#8b8f97;
+    --white:#f6f6f3;
+    --pen:#141414;
+    --yellow:#f5c518;
+    --yellow-d:#a67f00;
+    --orange:#ec5b33;
+    --orange-d:#8f2a12;
+    --skin:#d9a27a;
+    --card:#b98a4a;
+    --card-d:#7d5a2c;
+    --leaf:#5f8f3a;
+    --black:#000;
+    --hair:#3a2a1e;
+    --glow-d:#3a2f06;
+    --scene:#1d1a10;
+
+    --pixel:"VT323", "Geist Mono", monospace;
+    --sans:"Geist", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+    --mono:"Geist Mono", ui-monospace, Consolas, monospace;
+    --hand:"Caveat", "Comic Sans MS", cursive;
+
+    --wrap:72rem;
+    --gutter:16px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{overflow-x:clip}
+  html{scroll-behavior:smooth;scroll-padding-top:5rem}
+  body{margin:0;background:var(--bg);color:var(--white);font:400 1rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  h1,h2,h3{margin:0;font-weight:600;line-height:1.1;font-style:normal}
+  h1,h2{font-family:var(--pixel);font-weight:400;letter-spacing:0;line-height:.95}
+  h3{font-family:var(--sans);font-size:1.05rem;line-height:1.3}
+  p{margin:0}
+  .wrap{width:min(var(--wrap), 100% - 2*var(--gutter));margin-inline:auto}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  .mark{text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:4px;text-underline-offset:.18em;text-decoration-skip-ink:none}
+
+  :focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;gap:.5rem;font:600 .92rem/1 var(--sans);padding:.85rem 1.1rem;border:2px solid var(--pen);background:var(--yellow);color:var(--pen);text-decoration:none;box-shadow:4px 4px 0 var(--yellow-d);cursor:pointer;transition:transform .15s cubic-bezier(.4,0,.2,1)}
+  .btn:hover{transform:translate(-2px,-2px)}
+  .btn:active{transform:translate(3px,3px)}
+  .btn:disabled,.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed;transform:none}
+  .btn--ghost{background:var(--s3);color:var(--white);border-color:var(--line-2);box-shadow:4px 4px 0 var(--black)}
+  .btn--sm{padding:.6rem .85rem;font-size:.85rem;box-shadow:3px 3px 0 var(--yellow-d)}
+  .link{font:600 .8rem/1 var(--mono);color:var(--yellow);text-decoration:none;text-transform:uppercase;letter-spacing:.06em;display:inline-flex;gap:.4rem;padding:.3rem 0;border-bottom:1px solid transparent;transition:opacity .15s}
+  .link:hover{border-bottom-color:var(--yellow)}
+  .link:active{opacity:.7}
+
+  /* Live bar */
+  .live{background:var(--void);border-bottom:1px solid var(--line);font:500 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+  .live .wrap{display:flex;justify-content:space-between;gap:1rem;padding-block:.55rem}
+  .live b{color:var(--yellow);font-weight:600}
+  .live .dot{color:var(--orange)}
+  .live__right{display:none}
+
+  /* Nav */
+  .nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 92%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.8rem}
+  .brand{display:inline-flex;align-items:center;gap:.6rem;font:600 .95rem/1 var(--mono);text-decoration:none;color:var(--white)}
+  .brand__icon{width:28px;height:28px;background:var(--yellow);display:grid;place-items:center}
+  .brand__icon svg{width:18px;height:18px}
+  .brand s{text-decoration-color:var(--yellow);text-decoration-thickness:2px}
+  .nav__links{display:none;gap:1.6rem;list-style:none;margin:0;padding:0}
+  .nav__links a{font:500 .72rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--dim);text-decoration:none;padding:.4rem 0;border-bottom:1px solid transparent}
+  .nav__links a:hover{color:var(--white);border-bottom-color:var(--yellow)}
+  .nav__cta .long{display:none}
+
+  /* Hero */
+  .hero{padding-block:3.5rem 3rem;border-bottom:1px solid var(--line)}
+  .hero .wrap{display:grid;gap:2.5rem;align-items:center}
+  .badge{display:inline-flex;gap:.5rem;align-items:center;font:600 .68rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);border:1px solid var(--yellow-d);padding:.45rem .6rem;text-decoration:none;margin-bottom:1.4rem;transition:opacity .15s}
+  .badge:hover{border-color:var(--yellow)}
+  .badge:active{opacity:.7}
+  .hero h1{font-size:clamp(3.4rem, 11vw, 6.2rem)}
+  .lede{color:var(--dim);font-size:1.05rem;max-width:46ch;margin-top:1.2rem}
+  .lede b{color:var(--white);font-weight:600}
+  .hero__ctas{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.8rem}
+  .fine{font:500 .68rem/1.4 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-top:1.4rem}
+
+  .scene{position:relative;background:radial-gradient(ellipse at 60% 55%, var(--scene) 0%, var(--bg) 70%);border:1px solid var(--line);padding:1rem}
+  .scene svg{width:100%;height:auto;image-rendering:pixelated}
+  .tags{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.4rem}
+  .tag{font:600 .64rem/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--yellow);border:1px solid var(--yellow-d);background:var(--void);padding:.4rem .5rem;width:max-content;max-width:100%}
+  .tag--o{color:var(--orange);border-color:var(--orange-d)}
+
+  /* Machine animation */
+  .m-queue{animation:queue 4s linear infinite}
+  @keyframes queue{to{transform:translateX(22px)}}
+  .m-pupil{animation:scan 6s steps(12) infinite}
+  @keyframes scan{0%,100%{transform:translateX(0)}25%{transform:translateX(-12px)}50%{transform:translateX(0)}75%{transform:translateX(12px)}}
+  .m-lid{transform-box:fill-box;transform-origin:center;animation:blink 5s steps(1) infinite}
+  @keyframes blink{0%,94%{transform:scaleY(0)}95%,98%{transform:scaleY(1)}99%{transform:scaleY(0)}}
+  .m-fire{animation:flicker .6s steps(2) infinite alternate}
+  @keyframes flicker{from{opacity:1}to{opacity:.55}}
+  .m-glow{animation:flicker 1.8s steps(3) infinite alternate}
+  .m-puff{animation:puff 3s steps(6) infinite}
+  .m-puff.p2{animation-delay:1s}
+  .m-puff.p3{animation-delay:2s}
+  @keyframes puff{0%{transform:translate(0,0);opacity:.7}100%{transform:translate(6px,-14px);opacity:0}}
+  .m-drop{animation:drop 4s steps(8) infinite;opacity:0}
+  .m-drop.d2{animation-delay:1.33s}
+  .m-drop.d3{animation-delay:2.66s}
+  @keyframes drop{0%{transform:translate(0,0);opacity:1}35%{transform:translate(8px,12px);opacity:1}40%,100%{transform:translate(8px,12px);opacity:0}}
+
+  /* Logos */
+  .logos{padding-block:2rem;border-bottom:1px solid var(--line);overflow:hidden}
+  .logos p{text-align:center;font:600 .68rem/1.4 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--mute);margin-bottom:1.2rem;padding-inline:var(--gutter)}
+  .marquee{display:flex;width:max-content;animation:marq 48s linear infinite}
+  .marquee ul{display:flex;list-style:none;margin:0;padding:0}
+  .marquee li{font:600 1.05rem/1 var(--sans);color:var(--dim);white-space:nowrap;padding-inline:2.2rem;position:relative}
+  .marquee li::before{content:"";position:absolute;left:0;top:50%;width:6px;height:6px;background:var(--line-2);transform:translateY(-50%)}
+  @keyframes marq{to{transform:translateX(-50%)}}
+
+  /* Stats */
+  .stats{padding-block:2.5rem;border-bottom:1px solid var(--line)}
+  .stats dl{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem;margin:0}
+  .stat{border-left:2px solid var(--line-2);padding:.4rem 0 .4rem 1rem;display:flex;flex-direction:column-reverse;gap:.4rem}
+  .stat dd{margin:0;font:600 clamp(1.6rem, 4vw, 2.2rem)/1 var(--mono);color:var(--yellow)}
+  .stat dt{font-size:.85rem;color:var(--mute)}
+
+  /* Sections */
+  .sec{padding-block:4rem;border-bottom:1px solid var(--line)}
+  .sec--alt{background:var(--s1)}
+  .sec h2{font-size:clamp(2.5rem, 6.5vw, 3.6rem)}
+  .sec__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:2.2rem}
+  .sec__sub{color:var(--dim);margin-top:.8rem;max-width:52ch}
+
+  .grid4{display:grid;gap:1rem}
+  .card{position:relative;background:var(--s2);border:1px solid var(--line);padding:1.25rem 1.2rem 1.4rem}
+  .card::before,.card::after{content:"";position:absolute;width:12px;height:12px}
+  .card::before{top:-1px;left:-1px;border-top:2px solid var(--yellow);border-left:2px solid var(--yellow)}
+  .card::after{bottom:-1px;right:-1px;border-bottom:2px solid var(--yellow);border-right:2px solid var(--yellow)}
+  .card__top{display:flex;justify-content:space-between;align-items:start;margin-bottom:1.6rem}
+  .card__n{font:500 .72rem/1 var(--mono);color:var(--mute)}
+  .card p{color:var(--dim);font-size:.92rem;margin-top:.5rem}
+  .px{width:24px;height:24px;color:var(--yellow)}
+  .grid4 + .link{margin-top:1.8rem}
+
+  /* Story */
+  .story{display:grid;gap:2.5rem;align-items:center}
+  .mini{display:flex;flex-wrap:wrap;gap:1.8rem;margin:1.6rem 0 0}
+  .mini div{display:flex;flex-direction:column-reverse;gap:.3rem}
+  .mini dd{margin:0;font:600 1.4rem/1 var(--mono);color:var(--yellow)}
+  .mini dt{font-size:.78rem;color:var(--mute)}
+  .quote{margin:0;padding:2rem 1.6rem}
+  .quote p{font:600 clamp(1.15rem, 2.4vw, 1.4rem)/1.35 var(--sans);color:var(--white);margin:0}
+  .quote footer{font:500 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-top:1.2rem}
+
+  /* Numbers */
+  .cmp{display:grid;gap:2rem;margin-top:.5rem}
+  .row__top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
+  .row__top h3{font-size:1rem}
+  .row__price{font:600 1.15rem/1 var(--mono)}
+  .row--h .row__price{color:var(--orange)}
+  .row--m .row__price{color:var(--yellow)}
+  .bar{height:14px;background:var(--void);border:1px solid var(--line-2);margin-top:.7rem}
+  .bar i{display:block;height:100%;transform-origin:left;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+  .row--h .bar i{background:var(--orange);width:100%}
+  .row--m .bar i{background:var(--yellow);width:max(1.4%, 6px)}
+  .js .cmp:not(.on) .bar i{transform:scaleX(0)}
+  .row small{display:block;font-size:.78rem;color:var(--mute);margin-top:.5rem}
+  .cmp + .btn{margin-top:2.2rem}
+
+  /* FAQ */
+  .faq{display:grid;gap:2rem}
+  .faq details{border-top:1px solid var(--line)}
+  .faq details:last-child{border-bottom:1px solid var(--line)}
+  .faq summary{list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1.1rem 0;font-weight:600;cursor:pointer}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font:600 1.2rem/1 var(--mono);color:var(--yellow);transition:transform .2s}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq summary:hover{color:var(--yellow)}
+  .faq details p{color:var(--dim);padding:0 2rem 1.2rem 0;max-width:62ch}
+
+  /* Signup */
+  .sign{border:2px solid var(--yellow);background:var(--s1);box-shadow:0 0 40px -12px color-mix(in srgb, var(--yellow) 45%, transparent);padding:2rem 1.4rem;display:grid;gap:1.6rem;align-items:center}
+  .sign h2{font-size:clamp(2.3rem, 6vw, 3.2rem)}
+  .hand{font:500 1.25rem/1.2 var(--hand);color:var(--dim);margin-top:.7rem}
+  .field{display:flex;gap:.6rem;flex-wrap:wrap}
+  .input{flex:1 1 14rem;min-width:0;background:var(--void);border:1px solid var(--line-2);color:var(--white);font:400 .95rem/1 var(--sans);padding:.85rem .9rem}
+  .input::placeholder{color:var(--mute)}
+  .input:hover{border-color:var(--mute)}
+  .input:focus-visible{outline:2px solid var(--yellow);outline-offset:0;border-color:var(--yellow)}
+  .sign small,.check__note{display:block;font-size:.78rem;color:var(--mute);margin-top:.7rem}
+  .sign__done{color:var(--yellow);font-weight:600;margin-top:.8rem}
+
+  .hazard{height:14px;background:repeating-linear-gradient(-45deg, var(--yellow) 0 14px, var(--pen) 14px 28px)}
+
+  /* Check */
+  .check{padding-block:4rem;border-bottom:1px solid var(--line)}
+  .check__grid{display:grid;gap:2rem;align-items:start}
+  .check h2{font-size:clamp(2.5rem, 6.5vw, 3.6rem)}
+  .check label{display:block;font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-bottom:.6rem}
+  .term{background:var(--void);border:1px solid var(--line-2);min-height:15rem;padding:1.2rem;font:400 .85rem/1.7 var(--mono);color:var(--dim)}
+  .term p::before{content:"> ";color:var(--yellow)}
+  .term .idle{color:var(--mute)}
+  .term .idle::before{content:""}
+  .verdict{margin-top:1rem;border-top:1px dashed var(--line-2);padding-top:1rem}
+  .verdict strong{display:block;font:400 3.2rem/1 var(--pixel);color:var(--orange)}
+  .verdict strong.ok{color:var(--yellow)}
+  .verdict span{display:block;color:var(--white);margin-top:.6rem}
+  .verdict em{display:block;font-style:normal;color:var(--dim);margin-top:.3rem}
+
+  /* Store */
+  .shop{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+  .item{margin:0}
+  .item__art{aspect-ratio:1;background:var(--s2);border:1px solid var(--line);display:grid;place-items:center;padding:1rem}
+  .mug{position:relative;width:62%;aspect-ratio:1/1.05;background:var(--white);color:var(--pen);display:grid;place-items:center;padding:.5rem;text-align:center;font:400 clamp(.75rem, 2.2vw, 1rem)/1.1 var(--pixel)}
+  .mug::after{content:"";position:absolute;right:-24%;top:22%;width:28%;height:46%;border:5px solid var(--white);border-left:0}
+  .pad{width:90%;aspect-ratio:1.4;background:var(--pen);border:2px solid var(--line-2);color:var(--yellow);display:grid;place-items:center;padding:.6rem;text-align:center;font:400 clamp(.85rem, 2.6vw, 1.15rem)/1.1 var(--pixel)}
+  .item figcaption{font-size:.8rem;color:var(--mute);margin-top:.6rem}
+  .item figcaption b{color:var(--dim);font-weight:600}
+  .soldout{font:500 1.25rem/1.2 var(--hand);color:var(--yellow);margin-top:1.4rem}
+
+  /* Footer */
+  .foot{padding-block:3.5rem 0;background:var(--void);border-top:3px dashed var(--line)}
+  .foot__grid{display:grid;gap:2.2rem}
+  .foot__brand p{color:var(--dim);margin:.9rem 0 1.2rem;max-width:30ch}
+  .foot h3{font:600 .68rem/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--mute);margin-bottom:1rem}
+  .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+  .foot ul a{color:var(--dim);text-decoration:none;font-size:.92rem}
+  .foot ul a:hover{color:var(--yellow)}
+  .foot .ast{color:var(--orange)}
+  .foot .note{font-size:.78rem;color:var(--mute);margin-top:.5rem}
+  .human{font:500 1.2rem/1.2 var(--hand);color:var(--orange);text-decoration:underline wavy;text-underline-offset:4px;display:inline-block;margin-top:.8rem}
+  .human:hover{color:var(--yellow)}
+  .satire{background:var(--yellow);color:var(--pen);margin-top:3rem;padding:1rem 0;text-align:center}
+  .satire strong{font:400 clamp(1.6rem, 4vw, 2.2rem)/1 var(--pixel);display:block}
+  .satire span{font:600 .66rem/1.5 var(--mono);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:.35rem}
+  .satire a{text-decoration:underline}
+  .legal{font:500 .62rem/1.6 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1.5rem;padding-block:1rem}
+
+  /* Cookie toast */
+  .toast{position:fixed;left:var(--gutter);right:var(--gutter);bottom:var(--gutter);z-index:30;background:var(--s2);border:1px solid var(--line-2);padding:.9rem 1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;font-size:.85rem;color:var(--dim);max-width:30rem}
+  .toast[hidden]{display:none}
+
+  @media (min-width:600px){
+    .stats dl{grid-template-columns:repeat(4,1fr)}
+    .grid4{grid-template-columns:repeat(2,1fr)}
+    .shop{grid-template-columns:repeat(4,1fr)}
+    .tags{position:absolute;inset:0;margin:0;pointer-events:none;display:block}
+    .tag{position:absolute}
+    .tag--eye{top:5%;left:4%}
+    .tag--in{bottom:5%;left:4%}
+    .tag--out{bottom:5%;right:4%}
+    .live__right{display:block}
+  }
+  @media (min-width:900px){
+    .nav__links{display:flex}
+    .nav__cta .long{display:inline}
+    .nav__cta .short{display:none}
+    .hero{padding-block:5rem 4.5rem}
+    .hero .wrap{grid-template-columns:1fr 1.05fr}
+    .grid4{grid-template-columns:repeat(4,1fr)}
+    .story,.faq,.check__grid{grid-template-columns:1fr 1.2fr}
+    .sign{grid-template-columns:1fr 1fr;padding:2.6rem 2.4rem}
+    .foot__grid{grid-template-columns:1.4fr 1fr 1fr 1fr}
+    .sec,.check{padding-block:5.5rem}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none !important;transition:none !important}
+    .m-drop{opacity:0}
+  }
+</style>
+</head>
+<body>
+
+<div class="live" role="status" aria-live="off">
+  <div class="wrap">
+    <span><span class="dot">●</span> Uživo · <b data-total>2.731.554</b> radnih mjesta ukinuto · <b data-today>1.284</b> danas</span>
+    <span class="live__right">Zadovoljstvo zaposlenika: ne mjeri se (nema zaposlenika)</span>
+  </div>
+</div>
+
+<header class="nav">
+  <nav class="wrap" aria-label="Glavna navigacija">
+    <a class="brand" href="#vrh" aria-label="Zastarjelo, na vrh stranice">
+      <span class="brand__icon"><svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="2" width="8" height="4" style="fill:var(--pen)"/><rect x="1" y="3" width="6" height="2" style="fill:var(--yellow)"/><rect x="3" y="3" width="2" height="2" style="fill:var(--pen)"/></svg></span>
+      <s>zastarjelo</s>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#kako">Kako radi</a></li>
+      <li><a href="#usluge">Usluge</a></li>
+      <li><a href="#primjer">Primjer</a></li>
+      <li><a href="#cijene">Cijene</a></li>
+      <li><a href="#pitanja">Pitanja</a></li>
+      <li><a href="#darovi">Darovi</a></li>
+    </ul>
+    <a class="btn btn--sm nav__cta" href="#provjera"><span class="long">Provjerite jeste li višak</span><span class="short">Provjera</span></a>
+  </nav>
+</header>
+
+<main id="vrh">
+
+  <section class="hero" aria-labelledby="naslov">
+    <div class="wrap">
+      <div>
+        <a class="badge" href="#kako">Novo · OTPISIVAČ-5 je uključen →</a>
+        <h1 id="naslov">Vaše radno mjesto, <span class="mark">zastarjelo</span>.</h1>
+        <p class="lede">Ukidamo ljudska radna mjesta pouzdano, brzo i uz <b>otpremninu koja stane u kuvertu</b>.</p>
+        <div class="hero__ctas">
+          <a class="btn" href="#provjera">Pokreni provjeru viška →</a>
+          <a class="btn btn--ghost" href="#kako">Kako radi</a>
+        </div>
+        <p class="fine">Besplatno · bez registracije · bez prava na žalbu</p>
+      </div>
+
+      <figure class="scene" style="margin:0">
+        <svg viewBox="0 0 200 140" shape-rendering="crispEdges" role="img" aria-labelledby="stroj-opis">
+          <title id="stroj-opis">OTPISIVAČ-5: crni stroj sa žutim okom guta red službenika s pokretne trake, a njihove osobne stvari ispadaju u kartonsku kutiju.</title>
+          <defs>
+            <clipPath id="belt-clip"><rect x="0" y="0" width="88" height="128"/></clipPath>
+            <symbol id="worker" viewBox="0 0 10 16" width="10" height="16">
+              <rect x="3" y="0" width="4" height="4" style="fill:var(--skin)"/>
+              <rect x="3" y="0" width="4" height="1" style="fill:var(--hair)"/>
+              <rect x="2" y="4" width="6" height="6" style="fill:var(--white)"/>
+              <rect x="4" y="4" width="2" height="4" style="fill:var(--orange-d)"/>
+              <rect x="3" y="10" width="2" height="6" style="fill:var(--s3)"/>
+              <rect x="5" y="10" width="2" height="6" style="fill:var(--s3)"/>
+              <rect x="6" y="6" width="4" height="4" style="fill:var(--card)"/>
+              <rect x="6" y="6" width="4" height="1" style="fill:var(--card-d)"/>
+            </symbol>
+          </defs>
+
+          <!-- floor -->
+          <rect x="0" y="112" width="200" height="6" style="fill:var(--s3)"/>
+          <rect x="0" y="118" width="200" height="2" style="fill:var(--line)"/>
+
+          <!-- chimney and smoke -->
+          <rect x="136" y="16" width="12" height="26" style="fill:var(--s2)"/>
+          <rect x="134" y="12" width="16" height="4" style="fill:var(--line-2)"/>
+          <rect class="m-puff" x="138" y="4" width="6" height="6" style="fill:var(--line-2)"/>
+          <rect class="m-puff p2" x="139" y="6" width="5" height="5" style="fill:var(--line-2)"/>
+          <rect class="m-puff p3" x="137" y="5" width="6" height="6" style="fill:var(--line-2)"/>
+
+          <!-- body -->
+          <rect x="86" y="40" width="80" height="72" style="fill:var(--s2)"/>
+          <rect x="86" y="40" width="80" height="3" style="fill:var(--line-2)"/>
+          <rect x="162" y="43" width="4" height="69" style="fill:var(--void)"/>
+          <rect x="90" y="46" width="2" height="2" style="fill:var(--line-2)"/>
+          <rect x="156" y="46" width="2" height="2" style="fill:var(--line-2)"/>
+          <rect x="90" y="106" width="2" height="2" style="fill:var(--line-2)"/>
+          <rect x="156" y="106" width="2" height="2" style="fill:var(--line-2)"/>
+
+          <!-- eye -->
+          <rect class="m-glow" x="98" y="50" width="56" height="26" style="fill:var(--glow-d)"/>
+          <rect x="102" y="54" width="48" height="18" style="fill:var(--void)"/>
+          <rect x="106" y="57" width="40" height="12" style="fill:var(--yellow)"/>
+          <rect class="m-pupil" x="122" y="59" width="8" height="8" style="fill:var(--black)"/>
+          <rect class="m-lid" x="106" y="57" width="40" height="12" style="fill:var(--s3)"/>
+
+          <!-- plate -->
+          <rect x="106" y="80" width="40" height="9" style="fill:var(--s3)"/>
+          <text x="126" y="87" text-anchor="middle" font-family="VT323, monospace" font-size="8" style="fill:var(--yellow)">OTPISIVAČ-5</text>
+
+          <!-- intake -->
+          <rect x="86" y="86" width="14" height="26" style="fill:var(--void)"/>
+          <rect class="m-fire" x="88" y="98" width="10" height="14" style="fill:var(--orange)"/>
+          <rect x="88" y="104" width="10" height="8" style="fill:var(--yellow)"/>
+
+          <!-- conveyor -->
+          <rect x="0" y="100" width="90" height="4" style="fill:var(--line-2)"/>
+          <rect x="0" y="104" width="90" height="3" style="fill:var(--s3)"/>
+          <rect x="6" y="107" width="3" height="5" style="fill:var(--line)"/>
+          <rect x="40" y="107" width="3" height="5" style="fill:var(--line)"/>
+          <rect x="74" y="107" width="3" height="5" style="fill:var(--line)"/>
+
+          <!-- the queue -->
+          <g clip-path="url(#belt-clip)">
+            <g class="m-queue">
+              <use href="#worker" x="-34" y="84"/>
+              <use href="#worker" x="-12" y="84"/>
+              <use href="#worker" x="10" y="84"/>
+              <use href="#worker" x="32" y="84"/>
+              <use href="#worker" x="54" y="84"/>
+              <use href="#worker" x="76" y="84"/>
+            </g>
+          </g>
+
+          <!-- personal items chute -->
+          <rect x="166" y="90" width="8" height="6" style="fill:var(--void)"/>
+          <g class="m-drop"><rect x="168" y="92" width="4" height="4" style="fill:var(--white)"/><rect x="172" y="93" width="1" height="2" style="fill:var(--white)"/></g>
+          <g class="m-drop d2"><rect x="168" y="90" width="2" height="3" style="fill:var(--leaf)"/><rect x="170" y="89" width="2" height="2" style="fill:var(--leaf)"/><rect x="168" y="93" width="4" height="3" style="fill:var(--orange-d)"/></g>
+          <g class="m-drop d3"><rect x="167" y="91" width="6" height="5" style="fill:var(--yellow-d)"/><rect x="168" y="92" width="4" height="3" style="fill:var(--dim)"/></g>
+          <rect x="174" y="100" width="22" height="12" style="fill:var(--card)"/>
+          <rect x="174" y="100" width="22" height="2" style="fill:var(--card-d)"/>
+          <rect x="171" y="97" width="5" height="3" style="fill:var(--card-d)"/>
+          <rect x="194" y="97" width="5" height="3" style="fill:var(--card-d)"/>
+        </svg>
+        <ul class="tags">
+          <li class="tag tag--eye">▸ Oko OTPISIVAČA-5 · promatra</li>
+          <li class="tag tag--o tag--in">▸ Unos: 1 radno mjesto / 4 s</li>
+          <li class="tag tag--out">▸ Otvor za osobne stvari</li>
+        </ul>
+      </figure>
+    </div>
+  </section>
+
+  <section class="logos" aria-label="Klijenti">
+    <p>Vjeruje nam 4.812 tvrtki koje više nemaju pauzu za kavu</p>
+    <div class="marquee">
+      <ul>
+        <li>Pečat &amp; Potpis d.o.o.</li><li>Šalter Grupa</li><li>Tri Primjerka d.d.</li><li>Ovjera i Sinovi</li><li>Fascikl Partneri</li><li>Gablec Holding</li><li>Arhiv u Podrumu</li><li>Prilog A d.o.o.</li><li>Uredsko Bilje</li><li>Redni Broj Osiguranje</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>Pečat &amp; Potpis d.o.o.</li><li>Šalter Grupa</li><li>Tri Primjerka d.d.</li><li>Ovjera i Sinovi</li><li>Fascikl Partneri</li><li>Gablec Holding</li><li>Arhiv u Podrumu</li><li>Prilog A d.o.o.</li><li>Uredsko Bilje</li><li>Redni Broj Osiguranje</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Brojke">
+    <div class="wrap">
+      <dl>
+        <div class="stat"><dt>manje troškova plaća</dt><dd>98&nbsp;%</dd></div>
+        <div class="stat"><dt>prosječno do viška</dt><dd>9&nbsp;mj.</dd></div>
+        <div class="stat"><dt>pritužbi (nema tko)</dt><dd>0</dd></div>
+        <div class="stat"><dt>ukinutih radnih mjesta</dt><dd>3,9&nbsp;mil.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec" id="kako" aria-labelledby="kako-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2 id="kako-h">Četiri koraka. <span class="mark">Jedan ishod.</span></h2>
+      </div>
+      <ol class="grid4" style="list-style:none;margin:0;padding:0">
+        <li class="card"><div class="card__top"><span class="card__n">01</span><svg class="px" data-px="eye" aria-hidden="true"></svg></div><h3>Upoznavanje</h3><p>Vašem timu pridružuje se ljubazni asistent.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">02</span><svg class="px" data-px="funnel" aria-hidden="true"></svg></div><h3>Učenje</h3><p>Team building u Opatiji na kojem zapišete sve što znate.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">03</span><svg class="px" data-px="swap" aria-hidden="true"></svg></div><h3>Zamjena</h3><p>Vaša titula postaje „savjetnik“, pa „vanjski suradnik“.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">04</span><svg class="px" data-px="cake" aria-hidden="true"></svg></div><h3>Oproštaj</h3><p>Torta, čestitka i kartica koja više ne otvara vrata.</p></li>
+      </ol>
+      <a class="link" href="#pitanja">Što se zapravo događa →</a>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="usluge" aria-labelledby="usluge-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2 id="usluge-h">Sve što treba da <span class="mark">ne treba nitko</span>.</h2>
+        <a class="btn btn--ghost btn--sm" href="#cijene">Cijene</a>
+      </div>
+      <ul class="grid4" style="list-style:none;margin:0;padding:0">
+        <li class="card"><div class="card__top"><svg class="px" data-px="lens" aria-hidden="true"></svg></div><h3>Otkrivanje uloge™</h3><p>Stroj otkrije što zapravo radite. Obično brže od vas.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="pair" aria-hidden="true"></svg></div><h3>Rad u sjeni</h3><p>90 dana za stolom uz vlastitu zamjenu.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="drop" aria-hidden="true"></svg></div><h3>Izvlačenje znanja</h3><p>Recite nam sve što znate. Ručak je plaćen.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="badge" aria-hidden="true"></svg></div><h3>Optimizacija titule™</h3><p>Voditelj → Koordinator → Bivši djelatnik.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="primjer" aria-labelledby="primjer-h">
+    <div class="wrap story">
+      <div>
+        <h2 id="primjer-h">62 referenta. <span class="mark">Sada jedan šalter.</span> Zatvoren.</h2>
+        <dl class="mini">
+          <div><dt>troškova plaća</dt><dd>−94&nbsp;%</dd></div>
+          <div><dt>pečata na sat</dt><dd>+380&nbsp;%</dd></div>
+          <div><dt>bolovanja</dt><dd>0</dd></div>
+        </dl>
+      </div>
+      <blockquote class="card quote">
+        <p>„Imovina je tu da se otpiše.“</p>
+        <footer>Uprava (UI)</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="cijene" aria-labelledby="cijene-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2 id="cijene-h">Ljudi su skupi. <span class="mark">Provjerili smo.</span></h2>
+      </div>
+      <div class="cmp">
+        <div class="row row--h">
+          <div class="row__top"><h3>Čovjek, sa svim troškovima</h3><span class="row__price">28.000&nbsp;€ / god.</span></div>
+          <div class="bar" aria-hidden="true"><i></i></div>
+          <small>+ doprinosi, + regres, + božićnica, + osjećaji</small>
+        </div>
+        <div class="row row--m">
+          <div class="row__top"><h3>Zastarjelo Enterprise, po radnom mjestu</h3><span class="row__price">390&nbsp;€ / god.</span></div>
+          <div class="bar" aria-hidden="true"><i></i></div>
+          <small>Uvijek dostupan. Nikad na godišnjem.</small>
+        </div>
+      </div>
+      <a class="btn" href="#provjera">Pokreni provjeru viška →</a>
+    </div>
+  </section>
+
+  <section class="sec" id="pitanja" aria-labelledby="pitanja-h">
+    <div class="wrap faq">
+      <h2 id="pitanja-h">Pitanja.</h2>
+      <div>
+        <details><summary>Koliko je provjera točna?</summary><p>99,7&nbsp;%. Preostalih 0,3&nbsp;% ste vi, ali samo zasad.</p></details>
+        <details><summary>Hoće li moje radno mjesto stvarno biti ukinuto?</summary><p>Da. Razlikuje se samo datum.</p></details>
+        <details><summary>Što se događa s ljudima?</summary><p>Dobiju status „u tranziciji“ i bedž za posjetitelje.</p></details>
+        <details><summary>Je li to u skladu sa Zakonom o radu?</summary><p>OTPISIVAČ-5 pročitao je Zakon o radu dvaput. Sada piše izmjene.</p></details>
+        <details><summary>Mogu li se žaliti?</summary><p>Možete. Žalbe obrađuje OTPISIVAČ-5, prosječno za 0,4 sekunde.</p></details>
+        <details><summary>Zapošljavate li ikoga?</summary><p>Jednog čovjeka. Zakon to traži. Molimo ne obraćajte mu se.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="pretplata-h">
+    <div class="wrap">
+      <div class="sign">
+        <div>
+          <h2 id="pretplata-h">Saznajte prije <span class="mark">svog radnog mjesta</span>.</h2>
+          <p class="hand">psst. ovo je šala, adresa nikamo ne ide ;)</p>
+        </div>
+        <form id="sign" method="dialog" novalidate>
+          <label class="sr" for="sign-mail">E-mail adresa</label>
+          <div class="field">
+            <input class="input" id="sign-mail" type="email" placeholder="vi@covjek.hr" autocomplete="off">
+            <button class="btn" type="submit">Pretplati se</button>
+          </div>
+          <small>Besplatno. Odjava bilo kad. Da, stroj ih čita prvi.</small>
+          <p class="sign__done" id="sign-done" role="status" hidden></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="hazard" aria-hidden="true"></div>
+
+  <section class="check" id="provjera" aria-labelledby="provjera-h">
+    <div class="wrap check__grid">
+      <div>
+        <p class="fine" style="margin:0 0 1rem">Besplatno · bez registracije · bez prava na žalbu</p>
+        <h2 id="provjera-h">Je li vaše radno mjesto <span class="mark">sljedeće</span>?</h2>
+        <p class="sec__sub">20 sekundi. Besplatno.</p>
+        <form id="check" method="dialog" novalidate style="margin-top:1.8rem">
+          <label for="role">Vaše radno mjesto</label>
+          <div class="field">
+            <input class="input" id="role" type="text" placeholder="npr. računovođa" autocomplete="off" maxlength="60">
+            <button class="btn" id="check-btn" type="submit">Pokreni provjeru →</button>
+          </div>
+          <small class="check__note">Ništa se ne šalje ni ne sprema. Provjera se računa u vašem pregledniku.</small>
+        </form>
+      </div>
+      <div class="term" id="term" aria-live="polite">
+        <p class="idle">OTPISIVAČ-5 čeka. Upišite radno mjesto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="darovi" aria-labelledby="darovi-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <div>
+          <h2 id="darovi-h">Darovi za oproštaj.</h2>
+          <p class="sec__sub">Za nedavno ukinute. Plaća se otpremninom.</p>
+        </div>
+      </div>
+      <div class="shop">
+        <figure class="item"><div class="item__art"><div class="mug">Ovu šalicu vratite u kadrovsku do petka.</div></div><figcaption><b>Šalica</b> · zadnja kava na poslu</figcaption></figure>
+        <figure class="item"><div class="item__art"><div class="mug">Moj nasljednik ne pije kavu.</div></div><figcaption><b>Šalica</b> · za nove kolege</figcaption></figure>
+        <figure class="item"><div class="item__art"><div class="mug">Ovaj sastanak mogao je biti prompt.</div></div><figcaption><b>Šalica</b> · za zadnji kolegij</figcaption></figure>
+        <figure class="item"><div class="item__art"><div class="pad">Miš je ostao. Ja nisam.</div></div><figcaption><b>Podloga za miš</b> · uspomena</figcaption></figure>
+      </div>
+      <p class="soldout">Rasprodano. Sve je kupio OTPISIVAČ-5.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__brand">
+      <a class="brand" href="#vrh"><span class="brand__icon"><svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="2" width="8" height="4" style="fill:var(--pen)"/><rect x="1" y="3" width="6" height="2" style="fill:var(--yellow)"/><rect x="3" y="3" width="2" height="2" style="fill:var(--pen)"/></svg></span><s>zastarjelo</s></a>
+      <p>Ukidamo ljudska radna mjesta s povjerenjem.</p>
+      <a class="btn btn--sm" href="#provjera">Pokreni provjeru</a>
+    </div>
+    <div>
+      <h3>Proizvod</h3>
+      <ul>
+        <li><a href="#kako">Kako radi</a></li>
+        <li><a href="#usluge">Usluge</a></li>
+        <li><a href="#cijene">Cijene</a></li>
+        <li><a href="#provjera">Provjera viška</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Tvrtka</h3>
+      <ul>
+        <li><a href="#primjer">Primjer</a></li>
+        <li><a href="#pitanja">Pitanja</a></li>
+        <li><a href="#darovi">Darovi</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Inženjering</h3>
+      <p>Broj zaposlenih: 1<span class="ast">*</span></p>
+      <p class="note"><span class="ast">*</span> Zakonska obveza. Molimo ne obraćajte mu se.</p>
+      <a class="human" href="index.html">Njegova stranica</a>
+    </div>
+  </div>
+  <div class="satire">
+    <div class="wrap">
+      <strong>Satira. Nitko nije otpušten.</strong>
+      <span>Složio jedini čovjek iz <a href="index.html">KAI-SOL-a</a>, uz pomoć stroja · Po uzoru na <a href="https://deprecation.org/" rel="noopener">deprecation.org</a></span>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <span>© Zastarjelo · Sva ljudska prava pridržana. Zasad.</span>
+    <span>Napisao OTPISIVAČ-5 · Lektorirao OTPISIVAČ-5 · Ovjerio OTPISIVAČ-5</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" hidden>
+  <span>Ne koristimo kolačiće za praćenje. Stroj vas ionako prati.</span>
+  <button class="btn btn--sm" type="button" id="toast-ok">Razumijem</button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var doc = document.documentElement;
+  doc.classList.add("js");
+  var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Pixel icons from 8x8 masks */
+  var PX = {
+    eye:   ["..####..",".#....#.","#..##..#","#.####.#","#..##..#",".#....#.","..####..","........"],
+    funnel:["########",".######.","..####..","...##...","...##...","...##...","...##...","........"],
+    swap:  ["..#.....",".##.....","########",".##.....","..#..#..",".....##.","########",".....##."],
+    cake:  ["..#..#..","..#..#..",".######.",".#.##.#.","########","#.#..#.#","########","........"],
+    lens:  [".####...","#....#..","#....#..","#....#..",".####...","....##..",".....##.","......##"],
+    pair:  [".#....#.","###..###",".#....#.","###..###","#.#..#.#",".#....#.","#.#..#.#","........"],
+    drop:  ["...#....","..###...",".#####..",".#####..","#######.","#######.",".#####..","..###..."],
+    badge: ["########","#......#","#.##...#","#.##.###","#......#","#.######","#......#","########"]
+  };
+  Array.prototype.forEach.call(document.querySelectorAll("svg[data-px]"), function(svg){
+    var mask = PX[svg.getAttribute("data-px")];
+    if (!mask) return;
+    svg.setAttribute("viewBox", "0 0 8 8");
+    svg.setAttribute("shape-rendering", "crispEdges");
+    var out = "";
+    mask.forEach(function(row, y){
+      for (var x = 0; x < row.length; x++) if (row[x] === "#") out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="currentColor"/>';
+    });
+    svg.innerHTML = out;
+  });
+
+  /* Live counters: one role every 4 seconds */
+  var fmt = function(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); };
+  var EPOCH = Date.UTC(2026, 9, 23, 0, 0, 0), BASE = 2731554;
+  var totalEl = document.querySelector("[data-total]"), todayEl = document.querySelector("[data-today]");
+  function tick(){
+    var now = new Date();
+    var total = BASE + Math.max(0, Math.floor((now.getTime() - EPOCH) / 4000));
+    var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+    var today = Math.floor((now.getTime() - midnight) / 4000);
+    if (totalEl) totalEl.textContent = fmt(total);
+    if (todayEl) todayEl.textContent = fmt(today);
+  }
+  tick();
+  setInterval(tick, 4000);
+
+  /* Bars grow when seen */
+  var cmp = document.querySelector(".cmp");
+  if (cmp) {
+    if (still || !("IntersectionObserver" in window)) cmp.classList.add("on");
+    else {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if (e.isIntersecting) { cmp.classList.add("on"); io.disconnect(); } });
+      }, { threshold: .4 });
+      io.observe(cmp);
+    }
+  }
+
+  /* Signup: nothing is sent anywhere */
+  var sign = document.getElementById("sign");
+  if (sign) sign.addEventListener("submit", function(e){
+    e.preventDefault();
+    var mail = document.getElementById("sign-mail"), done = document.getElementById("sign-done");
+    done.hidden = false;
+    done.textContent = mail.value.trim()
+      ? "Primljeno. OTPISIVAČ-5 pročitao je vašu adresu i proglasio je viškom."
+      : "Prazna adresa. Stroj je ipak zadovoljan: i to je jedna osoba manje.";
+    mail.value = "";
+  });
+
+  /* Redundancy check, computed locally */
+  var ROLES = [
+    { k: ["program", "developer", "koder"], t: "Stroj već piše vaš kod. I ovaj tekst." },
+    { k: ["racunovod", "knjigovod", "financ"], t: "Tablica je spremna. Vi ste stupac koji se briše." },
+    { k: ["prodav", "blagajn", "trgov"], t: "Samoposlužna blagajna šalje pozdrave." },
+    { k: ["ucitelj", "nastavni", "profesor", "odgojitelj"], t: "Učenici su ionako već pitali stroj." },
+    { k: ["direktor", "menadzer", "manager", "sef", "voditelj"], t: "Vi potpisujete ukidanje ostalih. Vaše dolazi zadnje." },
+    { k: ["dizajn", "grafic"], t: "Stroj radi 400 logotipa u minuti. Svi su isti. Nikome ne smeta." },
+    { k: ["prevodi", "prevoditelj", "lektor"], t: "Ovu stranicu nije lektorirao čovjek. Pogodite tko je." },
+    { k: ["novinar", "urednik"], t: "Stroj već piše vijesti. I ispravke vijesti." },
+    { k: ["referent", "sluzbenik", "administrat"], t: "Pečat je naučio sam lupati. Trebalo mu je jedno popodne." },
+    { k: ["lijecnik", "doktor", "medicin", "sestra"], t: "Zasad ste sigurni. Stroj ne želi čekati u čekaonici.", far: true },
+    { k: ["politic", "sabornik", "ministar", "nacelnik", "gradonacelnik"], t: "Stroj je pročitao saborske zapisnike i odbio posao.", exempt: true }
+  ];
+  var GENERIC = [
+    "Vaš opis posla stane u jedan prompt. Kratki.",
+    "Vaš nasljednik je već prošao probni rok.",
+    "Kolege su potvrdile. Stroj je pitao i njih.",
+    "Najzahtjevniji dio vašeg posla bio je parking."
+  ];
+  function plain(s){ return s.toLowerCase().replace(/đ/g, "d").normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+  function hash(s){ var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function months(n){
+    var d = n % 10, dd = n % 100;
+    if (d === 1 && dd !== 11) return n + " mjesec";
+    if (d >= 2 && d <= 4 && (dd < 12 || dd > 14)) return n + " mjeseca";
+    return n + " mjeseci";
+  }
+  function esc(s){ return s.replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  var check = document.getElementById("check"), term = document.getElementById("term"), btn = document.getElementById("check-btn");
+  var timers = [];
+  if (check) check.addEventListener("submit", function(e){
+    e.preventDefault();
+    timers.forEach(clearTimeout); timers = [];
+    var raw = document.getElementById("role").value.trim();
+    if (!raw) { term.innerHTML = '<p>Unesite radno mjesto. Stroj ne pogađa. Još.</p>'; return; }
+    var p = plain(raw), h = hash(p), hit = null;
+    ROLES.forEach(function(r){ if (!hit && r.k.some(function(k){ return p.indexOf(k) !== -1; })) hit = r; });
+    var line = hit ? hit.t : GENERIC[h % GENERIC.length];
+    var n = hit && hit.far ? 30 + (h % 19) : 2 + (h % 17);
+    var steps = [
+      "Učitavam opis posla: „" + esc(raw) + "“",
+      "Uspoređujem s OTPISIVAČEM-5…",
+      "Računam otpremninu… 0,00 €",
+      "Obavještavam kadrovsku…"
+    ];
+    var verdict = hit && hit.exempt
+      ? '<div class="verdict"><strong class="ok">IZUZETO</strong><span>' + line + '</span><em>Žao nam je.</em></div>'
+      : '<div class="verdict"><strong>VIŠAK</strong><span>Procijenjeno vrijeme do ukidanja: ' + months(n) + '.</span><em>' + line + '</em></div>';
+
+    btn.disabled = true;
+    term.innerHTML = "";
+    var delay = still ? 0 : 550;
+    steps.forEach(function(s, i){
+      timers.push(setTimeout(function(){ term.insertAdjacentHTML("beforeend", "<p>" + s + "</p>"); }, delay * i));
+    });
+    timers.push(setTimeout(function(){
+      term.insertAdjacentHTML("beforeend", verdict);
+      btn.disabled = false;
+    }, delay * steps.length));
+  });
+
+  /* Cookie toast */
+  var toast = document.getElementById("toast"), seen = false;
+  try { seen = localStorage.getItem("zastarjelo-toast") === "1"; } catch (err) {}
+  if (toast && !seen) {
+    toast.hidden = false;
+    document.getElementById("toast-ok").addEventListener("click", function(){
+      toast.hidden = true;
+      try { localStorage.setItem("zastarjelo-toast", "1"); } catch (err) {}
+    });
+  }
+})();
+</script>
+</body>
+</html>

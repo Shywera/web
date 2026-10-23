@@ -223,3 +223,32 @@ that in the masthead. Direct link only.
 **The precedent this sets.** A page may leave the system when its content has a genuinely
 different register, but it leaves *completely*: own stylesheet, own fonts, own palette, no
 shared classes in either direction. Half-in pages are how a design system dies.
+
+### 23.10.2026 - zastarjelo.html, the third page out of system
+
+A Croatian satire page in the manner of deprecation.org: an "AI vendor" that sells the
+retirement of human jobs, written deadpan. His request. It is a joke page, so it leaves the
+system completely, on the precedent above: own `<style>` block, own fonts, own palette, no
+shared classes, no `tokens.css` or `kai.css`.
+
+**Its own system, recorded so it can be rebuilt:**
+
+- One long landing page in the original's order: live counter bar, hero with the
+  OTPISIVAČ-5 machine, client strip, stats, four steps, services, customer story, price
+  bars, FAQ, signup, hazard stripe, the redundancy check, the gift shop, footer.
+- Near-black `#0c0c0e` with surfaces `#131416` / `#1a1b1e` / `#232428`, warning yellow
+  `#f5c518` as the accent, signal orange `#ec5b33` for the human side and the verdict.
+  No blue, same as the rest of the site.
+- Headings **VT323** (Pixelify Sans was tried and dropped: its Č renders with a dot, the
+  same as Ć), body **Geist**, labels **Geist Mono**, one hand note in **Caveat**.
+- The machine is our own pixel SVG (`shape-rendering: crispEdges`), not the original's
+  artwork. Motion is loops on `transform` and `opacity` only, all off under
+  `prefers-reduced-motion`.
+- The redundancy check runs in the browser: a hash of the job title gives 2 to 18 months,
+  a keyword list adds a line per job. Nothing is sent or stored. The signup form has no
+  name and `method="dialog"`, so it cannot submit anywhere even without JavaScript.
+
+**The one rule it breaks on purpose:** no invented numbers. Every figure on the page is
+part of the joke, and the page says so in a yellow "Satira. Nitko nije otpušten." bar with
+a credit to deprecation.org. That is why it is `noindex`, outside the nav and the sitemap,
+and reached by direct link only.
