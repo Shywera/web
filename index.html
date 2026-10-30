@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Ukidamo ljudska radna mjesta pouzdano, brzo i uz otpremninu koja stane u kuvertu.">
+<meta name="description" content="KAI-SOL uvodi AI agente u male i srednje firme. Agenti preuzimaju e-mail, dokumente i unos podataka, a vaši ljudi ostaju na poslu koji traži čovjeka.">
 <meta name="theme-color" content="#0c0c0e">
+<link rel="canonical" href="https://kai-sol.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Vaše radno mjesto, zastarjelo.">
-<meta property="og:description" content="Ukidamo ljudska radna mjesta pouzdano, brzo i uz otpremninu koja stane u kuvertu.">
+<meta property="og:title" content="KAI-SOL | AI agenti za stvarni posao">
+<meta property="og:description" content="Agenti preuzimaju e-mail, dokumente i unos podataka. Vaši ljudi ostaju na poslu koji traži čovjeka.">
 <meta property="og:url" content="https://kai-sol.com/">
 <meta property="og:locale" content="hr_HR">
 <meta name="twitter:card" content="summary">
-<title>Zastarjelo | Vaše radno mjesto, zastarjelo</title>
+<title>KAI-SOL | AI agenti za stvarni posao</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%230c0c0e'/%3E%3Crect x='1' y='2' width='6' height='4' fill='%23f5c518'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23000'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;600&family=Caveat:wght@500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Geist:wght@400;600;700&family=Geist+Mono:wght@400;600&display=swap">
 
 <style>
   :root{
@@ -36,19 +36,15 @@
     --yellow-d:#a67f00;
     --orange:#ec5b33;
     --orange-d:#8f2a12;
-    --skin:#d9a27a;
-    --card:#b98a4a;
-    --card-d:#7d5a2c;
-    --leaf:#5f8f3a;
+    --green:#7fc45a;
+    --green-d:#3f6b2a;
     --black:#000;
-    --hair:#3a2a1e;
     --glow-d:#3a2f06;
     --scene:#1d1a10;
 
     --pixel:"VT323", "Geist Mono", monospace;
     --sans:"Geist", ui-sans-serif, system-ui, "Segoe UI", sans-serif;
     --mono:"Geist Mono", ui-monospace, Consolas, monospace;
-    --hand:"Caveat", "Comic Sans MS", cursive;
 
     --wrap:72rem;
     --gutter:16px;
@@ -65,7 +61,6 @@
   h3{font-family:var(--sans);font-size:1.05rem;line-height:1.3}
   p{margin:0}
   .wrap{width:min(var(--wrap), 100% - 2*var(--gutter));margin-inline:auto}
-  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
   .mark{text-decoration:underline;text-decoration-color:var(--yellow);text-decoration-thickness:4px;text-underline-offset:.18em;text-decoration-skip-ink:none}
 
@@ -82,20 +77,21 @@
   .link:hover{border-bottom-color:var(--yellow)}
   .link:active{opacity:.7}
 
-  /* Live bar */
+  /* Top bar */
   .live{background:var(--void);border-bottom:1px solid var(--line);font:500 .7rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
   .live .wrap{display:flex;justify-content:space-between;gap:1rem;padding-block:.55rem}
   .live b{color:var(--yellow);font-weight:600}
-  .live .dot{color:var(--orange)}
+  .live .dot{color:var(--green)}
+  .live a{color:var(--dim);text-decoration:none}
+  .live a:hover{color:var(--yellow)}
   .live__right{display:none}
 
   /* Nav */
   .nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 92%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
   .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.8rem}
-  .brand{display:inline-flex;align-items:center;gap:.6rem;font:600 .95rem/1 var(--mono);text-decoration:none;color:var(--white)}
+  .brand{display:inline-flex;align-items:center;gap:.6rem;font:600 .95rem/1 var(--mono);text-decoration:none;color:var(--white);letter-spacing:.04em}
   .brand__icon{width:28px;height:28px;background:var(--yellow);display:grid;place-items:center}
   .brand__icon svg{width:18px;height:18px}
-  .brand s{text-decoration-color:var(--yellow);text-decoration-thickness:2px}
   .nav__links{display:none;gap:1.6rem;list-style:none;margin:0;padding:0}
   .nav__links a{font:500 .72rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--dim);text-decoration:none;padding:.4rem 0;border-bottom:1px solid transparent}
   .nav__links a:hover{color:var(--white);border-bottom-color:var(--yellow)}
@@ -107,7 +103,7 @@
   .badge{display:inline-flex;gap:.5rem;align-items:center;font:600 .68rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--yellow);border:1px solid var(--yellow-d);padding:.45rem .6rem;text-decoration:none;margin-bottom:1.4rem;transition:opacity .15s}
   .badge:hover{border-color:var(--yellow)}
   .badge:active{opacity:.7}
-  .hero h1{font-size:clamp(3.4rem, 11vw, 6.2rem)}
+  .hero h1{font-size:clamp(3.2rem, 10vw, 5.8rem)}
   .lede{color:var(--dim);font-size:1.05rem;max-width:46ch;margin-top:1.2rem}
   .lede b{color:var(--white);font-weight:600}
   .hero__ctas{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:1.8rem}
@@ -118,6 +114,7 @@
   .tags{list-style:none;margin:.8rem 0 0;padding:0;display:grid;gap:.4rem}
   .tag{font:600 .64rem/1 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--yellow);border:1px solid var(--yellow-d);background:var(--void);padding:.4rem .5rem;width:max-content;max-width:100%}
   .tag--o{color:var(--orange);border-color:var(--orange-d)}
+  .tag--g{color:var(--green);border-color:var(--green-d)}
 
   /* Machine animation */
   .m-queue{animation:queue 4s linear infinite}
@@ -126,20 +123,18 @@
   @keyframes scan{0%,100%{transform:translateX(0)}25%{transform:translateX(-12px)}50%{transform:translateX(0)}75%{transform:translateX(12px)}}
   .m-lid{transform-box:fill-box;transform-origin:center;animation:blink 5s steps(1) infinite}
   @keyframes blink{0%,94%{transform:scaleY(0)}95%,98%{transform:scaleY(1)}99%{transform:scaleY(0)}}
-  .m-fire{animation:flicker .6s steps(2) infinite alternate}
-  @keyframes flicker{from{opacity:1}to{opacity:.55}}
   .m-glow{animation:flicker 1.8s steps(3) infinite alternate}
-  .m-puff{animation:puff 3s steps(6) infinite}
-  .m-puff.p2{animation-delay:1s}
-  .m-puff.p3{animation-delay:2s}
-  @keyframes puff{0%{transform:translate(0,0);opacity:.7}100%{transform:translate(6px,-14px);opacity:0}}
+  @keyframes flicker{from{opacity:1}to{opacity:.55}}
+  .m-led{animation:led 1.2s steps(2) infinite}
+  .m-led.l2{animation-delay:.4s}
+  .m-led.l3{animation-delay:.8s}
+  @keyframes led{0%{opacity:1}50%{opacity:.25}}
   .m-drop{animation:drop 4s steps(8) infinite;opacity:0}
   .m-drop.d2{animation-delay:1.33s}
   .m-drop.d3{animation-delay:2.66s}
   @keyframes drop{0%{transform:translate(0,0);opacity:1}35%{transform:translate(8px,12px);opacity:1}40%,100%{transform:translate(8px,12px);opacity:0}}
 
-
-  /* Stats */
+  /* Principles */
   .stats{padding-block:2.5rem;border-bottom:1px solid var(--line)}
   .stats dl{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem 1rem;margin:0}
   .stat{border-left:2px solid var(--line-2);padding:.4rem 0 .4rem 1rem;display:flex;flex-direction:column-reverse;gap:.4rem}
@@ -153,7 +148,7 @@
   .sec__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:2.2rem}
   .sec__sub{color:var(--dim);margin-top:.8rem;max-width:52ch}
 
-  .grid4{display:grid;gap:1rem}
+  .grid4,.grid3{display:grid;gap:1rem;list-style:none;margin:0;padding:0}
   .card{position:relative;background:var(--s2);border:1px solid var(--line);padding:1.25rem 1.2rem 1.4rem}
   .card::before,.card::after{content:"";position:absolute;width:12px;height:12px}
   .card::before{top:-1px;left:-1px;border-top:2px solid var(--yellow);border-left:2px solid var(--yellow)}
@@ -164,30 +159,26 @@
   .px{width:24px;height:24px;color:var(--yellow)}
   .grid4 + .link{margin-top:1.8rem}
 
-  /* Story */
-  .story{display:grid;gap:2.5rem;align-items:center}
-  .mini{display:flex;flex-wrap:wrap;gap:1.8rem;margin:1.6rem 0 0}
-  .mini div{display:flex;flex-direction:column-reverse;gap:.3rem}
-  .mini dd{margin:0;font:600 1.4rem/1 var(--mono);color:var(--yellow)}
-  .mini dt{font-size:.78rem;color:var(--mute)}
+  /* Example flow */
+  .story{display:grid;gap:2.5rem;align-items:start}
+  .flow{list-style:none;margin:1.6rem 0 0;padding:0;display:grid;gap:0;counter-reset:f}
+  .flow li{counter-increment:f;display:grid;grid-template-columns:2.2rem 1fr;gap:.8rem;padding:.9rem 0;border-top:1px solid var(--line);color:var(--dim);font-size:.95rem}
+  .flow li:last-child{border-bottom:1px solid var(--line)}
+  .flow li::before{content:"0" counter(f);font:600 .75rem/1.6 var(--mono);color:var(--mute)}
+  .flow b{color:var(--white);font-weight:600}
+  .flow .who{display:inline-block;font:600 .6rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;padding:.25rem .4rem;margin-left:.4rem;vertical-align:.15em;border:1px solid var(--yellow-d);color:var(--yellow)}
+  .flow .who--h{border-color:var(--green-d);color:var(--green)}
   .quote{margin:0;padding:2rem 1.6rem}
-  .quote p{font:600 clamp(1.15rem, 2.4vw, 1.4rem)/1.35 var(--sans);color:var(--white);margin:0}
-  .quote footer{font:500 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-top:1.2rem}
+  .quote h3{font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-bottom:1rem}
+  .quote p{font:600 clamp(1.05rem, 2.2vw, 1.25rem)/1.4 var(--sans);color:var(--white);margin:0}
+  .quote p + p{font:400 .92rem/1.6 var(--sans);color:var(--dim);margin-top:1rem}
 
-  /* Numbers */
-  .cmp{display:grid;gap:2rem;margin-top:.5rem}
-  .row__top{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap}
-  .row__top h3{font-size:1rem}
-  .row__price{font:600 1.15rem/1 var(--mono)}
-  .row--h .row__price{color:var(--orange)}
-  .row--m .row__price{color:var(--yellow)}
-  .bar{height:14px;background:var(--void);border:1px solid var(--line-2);margin-top:.7rem}
-  .bar i{display:block;height:100%;transform-origin:left;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
-  .row--h .bar i{background:var(--orange);width:100%}
-  .row--m .bar i{background:var(--yellow);width:max(1.4%, 6px)}
-  .js .cmp:not(.on) .bar i{transform:scaleX(0)}
-  .row small{display:block;font-size:.78rem;color:var(--mute);margin-top:.5rem}
-  .cmp + .btn{margin-top:2.2rem}
+  /* Pricing model */
+  .plan .price{font:400 2.2rem/1 var(--pixel);color:var(--yellow);margin:.2rem 0 .4rem}
+  .plan ul{margin:1rem 0 0;padding:0;list-style:none;display:grid;gap:.45rem}
+  .plan li{font-size:.88rem;color:var(--dim);padding-left:1.1rem;position:relative}
+  .plan li::before{content:"▸";position:absolute;left:0;color:var(--yellow)}
+  .grid3 + .fine{margin-top:1.6rem}
 
   /* FAQ */
   .faq{display:grid;gap:2rem}
@@ -200,15 +191,16 @@
   .faq summary:hover{color:var(--yellow)}
   .faq details p{color:var(--dim);padding:0 2rem 1.2rem 0;max-width:62ch}
 
-  /* Signup */
+  /* Forms */
   .field{display:flex;gap:.6rem;flex-wrap:wrap}
-  .input{flex:1 1 14rem;min-width:0;background:var(--void);border:1px solid var(--line-2);color:var(--white);font:400 .95rem/1 var(--sans);padding:.85rem .9rem}
+  .input{flex:1 1 14rem;min-width:0;width:100%;background:var(--void);border:1px solid var(--line-2);color:var(--white);font:400 .95rem/1 var(--sans);padding:.85rem .9rem}
   .input::placeholder{color:var(--mute)}
   .input:hover{border-color:var(--mute)}
   .input:focus-visible{outline:2px solid var(--yellow);outline-offset:0;border-color:var(--yellow)}
   .input--area{flex-basis:100%;resize:vertical;min-height:5.5rem;line-height:1.5}
   .count{font:500 .7rem/1 var(--mono);color:var(--mute);margin-left:auto;align-self:center}
-  .check__note{display:block;font-size:.78rem;color:var(--mute);margin-top:.7rem}
+  .note{display:block;font-size:.78rem;color:var(--mute);margin-top:.7rem}
+  label{display:block;font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-bottom:.6rem}
 
   .hazard{height:14px;background:repeating-linear-gradient(-45deg, var(--yellow) 0 14px, var(--pen) 14px 28px)}
 
@@ -216,27 +208,31 @@
   .check{padding-block:4rem;border-bottom:1px solid var(--line)}
   .check__grid{display:grid;gap:2rem;align-items:start}
   .check h2{font-size:clamp(2.5rem, 6.5vw, 3.6rem)}
-  .check label{display:block;font:600 .7rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);margin-bottom:.6rem}
   .term{background:var(--void);border:1px solid var(--line-2);min-height:9rem;padding:1.2rem;font:400 .85rem/1.7 var(--mono);color:var(--dim)}
   .term p::before{content:"> ";color:var(--yellow)}
   .term .idle{color:var(--mute)}
   .term .idle::before{content:""}
   .verdict{margin-top:1rem;border-top:1px dashed var(--line-2);padding-top:1rem}
-  .verdict strong{display:block;font:400 3.2rem/1 var(--pixel);color:var(--orange)}
-  .verdict strong.ok{color:var(--yellow)}
+  .verdict strong{display:block;font:400 3rem/1 var(--pixel);color:var(--yellow)}
+  .verdict strong.mid{color:var(--orange)}
+  .verdict strong.low{color:var(--mute)}
   .verdict span{display:block;color:var(--white);margin-top:.35rem}
   .verdict strong + span{margin-top:.7rem}
-  .verdict em{display:block;font-style:normal;color:var(--dim);margin-top:.3rem}
+  .verdict em{display:block;font-style:normal;color:var(--dim);margin-top:.6rem}
+  .verdict .btn{margin-top:1.1rem;font-family:var(--sans)}
+  .meter{height:10px;background:var(--s3);border:1px solid var(--line-2);margin-top:.7rem;max-width:22rem}
+  .meter i{display:block;height:100%;background:var(--yellow)}
 
-  /* Store */
-  .shop{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-  .item{margin:0}
-  .item__art{aspect-ratio:1;background:var(--s2);border:1px solid var(--line);display:grid;place-items:center;padding:1rem}
-  .mug{position:relative;width:62%;aspect-ratio:1/1.05;background:var(--white);color:var(--pen);display:grid;place-items:center;padding:.5rem;text-align:center;font:400 clamp(.75rem, 2.2vw, 1rem)/1.1 var(--pixel)}
-  .mug::after{content:"";position:absolute;right:-24%;top:22%;width:28%;height:46%;border:5px solid var(--white);border-left:0}
-  .pad{width:90%;aspect-ratio:1.4;background:var(--pen);border:2px solid var(--line-2);color:var(--yellow);display:grid;place-items:center;padding:.6rem;text-align:center;font:400 clamp(.85rem, 2.6vw, 1.15rem)/1.1 var(--pixel)}
-  .item figcaption{font-size:.8rem;color:var(--mute);margin-top:.6rem}
-  .item figcaption b{color:var(--dim);font-weight:600}
+  /* Contact */
+  .contact{display:grid;gap:2.5rem;align-items:start}
+  .contact form{display:grid;gap:1.1rem}
+  .contact .row2{display:grid;gap:1.1rem}
+  .direct{margin-top:1.6rem;display:grid;gap:.4rem}
+  .direct a{font:600 1.1rem/1.3 var(--mono);color:var(--yellow);text-decoration:none;width:max-content}
+  .direct a:hover{text-decoration:underline}
+  .sent{border:1px solid var(--green-d);background:var(--void);padding:1rem;color:var(--dim);font-size:.9rem}
+  .sent[hidden]{display:none}
+  .sent a{color:var(--yellow)}
 
   /* Footer */
   .foot{padding-block:3.5rem 0;background:var(--void);border-top:3px dashed var(--line)}
@@ -246,23 +242,15 @@
   .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
   .foot ul a{color:var(--dim);text-decoration:none;font-size:.92rem}
   .foot ul a:hover{color:var(--yellow)}
-  .foot .ast{color:var(--orange)}
-  .foot .note{font-size:.78rem;color:var(--mute);margin-top:.5rem}
-  .fired{font:500 1.2rem/1.25 var(--hand);color:var(--orange);margin-top:1rem;max-width:26ch}
   .closing{background:var(--yellow);color:var(--pen);margin-top:3rem;padding:1rem 0;text-align:center}
   .closing strong{font:400 clamp(1.6rem, 4vw, 2.2rem)/1 var(--pixel);display:block}
-  .closing .ast{color:inherit}
-  .closing .wrap > span{font:600 .66rem/1.5 var(--mono);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:.35rem}
-    .legal{font:500 .62rem/1.6 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1.5rem;padding-block:1rem}
-
-  /* Cookie toast */
-  .toast{position:fixed;left:var(--gutter);right:var(--gutter);bottom:var(--gutter);z-index:30;background:var(--s2);border:1px solid var(--line-2);padding:.9rem 1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;font-size:.85rem;color:var(--dim);max-width:30rem}
-  .toast[hidden]{display:none}
+  .closing a{color:inherit}
+  .legal{font:500 .62rem/1.6 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--mute);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1.5rem;padding-block:1rem}
 
   @media (min-width:600px){
     .stats dl{grid-template-columns:repeat(4,1fr)}
     .grid4{grid-template-columns:repeat(2,1fr)}
-    .shop{grid-template-columns:repeat(4,1fr)}
+    .contact .row2{grid-template-columns:1fr 1fr}
     .tags{position:absolute;inset:0;margin:0;pointer-events:none;display:block}
     .tag{position:absolute}
     .tag--eye{top:5%;left:4%}
@@ -277,7 +265,8 @@
     .hero{padding-block:5rem 4.5rem}
     .hero .wrap{grid-template-columns:1fr 1.05fr}
     .grid4{grid-template-columns:repeat(4,1fr)}
-    .story,.faq,.check__grid{grid-template-columns:1fr 1.2fr}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    .story,.faq,.check__grid,.contact{grid-template-columns:1fr 1.2fr}
     .term{min-height:15rem}
     .foot__grid{grid-template-columns:1.4fr 1fr 1fr 1fr}
     .sec,.check{padding-block:5.5rem}
@@ -292,83 +281,65 @@
 </head>
 <body>
 
-<div class="live" role="status" aria-live="off">
+<div class="live">
   <div class="wrap">
-    <span><span class="dot">●</span> Uživo · <b data-total>2.731.554</b> radnih mjesta ukinuto · <b data-today>1.284</b> danas</span>
-    <span class="live__right">Zadovoljstvo zaposlenika: ne mjeri se (nema zaposlenika)</span>
+    <span><span class="dot">●</span> KAI-SOL · <b>implementacija AI agenata</b></span>
+    <span class="live__right"><a href="mailto:info@kai-sol.com">info@kai-sol.com</a></span>
   </div>
 </div>
 
 <header class="nav">
   <nav class="wrap" aria-label="Glavna navigacija">
-    <a class="brand" href="#vrh" aria-label="Zastarjelo, na vrh stranice">
+    <a class="brand" href="#vrh" aria-label="KAI-SOL, na vrh stranice">
       <span class="brand__icon"><svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="2" width="8" height="4" style="fill:var(--pen)"/><rect x="1" y="3" width="6" height="2" style="fill:var(--yellow)"/><rect x="3" y="3" width="2" height="2" style="fill:var(--pen)"/></svg></span>
-      <s>zastarjelo</s>
+      KAI-SOL
     </a>
     <ul class="nav__links">
-      <li><a href="#kako">Kako radi</a></li>
-      <li><a href="#usluge">Usluge</a></li>
+      <li><a href="#procjena">Procjena</a></li>
+      <li><a href="#kako">Kako radimo</a></li>
+      <li><a href="#usluge">Agenti</a></li>
       <li><a href="#primjer">Primjer</a></li>
-      <li><a href="#cijene">Cijene</a></li>
+      <li><a href="#suradnja">Suradnja</a></li>
       <li><a href="#pitanja">Pitanja</a></li>
-      <li><a href="#darovi">Darovi</a></li>
     </ul>
-    <a class="btn btn--sm nav__cta" href="#provjera"><span class="long">Provjerite jeste li višak</span><span class="short">Provjera</span></a>
+    <a class="btn btn--sm nav__cta" href="#kontakt"><span class="long">Dogovorite razgovor</span><span class="short">Kontakt</span></a>
   </nav>
 </header>
 
 <main id="vrh">
 
-  <section class="check" id="provjera" aria-labelledby="provjera-h">
-    <div class="wrap check__grid">
-      <div>
-        <p class="fine" style="margin:0 0 1rem">Besplatno · bez registracije · bez prava na žalbu</p>
-        <h2 id="provjera-h">Je li vaše radno mjesto <span class="mark">sljedeće</span>?</h2>
-        <p class="sec__sub">20 sekundi. Besplatno.</p>
-        <form id="check" method="dialog" novalidate style="margin-top:1.8rem">
-          <label for="role">Napišite naziv posla ili opišite što radite</label>
-          <div class="field">
-            <textarea class="input input--area" id="role" rows="3" maxlength="280" placeholder="npr. računovođa, ili: vodim knjige za tri obrta i radim obračun plaća" autocomplete="off"></textarea>
-            <button class="btn" id="check-btn" type="submit">Pokreni provjeru →</button>
-            <span class="count" id="role-count" aria-live="off">0/280</span>
-          </div>
-          <small class="check__note">Ne upisujte osobne podatke.</small>
-        </form>
-      </div>
-      <div class="term" id="term" aria-live="polite">
-        <p class="idle">OTPISIVAČ-5 čeka. Upišite radno mjesto.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="hazard" aria-hidden="true"></div>
-
   <section class="hero" aria-labelledby="naslov">
     <div class="wrap">
       <div>
-        <a class="badge" href="#kako">Novo · OTPISIVAČ-5 je uključen →</a>
-        <h1 id="naslov">Vaše radno mjesto, <span class="mark">zastarjelo</span>.</h1>
-        <p class="lede">Ukidamo ljudska radna mjesta pouzdano, brzo i uz <b>otpremninu koja stane u kuvertu</b>.</p>
+        <a class="badge" href="#pitanja">Ne, nismo tu da ukinemo vaš tim →</a>
+        <h1 id="naslov">AI agenti koji rade <span class="mark">dosadni dio</span> posla.</h1>
+        <p class="lede">KAI-SOL uvodi AI agente u male i srednje firme. Agenti preuzimaju e-mail, dokumente i unos podataka, a <b>vaši ljudi ostaju na poslu koji traži čovjeka</b>.</p>
         <div class="hero__ctas">
-          <a class="btn" href="#provjera">Pokreni provjeru viška →</a>
-          <a class="btn btn--ghost" href="#kako">Kako radi</a>
+          <a class="btn" href="#procjena">Procijenite svoj proces →</a>
+          <a class="btn btn--ghost" href="#kako">Kako radimo</a>
         </div>
       </div>
 
       <figure class="scene" style="margin:0">
         <svg viewBox="0 0 200 140" shape-rendering="crispEdges" role="img" aria-labelledby="stroj-opis">
-          <title id="stroj-opis">OTPISIVAČ-5: crni stroj sa žutim okom guta red službenika s pokretne trake, a njihove osobne stvari ispadaju u kartonsku kutiju.</title>
+          <title id="stroj-opis">AI agent: crni stroj sa žutim okom uzima e-mailove i dokumente s pokretne trake i izbacuje gotove, provjerene zadatke u ladicu.</title>
           <defs>
             <clipPath id="belt-clip"><rect x="0" y="0" width="88" height="128"/></clipPath>
-            <symbol id="worker" viewBox="0 0 10 16" width="10" height="16">
-              <rect x="3" y="0" width="4" height="4" style="fill:var(--skin)"/>
-              <rect x="3" y="0" width="4" height="1" style="fill:var(--hair)"/>
-              <rect x="2" y="4" width="6" height="6" style="fill:var(--white)"/>
-              <rect x="4" y="4" width="2" height="4" style="fill:var(--orange-d)"/>
-              <rect x="3" y="10" width="2" height="6" style="fill:var(--s3)"/>
-              <rect x="5" y="10" width="2" height="6" style="fill:var(--s3)"/>
-              <rect x="6" y="6" width="4" height="4" style="fill:var(--card)"/>
-              <rect x="6" y="6" width="4" height="1" style="fill:var(--card-d)"/>
+            <symbol id="sheet" viewBox="0 0 10 16" width="10" height="16">
+              <rect x="1" y="2" width="8" height="12" style="fill:var(--white)"/>
+              <rect x="6" y="2" width="3" height="3" style="fill:var(--line-2)"/>
+              <rect x="2" y="6" width="6" height="1" style="fill:var(--line-2)"/>
+              <rect x="2" y="8" width="5" height="1" style="fill:var(--line-2)"/>
+              <rect x="2" y="10" width="6" height="1" style="fill:var(--line-2)"/>
+              <rect x="2" y="12" width="3" height="1" style="fill:var(--orange)"/>
+            </symbol>
+            <symbol id="mail" viewBox="0 0 10 16" width="10" height="16">
+              <rect x="0" y="7" width="10" height="7" style="fill:var(--dim)"/>
+              <rect x="1" y="8" width="2" height="1" style="fill:var(--line-2)"/>
+              <rect x="3" y="9" width="2" height="1" style="fill:var(--line-2)"/>
+              <rect x="5" y="9" width="2" height="1" style="fill:var(--line-2)"/>
+              <rect x="7" y="8" width="2" height="1" style="fill:var(--line-2)"/>
+              <rect x="7" y="11" width="2" height="2" style="fill:var(--orange)"/>
             </symbol>
           </defs>
 
@@ -376,12 +347,9 @@
           <rect x="0" y="112" width="200" height="6" style="fill:var(--s3)"/>
           <rect x="0" y="118" width="200" height="2" style="fill:var(--line)"/>
 
-          <!-- chimney and smoke -->
-          <rect x="136" y="16" width="12" height="26" style="fill:var(--s2)"/>
-          <rect x="134" y="12" width="16" height="4" style="fill:var(--line-2)"/>
-          <rect class="m-puff" x="138" y="4" width="6" height="6" style="fill:var(--line-2)"/>
-          <rect class="m-puff p2" x="139" y="6" width="5" height="5" style="fill:var(--line-2)"/>
-          <rect class="m-puff p3" x="137" y="5" width="6" height="6" style="fill:var(--line-2)"/>
+          <!-- antenna -->
+          <rect x="140" y="20" width="4" height="20" style="fill:var(--line-2)"/>
+          <rect class="m-led" x="138" y="14" width="8" height="6" style="fill:var(--yellow)"/>
 
           <!-- body -->
           <rect x="86" y="40" width="80" height="72" style="fill:var(--s2)"/>
@@ -399,14 +367,16 @@
           <rect class="m-pupil" x="122" y="59" width="8" height="8" style="fill:var(--black)"/>
           <rect class="m-lid" x="106" y="57" width="40" height="12" style="fill:var(--s3)"/>
 
-          <!-- plate -->
+          <!-- plate and status lights -->
           <rect x="106" y="80" width="40" height="9" style="fill:var(--s3)"/>
-          <text x="126" y="87" text-anchor="middle" font-family="VT323, monospace" font-size="8" style="fill:var(--yellow)">OTPISIVAČ-5</text>
+          <text x="126" y="87" text-anchor="middle" font-family="VT323, monospace" font-size="8" style="fill:var(--yellow)">KAI-AGENT</text>
+          <rect class="m-led" x="110" y="94" width="4" height="3" style="fill:var(--green)"/>
+          <rect class="m-led l2" x="117" y="94" width="4" height="3" style="fill:var(--green)"/>
+          <rect class="m-led l3" x="124" y="94" width="4" height="3" style="fill:var(--yellow)"/>
 
           <!-- intake -->
           <rect x="86" y="86" width="14" height="26" style="fill:var(--void)"/>
-          <rect class="m-fire" x="88" y="98" width="10" height="14" style="fill:var(--orange)"/>
-          <rect x="88" y="104" width="10" height="8" style="fill:var(--yellow)"/>
+          <rect class="m-glow" x="88" y="98" width="10" height="14" style="fill:var(--glow-d)"/>
 
           <!-- conveyor -->
           <rect x="0" y="100" width="90" height="4" style="fill:var(--line-2)"/>
@@ -415,144 +385,201 @@
           <rect x="40" y="107" width="3" height="5" style="fill:var(--line)"/>
           <rect x="74" y="107" width="3" height="5" style="fill:var(--line)"/>
 
-          <!-- the queue -->
+          <!-- incoming work -->
           <g clip-path="url(#belt-clip)">
             <g class="m-queue">
-              <use href="#worker" x="-34" y="84"/>
-              <use href="#worker" x="-12" y="84"/>
-              <use href="#worker" x="10" y="84"/>
-              <use href="#worker" x="32" y="84"/>
-              <use href="#worker" x="54" y="84"/>
-              <use href="#worker" x="76" y="84"/>
+              <use href="#sheet" x="-34" y="84"/>
+              <use href="#mail" x="-12" y="84"/>
+              <use href="#sheet" x="10" y="84"/>
+              <use href="#mail" x="32" y="84"/>
+              <use href="#sheet" x="54" y="84"/>
+              <use href="#mail" x="76" y="84"/>
             </g>
           </g>
 
-          <!-- personal items chute -->
+          <!-- finished tasks chute -->
           <rect x="166" y="90" width="8" height="6" style="fill:var(--void)"/>
-          <g class="m-drop"><rect x="168" y="92" width="4" height="4" style="fill:var(--white)"/><rect x="172" y="93" width="1" height="2" style="fill:var(--white)"/></g>
-          <g class="m-drop d2"><rect x="168" y="90" width="2" height="3" style="fill:var(--leaf)"/><rect x="170" y="89" width="2" height="2" style="fill:var(--leaf)"/><rect x="168" y="93" width="4" height="3" style="fill:var(--orange-d)"/></g>
-          <g class="m-drop d3"><rect x="167" y="91" width="6" height="5" style="fill:var(--yellow-d)"/><rect x="168" y="92" width="4" height="3" style="fill:var(--dim)"/></g>
-          <rect x="174" y="100" width="22" height="12" style="fill:var(--card)"/>
-          <rect x="174" y="100" width="22" height="2" style="fill:var(--card-d)"/>
-          <rect x="171" y="97" width="5" height="3" style="fill:var(--card-d)"/>
-          <rect x="194" y="97" width="5" height="3" style="fill:var(--card-d)"/>
+          <g class="m-drop"><rect x="167" y="91" width="6" height="5" style="fill:var(--green)"/><rect x="169" y="93" width="1" height="1" style="fill:var(--pen)"/><rect x="170" y="94" width="1" height="1" style="fill:var(--pen)"/><rect x="171" y="92" width="1" height="2" style="fill:var(--pen)"/></g>
+          <g class="m-drop d2"><rect x="167" y="91" width="6" height="5" style="fill:var(--white)"/><rect x="168" y="92" width="4" height="1" style="fill:var(--line-2)"/><rect x="168" y="94" width="3" height="1" style="fill:var(--green-d)"/></g>
+          <g class="m-drop d3"><rect x="167" y="91" width="6" height="5" style="fill:var(--green)"/><rect x="169" y="93" width="1" height="1" style="fill:var(--pen)"/><rect x="170" y="94" width="1" height="1" style="fill:var(--pen)"/><rect x="171" y="92" width="1" height="2" style="fill:var(--pen)"/></g>
+          <rect x="174" y="102" width="22" height="10" style="fill:var(--s3)"/>
+          <rect x="174" y="102" width="22" height="2" style="fill:var(--line-2)"/>
+          <rect x="176" y="106" width="18" height="2" style="fill:var(--green-d)"/>
         </svg>
         <ul class="tags">
-          <li class="tag tag--eye">▸ Oko OTPISIVAČA-5 · promatra</li>
-          <li class="tag tag--o tag--in">▸ Unos: 1 radno mjesto / 4 s</li>
-          <li class="tag tag--out">▸ Otvor za osobne stvari</li>
+          <li class="tag tag--eye">▸ Svaku akciju zapisuje u dnevnik</li>
+          <li class="tag tag--o tag--in">▸ Ulaz: e-mail, PDF, narudžbe</li>
+          <li class="tag tag--g tag--out">▸ Izlaz: gotovo, u vašem sustavu</li>
         </ul>
       </figure>
     </div>
   </section>
 
-  <section class="stats" aria-label="Brojke">
+  <section class="stats" aria-label="Kako radimo, u brojkama">
     <div class="wrap">
       <dl>
-        <div class="stat"><dt>manje troškova plaća</dt><dd>98&nbsp;%</dd></div>
-        <div class="stat"><dt>prosječno do viška</dt><dd>9&nbsp;mj.</dd></div>
-        <div class="stat"><dt>pritužbi (nema tko)</dt><dd>0</dd></div>
-        <div class="stat"><dt>ukinutih radnih mjesta</dt><dd>3,9&nbsp;mil.</dd></div>
+        <div class="stat"><dt>proces po pilotu, ne cijela firma odjednom</dt><dd>1</dd></div>
+        <div class="stat"><dt>akcija agenta zapisano u dnevnik</dt><dd>100&nbsp;%</dd></div>
+        <div class="stat"><dt>pristupa podacima koji agentu ne trebaju</dt><dd>0</dd></div>
+        <div class="stat"><dt>odobravate korake dok ne vjerujete agentu</dt><dd>Vi</dd></div>
       </dl>
     </div>
   </section>
 
-  <section class="sec" id="kako" aria-labelledby="kako-h">
-    <div class="wrap">
-      <div class="sec__head">
-        <h2 id="kako-h">Četiri koraka. <span class="mark">Jedan ishod.</span></h2>
+  <div class="hazard" aria-hidden="true"></div>
+
+  <section class="check" id="procjena" aria-labelledby="procjena-h">
+    <div class="wrap check__grid">
+      <div>
+        <p class="fine" style="margin:0 0 1rem">Besplatno · bez registracije · 10 sekundi</p>
+        <h2 id="procjena-h">Što agent može <span class="mark">preuzeti</span> kod vas?</h2>
+        <p class="sec__sub">Opišite jedan posao koji se ponavlja. Dobit ćete grubu procjenu i prijedlog agenta.</p>
+        <form id="check" novalidate style="margin-top:1.8rem">
+          <label for="task">Opišite zadatak svojim riječima</label>
+          <div class="field">
+            <textarea class="input input--area" id="task" rows="3" maxlength="280" placeholder="npr. svaki dan prepisujemo narudžbe iz e-maila u ERP i šaljemo potvrdu kupcu" autocomplete="off"></textarea>
+            <button class="btn" id="check-btn" type="submit">Procijeni →</button>
+            <span class="count" id="task-count" aria-live="off">0/280</span>
+          </div>
+          <small class="note">Ne upisujte osobne podatke ni poslovne tajne. Procjena se radi u vašem pregledniku.</small>
+        </form>
       </div>
-      <ol class="grid4" style="list-style:none;margin:0;padding:0">
-        <li class="card"><div class="card__top"><span class="card__n">01</span><svg class="px" data-px="eye" aria-hidden="true"></svg></div><h3>Upoznavanje</h3><p>Vašem timu pridružuje se ljubazni asistent.</p></li>
-        <li class="card"><div class="card__top"><span class="card__n">02</span><svg class="px" data-px="funnel" aria-hidden="true"></svg></div><h3>Učenje</h3><p>Team building u Opatiji na kojem zapišete sve što znate.</p></li>
-        <li class="card"><div class="card__top"><span class="card__n">03</span><svg class="px" data-px="swap" aria-hidden="true"></svg></div><h3>Zamjena</h3><p>Vaša titula postaje „savjetnik“, pa „vanjski suradnik“.</p></li>
-        <li class="card"><div class="card__top"><span class="card__n">04</span><svg class="px" data-px="cake" aria-hidden="true"></svg></div><h3>Oproštaj</h3><p>Torta, čestitka i kartica koja više ne otvara vrata.</p></li>
-      </ol>
-      <a class="link" href="#pitanja">Što se zapravo događa →</a>
+      <div class="term" id="term" aria-live="polite">
+        <p class="idle">KAI-AGENT čeka. Opišite zadatak.</p>
+      </div>
     </div>
   </section>
 
-  <section class="sec sec--alt" id="usluge" aria-labelledby="usluge-h">
+  <section class="sec sec--alt" id="kako" aria-labelledby="kako-h">
     <div class="wrap">
       <div class="sec__head">
-        <h2 id="usluge-h">Sve što treba da <span class="mark">ne treba nitko</span>.</h2>
-        <a class="btn btn--ghost btn--sm" href="#cijene">Cijene</a>
+        <div>
+          <h2 id="kako-h">Četiri koraka. <span class="mark">Bez crne kutije.</span></h2>
+          <p class="sec__sub">Ne prodajemo platformu. Gradimo agenta za vaš proces, uvodimo ga uz vaš tim i ostajemo uz njega.</p>
+        </div>
       </div>
-      <ul class="grid4" style="list-style:none;margin:0;padding:0">
-        <li class="card"><div class="card__top"><svg class="px" data-px="lens" aria-hidden="true"></svg></div><h3>Otkrivanje uloge™</h3><p>Stroj otkrije što zapravo radite. Obično brže od vas.</p></li>
-        <li class="card"><div class="card__top"><svg class="px" data-px="pair" aria-hidden="true"></svg></div><h3>Rad u sjeni</h3><p>90 dana za stolom uz vlastitu zamjenu.</p></li>
-        <li class="card"><div class="card__top"><svg class="px" data-px="drop" aria-hidden="true"></svg></div><h3>Izvlačenje znanja</h3><p>Recite nam sve što znate. Ručak je plaćen.</p></li>
-        <li class="card"><div class="card__top"><svg class="px" data-px="badge" aria-hidden="true"></svg></div><h3>Optimizacija titule™</h3><p>Voditelj → Koordinator → Bivši djelatnik.</p></li>
+      <ol class="grid4">
+        <li class="card"><div class="card__top"><span class="card__n">01</span><svg class="px" data-px="lens" aria-hidden="true"></svg></div><h3>Mapiranje</h3><p>Sjednemo s ljudima koji posao rade i zapišemo korake, iznimke i sustave. Tražimo zadatke koji se ponavljaju i troše vrijeme.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">02</span><svg class="px" data-px="flask" aria-hidden="true"></svg></div><h3>Pilot</h3><p>Gradimo jednog agenta za jedan proces i puštamo ga uz vaš tim. Svaki njegov korak odobravate vi, dok ne vidite da radi.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">03</span><svg class="px" data-px="plug" aria-hidden="true"></svg></div><h3>Uvođenje</h3><p>Agent dobiva vlastiti korisnički račun u vašem e-mailu, ERP-u, CRM-u ili tablicama. Samo za ono što mu treba.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">04</span><svg class="px" data-px="shield" aria-hidden="true"></svg></div><h3>Nadzor</h3><p>Pratimo svaku akciju, mjerimo uštedu vremena i rješavamo iznimke. Mjesečni izvještaj u kojem vidite što je agent radio.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="usluge" aria-labelledby="usluge-h">
+    <div class="wrap">
+      <div class="sec__head">
+        <h2 id="usluge-h">Agenti koje <span class="mark">uvodimo</span>.</h2>
+        <a class="btn btn--ghost btn--sm" href="#suradnja">Suradnja i cijene</a>
+      </div>
+      <ul class="grid4">
+        <li class="card"><div class="card__top"><svg class="px" data-px="mail" aria-hidden="true"></svg></div><h3>E-mail i upiti</h3><p>Čita dolaznu poštu, razvrstava je, odgovara na standardna pitanja i prosljeđuje ostalo pravoj osobi, s pripremljenim sažetkom.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="doc" aria-hidden="true"></svg></div><h3>Obrada dokumenata</h3><p>Računi, narudžbe, otpremnice i ponude. Izvlači podatke, upisuje ih u vaš sustav, a sve nejasno označi za provjeru.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="chat" aria-hidden="true"></svg></div><h3>Interni asistent</h3><p>Odgovara na pitanja o procedurama, cjenicima i proizvodima iz vaših dokumenata i uvijek navodi izvor.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="gear" aria-hidden="true"></svg></div><h3>Automatizacije po mjeri</h3><p>Izvještaji, podsjetnici, prijenos podataka između sustava. Radi u alatima koje već imate: Microsoft 365, Google Workspace, ERP, CRM, webshop.</p></li>
       </ul>
     </div>
   </section>
 
-  <section class="sec" id="primjer" aria-labelledby="primjer-h">
+  <section class="sec sec--alt" id="primjer" aria-labelledby="primjer-h">
     <div class="wrap story">
       <div>
-        <h2 id="primjer-h">62 referenta. <span class="mark">Sada jedan šalter.</span> Zatvoren.</h2>
-        <dl class="mini">
-          <div><dt>troškova plaća</dt><dd>−94&nbsp;%</dd></div>
-          <div><dt>pečata na sat</dt><dd>+380&nbsp;%</dd></div>
-          <div><dt>bolovanja</dt><dd>0</dd></div>
-        </dl>
+        <h2 id="primjer-h">Narudžba iz e-maila u ERP. <span class="mark">Bez prepisivanja.</span></h2>
+        <p class="sec__sub">Primjer tijeka kakav gradimo. Agent radi posao, čovjek donosi odluke.</p>
+        <ol class="flow">
+          <li><span>Kupac pošalje narudžbu u PDF-u ili u tijelu e-maila.<span class="who">agent</span></span></li>
+          <li><span>Agent prepozna kupca, artikle, količine i rok isporuke te provjeri cijene i zalihe.<span class="who">agent</span></span></li>
+          <li><span>Ako sve odgovara, upisuje nalog u ERP. Ako nešto ne štima, <b>zaustavlja se i pita</b>.<span class="who who--h">čovjek</span></span></li>
+          <li><span>Kupcu šalje potvrdu, a nalog i originalni e-mail ostaju povezani u dnevniku.<span class="who">agent</span></span></li>
+        </ol>
       </div>
-      <blockquote class="card quote">
-        <p>„Imovina je tu da se otpiše.“</p>
-        <footer>Uprava (UI)</footer>
-      </blockquote>
-    </div>
-  </section>
-
-  <section class="sec sec--alt" id="cijene" aria-labelledby="cijene-h">
-    <div class="wrap">
-      <div class="sec__head">
-        <h2 id="cijene-h">Ljudi su skupi. <span class="mark">Provjerili smo.</span></h2>
-      </div>
-      <div class="cmp">
-        <div class="row row--h">
-          <div class="row__top"><h3>Čovjek, sa svim troškovima</h3><span class="row__price">28.000&nbsp;€ / god.</span></div>
-          <div class="bar" aria-hidden="true"><i></i></div>
-          <small>+ doprinosi, + regres, + božićnica, + osjećaji</small>
-        </div>
-        <div class="row row--m">
-          <div class="row__top"><h3>Zastarjelo Enterprise, po radnom mjestu</h3><span class="row__price">390&nbsp;€ / god.</span></div>
-          <div class="bar" aria-hidden="true"><i></i></div>
-          <small>Uvijek dostupan. Nikad na godišnjem.</small>
-        </div>
-      </div>
-      <a class="btn" href="#provjera">Pokreni provjeru viška →</a>
-    </div>
-  </section>
-
-  <section class="sec" id="pitanja" aria-labelledby="pitanja-h">
-    <div class="wrap faq">
-      <h2 id="pitanja-h">Pitanja.</h2>
-      <div>
-        <details><summary>Koliko je provjera točna?</summary><p>99,7&nbsp;%. Preostalih 0,3&nbsp;% ste vi, ali samo zasad.</p></details>
-        <details><summary>Hoće li moje radno mjesto stvarno biti ukinuto?</summary><p>Da. Razlikuje se samo datum.</p></details>
-        <details><summary>Što se događa s ljudima?</summary><p>Dobiju status „u tranziciji“ i bedž za posjetitelje.</p></details>
-        <details><summary>Je li to u skladu sa Zakonom o radu?</summary><p>OTPISIVAČ-5 pročitao je Zakon o radu dvaput. Sada piše izmjene.</p></details>
-        <details><summary>Mogu li se žaliti?</summary><p>Možete. Žalbe obrađuje OTPISIVAČ-5, prosječno za 0,4 sekunde.</p></details>
-        <details><summary>Zapošljavate li ikoga?</summary><p>Jednog čovjeka. Zakon to traži. Molimo ne obraćajte mu se.</p></details>
+      <div class="card quote">
+        <h3>Zašto mi</h3>
+        <p>Prije agenata gradili smo interne sustave u proizvodnji: skladište, kontrolu kvalitete i poslovnu platformu za tiskaru etiketa.</p>
+        <p>Zato agenta ne gradimo za prezentaciju, nego za ured u kojem telefon zvoni, narudžbe stižu u svim formatima, a iznimka je pravilo. Dvoje nas je: jedno gradi agente, drugo vodi suradnju i brine da se ušteda vidi u brojkama.</p>
       </div>
     </div>
   </section>
 
-  <section class="sec sec--alt" id="darovi" aria-labelledby="darovi-h">
+  <section class="sec" id="suradnja" aria-labelledby="suradnja-h">
     <div class="wrap">
       <div class="sec__head">
         <div>
-          <h2 id="darovi-h">Darovi za oproštaj.</h2>
-          <p class="sec__sub">Za nedavno ukinute. Plaća se otpremninom.</p>
+          <h2 id="suradnja-h">Krenite malo. <span class="mark">Platite za rezultat.</span></h2>
+          <p class="sec__sub">Svaki proces je drukčiji, pa cijenu dajemo nakon procjene. Pilot ima fiksnu cijenu dogovorenu unaprijed.</p>
         </div>
       </div>
-      <div class="shop">
-        <figure class="item"><div class="item__art"><div class="mug">Ovu šalicu vratite u kadrovsku do petka.</div></div><figcaption><b>Šalica</b> · zadnja kava na poslu</figcaption></figure>
-        <figure class="item"><div class="item__art"><div class="mug">Moj nasljednik ne pije kavu.</div></div><figcaption><b>Šalica</b> · za nove kolege</figcaption></figure>
-        <figure class="item"><div class="item__art"><div class="mug">Ovaj sastanak mogao je biti prompt.</div></div><figcaption><b>Šalica</b> · za zadnji kolegij</figcaption></figure>
-        <figure class="item"><div class="item__art"><div class="pad">Miš je ostao. Ja nisam.</div></div><figcaption><b>Podloga za miš</b> · uspomena</figcaption></figure>
+      <ol class="grid3">
+        <li class="card plan">
+          <span class="card__n">01 · Procjena</span>
+          <p class="price">Besplatno</p>
+          <p>Razgovor od 30 minuta i pisani prijedlog.</p>
+          <ul>
+            <li>Koji procesi imaju smisla, a koji ne</li>
+            <li>Procjena uštede vremena</li>
+            <li>Prijedlog prvog agenta i cijena pilota</li>
+          </ul>
+        </li>
+        <li class="card plan">
+          <span class="card__n">02 · Pilot</span>
+          <p class="price">Fiksna cijena</p>
+          <p>Jedan agent, jedan proces, 2 do 4 tjedna.</p>
+          <ul>
+            <li>Izrada i spajanje na vaše sustave</li>
+            <li>Rad uz vaš tim, uz odobravanje koraka</li>
+            <li>Mjerenje: koliko je vremena stvarno ušteđeno</li>
+          </ul>
+        </li>
+        <li class="card plan">
+          <span class="card__n">03 · Rad i održavanje</span>
+          <p class="price">Mjesečno</p>
+          <p>Kad pilot pokaže rezultat, agent ide u redovni rad.</p>
+          <ul>
+            <li>Hosting, nadzor i troškovi AI modela</li>
+            <li>Izmjene kad se proces promijeni</li>
+            <li>Mjesečni izvještaj o radu agenta</li>
+          </ul>
+        </li>
+      </ol>
+      <p class="fine">Ako pilot ne pokaže uštedu, agent ne ide dalje. Bez dugoročnih ugovora unaprijed.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--alt" id="pitanja" aria-labelledby="pitanja-h">
+    <div class="wrap faq">
+      <h2 id="pitanja-h">Pitanja.</h2>
+      <div>
+        <details><summary>Hoće li agent zamijeniti moje zaposlenike?</summary><p>Ne gradimo ga za to. Agent preuzima ponavljajuće zadatke poput prepisivanja, razvrstavanja i standardnih odgovora. Ljudi dobivaju vrijeme za kupce, odluke i posao koji traži iskustvo.</p></details>
+        <details><summary>Što ako agent pogriješi?</summary><p>Agent se gradi tako da se zaustavi kad nije siguran i pita čovjeka. Na početku vi odobravate svaki korak, a sve akcije ostaju zapisane u dnevniku, pa se svaka greška može pronaći i ispraviti.</p></details>
+        <details><summary>Što je s našim podacima i GDPR-om?</summary><p>Agent dobiva pristup samo podacima koji su mu potrebni, kroz vlastiti korisnički račun koji možete ugasiti u svakom trenutku. Koristimo poslovne verzije AI modela koje ne treniraju na vašim podacima, a gdje je potrebno, potpisujemo ugovor o obradi podataka.</p></details>
+        <details><summary>S kojim sustavima agent radi?</summary><p>S e-mailom (Microsoft 365, Google Workspace), tablicama, CRM-om, webshopom i ERP-om koji ima API ili izvoz podataka. Ako sustav nema sučelje, procjenu dajemo nakon razgovora.</p></details>
+        <details><summary>Koliko traje uvođenje?</summary><p>Pilot za jedan proces traje 2 do 4 tjedna. Nakon toga agent radi samostalno, a mi ga pratimo i prilagođavamo.</p></details>
+        <details><summary>Trebamo li imati IT odjel?</summary><p>Ne. Postavljanje, spajanje i održavanje radimo mi. Od vas trebamo osobu koja zna proces i sat vremena tjedno tijekom pilota.</p></details>
       </div>
+    </div>
+  </section>
+
+  <section class="sec" id="kontakt" aria-labelledby="kontakt-h">
+    <div class="wrap contact">
+      <div>
+        <h2 id="kontakt-h">Dogovorite <span class="mark">razgovor</span>.</h2>
+        <p class="sec__sub">Opišite proces koji vam krade vrijeme. Javit ćemo se s terminom za razgovor od 30 minuta.</p>
+        <div class="direct">
+          <span class="fine" style="margin:0">Ili pišite izravno</span>
+          <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
+        </div>
+      </div>
+      <form id="contact" novalidate>
+        <div class="row2">
+          <div><label for="c-name">Ime *</label><input class="input" id="c-name" name="ime" autocomplete="name" required></div>
+          <div><label for="c-email">E-mail *</label><input class="input" id="c-email" name="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div><label for="c-company">Tvrtka</label><input class="input" id="c-company" name="tvrtka" autocomplete="organization"></div>
+        <div><label for="c-msg">Koji proces želite automatizirati?</label><textarea class="input input--area" id="c-msg" name="poruka" rows="5"></textarea></div>
+        <div><button class="btn" type="submit">Pošalji upit →</button><small class="note" id="c-err" aria-live="polite"></small></div>
+        <p class="sent" id="c-sent" hidden>Otvorio se vaš program za e-poštu s pripremljenom porukom, samo je pošaljite. Ako se nije otvorio, pišite na <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>.</p>
+      </form>
     </div>
   </section>
 
@@ -561,68 +588,61 @@
 <footer class="foot">
   <div class="wrap foot__grid">
     <div class="foot__brand">
-      <a class="brand" href="#vrh"><span class="brand__icon"><svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="2" width="8" height="4" style="fill:var(--pen)"/><rect x="1" y="3" width="6" height="2" style="fill:var(--yellow)"/><rect x="3" y="3" width="2" height="2" style="fill:var(--pen)"/></svg></span><s>zastarjelo</s></a>
-      <p>Ukidamo ljudska radna mjesta s povjerenjem.</p>
-      <a class="btn btn--sm" href="#provjera">Pokreni provjeru</a>
+      <a class="brand" href="#vrh"><span class="brand__icon"><svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="2" width="8" height="4" style="fill:var(--pen)"/><rect x="1" y="3" width="6" height="2" style="fill:var(--yellow)"/><rect x="3" y="3" width="2" height="2" style="fill:var(--pen)"/></svg></span>KAI-SOL</a>
+      <p>Implementacija AI agenata za male i srednje firme.</p>
+      <a class="btn btn--sm" href="#kontakt">Dogovorite razgovor</a>
     </div>
     <div>
-      <h3>Proizvod</h3>
+      <h3>Usluge</h3>
       <ul>
-        <li><a href="#kako">Kako radi</a></li>
-        <li><a href="#usluge">Usluge</a></li>
-        <li><a href="#cijene">Cijene</a></li>
-        <li><a href="#provjera">Provjera viška</a></li>
+        <li><a href="#usluge">Agenti</a></li>
+        <li><a href="#kako">Kako radimo</a></li>
+        <li><a href="#suradnja">Suradnja</a></li>
+        <li><a href="#procjena">Procjena procesa</a></li>
       </ul>
     </div>
     <div>
-      <h3>Tvrtka</h3>
+      <h3>KAI-SOL</h3>
       <ul>
         <li><a href="#primjer">Primjer</a></li>
         <li><a href="#pitanja">Pitanja</a></li>
-        <li><a href="#darovi">Darovi</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
       </ul>
     </div>
     <div>
-      <h3>Inženjering</h3>
-      <p>Broj zaposlenih: 1<span class="ast">*</span></p>
-      <p class="note"><span class="ast">*</span> Zakonska obveza. Molimo ne obraćajte mu se.</p>
-      <p class="fired">Čovjek koji je počeo raditi ovu stranicu dobio je otkaz na pola posla. Dovršio ju je OTPISIVAČ-5.</p>
+      <h3>Kontakt</h3>
+      <ul>
+        <li><a href="mailto:info@kai-sol.com">info@kai-sol.com</a></li>
+      </ul>
     </div>
   </div>
   <div class="closing">
     <div class="wrap">
-      <strong>Otpustili smo cijeli tim<span class="ast">*</span>. Vi ste sljedeći.</strong>
-      <span>* Osim jednog. Zakon to traži.</span>
+      <strong>Agent radi posao. <a href="#kontakt">Vi vodite firmu.</a></strong>
     </div>
   </div>
   <div class="wrap legal">
-    <span>© Zastarjelo · Sva ljudska prava pridržana. Zasad.</span>
-    <span>Napisao OTPISIVAČ-5 · Lektorirao OTPISIVAČ-5 · Ovjerio OTPISIVAČ-5</span>
+    <span>© KAI-SOL</span>
+    <span>kai-sol.com</span>
   </div>
 </footer>
-
-<div class="toast" id="toast" hidden>
-  <span>Ne koristimo kolačiće za praćenje. Stroj vas ionako prati.</span>
-  <button class="btn btn--sm" type="button" id="toast-ok">Razumijem</button>
-</div>
 
 <script>
 (function(){
   "use strict";
-  var doc = document.documentElement;
-  doc.classList.add("js");
+  document.documentElement.classList.add("js");
   var still = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* Pixel icons from 8x8 masks */
   var PX = {
-    eye:   ["..####..",".#....#.","#..##..#","#.####.#","#..##..#",".#....#.","..####..","........"],
-    funnel:["########",".######.","..####..","...##...","...##...","...##...","...##...","........"],
-    swap:  ["..#.....",".##.....","########",".##.....","..#..#..",".....##.","########",".....##."],
-    cake:  ["..#..#..","..#..#..",".######.",".#.##.#.","########","#.#..#.#","########","........"],
     lens:  [".####...","#....#..","#....#..","#....#..",".####...","....##..",".....##.","......##"],
-    pair:  [".#....#.","###..###",".#....#.","###..###","#.#..#.#",".#....#.","#.#..#.#","........"],
-    drop:  ["...#....","..###...",".#####..",".#####..","#######.","#######.",".#####..","..###..."],
-    badge: ["########","#......#","#.##...#","#.##.###","#......#","#.######","#......#","########"]
+    flask: ["..####..","...##...","...##...","..#..#..",".#....#.","#.####.#","#......#",".######."],
+    plug:  ["..#..#..","..#..#..",".######.",".######.","..####..","...##...","...##...","...##..."],
+    shield:["########","#......#","#.....##","##...#.#","#.#.#..#","#..#...#",".#....#.","..####.."],
+    mail:  ["########","##....##","#.#..#.#","#..##..#","#......#","#......#","########","........"],
+    doc:   [".#####..",".#...##.",".#....#.",".#.##.#.",".#....#.",".#.##.#.",".#....#.",".######."],
+    chat:  [".######.","#......#","#.#.#..#","#......#",".######.","..#.....",".#......","........"],
+    gear:  ["...##...",".#.##.#.","..####..","###..###","###..###","..####..",".#.##.#.","...##..."]
   };
   Array.prototype.forEach.call(document.querySelectorAll("svg[data-px]"), function(svg){
     var mask = PX[svg.getAttribute("data-px")];
@@ -636,152 +656,61 @@
     svg.innerHTML = out;
   });
 
-  /* Live counters: one role every 4 seconds */
-  var fmt = function(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); };
-  var EPOCH = Date.UTC(2026, 9, 23, 0, 0, 0), BASE = 2731554;
-  var totalEl = document.querySelector("[data-total]"), todayEl = document.querySelector("[data-today]");
-  function tick(){
-    var now = new Date();
-    var total = BASE + Math.max(0, Math.floor((now.getTime() - EPOCH) / 4000));
-    var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-    var today = Math.floor((now.getTime() - midnight) / 4000);
-    if (totalEl) totalEl.textContent = fmt(total);
-    if (todayEl) todayEl.textContent = fmt(today);
-  }
-  tick();
-  setInterval(tick, 4000);
-
-  /* Bars grow when seen */
-  var cmp = document.querySelector(".cmp");
-  if (cmp) {
-    if (still || !("IntersectionObserver" in window)) cmp.classList.add("on");
-    else {
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if (e.isIntersecting) { cmp.classList.add("on"); io.disconnect(); } });
-      }, { threshold: .4 });
-      io.observe(cmp);
-    }
-  }
-
-  /* Redundancy check. OTPISIVAČ-5 answers through the API when API_URL is set;
-     the local table below answers when it isn't, or when the API fails.
-     e is how exposed the work is to AI and automation (0 hands-on, 1 pure screen work),
-     ordered after the ILO generative-AI exposure gradient: clerical highest, trades lowest. */
-  var API_URL = "https://zastarjelo-api.kristijanilic58.workers.dev/check";
-  var JOBS = [
-    { k: ["politic", "sabor", "zastupnik", "ministar", "nacelnik", "zupan"], exempt: true, t: "Stroj je pročitao saborske zapisnike i odbio posao." },
-    { k: ["student", "ucenik", "nezaposlen", "penzioner", "umirovljen"], none: true, t: "Ne možete dobiti otkaz. Stroj je zbunjen i pomalo ljubomoran." },
-    { k: ["svecenik", "fratar", "casna"], e: .03, t: "Stroj je pokušao ispovijedati. Dobio je pokoru." },
-    { k: ["unos podataka", "daktilograf", "zapisnicar", "call cent", "pozivni centar", "korisnicka podrska", "korisnicke podrske", "telefonist"], e: .94, t: "Stroj se javlja iz prve i nikoga ne stavlja na čekanje. Samo na listu." },
-    { k: ["prevoditelj", "prevodi", "lektor", "copywriter", "tekstopis", "sadrzaj", "seo"], e: .9, t: "Ovu rečenicu nije napisao čovjek. Primijetili ste? Ni vaš šef." },
-    { k: ["administrat", "referent", "sluzbenik", "tajni", "uredsk", "arhivar"], e: .86, t: "Pečat je naučio sam lupati. Trebalo mu je jedno popodne." },
-    { k: ["knjigovod", "racunovod", "obracun", "likvidator", "financijsk"], e: .82, t: "Tablica je spremna. Vi ste stupac koji se briše." },
-    { k: ["osiguranj", "telemarket", "turisticki agent", "putnick", "bankar", "bankovn", "kreditn"], e: .8, t: "Stroj nikad ne zaboravi poslati ponudu. Ni podsjetnik na podsjetnik." },
-    { k: ["program", "developer", "softver", "koder", "frontend", "backend", "full stack", "fullstack", "tester"], e: .72, t: "Stroj već piše vaš kod. I ovaj tekst." },
-    { k: ["dizajn", "ilustrator", "animator"], e: .68, t: "Stroj radi 400 logotipa u minuti. Svi su isti. Nikome ne smeta." },
-    { k: ["novinar", "urednik", "marketing", "oglasavanj", "odnosi s javnoscu", "analiticar", "podatkovn", "data scien", "influencer", "youtuber"], e: .66, t: "Stroj već piše vijesti. I ispravke vijesti." },
-    { k: ["pravnik", "odvjetni", "paralegal", "biljeznik"], e: .52, t: "Stroj je pročitao sve zakone. Na sud ga ipak još ne puštaju." },
-    { k: ["recepcion", "blagajn", "prodavac", "trgovac", "komercijalist"], e: .5, t: "Samoposlužna blagajna šalje pozdrave." },
-    { k: ["kuhar", "sef kuhinje", "pekar", "slasticar", "mesar", "pizza"], e: .12, t: "Stroj zna recept. Ne zna probati umak." },
-    { k: ["konobar", "barmen", "barista", "sobaric", "hostes"], e: .16, t: "Stroj ne zna nositi šest tanjura. Ni podnijeti goste." },
-    { k: ["direktor", "menadzer", "manager", "sef", "voditelj", "poduzetnik", "vlasnik"], e: .38, t: "Vi potpisujete ukidanje ostalih. Vaše dolazi zadnje." },
-    { k: ["arhitekt"], e: .45, t: "Stroj crta tlocrt u sekundi. Statika mu još nije jača strana." },
-    { k: ["znanstven", "istrazivac", "doktorand"], e: .4, t: "Stroj piše radove brže. Recenzenti to još nisu primijetili." },
-    { k: ["inzenjer"], e: .33, t: "Stroj računa brže. Potpisati projekt ipak ne smije." },
-    { k: ["odgojitelj", "vrtic"], e: .08, t: "Stroj je probao čuvati djecu. Dobio je plastelin u ventilator." },
-    { k: ["ucitelj", "nastavni", "profesor", "predavac"], e: .25, t: "Učenici su ionako već pitali stroj. U 7:15 ga ipak nitko ne sluša." },
-    { k: ["farmaceut", "ljekarn", "laborant"], e: .35, t: "Stroj zna sve nuspojave. Recept s rukopisom liječnika ipak ne može pročitati." },
-    { k: ["psiholog", "psihoterapeut", "socijalni radnik", "pedagog", "logoped"], e: .18, t: "Stroj sluša bez prekidanja. Klijenti ipak traže nekoga tko kima." },
-    { k: ["medicinska sestra", "medicinski tehnicar", "sestra", "bolnicar", "njegovatelj", "primalja"], e: .07, t: "Stroj ne zna promijeniti posteljinu dok je pacijent u njoj." },
-    { k: ["kirurg", "lijecn", "doktor", "zubar", "stomatolog", "veterinar", "fizioterapeut"], e: .12, t: "Zasad ste sigurni. Stroj ne želi čekati u čekaonici." },
-    { k: ["pilot", "kontrolor leta", "strojovod"], e: .2, t: "Stroj bi letio. Putnici ipak žele nekoga za koga mogu moliti." },
-    { k: ["vozac", "kamion", "taksi", "dostavljac", "kurir", "autobus"], e: .3, t: "Samovozeći kamion još ne zna proći kroz Zagreb u špici." },
-    { k: ["skladist", "vilicar", "magaciner", "komisioner"], e: .32, t: "Roboti u skladištu već voze. Vama još daju da potpišete otpremnicu." },
-    { k: ["cnc", "operater", "proizvodn", "pakir"], e: .28, t: "Linija se automatizira već 50 godina. Vi ste i dalje tu. Stroj je impresioniran." },
-    { k: ["offset", "tiskar", "graficar", "knjigovez", "strojar", "strojobravar", "tokar", "glodac"], e: .09, t: "Stroj zna poslati nalog za tisak. Kad se papir zaglavi, zove vas." },
-    { k: ["instalater", "elektricar", "monter", "stolar", "zidar", "tesar", "keramicar", "soboslikar", "licilac", "krovopokrivac", "bravar", "zavarivac", "limar", "fasader", "gradevin", "gradilist"], e: .05, t: "Stroj ne zna popraviti bojler. Još uvijek gleda tutorijal." },
-    { k: ["mehanicar", "serviser", "vulkanizer"], e: .08, t: "Stroj pronađe kvar. Pod auto ipak ne može leći." },
-    { k: ["frizer", "brijac", "kozmetic", "manikir", "pedikir", "maser", "tetovir", "tattoo"], e: .05, t: "Stroj je probao šišati. Stroj više ne šiša." },
-    { k: ["cistac", "cistacic", "spremac", "higijenicar", "domar", "smetlar", "komunaln", "vrtlar"], e: .06, t: "Robotski usisavač je opet zapeo pod kaučem." },
-    { k: ["poljoprivred", "seljak", "ratar", "vinogradar", "ribar", "sumar", "pcelar", "stocar", "farmer"], e: .07, t: "Stroj zna prognozu. Kravu ipak ne zna pomusti kad joj se ne da." },
-    { k: ["policaj", "vatrogas", "vojnik", "zastitar", "portir", "carinik", "spasilac"], e: .14, t: "Stroj bi patrolirao. Stepenice su mu još problem." },
-    { k: ["nogomet", "sportas", "trener", "glumac", "glazbenik", "pjevac", "muzicar", "komicar", "plesac"], e: .15, t: "Stroj zna pjevati. Publika ipak želi nekoga tko se može oznojiti." }
+  /* Process check. A rough, local estimate: e is the share of the task an agent can
+     realistically take over (0 hands-on work, 1 pure screen and paper work). */
+  var TASKS = [
+    { k: ["prepis", "prepisuj", "unos podataka", "unosim", "upisuj", "kopir", "copy paste", "excel", "tablic"], e: .85, a: "Agent za unos podataka", t: "Prepisivanje iz jednog mjesta u drugo najčišći je slučaj za agenta. Čovjek provjerava samo ono što agent označi." },
+    { k: ["racun", "faktur", "knjizenj", "ulazni"], e: .8, a: "Agent za obradu računa", t: "Računi imaju predvidljivu strukturu. Agent izvlači stavke i priprema knjiženje, a odstupanja šalje na provjeru." },
+    { k: ["narudzb", "ponud", "upit za cijen", "cjenik"], e: .72, a: "Agent za narudžbe i ponude", t: "Agent čita narudžbu ili upit, provjerava cijene i zalihe i priprema nalog ili ponudu. Vi potvrđujete prije slanja." },
+    { k: ["prijevod", "prevod", "prevest"], e: .75, a: "Agent za prijevode", t: "Prvu verziju prijevoda agent radi odmah, uz vaš rječnik pojmova. Čovjek radi završno čitanje." },
+    { k: ["mail", "upit", "inbox", "posta", "dopis"], e: .72, a: "Agent za e-mail", t: "Razvrstavanje i odgovori na standardna pitanja idealni su za agenta. Osjetljive poruke i dalje idu čovjeku." },
+    { k: ["zapisnik", "sastan", "biljeske"], e: .7, a: "Asistent za sastanke", t: "Agent piše zapisnik, izvlači zadatke i šalje ih odgovornima. Vi samo pročitate i potvrdite." },
+    { k: ["termin", "rezervacij", "zakaz", "kalendar", "raspored"], e: .68, a: "Agent za termine", t: "Usklađivanje termina i podsjetnici rade se sami. Iznimke i promjene u zadnji čas ostaju ljudima." },
+    { k: ["izvjestaj", "izvjesce", "report", "analiz", "statistik"], e: .66, a: "Agent za izvještaje", t: "Agent skuplja podatke iz više izvora i slaže izvještaj u isto vrijeme svaki tjedan. Zaključke i dalje donosite vi." },
+    { k: ["podrsk", "reklamacij", "kupc", "korisnik", "klijent"], e: .6, a: "Agent za korisničku podršku", t: "Česta pitanja agent rješava sam. Reklamacije priprema sa svim podacima, a odluku donosi čovjek." },
+    { k: ["nabav", "dobavljac"], e: .6, a: "Agent za nabavu", t: "Agent prati zalihe, priprema upite dobavljačima i uspoređuje ponude. Narudžbu odobravate vi." },
+    { k: ["objav", "drustven", "newsletter", "marketing", "oglas"], e: .58, a: "Agent za sadržaj", t: "Agent priprema prijedloge objava i newslettera iz vaših materijala. Glas brenda i konačnu odluku čuvate vi." },
+    { k: ["skladist", "zalih", "inventur", "otpremnic", "primk"], e: .55, a: "Agent za skladišne dokumente", t: "Papirni dio skladišta ide agentu: primke, otpremnice, usklađivanje stanja. Fizički rad s robom ostaje ljudima." },
+    { k: ["plac", "obracun", "kadrovsk", "bolovanj", "godisnj"], e: .5, a: "Asistent za kadrovsku", t: "Strogi propisi znače da agent priprema, a čovjek provjerava. I dalje se uštedi velik dio sati." },
+    { k: ["ugovor", "pravn", "natjecaj", "javna nabava"], e: .45, a: "Asistent za dokumente", t: "Agent uspoređuje dokument s predloškom i označava odstupanja i rokove. Potpis i odluka ostaju vama." },
+    { k: ["popravak", "popravlj", "montaz", "voznj", "vozim", "dostav", "ciscenj", "kuhanj", "kuham", "sisanj", "proizvodn", "pakiranj", "pakiram", "utovar"], e: .1, a: "Agent za papirologiju oko posla", t: "Fizički rad agent ne može preuzeti. Može preuzeti papirologiju oko njega: radne naloge, raspored, izvještaje i komunikaciju." }
   ];
-  var GENERIC = [
-    "Vaš opis posla stane u jedan prompt. Kratki.",
-    "Vaš nasljednik je već prošao probni rok.",
-    "Kolege su potvrdile. Stroj je pitao i njih.",
-    "Stroj ne prepoznaje vaš posao. To ga brine više nego vas."
-  ];
+  var SIGNALS = ["rucno", "svaki dan", "svakodnevno", "svaki tjedan", "ponavlja", "stalno", "uvijek isto", "sat vremena", "sati"];
+
   function plain(s){ return s.toLowerCase().replace(/đ/g, "d").normalize("NFD").replace(/[̀-ͯ]/g, ""); }
-  function hash(s){ var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
-  function plural(n, one, few, many){
-    var d = n % 10, dd = n % 100;
-    if (d === 1 && dd !== 11) return n + " " + one;
-    if (d >= 2 && d <= 4 && (dd < 12 || dd > 14)) return n + " " + few;
-    return n + " " + many;
-  }
-  function eta(m){
-    if (m < 12) return plural(m, "mjesec", "mjeseca", "mjeseci");
-    var y = Math.floor(m / 12), r = m % 12, s = plural(y, "godina", "godine", "godina");
-    return y < 5 && r ? s + " i " + plural(r, "mjesec", "mjeseca", "mjeseci") : s;
-  }
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function clamp(n, lo, hi){ n = Math.round(Number(n)); return isNaN(n) ? lo : Math.min(hi, Math.max(lo, n)); }
 
-  function localVerdict(raw){
-    var p = plain(raw), h = hash(p), hit = null;
-    JOBS.forEach(function(j){ if (!hit && j.k.some(function(k){ return p.indexOf(k) !== -1; })) hit = j; });
-    if (hit && (hit.exempt || hit.none)) return { special: hit.exempt ? "IZUZETO" : "NIJE PRIMJENJIVO", komentar: hit.t };
-    var e = hit ? hit.e : .3 + (h % 31) / 100;
-    var jitter = .85 + (h % 31) / 100;
+  function estimate(raw){
+    var p = plain(raw), hit = null;
+    TASKS.forEach(function(t){ if (!hit && t.k.some(function(k){ return p.indexOf(k) !== -1; })) hit = t; });
+    var bonus = SIGNALS.filter(function(s){ return p.indexOf(s) !== -1; }).length * .04;
+    var e = Math.min(.9, (hit ? hit.e : .35) + bonus);
+    var share = Math.round(e * 20) * 5;
     return {
-      naziv: !hit ? "Neklasificirani čovjek" : raw.length <= 40 ? raw : "Vaše radno mjesto",
-      mjeseci: clamp(300 * Math.pow(6 / 300, e) * jitter, 3, 360),
-      vjerojatnost: clamp(3 + 94 * Math.pow(e, 1.15) + (h % 7) - 3, 1, 99),
-      kako: [],
-      komentar: hit ? hit.t : GENERIC[h % GENERIC.length]
+      share: share,
+      agent: hit ? hit.a : "Agent po mjeri",
+      note: hit ? hit.t : "Iz opisa ne vidimo dovoljno da procijenimo točno. Napišite koje alate koristite i koliko često se posao ponavlja, ili nam ga opišite na razgovoru."
     };
   }
 
   function render(v){
-    if (v.special) return '<div class="verdict"><strong class="ok">' + v.special + '</strong><span>' + esc(v.komentar) + '</span></div>';
-    if (v.vrsta === "izmisljeno" || v.vrsta === "nerazumljivo") return '<div class="verdict"><strong class="ok">' +
-      (v.vrsta === "izmisljeno" ? "IZVAN NADLEŽNOSTI" : "NEKLASIFICIRANO") + '</strong>' +
-      '<span>Radno mjesto: ' + esc(v.naziv) + '</span><em>' + esc(v.komentar) + '</em></div>';
-    var p = clamp(v.vjerojatnost, 0, 100);
-    var label = p >= 70 ? "VIŠAK" : p >= 35 ? "NA LISTI" : "ZASAD SIGURNO";
-    return '<div class="verdict"><strong' + (p < 35 ? ' class="ok"' : '') + '>' + label + '</strong>' +
-      '<span>Radno mjesto: ' + esc(v.naziv) + '</span>' +
-      '<span>Procijenjeno vrijeme do ukidanja: ' + eta(clamp(v.mjeseci, 1, 600)) + '.</span>' +
-      '<span>Vjerojatnost u idućih 10 godina: ' + p + '&nbsp;%.</span>' +
-      '<em>' + esc(v.komentar) + '</em></div>';
-  }
-
-  function ask(raw){
-    if (!API_URL || !window.fetch) return Promise.reject(new Error("no api"));
-    var ctrl = "AbortController" in window ? new AbortController() : null;
-    var timer = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 25000);
-    return fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ role: raw }),
-      signal: ctrl ? ctrl.signal : undefined
-    }).then(function(r){
-      clearTimeout(timer);
-      if (!r.ok) throw new Error("http " + r.status);
-      return r.json();
-    }).then(function(v){
-      if (!v || typeof v.naziv !== "string" || !Array.isArray(v.kako)) throw new Error("shape");
-      return v;
-    });
+    var label = v.share >= 60 ? "DOBAR KANDIDAT" : v.share >= 30 ? "DJELOMIČNO" : "VEĆINOM RUČNO";
+    var cls = v.share >= 60 ? "" : v.share >= 30 ? ' class="mid"' : ' class="low"';
+    return '<div class="verdict"><strong' + cls + '>' + label + '</strong>' +
+      '<span>Prijedlog: ' + esc(v.agent) + '</span>' +
+      '<span>Agent može preuzeti otprilike ' + v.share + '&nbsp;% koraka.</span>' +
+      '<div class="meter" aria-hidden="true"><i style="width:' + v.share + '%"></i></div>' +
+      '<em>' + esc(v.note) + '</em>' +
+      '<em>Gruba procjena prema opisu. Točnu dajemo nakon razgovora.</em>' +
+      '<a class="btn btn--sm" href="#kontakt" data-send>Pošaljite nam ovaj opis →</a></div>';
   }
 
   var check = document.getElementById("check"), term = document.getElementById("term"), btn = document.getElementById("check-btn");
-  var roleEl = document.getElementById("role"), countEl = document.getElementById("role-count");
-  if (roleEl && countEl) {
-    roleEl.addEventListener("input", function(){ countEl.textContent = roleEl.value.length + "/280"; });
-    roleEl.addEventListener("keydown", function(e){
+  var taskEl = document.getElementById("task"), countEl = document.getElementById("task-count");
+  var lastTask = "";
+  if (taskEl && countEl) {
+    taskEl.addEventListener("input", function(){ countEl.textContent = taskEl.value.length + "/280"; });
+    taskEl.addEventListener("keydown", function(e){
       if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); if (!btn.disabled) check.requestSubmit ? check.requestSubmit() : btn.click(); }
     });
   }
@@ -794,33 +723,36 @@
   if (check) check.addEventListener("submit", function(e){
     e.preventDefault();
     timers.forEach(clearTimeout); timers = [];
-    var raw = document.getElementById("role").value.replace(/\s+/g, " ").trim();
-    if (raw.length < 2) { term.innerHTML = '<p>Unesite radno mjesto. Stroj ne pogađa. Još.</p>'; return; }
+    var raw = taskEl.value.replace(/\s+/g, " ").trim();
+    if (raw.length < 4) { term.innerHTML = "<p>Opišite zadatak u nekoliko riječi.</p>"; return; }
+    lastTask = raw;
     btn.disabled = true;
     term.innerHTML = "";
-    var answer = ask(raw).catch(function(){ return localVerdict(raw); });
-    line("Učitavam opis posla: „" + esc(raw.length > 60 ? raw.slice(0, 57) + "…" : raw) + "“", 0)
-      .then(function(){ return line("Uspoređujem s OTPISIVAČEM-5…", 550); })
-      .then(function(){ return answer; })
-      .then(function(v){
-        var steps = (v.kako || []).slice(0, 3).map(function(s){ return esc(s); });
-        if (!steps.length && !v.special) steps = ["Računam otpremninu… 0,00 €", "Obavještavam kadrovsku…"];
-        return steps.reduce(function(chain, s){ return chain.then(function(){ return line(s, 550); }); }, Promise.resolve())
-          .then(function(){ term.insertAdjacentHTML("beforeend", render(v)); });
-      })
-      .then(function(){ btn.disabled = false; }, function(){ btn.disabled = false; });
+    var v = estimate(raw);
+    line("Čitam opis: „" + esc(raw.length > 60 ? raw.slice(0, 57) + "…" : raw) + "“", 0)
+      .then(function(){ return line("Tražim korake koji se ponavljaju…", 500); })
+      .then(function(){ return line("Provjeravam gdje treba ljudska odluka…", 500); })
+      .then(function(){ term.insertAdjacentHTML("beforeend", render(v)); btn.disabled = false; });
+  });
+  if (term) term.addEventListener("click", function(e){
+    var a = e.target.closest && e.target.closest("[data-send]");
+    if (!a) return;
+    var msg = document.getElementById("c-msg");
+    if (msg && lastTask && msg.value.indexOf(lastTask) === -1) msg.value = (msg.value ? msg.value + "\n\n" : "") + lastTask;
   });
 
-  /* Cookie toast */
-  var toast = document.getElementById("toast"), seen = false;
-  try { seen = localStorage.getItem("zastarjelo-toast") === "1"; } catch (err) {}
-  if (toast && !seen) {
-    toast.hidden = false;
-    document.getElementById("toast-ok").addEventListener("click", function(){
-      toast.hidden = true;
-      try { localStorage.setItem("zastarjelo-toast", "1"); } catch (err) {}
-    });
-  }
+  /* Contact: opens the visitor's mail client with a prepared message */
+  var form = document.getElementById("contact");
+  if (form) form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = form.ime.value.trim(), mail = form.email.value.trim(), err = document.getElementById("c-err");
+    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) { err.textContent = "Upišite ime i ispravnu e-mail adresu."; return; }
+    err.textContent = "";
+    var body = "Ime: " + name + "\nE-mail: " + mail + (form.tvrtka.value.trim() ? "\nTvrtka: " + form.tvrtka.value.trim() : "") + "\n\n" + form.poruka.value.trim();
+    var subject = "Upit: AI agent" + (form.tvrtka.value.trim() ? " za " + form.tvrtka.value.trim() : "");
+    window.location.href = "mailto:info@kai-sol.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    document.getElementById("c-sent").hidden = false;
+  });
 })();
 </script>
 </body>
