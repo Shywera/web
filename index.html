@@ -1394,7 +1394,6 @@
     ctx.globalAlpha = 1;
   }
 
-  window.__sw = function(){ return all.filter(function(j){ return j.state !== "done"; }).slice(0, 12).map(function(j){ return [j.kind, j.state, (j.el.id || j.el.className).slice(0, 30), j.r && Math.round(j.r.top), j.si, j.steps && j.steps[j.si] && !!j.steps[j.si].ok, j.bot && [Math.round(j.bot.x), Math.round(j.bot.y)]].join(" "); }); };
   function wake(){ if (!running) { running = true; requestAnimationFrame(frame); } }
 
   function skipAll(){
