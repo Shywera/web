@@ -957,6 +957,7 @@
     var w = 0; rows.concat([title]).forEach(function(r){ w = Math.max(w, ctx.measureText(r).width); });
     w = Math.round(w + 26); var h = 22 + rows.length * 18;
     x = Math.round(Math.max(4, Math.min(vw - w - 4, x))); y = Math.round(Math.max(RUL + 4, Math.min(vh - h - 4, y)));
+    if (small) return { x: x, y: y, w: w, h: h }; /* phones: the code drawer shows this instead */
     ctx.fillStyle = "#000"; ctx.fillRect(x + 3, y + 3, w, h);
     ctx.fillStyle = "#131416"; ctx.fillRect(x, y, w, h);
     ctx.strokeStyle = "#43464d"; ctx.strokeRect(x + .5, y + .5, w - 1, h - 1);
@@ -970,6 +971,7 @@
   function swatches(x, y, pick, color){
     var w = SWATCH.length * 20 + 8;
     x = Math.round(Math.max(4, Math.min(vw - w - 4, x))); y = Math.round(Math.max(RUL + 4, Math.min(vh - 30, y)));
+    if (small) return [x + 14 + pick * 20, y + 14];
     ctx.fillStyle = "#000"; ctx.fillRect(x + 3, y + 3, w, 28);
     ctx.fillStyle = "#131416"; ctx.fillRect(x, y, w, 28); ctx.strokeStyle = "#43464d"; ctx.strokeRect(x + .5, y + .5, w - 1, 27);
     SWATCH.forEach(function(c, q){
@@ -1236,13 +1238,13 @@
     var c = j.code, r = j.el.getBoundingClientRect();
     if (!c || r.bottom < 0 || r.top > vh) return;
     var lines = [];
-    c.html.forEach(function(t){ if (t) lines.push({ h: t }); });
+    c.html.slice(0, small ? 1 : 9).forEach(function(t){ if (t) lines.push({ h: t }); });
     lines.push({ s: c.sel + " {" });
-    var css = c.css, max = small ? 4 : 8;
+    var css = c.css, max = small ? 3 : 8;
     css.slice(Math.max(0, css.length - max)).forEach(function(o){ lines.push({ k: o.k, v: o.v, o: o }); });
     lines.push({ s: "}" });
     ctx.font = "11px " + MONO; ctx.textBaseline = "middle"; CW = ctx.measureText("0").width || 7;
-    var w = small ? Math.min(250, vw - 20) : 290, h = 20 + lines.length * LH + 6, maxCh = Math.floor((w - 34) / CW);
+    var w = small ? vw - 16 : 290, h = 20 + lines.length * LH + 6, maxCh = Math.floor((w - 34) / CW);
     /* place it next to the block, never over the text being written when there is room */
     var spots = [[r.right + 16, r.top], [r.left - w - 16, r.top], [r.left, r.top - h - 12], [r.left, r.bottom + 12]], x = null, y = null;
     for (var q = 0; q < spots.length; q++) {
@@ -1250,12 +1252,16 @@
       if (sx >= LR + 4 && sx + w <= vw - 4 && sy >= RUL + 4 && sy + h <= vh - 4) { x = sx; y = sy; break; }
     }
     if (x === null) { x = Math.max(LR + 4, Math.min(vw - w - 4, r.left)); y = Math.max(RUL + 4, Math.min(vh - h - 50, r.bottom + 12)); }
+    /* phones: one tidy drawer docked above the skip button instead of cards floating over the page */
+    if (small) { x = 8; y = vh - h - 62; }
     x = Math.round(x); y = Math.round(y);
     ctx.globalAlpha = alpha;
-    /* connector to the element */
-    ctx.strokeStyle = b; ctx.setLineDash([2, 3]); ctx.beginPath();
-    ctx.moveTo(x + (x > r.right ? 0 : w / 2), y + (x > r.right ? 10 : y > r.bottom ? 0 : h)); ctx.lineTo(x > r.right ? r.right : r.left + 10, x > r.right ? r.top + 10 : y > r.bottom ? r.bottom : r.top);
-    ctx.stroke(); ctx.setLineDash([]);
+    if (!small) {
+      /* connector to the element */
+      ctx.strokeStyle = b; ctx.setLineDash([2, 3]); ctx.beginPath();
+      ctx.moveTo(x + (x > r.right ? 0 : w / 2), y + (x > r.right ? 10 : y > r.bottom ? 0 : h)); ctx.lineTo(x > r.right ? r.right : r.left + 10, x > r.right ? r.top + 10 : y > r.bottom ? r.bottom : r.top);
+      ctx.stroke(); ctx.setLineDash([]);
+    }
     ctx.fillStyle = "#000"; ctx.fillRect(x + 4, y + 4, w, h);
     ctx.fillStyle = "#0e0f11"; ctx.fillRect(x, y, w, h);
     ctx.fillStyle = "#1a1b1e"; ctx.fillRect(x, y, w, 18);
@@ -1283,6 +1289,14 @@
       if (o.n < full.length && Math.floor(now * 4) % 2 === 0) { ctx.fillStyle = b; ctx.fillRect(lx + Math.min(shown.length, maxCh) * CW + (/^#/.test(L.v) && shown.length > kEnd + 2 ? 12 : 0), ly - 6, 2, 12); }
     });
     ctx.globalAlpha = 1;
+  }
+  /* live code editors for blocks being built (one docked drawer on phones) */
+  function drawCards(){
+    var cards = 0, cmax = small ? 1 : 3;
+    for (var cq = 0; cq < all.length && cards < cmax; cq++) {
+      var cj = all[cq];
+      if (cj.state === "run" && cj.code && cj.r && cj.r.bottom > RUL && cj.r.top < vh) { drawCode(cj, 1, cj.color || "#f5c518"); cards++; }
+    }
   }
   function drawHtml(t, x, y){
     var parts = t.split(/(<\/?[\w-]+|[\w-]+=|"[^"]*"|>|\/\/.*$)/);
@@ -1433,12 +1447,7 @@
     }
     ctx.setLineDash([]);
     drawFx(dt);
-    /* live code editors for blocks being built (one at a time on phones) */
-    var cards = 0, cmax = small ? 1 : 3;
-    for (var cq = 0; cq < all.length && cards < cmax; cq++) {
-      var cj = all[cq];
-      if (cj.state === "run" && cj.code && cj.r && cj.r.bottom > RUL && cj.r.top < vh) { drawCode(cj, 1, cj.color || "#f5c518"); cards++; }
-    }
+    if (!small) drawCards();
 
     var busy = active > 0;
     bots.forEach(function(b, bi){
@@ -1492,6 +1501,7 @@
       if (!park || b.job) { var lx = x + 14 + tg.w > vw ? x - tg.w - 4 : x + 14; ctx.drawImage(tg.c, lx, y + 20, tg.w, 16); }
     });
 
+    if (small) drawCards(); /* phones: the docked drawer sits on top of everything */
     if (skip) skip.hidden = pending <= 0;
     if (!busy && !fx.length && !backlog && (small || pending <= 0 && park)) { running = false; last = 0; if (pending <= 0) ctx.clearRect(0, 0, vw, vh); return; }
     requestAnimationFrame(frame);
