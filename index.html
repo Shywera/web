@@ -281,7 +281,7 @@
   /* Swarm build: bot cursors design the page in front of the visitor (script at the end) */
   .swarm-pre .live,.swarm-pre .nav,.swarm-pre main,.swarm-pre .foot{opacity:0;animation:swarm-safe 0s 4s forwards}
   @keyframes swarm-safe{to{opacity:1}}
-  .swarm-cv{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:30}
+  .swarm-cv{position:fixed;inset:0;width:100%;height:100%;max-width:100%;pointer-events:none;z-index:30}
   .swarm .bt:not(.bt--on){opacity:0}
   .swarm .bt-art{background:transparent !important;border-color:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
   .swarm .bt--anim{transition:opacity .3s,background-color .4s,border-color .4s,box-shadow .4s,color .4s !important}
@@ -873,16 +873,17 @@
   }
 
   /* ---------- Viewport ---------- */
-  var vw = 0, vh = 0, dpr = 1, park = true, ax = 0, ay = 0, orbit = 40, RUL = 14;
+  var vw = 0, vh = 0, dpr = 1, park = true, ax = 0, ay = 0, orbit = 40, RUL = 14, LR = 14;
   function measure(){
-    vw = window.innerWidth; vh = window.innerHeight; small = vw < 600;
+    /* size from the canvas itself, so it always matches the visible viewport and never makes the page wider */
+    vw = cv.clientWidth || document.documentElement.clientWidth; vh = cv.clientHeight || window.innerHeight; small = vw < 600;
     dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
     cv.width = Math.round(vw * dpr); cv.height = Math.round(vh * dpr);
-    cv.style.width = vw + "px"; cv.style.height = vh + "px";
     var wrap = document.querySelector(".wrap"), gap = wrap ? (vw - wrap.getBoundingClientRect().width) / 2 : 0;
     park = gap < 130;
     ax = vw - gap / 2; ay = vh * .45; orbit = Math.max(24, Math.min(64, gap / 2 - 30));
     RUL = small ? 9 : 16;
+    LR = small ? 0 : RUL; /* phones: top ruler only, so the content stays visually centred */
   }
 
   /* ---------- The swarm ---------- */
@@ -1125,7 +1126,9 @@
     var final = fam(el);
     j.lock = { minHeight: el.style.minHeight, minWidth: el.style.minWidth };
     var r = el.getBoundingClientRect();
-    if (j.kind !== "art") css(el, { minHeight: r.height + "px", minWidth: r.width + "px" });
+    if (j.kind !== "art") css(el, { minHeight: r.height + "px" });
+    /* only inline boxes need a width lock; block boxes already get their width from the layout */
+    if (j.kind !== "art" && /^inline/.test(s.display)) css(el, { minWidth: "min(" + r.width + "px, 100%)" });
     j.T = j.kind === "dup" || j.kind === "art" ? null : texts(el);
     if (j.T) typed(j.T, 0);
     var grey = { fontFamily: SERIF, color: "#8b8f97" }, greySmall = { fontFamily: SERIF, color: "#8b8f97", fontSize: (j.fs * .55).toFixed(1) + "px" };
@@ -1280,7 +1283,7 @@
       } else {
         b.cur = "arrow";
         var tx, ty;
-        if (park) { tx = vw - (small ? 9 : 12); ty = vh * (.3 + bi * (.4 / n)) + Math.sin(now * 1.4 + b.ph) * 4; }
+        if (park) { tx = small ? vw + 40 : vw - 12; /* phones: wait fully off-screen */ ty = vh * (.3 + bi * (.4 / n)) + Math.sin(now * 1.4 + b.ph) * 4; }
         else { var a = b.ph + now * b.spin; tx = ax + Math.cos(a) * orbit * b.rr; ty = ay + Math.sin(a) * orbit * 1.6 * b.rr; }
         steer(b, tx, ty, 520, dt);
         bots.forEach(function(o){
@@ -1326,7 +1329,7 @@
         ctx.globalAlpha = .55 * f.a; ctx.strokeStyle = f.color; ctx.setLineDash([2, 3]);
         ctx.beginPath();
         [r.left, r.right].forEach(function(x){ ctx.moveTo(px(x), RUL); ctx.lineTo(px(x), vh); });
-        ctx.moveTo(RUL, px(r.top)); ctx.lineTo(vw, px(r.top));
+        ctx.moveTo(LR, px(r.top)); ctx.lineTo(vw, px(r.top));
         ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
       } else if (f.kind === "flash") {
         f.a -= dt * 2;
@@ -1376,21 +1379,21 @@
   /* Design-tool rulers along the top and left edges while anything is being built */
   function drawRulers(){
     ctx.globalAlpha = rul;
-    ctx.fillStyle = "#0a0a0b"; ctx.fillRect(0, 0, vw, RUL); ctx.fillRect(0, 0, RUL, vh);
+    ctx.fillStyle = "#0a0a0b"; ctx.fillRect(0, 0, vw, RUL); ctx.fillRect(0, 0, LR, vh);
     jobs.forEach(function(j){
       if (j.state !== "run" || !j.r) return;
       ctx.fillStyle = j.color; ctx.globalAlpha = .35 * rul;
-      ctx.fillRect(Math.round(j.r.left), 0, Math.round(j.r.width), RUL); ctx.fillRect(0, Math.round(j.r.top), RUL, Math.round(j.r.height));
+      ctx.fillRect(Math.round(j.r.left), 0, Math.round(j.r.width), RUL); ctx.fillRect(0, Math.round(j.r.top), LR, Math.round(j.r.height));
     });
     ctx.globalAlpha = rul; ctx.fillStyle = "#43464d";
     var sy = window.scrollY || 0;
     for (var x = 0; x < vw; x += 10) { var hx = x % 100 === 0 ? RUL : x % 50 === 0 ? RUL * .55 : RUL * .3; ctx.fillRect(x, RUL - hx, 1, hx); }
-    for (var y = -(sy % 10); y < vh; y += 10) { var v = Math.round(y + sy), hy = v % 100 === 0 ? RUL : v % 50 === 0 ? RUL * .55 : RUL * .3; ctx.fillRect(RUL - hy, Math.round(y), hy, 1); }
+    if (LR) for (var y = -(sy % 10); y < vh; y += 10) { var v = Math.round(y + sy), hy = v % 100 === 0 ? RUL : v % 50 === 0 ? RUL * .55 : RUL * .3; ctx.fillRect(RUL - hy, Math.round(y), hy, 1); }
     if (!small) {
       ctx.fillStyle = "#8b8f97"; ctx.font = "10px " + MONO; ctx.textBaseline = "top";
       for (x = 100; x < vw; x += 100) ctx.fillText(String(x), x + 3, 2);
     }
-    ctx.fillStyle = "#2e3035"; ctx.fillRect(0, RUL, vw, 1); ctx.fillRect(RUL, 0, 1, vh);
+    ctx.fillStyle = "#2e3035"; ctx.fillRect(0, RUL, vw, 1); if (LR) ctx.fillRect(LR, 0, 1, vh);
     ctx.globalAlpha = 1;
   }
 
