@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="KAI-SOL radi poslovnu automatizaciju za male i srednje firme: interne skripte, aplikacije po mjeri i API integracije koje spajaju sustave koje već koristite.">
+<meta name="description" content="KAI-SOL radi poslovnu automatizaciju za male i srednje tvrtke: interne skripte, aplikacije po mjeri i API integracije koje spajaju sustave koje već koristite.">
 <meta name="theme-color" content="#0c0c0e">
 <link rel="canonical" href="https://kai-sol.com/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="KAI-SOL | Poslovna automatizacija i API integracije">
-<meta property="og:description" content="Interne skripte, aplikacije po mjeri i API integracije. Vaši sustavi razmjenjuju podatke sami, a ljudi ostaju na poslu koji traži čovjeka.">
+<meta property="og:description" content="Interne skripte, aplikacije po mjeri i API integracije. Vaši sustavi sami razmjenjuju podatke, a ljudi se bave poslom za koji je potreban čovjek.">
 <meta property="og:site_name" content="KAI-SOL">
 <meta property="og:url" content="https://kai-sol.com/">
 <meta property="og:locale" content="hr_HR">
@@ -22,7 +22,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%230c0c0e'/%3E%3Crect x='1' y='2' width='6' height='4' fill='%23f5c518'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23000'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/fonts/fonts.css">
 <script>(function(){try{var f=/[?&]swarm=1/.test(location.search),m=window.matchMedia;if(f||(m&&!m("(prefers-reduced-motion: reduce)").matches&&!navigator.webdriver&&!/bot|crawl|spider|slurp|lighthouse|headless|preview/i.test(navigator.userAgent)&&!sessionStorage.getItem("swarm-off")))document.documentElement.classList.add("swarm-pre")}catch(e){}})();</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"KAI-SOL","url":"https://kai-sol.com/","email":"info@kai-sol.com","description":"Poslovna automatizacija za male i srednje firme: interne skripte, aplikacije po mjeri i API integracije.","areaServed":"HR","knowsAbout":["Poslovna automatizacija","API integracije","Interne aplikacije","Automatizacija procesa"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"KAI-SOL","url":"https://kai-sol.com/","email":"info@kai-sol.com","description":"Poslovna automatizacija za male i srednje tvrtke: interne skripte, aplikacije po mjeri i API integracije.","areaServed":"HR","knowsAbout":["Poslovna automatizacija","API integracije","Interne aplikacije","Automatizacija procesa"]}</script>
 
 <style>
   :root{
@@ -189,6 +189,7 @@
   /* FAQ */
   .faq{display:grid;gap:2rem}
   .faq details{border-top:1px solid var(--line)}
+  .faq__head h2{margin:0}
   .faq details:last-child{border-bottom:1px solid var(--line)}
   .faq summary{list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1.1rem 0;font-weight:600;cursor:pointer}
   .faq summary::-webkit-details-marker{display:none}
@@ -273,6 +274,7 @@
     .grid4{grid-template-columns:repeat(4,1fr)}
     .grid3{grid-template-columns:repeat(3,1fr)}
     .story,.faq,.check__grid,.contact{grid-template-columns:1fr 1.2fr}
+    .faq__head{position:sticky;top:6rem;align-self:start}
     .term{min-height:15rem}
     .foot__grid{grid-template-columns:1.4fr 1fr 1fr 1fr}
     .sec,.check{padding-block:5.5rem}
@@ -336,8 +338,8 @@
     <div class="wrap">
       <div>
         <a class="badge" href="#usluge">Skripte · aplikacije · API integracije →</a>
-        <h1 id="naslov">Automatizacija koja radi <span class="mark">dosadni dio</span> posla.</h1>
-        <p class="lede">KAI-SOL gradi interne skripte, aplikacije i API integracije za male i srednje firme. Podaci sami putuju između vaših sustava, a <b>vaši ljudi ostaju na poslu koji traži čovjeka</b>.</p>
+        <h1 id="naslov">Automatizacija koja obavlja <span class="mark">dosadni dio</span> posla.</h1>
+        <p class="lede">KAI-SOL gradi interne skripte, aplikacije i API integracije za male i srednje tvrtke. Podaci sami putuju između vaših sustava, a <b>vaši se ljudi bave poslom za koji je potreban čovjek</b>.</p>
         <div class="hero__ctas">
           <a class="btn" href="#procjena">Procijenite svoj proces →</a>
           <a class="btn btn--ghost" href="#kako">Kako radimo</a>
@@ -431,7 +433,7 @@
           <rect x="176" y="106" width="18" height="2" style="fill:var(--green-d)"/>
         </svg>
         <ul class="tags">
-          <li class="tag tag--eye">▸ Svako pokretanje zapisano u dnevnik</li>
+          <li class="tag tag--eye">▸ Svako pokretanje zapisano u dnevniku</li>
           <li class="tag tag--o tag--in">▸ Ulaz: e-mail, PDF, API, tablice</li>
           <li class="tag tag--g tag--out">▸ Izlaz: gotovo, u vašem sustavu</li>
         </ul>
@@ -442,9 +444,9 @@
   <section class="stats" aria-label="Kako radimo, u brojkama">
     <div class="wrap">
       <dl>
-        <div class="stat"><dt>proces po pilotu, ne cijela firma odjednom</dt><dd>1</dd></div>
-        <div class="stat"><dt>pokretanja zapisano u dnevnik</dt><dd>100&nbsp;%</dd></div>
-        <div class="stat"><dt>pristupa podacima koji automatizaciji ne trebaju</dt><dd>0</dd></div>
+        <div class="stat"><dt>proces po pilotu, a ne cijela tvrtka odjednom</dt><dd>1</dd></div>
+        <div class="stat"><dt>pokretanja zapisano u dnevniku</dt><dd>100&nbsp;%</dd></div>
+        <div class="stat"><dt>pristupa podacima koji automatizaciji nisu potrebni</dt><dd>0</dd></div>
         <div class="stat"><dt>odobravate prije puštanja u rad</dt><dd>Vi</dd></div>
       </dl>
     </div>
@@ -462,10 +464,10 @@
           <label for="task">Opišite zadatak svojim riječima</label>
           <div class="field">
             <textarea class="input input--area" id="task" rows="3" maxlength="280" placeholder="npr. svaki dan prepisujemo narudžbe iz e-maila u ERP i šaljemo potvrdu kupcu" autocomplete="off"></textarea>
-            <button class="btn" id="check-btn" type="submit">Procijeni →</button>
+            <button class="btn" id="check-btn" type="submit">Procijenite →</button>
             <span class="count" id="task-count" aria-live="off">0/280</span>
           </div>
-          <small class="note">Ne upisujte osobne podatke ni poslovne tajne. Procjena se radi u vašem pregledniku.</small>
+          <small class="note">Ne upisujte osobne podatke ni poslovne tajne. Procjena se izračunava u vašem pregledniku.</small>
         </form>
       </div>
       <div class="term" id="term" aria-live="polite">
@@ -478,15 +480,15 @@
     <div class="wrap">
       <div class="sec__head">
         <div>
-          <h2 id="kako-h">Četiri koraka. <span class="mark">Bez crne kutije.</span></h2>
-          <p class="sec__sub">Ne prodajemo platformu. Gradimo rješenje za vaš proces, uvodimo ga uz vaš tim i održavamo ga dok radi.</p>
+          <h2 id="kako-h">Četiri koraka. <span class="mark">Sve na vidjelu.</span></h2>
+          <p class="sec__sub">Ne prodajemo platformu. Gradimo rješenje za vaš proces, uvodimo ga zajedno s vašim zaposlenicima i održavamo ga dok god ga koristite.</p>
         </div>
       </div>
       <ol class="grid4">
-        <li class="card"><div class="card__top"><span class="card__n">01</span><svg class="px" data-px="lens" aria-hidden="true"></svg></div><h3>Mapiranje</h3><p>Sjednemo s ljudima koji posao rade i zapišemo korake, iznimke i sustave. Tražimo zadatke koji se ponavljaju i troše vrijeme.</p></li>
-        <li class="card"><div class="card__top"><span class="card__n">02</span><svg class="px" data-px="flask" aria-hidden="true"></svg></div><h3>Pilot</h3><p>Gradimo jedno rješenje za jedan proces i puštamo ga uz vaš tim. Rezultate provjeravate vi, dok ne vidite da radi.</p></li>
-        <li class="card"><div class="card__top"><span class="card__n">03</span><svg class="px" data-px="plug" aria-hidden="true"></svg></div><h3>Integracija</h3><p>Spajamo se na vaš e-mail, ERP, CRM, webshop ili tablice preko API-ja, s vlastitim pristupom samo za ono što treba.</p></li>
-        <li class="card"><div class="card__top"><span class="card__n">04</span><svg class="px" data-px="shield" aria-hidden="true"></svg></div><h3>Nadzor</h3><p>Pratimo svako pokretanje, mjerimo uštedu vremena i rješavamo iznimke. Mjesečni izvještaj u kojem vidite što je automatizacija napravila.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">01</span><svg class="px" data-px="lens" aria-hidden="true"></svg></div><h3>Analiza</h3><p>Sjednemo s ljudima koji taj posao obavljaju i zapišemo korake, iznimke i sustave. Tražimo zadatke koji se ponavljaju i oduzimaju vrijeme.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">02</span><svg class="px" data-px="flask" aria-hidden="true"></svg></div><h3>Pilot</h3><p>Izrađujemo jedno rješenje za jedan proces i puštamo ga u rad pod nadzorom vaših ljudi. Rezultate provjeravate vi, sve dok se ne uvjerite da radi.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">03</span><svg class="px" data-px="plug" aria-hidden="true"></svg></div><h3>Integracija</h3><p>Povezujemo se s vašim e-mailom, ERP-om, CRM-om, webshopom ili tablicama putem API-ja, uz zaseban pristup ograničen na ono što je potrebno.</p></li>
+        <li class="card"><div class="card__top"><span class="card__n">04</span><svg class="px" data-px="shield" aria-hidden="true"></svg></div><h3>Nadzor</h3><p>Pratimo svako pokretanje, mjerimo uštedu vremena i rješavamo iznimke. Svaki mjesec dobivate izvještaj o tome što je automatizacija obavila.</p></li>
       </ol>
     </div>
   </section>
@@ -498,10 +500,10 @@
         <a class="btn btn--ghost btn--sm" href="#suradnja">Suradnja i cijene</a>
       </div>
       <ul class="grid4">
-        <li class="card"><div class="card__top"><svg class="px" data-px="gear" aria-hidden="true"></svg></div><h3>Interne skripte</h3><p>Zadaci koji se ponavljaju svaki dan ili tjedan: prijenos i čišćenje podataka, izvoz, izvještaji, podsjetnici. Rade sami, po rasporedu ili na okidač.</p></li>
-        <li class="card"><div class="card__top"><svg class="px" data-px="chat" aria-hidden="true"></svg></div><h3>Interne aplikacije</h3><p>Mali alati po mjeri vašeg procesa: obrasci, nadzorne ploče, evidencije i odobravanja. Umjesto tablice koju svi uređuju ručno.</p></li>
-        <li class="card"><div class="card__top"><svg class="px" data-px="plug" aria-hidden="true"></svg></div><h3>API integracije</h3><p>Spajamo sustave koji ne razgovaraju međusobno: Microsoft 365, Google Workspace, ERP, CRM, webshop, računovodstvo. Podatak se upiše jednom.</p></li>
-        <li class="card"><div class="card__top"><svg class="px" data-px="doc" aria-hidden="true"></svg></div><h3>Obrada dokumenata i e-maila</h3><p>Računi, ponude i upiti iz e-maila. Gdje ima smisla koristimo AI za izvlačenje podataka, a sve nejasno ide čovjeku na provjeru.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="gear" aria-hidden="true"></svg></div><h3>Interne skripte</h3><p>Zadaci koji se ponavljaju svaki dan ili tjedan: prijenos i čišćenje podataka, izvoz, izvještaji, podsjetnici. Pokreću se same, po rasporedu ili kad se u sustavu nešto dogodi.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="chat" aria-hidden="true"></svg></div><h3>Interne aplikacije</h3><p>Mali alati po mjeri vašeg procesa: obrasci, nadzorne ploče, evidencije i odobravanja. Umjesto tablice koju svi ručno uređuju.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="plug" aria-hidden="true"></svg></div><h3>API integracije</h3><p>Povezujemo sustave koji međusobno ne razmjenjuju podatke: Microsoft 365, Google Workspace, ERP, CRM, webshop, računovodstvo. Podatak upisujete samo jednom.</p></li>
+        <li class="card"><div class="card__top"><svg class="px" data-px="doc" aria-hidden="true"></svg></div><h3>Obrada dokumenata i e-maila</h3><p>Računi, ponude i upiti iz e-maila. Gdje je to korisno, podatke izvlačimo uz pomoć AI-ja, a sve nejasno ide čovjeku na provjeru.</p></li>
       </ul>
     </div>
   </section>
@@ -512,15 +514,15 @@
         <h2 id="primjer-h">Webshop, ERP i računi. <span class="mark">Bez prepisivanja.</span></h2>
         <p class="sec__sub">Primjer integracije kakvu gradimo. Sustavi razmjenjuju podatke, čovjek donosi odluke.</p>
         <ol class="flow">
-          <li><span>Kupac naruči u webshopu. Integracija preko API-ja odmah preuzme narudžbu.<span class="who">automatika</span></span></li>
-          <li><span>Skripta pronađe kupca u ERP-u ili ga otvori, uskladi šifre artikala i provjeri cijene.<span class="who">automatika</span></span></li>
-          <li><span>Ako sve odgovara, nalog ide u ERP. Ako nešto ne štima, <b>zaustavlja se i javlja odgovornoj osobi</b>.<span class="who who--h">čovjek</span></span></li>
+          <li><span>Kupac naruči u webshopu, a integracija putem API-ja odmah preuzima narudžbu.<span class="who">automatika</span></span></li>
+          <li><span>Skripta pronađe kupca u ERP-u ili ga upiše kao novog, uskladi šifre artikala i provjeri cijene.<span class="who">automatika</span></span></li>
+          <li><span>Ako sve odgovara, nalog ide u ERP. Ako se nešto ne slaže, <b>zaustavlja se i javlja odgovornoj osobi</b>.<span class="who who--h">čovjek</span></span></li>
           <li><span>Račun se izradi u računovodstvenom programu i pošalje kupcu, a svaki korak ostaje zapisan u dnevniku.<span class="who">automatika</span></span></li>
         </ol>
       </div>
       <div class="card quote">
         <h3>Zašto mi</h3>
-        <p>Gradimo interne alate koje ljudi stvarno koriste svaki dan, spojene na sustave koje firma već ima.</p>
+        <p>Gradimo interne alate koje ljudi stvarno koriste svaki dan, povezane sa sustavima koje tvrtka već ima.</p>
         <p>Ne nudimo novu platformu na koju se morate prebaciti, nego skripte, aplikacije i integracije oko vašeg načina rada, s jasnim dnevnikom i iznimkama koje idu čovjeku. Uštedu mjerimo i pokazujemo u brojkama, ne u prezentaciji.</p>
       </div>
     </div>
@@ -530,8 +532,8 @@
     <div class="wrap">
       <div class="sec__head">
         <div>
-          <h2 id="suradnja-h">Krenite malo. <span class="mark">Platite za rezultat.</span></h2>
-          <p class="sec__sub">Svaki proces je drukčiji, pa cijenu dajemo nakon procjene. Pilot ima fiksnu cijenu dogovorenu unaprijed.</p>
+          <h2 id="suradnja-h">Krenite od jednog procesa. <span class="mark">Plaćate rezultat.</span></h2>
+          <p class="sec__sub">Svaki je proces drukčiji, pa cijenu dajemo nakon procjene. Pilot ima fiksnu cijenu dogovorenu unaprijed.</p>
         </div>
       </div>
       <ol class="grid3">
@@ -551,36 +553,40 @@
           <p>Jedno rješenje, jedan proces, 2 do 4 tjedna.</p>
           <ul>
             <li>Izrada i spajanje na vaše sustave</li>
-            <li>Rad uz vaš tim, uz provjeru rezultata</li>
+            <li>Probni rad s vašim zaposlenicima i provjera rezultata</li>
             <li>Mjerenje: koliko je vremena stvarno ušteđeno</li>
           </ul>
         </li>
         <li class="card plan">
           <span class="card__n">03 · Rad i održavanje</span>
           <p class="price">Mjesečno</p>
-          <p>Kad pilot pokaže rezultat, rješenje ide u redovni rad.</p>
+          <p>Kad pilot pokaže rezultat, rješenje prelazi u redovnu upotrebu.</p>
           <ul>
-            <li>Hosting i nadzor (uz troškove AI modela, gdje se koriste)</li>
+            <li>Hosting i nadzor (te troškovi AI modela, ako se koriste)</li>
             <li>Izmjene kad se proces ili API promijeni</li>
             <li>Mjesečni izvještaj o radu automatizacije</li>
           </ul>
         </li>
       </ol>
-      <p class="fine">Ako pilot ne pokaže uštedu, rješenje ne ide dalje. Bez dugoročnih ugovora unaprijed.</p>
+      <p class="fine">Ako pilot ne pokaže uštedu, ne nastavljamo. Nema obveze potpisivanja dugoročnog ugovora.</p>
     </div>
   </section>
 
   <section class="sec sec--alt" id="pitanja" aria-labelledby="pitanja-h">
     <div class="wrap faq">
-      <h2 id="pitanja-h">Pitanja.</h2>
+      <div class="faq__head">
+        <h2 id="pitanja-h">Česta <span class="mark">pitanja</span>.</h2>
+        <p class="sec__sub">Ne vidite svoje pitanje? Postavite ga na razgovoru ili nam pišite.</p>
+        <a class="btn btn--ghost btn--sm" href="#kontakt" style="margin-top:1.6rem">Postavite pitanje →</a>
+      </div>
       <div>
         <details><summary>Hoće li automatizacija zamijeniti moje zaposlenike?</summary><p>Ne gradimo je za to. Automatizacija preuzima ponavljajuće zadatke poput prepisivanja, prijenosa podataka i izvještaja. Ljudi dobivaju vrijeme za kupce, odluke i posao koji traži iskustvo.</p></details>
         <details><summary>Što ako nešto pođe po zlu?</summary><p>Svako rješenje gradimo tako da se zaustavi kad podaci ne odgovaraju i javi to čovjeku. Na početku vi provjeravate rezultate, a svako pokretanje ostaje zapisano u dnevniku, pa se svaka greška može pronaći i ispraviti.</p></details>
-        <details><summary>Što je s našim podacima i GDPR-om?</summary><p>Automatizacija dobiva pristup samo podacima koji su joj potrebni, kroz vlastiti korisnički račun ili API ključ koji možete ugasiti u svakom trenutku. Gdje koristimo AI, koristimo poslovne verzije modela koje ne treniraju na vašim podacima, a gdje je potrebno, potpisujemo ugovor o obradi podataka.</p></details>
+        <details><summary>Što je s našim podacima i GDPR-om?</summary><p>Automatizacija dobiva pristup samo podacima koji su joj potrebni, putem zasebnog korisničkog računa ili API ključa koji možete opozvati u bilo kojem trenutku. Gdje koristimo AI, koristimo poslovne verzije modela kod kojih se vaši podaci ne koriste za treniranje, a gdje je potrebno, potpisujemo ugovor o obradi podataka.</p></details>
         <details><summary>S kojim sustavima radite?</summary><p>S e-mailom (Microsoft 365, Google Workspace), tablicama, CRM-om, webshopom, računovodstvom i ERP-om koji ima API ili izvoz podataka. Ako sustav nema API, procjenu dajemo nakon razgovora.</p></details>
         <details><summary>Koliko traje uvođenje?</summary><p>Pilot za jedan proces traje 2 do 4 tjedna. Nakon toga rješenje radi samostalno, a mi ga pratimo i prilagođavamo.</p></details>
-        <details><summary>Koristite li AI?</summary><p>Samo gdje donosi korist, na primjer za čitanje računa ili razvrstavanje e-maila. Većinu posla rade obične skripte i integracije, koje su brže, jeftinije i predvidljive.</p></details>
-        <details><summary>Trebamo li imati IT odjel?</summary><p>Ne. Postavljanje, spajanje i održavanje radimo mi. Od vas trebamo osobu koja zna proces i sat vremena tjedno tijekom pilota.</p></details>
+        <details><summary>Koristite li AI?</summary><p>Samo ondje gdje donosi stvarnu korist, na primjer za čitanje računa ili razvrstavanje e-maila. Većinu posla rade obične skripte i integracije, koje su brže, jeftinije i predvidljivije.</p></details>
+        <details><summary>Treba li nam IT odjel?</summary><p>Ne. Postavljanje, povezivanje i održavanje preuzimamo mi. Od vas nam treba osoba koja poznaje proces i oko sat vremena tjedno tijekom pilota.</p></details>
       </div>
     </div>
   </section>
@@ -589,7 +595,7 @@
     <div class="wrap contact">
       <div>
         <h2 id="kontakt-h">Dogovorite <span class="mark">razgovor</span>.</h2>
-        <p class="sec__sub">Opišite proces koji vam krade vrijeme. Javit ćemo se s terminom za razgovor od 30 minuta.</p>
+        <p class="sec__sub">Opišite proces koji vam krade vrijeme. Javit ćemo vam se i predložiti termin za razgovor od 30 minuta.</p>
         <div class="direct">
           <span class="fine" style="margin:0">Ili pišite izravno</span>
           <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>
@@ -602,8 +608,8 @@
         </div>
         <div><label for="c-company">Tvrtka</label><input class="input" id="c-company" name="tvrtka" autocomplete="organization"></div>
         <div><label for="c-msg">Koji proces želite automatizirati?</label><textarea class="input input--area" id="c-msg" name="poruka" rows="5"></textarea></div>
-        <div><button class="btn" type="submit">Pošalji upit →</button><small class="note" id="c-err" aria-live="polite"></small></div>
-        <p class="sent" id="c-sent" hidden>Otvorio se vaš program za e-poštu s pripremljenom porukom, samo je pošaljite. Ako se nije otvorio, pišite na <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>.</p>
+        <div><button class="btn" type="submit">Pošaljite upit →</button><small class="note" id="c-err" aria-live="polite"></small></div>
+        <p class="sent" id="c-sent" hidden>Otvorio se vaš program za e-poštu s pripremljenom porukom. Samo je pošaljite. Ako se nije otvorio, pišite na <a href="mailto:info@kai-sol.com">info@kai-sol.com</a>.</p>
       </form>
     </div>
   </section>
@@ -614,7 +620,7 @@
   <div class="wrap foot__grid">
     <div class="foot__brand">
       <a class="brand" href="#vrh"><span class="brand__icon"><svg viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="0" y="2" width="8" height="4" style="fill:var(--pen)"/><rect x="1" y="3" width="6" height="2" style="fill:var(--yellow)"/><rect x="3" y="3" width="2" height="2" style="fill:var(--pen)"/></svg></span>KAI-SOL</a>
-      <p>Poslovna automatizacija za male i srednje firme: skripte, aplikacije i API integracije.</p>
+      <p>Poslovna automatizacija za male i srednje tvrtke: skripte, aplikacije i API integracije.</p>
       <a class="btn btn--sm" href="#kontakt">Dogovorite razgovor</a>
     </div>
     <div>
@@ -644,7 +650,7 @@
   </div>
   <div class="closing">
     <div class="wrap">
-      <strong>Automatika radi posao. <a href="#kontakt">Vi vodite firmu.</a></strong>
+      <strong>Rutinu prepustite automatizaciji. <a href="#kontakt">Vi vodite tvrtku.</a></strong>
     </div>
   </div>
   <div class="wrap legal">
@@ -685,21 +691,21 @@
   /* Process check. A rough, local estimate: e is the share of the task automation can
      realistically take over (0 hands-on work, 1 pure screen and paper work). */
   var TASKS = [
-    { k: ["prepis", "prepisuj", "unos podataka", "unosim", "upisuj", "kopir", "copy paste", "excel", "tablic"], e: .85, a: "Automatski unos podataka", t: "Prepisivanje iz jednog mjesta u drugo najčišći je slučaj za automatizaciju. Čovjek provjerava samo ono što skripta označi." },
+    { k: ["prepis", "prepisuj", "unos podataka", "unosim", "upisuj", "kopir", "copy paste", "excel", "tablic"], e: .85, a: "Automatski unos podataka", t: "Prepisivanje podataka s jednog mjesta na drugo najjasniji je primjer posla za automatizaciju. Čovjek provjerava samo ono što skripta označi." },
     { k: ["racun", "faktur", "knjizenj", "ulazni"], e: .8, a: "Automatska obrada računa", t: "Računi imaju predvidljivu strukturu. Skripta izvlači stavke i priprema knjiženje, a odstupanja šalje na provjeru." },
     { k: ["narudzb", "ponud", "upit za cijen", "cjenik"], e: .72, a: "Integracija narudžbi i ponuda", t: "Integracija preuzima narudžbu ili upit, provjerava cijene i priprema nalog ili ponudu u vašem sustavu. Vi potvrđujete prije slanja." },
-    { k: ["prijevod", "prevod", "prevest"], e: .75, a: "Automatizirani prijevodi", t: "Prva verzija prijevoda radi se automatski, uz vaš rječnik pojmova. Čovjek radi završno čitanje." },
+    { k: ["prijevod", "prevod", "prevest"], e: .75, a: "Automatizirani prijevodi", t: "Prvu verziju prijevoda izrađuje automatizacija, prema vašem rječniku pojmova. Čovjek radi završnu redakturu." },
     { k: ["mail", "upit", "inbox", "posta", "dopis"], e: .72, a: "Automatizacija e-maila", t: "Razvrstavanje i odgovori na standardna pitanja dobar su kandidat za automatizaciju. Osjetljive poruke i dalje idu čovjeku." },
     { k: ["zapisnik", "sastan", "biljeske"], e: .7, a: "Automatski zapisnici", t: "Zapisnik i zadaci pripremaju se automatski i šalju odgovornima. Vi samo pročitate i potvrdite." },
     { k: ["termin", "rezervacij", "zakaz", "kalendar", "raspored"], e: .68, a: "Automatizacija termina", t: "Usklađivanje termina i podsjetnici rade se sami. Iznimke i promjene u zadnji čas ostaju ljudima." },
-    { k: ["izvjestaj", "izvjesce", "report", "analiz", "statistik"], e: .66, a: "Automatski izvještaji", t: "Skripta skuplja podatke iz više izvora preko API-ja i slaže izvještaj u isto vrijeme svaki tjedan. Zaključke i dalje donosite vi." },
-    { k: ["podrsk", "reklamacij", "kupc", "korisnik", "klijent"], e: .6, a: "Automatizacija korisničke podrške", t: "Česta pitanja rješavaju se automatski. Reklamacije priprema sa svim podacima, a odluku donosi čovjek." },
+    { k: ["izvjestaj", "izvjesce", "report", "analiz", "statistik"], e: .66, a: "Automatski izvještaji", t: "Skripta skuplja podatke iz više izvora preko API-ja i slaže izvještaj svaki tjedan u isto vrijeme. Zaključke i dalje donosite vi." },
+    { k: ["podrsk", "reklamacij", "kupc", "korisnik", "klijent"], e: .6, a: "Automatizacija korisničke podrške", t: "Česta pitanja rješavaju se automatski. Za reklamacije se automatski prikupe svi podaci, a odluku donosi čovjek." },
     { k: ["nabav", "dobavljac"], e: .6, a: "Automatizacija nabave", t: "Automatizacija prati stanje, priprema upite dobavljačima i uspoređuje ponude. Narudžbu odobravate vi." },
-    { k: ["objav", "drustven", "newsletter", "marketing", "oglas"], e: .58, a: "Priprema sadržaja", t: "Automatizacija priprema prijedloge objava i newslettera iz vaših materijala. Glas brenda i konačnu odluku čuvate vi." },
+    { k: ["objav", "drustven", "newsletter", "marketing", "oglas"], e: .58, a: "Priprema sadržaja", t: "Automatizacija priprema prijedloge objava i newslettera iz vaših materijala. Ton komunikacije i konačna odluka ostaju na vama." },
     { k: ["skladist", "zalih", "inventur", "otpremnic", "primk"], e: .55, a: "Automatska obrada dokumenata za robu", t: "Primke, otpremnice i usklađivanje stanja mogu se obrađivati automatski. Fizički rad s robom ostaje ljudima." },
-    { k: ["plac", "obracun", "kadrovsk", "bolovanj", "godisnj"], e: .5, a: "Podrška za kadrovsku", t: "Strogi propisi znače da automatizacija priprema, a čovjek provjerava. I dalje se uštedi velik dio sati." },
-    { k: ["ugovor", "pravn", "natjecaj", "javna nabava"], e: .45, a: "Provjera dokumenata", t: "Skripta uspoređuje dokument s predloškom i označava odstupanja i rokove. Potpis i odluka ostaju vama." },
-    { k: ["popravak", "popravlj", "montaz", "voznj", "vozim", "dostav", "ciscenj", "kuhanj", "kuham", "sisanj", "proizvodn", "pakiranj", "pakiram", "utovar"], e: .1, a: "Automatizacija papirologije oko posla", t: "Fizički rad se ne može automatizirati. Papirologija oko njega može: radni nalozi, raspored, izvještaji i komunikacija." }
+    { k: ["plac", "obracun", "kadrovsk", "bolovanj", "godisnj"], e: .5, a: "Podrška kadrovskoj službi", t: "Zbog strogih propisa automatizacija samo priprema podatke, a čovjek ih provjerava. Ušteda vremena i dalje je velika." },
+    { k: ["ugovor", "pravn", "natjecaj", "javna nabava"], e: .45, a: "Provjera dokumenata", t: "Skripta uspoređuje dokument s predloškom i označava odstupanja i rokove. Potpis i odluka ostaju na vama." },
+    { k: ["popravak", "popravlj", "montaz", "voznj", "vozim", "dostav", "ciscenj", "kuhanj", "kuham", "sisanj", "proizvodn", "pakiranj", "pakiram", "utovar"], e: .1, a: "Automatizacija papirologije oko posla", t: "Fizički rad ne možemo automatizirati, ali papirologiju oko njega možemo: radni nalozi, raspored, izvještaji i komunikacija." }
   ];
   var SIGNALS = ["rucno", "svaki dan", "svakodnevno", "svaki tjedan", "ponavlja", "stalno", "uvijek isto", "sat vremena", "sati"];
 
@@ -715,7 +721,7 @@
     return {
       share: share,
       agent: hit ? hit.a : "Rješenje po mjeri",
-      note: hit ? hit.t : "Iz opisa ne vidimo dovoljno da procijenimo točno. Napišite koje alate koristite i koliko često se posao ponavlja, ili nam ga opišite na razgovoru."
+      note: hit ? hit.t : "Iz opisa ne možemo dovoljno točno procijeniti. Napišite koje alate koristite i koliko često se posao ponavlja, ili nam ga opišite na razgovoru."
     };
   }
 
@@ -757,7 +763,7 @@
     var v = estimate(raw);
     line("Čitam opis: „" + esc(raw.length > 60 ? raw.slice(0, 57) + "…" : raw) + "“", 0)
       .then(function(){ return line("Tražim korake koji se ponavljaju…", 500); })
-      .then(function(){ return line("Provjeravam gdje treba ljudska odluka…", 500); })
+      .then(function(){ return line("Provjeravam gdje je potrebna ljudska odluka…", 500); })
       .then(function(){ term.insertAdjacentHTML("beforeend", render(v)); btn.disabled = false; });
   });
   if (term) term.addEventListener("click", function(e){
@@ -1007,7 +1013,7 @@
       ctx.strokeStyle = b.color; ctx.globalAlpha = 1 - p; ctx.lineWidth = 2;
       ctx.beginPath(); ctx.arc(c[0], c[1], 6 + p * 40, 0, 6.29); ctx.stroke(); ctx.lineWidth = 1; ctx.globalAlpha = 1;
       frameBox(r.left, r.top, r.width, r.height, b.color);
-      pill("Fill", c[0] + 14, c[1] + 18, b.color);
+      pill("Ispuna", c[0] + 14, c[1] + 18, b.color);
     } }; },
     padding: function(){ return { d: .55, start: function(j){
       var s = getComputedStyle(j.el); j.pad = ["Top", "Right", "Bottom", "Left"].map(function(k){ return parseFloat(s["padding" + k]) || 0; });
@@ -1019,7 +1025,7 @@
       ctx.fillRect(r.left, r.top + P[0], P[3], r.height - P[0] - P[2]); ctx.fillRect(r.right - P[1], r.top + P[0], P[1], r.height - P[0] - P[2]);
       ctx.globalAlpha = 1;
       frameBox(r.left, r.top, r.width, r.height, b.color);
-      if (P[0] > 6) pill("padding " + Math.round(P[0]) + " · " + Math.round(P[3]), r.left + P[3], r.top + P[0] / 2 - 8, "#7fc45a");
+      if (P[0] > 6) pill("razmak " + Math.round(P[0]) + " · " + Math.round(P[3]), r.left + P[3], r.top + P[0] / 2 - 8, "#7fc45a");
       /* devtools-style inspector: margin box and an element tooltip */
       var G = j.mar; ctx.globalAlpha = .25 * Math.sin(p * 3.14); ctx.fillStyle = "#ec5b33";
       ctx.fillRect(r.left - G[3], r.top - G[0], r.width + G[1] + G[3], G[0]); ctx.fillRect(r.left - G[3], r.bottom, r.width + G[1] + G[3], G[2]);
@@ -1060,7 +1066,7 @@
       var s = from + (1 - from) * ease(p);
       j.el.style.fontSize = (j.fs * s).toFixed(1) + "px";
       hilite(j.el, b.color, .18);
-      var P = panel(r.right - 150, r.top - 48, "Size", [Math.round(j.fs * from) + " → " + Math.round(j.fs * s) + " px"], 0, b.color);
+      var P = panel(r.right - 150, r.top - 48, "Veličina", [Math.round(j.fs * from) + " → " + Math.round(j.fs * s) + " px"], 0, b.color);
       b.x = P.x + P.w - 12; b.y = P.y + 30;
     }, end: function(j){ j.el.style.fontSize = ""; } }; },
     colour: function(pick, done){ return { cur: "arrow", d: .45, run: function(p, r, b, j){
@@ -1087,7 +1093,7 @@
       Array.prototype.forEach.call(j.el.querySelectorAll("svg"), function(s){ flash(s, "#7fc45a"); });
     } }; },
     shadow: function(){ return { cur: "arrow", d: .45, start: function(j){ j.el.classList.remove("bt--noshadow"); }, run: function(p, r, b){
-      var P = panel(r.right + 10, r.top - 6, "Drop shadow", ["x 4  y 4  blur 0"], 0, b.color); b.x = P.x + 20; b.y = P.y + 30;
+      var P = panel(r.right + 10, r.top - 6, "Sjena", ["x 4  y 4  zamućenje 0"], 0, b.color); b.x = P.x + 20; b.y = P.y + 30;
     } }; },
     ghost: function(){ return { cur: "arrow", d: .6, to: function(r, j){ var m = j.dep2.el.getBoundingClientRect(); return [m.left + 8, m.top + 8]; }, run: function(p, r, b, j){
       var m = j.dep2.el.getBoundingClientRect(), e = ease(p);
@@ -1095,7 +1101,7 @@
       ctx.fillStyle = b.color; ctx.globalAlpha = .08; ctx.fillRect(x, y, w, h); ctx.globalAlpha = 1;
       ctx.setLineDash([5, 4]); ctx.strokeStyle = b.color; ctx.strokeRect(px(x), px(y), Math.round(w), Math.round(h)); ctx.setLineDash([]);
       b.x = x + 8; b.y = y + 8;
-      pill("⌥ drag · duplicate", x + 18, y + 18, b.color);
+      pill("⌥ povuci · kopiraj", x + 18, y + 18, b.color);
     }, end: function(j){
       j.T = null; j.el.classList.add("bt--on");
       var first = j.el.querySelector("h3, summary, a, dd, .card__n") || j.el;
@@ -1110,7 +1116,7 @@
       ctx.moveTo(r.left, r.top); ctx.lineTo(r.left + r.width * e, r.top + r.height * e);
       ctx.moveTo(r.right, r.top); ctx.lineTo(r.right - r.width * e, r.top + r.height * e); ctx.stroke(); ctx.globalAlpha = 1;
       b.x = r.right - r.width * e; b.y = r.top + r.height * e;
-      pill("Place image", r.left + r.width / 2, r.top + r.height / 2 - 8, b.color, true);
+      pill("Umetni sliku", r.left + r.width / 2, r.top + r.height / 2 - 8, b.color, true);
     } }; },
     scan: function(){ return { cur: "arrow", d: 1.1, start: function(j){ j.svg = j.el.querySelector("svg"); if (j.svg) j.svg.style.opacity = "1"; }, run: function(p, r, b, j){
       if (!j.svg) return;
@@ -1128,7 +1134,7 @@
       var e = ease(p), top = Math.max(RUL, r.top), w = (r.width - 4) * e, h = (Math.min(vh - 4, r.bottom) - top) * e;
       b.x = r.left + 2 + w; b.y = top + h;
       ctx.setLineDash([6, 4]); ctx.strokeStyle = b.color; ctx.strokeRect(px(r.left + 2), px(top), Math.round(w), Math.round(h)); ctx.setLineDash([]);
-      pill((j.el.id || j.el.className.split(" ")[0] || "section") + " · " + Math.round(r.width) + " × " + Math.round(r.height), r.left + 8, top + 6, b.color);
+      pill((j.el.id || j.el.className.split(" ")[0] || "sekcija") + " · " + Math.round(r.width) + " × " + Math.round(r.height), r.left + 8, top + 6, b.color);
     }, end: function(j){ j.el.classList.add("bt--anim"); j.el.classList.remove("bt-art"); } }; }
   };
 
@@ -1327,23 +1333,23 @@
       case "art": L = [STEP.art()]; break;
       case "head":
         el.classList.add("bt--nomark");
-        L = [STEP.frame("Text · "), STEP.type(small ? 45 : 32, 1.4, greySmall), STEP.select(),
+        L = [STEP.frame("Tekst · "), STEP.type(small ? 45 : 32, 1.4, greySmall), STEP.select(),
           STEP.fonts(small ? [[SERIF, "Georgia"], ["", final]] : [[SERIF, "Georgia"], [ARIAL, "Arial"], [MONO, "Geist Mono"], ["", final]]),
           STEP.size(.55), STEP.colour(1, function(x){ x.el.style.color = ""; }), STEP.marks()];
         break;
       case "para":
         el.classList.add("bt--nomark");
-        L = [STEP.frame("Text · "), STEP.type(small ? 140 : 110, 1.1, grey), STEP.select(),
+        L = [STEP.frame("Tekst · "), STEP.type(small ? 140 : 110, 1.1, grey), STEP.select(),
           STEP.fonts(small ? [["", final]] : [[SERIF, "Georgia"], [MONO, "Geist Mono"], ["", final]]),
           STEP.colour(1, function(x){ x.el.style.color = ""; })];
         if (el.querySelector(".mark")) L.push(STEP.marks());
         break;
       case "tiny": L = [STEP.type(70, .6), STEP.colour(0, function(){})]; break;
       case "btn":
-        L = [STEP.frame("Button · "), STEP.fill(["bt--grey", "bt--noshadow"]), STEP.type(40, .5),
+        L = [STEP.frame("Gumb · "), STEP.fill(["bt--grey", "bt--noshadow"]), STEP.type(40, .5),
           STEP.colour(2, function(x){ x.el.classList.remove("bt--grey"); }), STEP.shadow()];
         break;
-      case "scene": L = [STEP.frame("Frame · "), STEP.fill(), STEP.placeholder(), STEP.scan(), STEP.tags()]; break;
+      case "scene": L = [STEP.frame("Okvir · "), STEP.fill(), STEP.placeholder(), STEP.scan(), STEP.tags()]; break;
       case "dup": L = [STEP.ghost(), STEP.retype()]; break;
       default:
         L = [STEP.frame(), STEP.fill(), STEP.padding(), STEP.type(small ? 160 : 120, 1.3), STEP.icons()];
