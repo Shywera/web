@@ -187,15 +187,18 @@
   .grid3 + .fine{margin-top:1.6rem}
 
   /* FAQ */
-  .faq{display:grid;gap:2rem}
-  .faq details{border-top:1px solid var(--line)}
-  .faq details:last-child{border-bottom:1px solid var(--line)}
-  .faq summary{list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center;padding:1.1rem 0;font-weight:600;cursor:pointer}
+  .faq{display:grid;gap:2.2rem;max-width:52rem}
+  .faq > div{display:grid;gap:.75rem;align-items:start;counter-reset:q}
+  .faq details{counter-increment:q;background:var(--s2);border:1px solid var(--line);border-left:2px solid var(--line-2);padding:0 1.1rem;transition:border-color .15s}
+  .faq details:hover{border-left-color:var(--yellow-d)}
+  .faq details[open]{border-color:var(--line-2);border-left-color:var(--yellow)}
+  .faq summary{list-style:none;display:flex;gap:.9rem;align-items:center;padding:1.05rem 0;font-weight:600;line-height:1.35;cursor:pointer}
   .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:"+";font:600 1.2rem/1 var(--mono);color:var(--yellow);transition:transform .2s}
+  .faq summary::before{content:counter(q, decimal-leading-zero);flex:none;font:500 .72rem/1 var(--mono);color:var(--mute)}
+  .faq summary::after{content:"+";flex:none;margin-left:auto;font:600 1.2rem/1 var(--mono);color:var(--yellow);transition:transform .2s}
   .faq details[open] summary::after{transform:rotate(45deg)}
   .faq summary:hover{color:var(--yellow)}
-  .faq details p{color:var(--dim);padding:0 2rem 1.2rem 0;max-width:62ch}
+  .faq details p{color:var(--dim);padding:0 0 1.2rem 1.6rem;max-width:62ch}
 
   /* Forms */
   .field{display:flex;gap:.6rem;flex-wrap:wrap}
@@ -272,7 +275,7 @@
     .hero .wrap{grid-template-columns:1fr 1.05fr}
     .grid4{grid-template-columns:repeat(4,1fr)}
     .grid3{grid-template-columns:repeat(3,1fr)}
-    .story,.faq,.check__grid,.contact{grid-template-columns:1fr 1.2fr}
+    .story,.check__grid,.contact{grid-template-columns:1fr 1.2fr}
     .term{min-height:15rem}
     .foot__grid{grid-template-columns:1.4fr 1fr 1fr 1fr}
     .sec,.check{padding-block:5.5rem}
