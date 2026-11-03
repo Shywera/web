@@ -21,6 +21,7 @@
 <title>KAI-SOL | Poslovna automatizacija i API integracije</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%230c0c0e'/%3E%3Crect x='1' y='2' width='6' height='4' fill='%23f5c518'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23000'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/fonts/fonts.css">
+<script>(function(){try{var f=/[?&]swarm=1/.test(location.search),m=window.matchMedia;if(f||(m&&!m("(prefers-reduced-motion: reduce)").matches&&!navigator.webdriver&&!/bot|crawl|spider|slurp|lighthouse|headless|preview/i.test(navigator.userAgent)&&!sessionStorage.getItem("swarm-off")))document.documentElement.classList.add("swarm-pre")}catch(e){}})();</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"KAI-SOL","url":"https://kai-sol.com/","email":"info@kai-sol.com","description":"Poslovna automatizacija za male i srednje firme: interne skripte, aplikacije po mjeri i API integracije.","areaServed":"HR","knowsAbout":["Poslovna automatizacija","API integracije","Interne aplikacije","Automatizacija procesa"]}</script>
 
 <style>
@@ -277,12 +278,23 @@
     .sec,.check{padding-block:5.5rem}
   }
 
-  /* Swarm build: bot cursors assemble blocks as they scroll into view (see script at the end) */
-  .swarm-cv{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:15}
-  .swarm .bt{opacity:0}
-  .swarm .bt--live,.swarm .bt--done{opacity:1}
+  /* Swarm build: bot cursors design the page in front of the visitor (script at the end) */
+  .swarm-pre .live,.swarm-pre .nav,.swarm-pre main,.swarm-pre .foot{opacity:0;animation:swarm-safe 0s 4s forwards}
+  @keyframes swarm-safe{to{opacity:1}}
+  .swarm-cv{position:fixed;left:0;top:0;width:100vw;height:100vh;pointer-events:none;z-index:30}
+  .swarm .bt:not(.bt--on){opacity:0}
+  .swarm .bt-art{background:transparent !important;border-color:transparent !important;-webkit-backdrop-filter:none !important;backdrop-filter:none !important}
+  .swarm .bt--anim{transition:opacity .3s,background-color .4s,border-color .4s,box-shadow .4s,color .4s !important}
   .swarm .bt--fade{transition:opacity .4s ease-out}
-  @media print{.swarm .bt{opacity:1 !important;clip-path:none !important}.swarm-cv{display:none}}
+  .swarm .bt--shell > *{opacity:0}
+  .swarm .bt--shell.bt--kids > *{opacity:1}
+  .swarm .bt--noicon svg{opacity:0}
+  .swarm .bt--grey{background:var(--s3) !important;color:var(--white) !important;border-color:var(--line-2) !important}
+  .swarm .bt--noshadow{box-shadow:none !important}
+  .swarm .bt--nomark .mark{text-decoration-color:transparent}
+  .swarm-skip{position:fixed;left:12px;bottom:12px;z-index:31;font:500 .68rem/1 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--dim);background:var(--void);border:1px solid var(--line-2);padding:.55rem .7rem;cursor:pointer}
+  .swarm-skip:hover{color:var(--yellow);border-color:var(--yellow-d)}
+  @media print{.swarm .bt,.swarm .bt-art{opacity:1 !important}.swarm-cv,.swarm-skip{display:none}}
 
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -770,41 +782,74 @@
 })();
 </script>
 <script>
-/* Swarm build. A small swarm of bot cursors builds each block of the page as it
-   scrolls into view: a cursor flies to the block, drags out its frame and the block
-   appears behind it. Content stays in the DOM the whole time, so it is readable by
-   screen readers, search engines and anyone without JavaScript or with reduced motion. */
+/* Swarm build. The page starts as an empty canvas and a swarm of bot cursors designs it
+   in front of the visitor, top to bottom, as they scroll: rulers and guides, a layout grid,
+   section artboards, frames, fills, padding, text typed in a placeholder font, font, size
+   and colour changes, underlines drawn with a pen, and duplicated cards.
+   The real content stays in the DOM. The build is skipped for reduced motion, crawlers,
+   printing and anyone who presses "Preskoči". */
 (function(){
   "use strict";
-  var mm = window.matchMedia;
-  if (!mm || mm("(prefers-reduced-motion: reduce)").matches || !window.requestAnimationFrame) return;
-  var cv = document.createElement("canvas");
-  if (!cv.getContext) return;
-  var ctx = cv.getContext("2d");
-  if (!ctx) return;
-
   var root = document.documentElement;
-  var main = document.querySelector("main");
-  if (!main) return;
+  function bail(){ root.classList.remove("swarm-pre"); }
+  var force = /[?&]swarm=1/.test(location.search);
+  var mm = window.matchMedia;
+  if (!force && (!mm || mm("(prefers-reduced-motion: reduce)").matches || navigator.webdriver || /bot|crawl|spider|slurp|lighthouse|headless|preview/i.test(navigator.userAgent))) return bail();
+  try { if (!force && sessionStorage.getItem("swarm-off")) return bail(); } catch (e) {}
+  var cv = document.createElement("canvas"), ctx = cv.getContext && cv.getContext("2d");
+  if (!ctx || !window.requestAnimationFrame || !document.createTreeWalker) return bail();
 
-  /* What gets built, in document order. Nested matches are dropped so a block is built once. */
-  var SEL = ["h2", ".sec__sub", ".fine", ".sec__head > .btn", ".card", ".flow > li", "details", "form", ".term", ".direct", ".stat"];
-  var TEXT = /^(H2|P)$/;
-  var all = main.querySelectorAll(SEL.map(function(s){ return "main > section:not(.hero) " + s; }).join(","));
-  var picked = Array.prototype.filter.call(all, function(el){
-    for (var p = el.parentElement; p && p !== main; p = p.parentElement) if (p.classList.contains("bt") || p.matches(SEL.join(","))) return false;
-    el.classList.add("bt");
+  var small = window.innerWidth < 600;
+  var COLORS = ["#f5c518", "#ec5b33", "#7fc45a", "#f6f6f3"];
+  var SWATCH = ["#8b8f97", "#f6f6f3", "#f5c518", "#ec5b33", "#7fc45a"];
+  var NAMES = ["cron", "api", "webhook", "skripta", "sync", "parser", "izvoz", "erp-bot", "mail-bot", "csv", "etl", "backup", "report", "queue"];
+  var PIX = "VT323, 'Geist Mono', monospace", MONO = "'Geist Mono', ui-monospace, monospace";
+  var SERIF = "Georgia, 'Times New Roman', serif", ARIAL = "Arial, Helvetica, sans-serif";
+
+  /* ---------- What gets built ---------- */
+  var ARTS = Array.prototype.slice.call(document.querySelectorAll(".live, .nav, main > section, .foot"));
+  var SEL = [".live .wrap > span", ".brand", ".nav__links li", ".nav__cta", ".badge", ".hero h1", ".lede", ".hero__ctas .btn", ".hero .fine", ".scene",
+    ".stat", ".hazard", "main > section:not(.hero) h2", "main > section:not(.hero) .sec__sub", "main > section:not(.hero) .fine", ".sec__head > .btn",
+    ".card", ".flow > li", ".faq details", "main form", ".term", ".direct", ".foot__grid > div", ".closing strong", ".legal > span"].join(",");
+  var found = Array.prototype.slice.call(document.querySelectorAll(SEL));
+  var blocks = found.filter(function(el){
+    for (var p = el.parentElement; p; p = p.parentElement) if (found.indexOf(p) !== -1) return false;
     return true;
   });
-  if (!picked.length) return;
+  if (!blocks.length) return bail();
 
-  var COLORS = ["#f5c518", "#ec5b33", "#7fc45a", "#f6f6f3"];
-  var NAMES = ["cron", "api", "webhook", "skripta", "sync", "parser", "izvoz", "erp-bot", "mail-bot", "csv", "etl", "backup", "report", "queue"];
+  var jobs = [], artOf = new Map();
+  ARTS.forEach(function(el){ var j = { el: el, art: true, kind: "art", state: "wait" }; artOf.set(el, j); });
+  blocks.forEach(function(el){
+    var kind = el.matches(".scene") ? "scene" : el.matches(".btn, .nav__cta") ? "btn" : /^H[12]$/.test(el.tagName) ? "head"
+      : el.matches(".live .wrap > span, .legal > span, .nav__links li") ? "tiny"
+      : /^(P|A|STRONG|SPAN)$/.test(el.tagName) ? "para" : "box";
+    var j = { el: el, kind: kind, state: "wait" };
+    var a = null;
+    for (var p = el.parentElement; p; p = p.parentElement) if (artOf.has(p)) { a = artOf.get(p); break; }
+    j.dep = a;
+    /* Siblings of the same kind: the first is designed, the rest are alt-dragged copies */
+    var sibs = blocks.filter(function(o){ return o.parentElement === el.parentElement && o.tagName === el.tagName; });
+    if (sibs.length > 1 && sibs[0] !== el && kind !== "head" && kind !== "para") j.master = sibs[0];
+    jobs.push(j);
+  });
+  var byEl = new Map(); jobs.forEach(function(j){ byEl.set(j.el, j); });
+  jobs.forEach(function(j){ if (j.master) { j.dep2 = byEl.get(j.master); j.kind = "dup"; } });
+  var arts = ARTS.map(function(el){ return artOf.get(el); });
+  var all = arts.concat(jobs);
+  /* document order, artboards before their content */
+  all.sort(function(a, b){ return a.el === b.el ? 0 : a.el.contains(b.el) ? -1 : b.el.contains(a.el) ? 1 : (a.el.compareDocumentPosition(b.el) & 4 ? -1 : 1); });
 
-  /* Pixel sprites with a 1px dark outline, pre-rendered once per colour */
-  var ARROW = ["#......", "##.....", "###....", "####...", "#####..", "######.", "#######", "###....", "#.##...", "..##..."];
-  var BEAM  = ["##.##", "..#..", "..#..", "..#..", "..#..", "..#..", "..#..", "..#..", "##.##"];
+  /* ---------- Sprites ---------- */
   var S = 2;
+  var M = {
+    arrow: ["#......", "##.....", "###....", "####...", "#####..", "######.", "#######", "###....", "#.##...", "..##..."],
+    beam:  ["##.##", "..#..", "..#..", "..#..", "..#..", "..#..", "..#..", "..#..", "##.##"],
+    cross: ["...#...", "...#...", "...#...", "###.###", "...#...", "...#...", "...#..."],
+    pen:   ["..#....", ".###...", ".###...", "#####..", "#.#.#..", "#.#.#..", "#####..", ".###...", "..#...."],
+    hand:  ["..##...", "..##...", "..####.", "..#####", "#######", "#######", ".######", "..####.", "..####."]
+  };
+  var HOT = { arrow: [0, 0], beam: [2, 4], cross: [3, 3], pen: [2, 8], hand: [2, 0] };
   function sprite(mask, color){
     var h = mask.length, w = mask[0].length, c = document.createElement("canvas");
     c.width = (w + 2) * S; c.height = (h + 2) * S;
@@ -817,7 +862,7 @@
     return c;
   }
   function tag(text, color){
-    var c = document.createElement("canvas"), g = c.getContext("2d"), f = "16px VT323, 'Geist Mono', monospace";
+    var c = document.createElement("canvas"), g = c.getContext("2d"), f = "16px " + PIX;
     g.font = f;
     var w = Math.ceil(g.measureText(text).width) + 10;
     c.width = w * 2; c.height = 32;
@@ -827,191 +872,561 @@
     return { c: c, w: w };
   }
 
-  var vw = 0, vh = 0, dpr = 1, park = true, ax = 0, ay = 0, orbit = 40, small = true;
+  /* ---------- Viewport ---------- */
+  var vw = 0, vh = 0, dpr = 1, park = true, ax = 0, ay = 0, orbit = 40, RUL = 14;
   function measure(){
-    vw = window.innerWidth; vh = window.innerHeight;
-    small = vw < 600;
+    vw = window.innerWidth; vh = window.innerHeight; small = vw < 600;
     dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 2);
     cv.width = Math.round(vw * dpr); cv.height = Math.round(vh * dpr);
     cv.style.width = vw + "px"; cv.style.height = vh + "px";
     var wrap = document.querySelector(".wrap"), gap = wrap ? (vw - wrap.getBoundingClientRect().width) / 2 : 0;
-    park = gap < 130;                       /* no free margin: cursors wait at the right edge */
+    park = gap < 130;
     ax = vw - gap / 2; ay = vh * .45; orbit = Math.max(24, Math.min(64, gap / 2 - 30));
+    RUL = small ? 9 : 16;
   }
 
-  /* The swarm. Phones get fewer cursors and a lighter frame budget. */
-  var n = window.innerWidth < 600 ? 6 : window.innerWidth < 1000 ? 9 : 14;
+  /* ---------- The swarm ---------- */
+  var n = window.innerWidth < 600 ? 7 : window.innerWidth < 1000 ? 10 : 14;
   var bots = [];
   for (var i = 0; i < n; i++) {
-    var col = COLORS[i % COLORS.length];
-    bots.push({
-      i: i, color: col, arrow: sprite(ARROW, col), beam: sprite(BEAM, col), tag: tag(NAMES[i % NAMES.length], col),
-      x: window.innerWidth + 40 + Math.random() * 120, y: window.innerHeight * (.2 + Math.random() * .6), vx: 0, vy: 0,
-      ph: Math.random() * 6.28, spin: (.25 + Math.random() * .35) * (i % 2 ? 1 : -1), rr: .55 + Math.random() * .45,
-      job: null, mode: "idle"
+    var col = COLORS[i % COLORS.length], spr = {};
+    for (var k in M) spr[k] = sprite(M[k], col);
+    bots.push({ i: i, color: col, spr: spr, tag: tag(NAMES[i], col), cur: "arrow",
+      x: (i % 2 ? window.innerWidth + 30 : -30) + Math.random() * 40, y: window.innerHeight * (.15 + Math.random() * .7), vx: 0, vy: 0,
+      ph: Math.random() * 6.28, spin: (.25 + Math.random() * .35) * (i % 2 ? 1 : -1), rr: .55 + Math.random() * .45, job: null });
+  }
+
+  /* ---------- Helpers ---------- */
+  var ease = function(t){ return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+  var range = document.createRange();
+  function texts(el){
+    var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), a = [], t, total = 0;
+    while ((t = w.nextNode())) {
+      if (!/\S/.test(t.nodeValue) || !t.parentElement || !t.parentElement.getClientRects().length) continue;
+      a.push({ n: t, s: t.nodeValue }); total += t.nodeValue.length;
+    }
+    return { a: a, total: total };
+  }
+  function typed(T, k){
+    var left = k;
+    T.a.forEach(function(o){
+      var v = o.s.slice(0, Math.max(0, Math.min(o.s.length, left)));
+      if (o.n.nodeValue !== v) o.n.nodeValue = v;
+      left -= o.s.length;
     });
   }
-
-  var tasks = picked.map(function(el, k){ return { el: el, k: k, text: TEXT.test(el.tagName), state: "wait", since: 0, r: null }; });
-  var left = tasks.length, flashes = [], px = -1e4, py = -1e4, last = 0, lastAssign = 0, running = false, dirty = true, now = 0;
-
-  function reveal(t, fade){
-    if (t.state === "done") return;
-    if (t.bot) { t.bot.job = null; t.bot.mode = "idle"; t.bot = null; }
-    t.state = "done"; left--;
-    t.el.style.clipPath = ""; t.el.style.webkitClipPath = "";
-    if (fade) t.el.classList.add("bt--fade");
-    t.el.classList.remove("bt--live"); t.el.classList.add("bt--done");
+  function restore(T){ if (T) T.a.forEach(function(o){ if (o.n.nodeValue !== o.s) o.n.nodeValue = o.s; }); }
+  function caret(T, k){
+    var left = k, hit = null;
+    for (var q = 0; q < T.a.length && left > 0; q++) { var L = T.a[q].s.length; hit = { n: T.a[q].n, i: Math.min(L, left) }; left -= L; }
+    if (!hit || hit.i < 1) return null;
+    try { range.setStart(hit.n, hit.i - 1); range.setEnd(hit.n, hit.i); } catch (e) { return null; }
+    var rs = range.getClientRects(), r = rs[rs.length - 1];
+    return r ? [r.right, r.top + r.height / 2, r.height] : null;
   }
-  function clip(el, v){ el.style.clipPath = v; el.style.webkitClipPath = v; }
-  var ease = function(t){ return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+  function lines(el){
+    try { range.selectNodeContents(el); } catch (e) { return []; }
+    return Array.prototype.filter.call(range.getClientRects(), function(r){ return r.width > 1; });
+  }
+  function fam(el){ return (getComputedStyle(el).fontFamily.split(",")[0] || "").replace(/["']/g, "").trim(); }
+  function css(el, o){ for (var p in o) el.style[p] = o[p]; }
+  var CLS = ["bt--shell", "bt--kids", "bt--grey", "bt--noshadow", "bt--nomark", "bt--noicon"];
+
+  /* ---------- Canvas drawing ---------- */
+  function px(v){ return Math.round(v) + .5; }
+  function frameBox(x, y, w, h, color, label){
+    ctx.strokeStyle = color; ctx.lineWidth = 1; ctx.strokeRect(px(x), px(y), Math.round(w), Math.round(h));
+    ctx.fillStyle = color;
+    [[x, y], [x + w, y], [x, y + h], [x + w, y + h], [x + w / 2, y], [x + w / 2, y + h], [x, y + h / 2], [x + w, y + h / 2]].forEach(function(c){
+      ctx.fillStyle = "#0a0a0b"; ctx.fillRect(Math.round(c[0]) - 3, Math.round(c[1]) - 3, 7, 7);
+      ctx.fillStyle = color; ctx.fillRect(Math.round(c[0]) - 2, Math.round(c[1]) - 2, 5, 5);
+    });
+    if (label) pill(label, x + w / 2, y + h + 8, color, true);
+  }
+  function pill(text, x, y, color, center){
+    ctx.font = "15px " + PIX; ctx.textBaseline = "middle";
+    var w = ctx.measureText(text).width + 10;
+    var lx = Math.max(2, Math.min(vw - w - 2, center ? x - w / 2 : x)), ly = Math.max(RUL + 2, Math.min(vh - 18, y));
+    ctx.fillStyle = color; ctx.fillRect(Math.round(lx), Math.round(ly), Math.round(w), 16);
+    ctx.fillStyle = "#0a0a0b"; ctx.fillText(text, Math.round(lx) + 5, Math.round(ly) + 8.5);
+  }
+  function panel(x, y, title, rows, hi, color){
+    ctx.font = "12px " + MONO; ctx.textBaseline = "middle";
+    var w = 0; rows.concat([title]).forEach(function(r){ w = Math.max(w, ctx.measureText(r).width); });
+    w = Math.round(w + 26); var h = 22 + rows.length * 18;
+    x = Math.round(Math.max(4, Math.min(vw - w - 4, x))); y = Math.round(Math.max(RUL + 4, Math.min(vh - h - 4, y)));
+    ctx.fillStyle = "#000"; ctx.fillRect(x + 3, y + 3, w, h);
+    ctx.fillStyle = "#131416"; ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = "#43464d"; ctx.strokeRect(x + .5, y + .5, w - 1, h - 1);
+    ctx.fillStyle = "#8b8f97"; ctx.fillText(title, x + 8, y + 11);
+    rows.forEach(function(r, q){
+      if (q === hi) { ctx.fillStyle = color; ctx.globalAlpha = .22; ctx.fillRect(x + 2, y + 21 + q * 18, w - 4, 17); ctx.globalAlpha = 1; }
+      ctx.fillStyle = q === hi ? "#f6f6f3" : "#c0c3c9"; ctx.fillText(r, x + 8, y + 30 + q * 18);
+    });
+    return { x: x, y: y, w: w, h: h };
+  }
+  function swatches(x, y, pick, color){
+    var w = SWATCH.length * 20 + 8;
+    x = Math.round(Math.max(4, Math.min(vw - w - 4, x))); y = Math.round(Math.max(RUL + 4, Math.min(vh - 30, y)));
+    ctx.fillStyle = "#000"; ctx.fillRect(x + 3, y + 3, w, 28);
+    ctx.fillStyle = "#131416"; ctx.fillRect(x, y, w, 28); ctx.strokeStyle = "#43464d"; ctx.strokeRect(x + .5, y + .5, w - 1, 27);
+    SWATCH.forEach(function(c, q){
+      ctx.fillStyle = c; ctx.fillRect(x + 6 + q * 20, y + 6, 16, 16);
+      if (q === pick) { ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.strokeRect(x + 5 + q * 20, y + 5, 18, 18); ctx.lineWidth = 1; }
+    });
+    return [x + 14 + pick * 20, y + 14];
+  }
+  function hilite(el, color, a){
+    ctx.fillStyle = color; ctx.globalAlpha = a;
+    lines(el).forEach(function(r){ ctx.fillRect(Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height)); });
+    ctx.globalAlpha = 1;
+  }
+
+  /* Effects that outlive a step: guides, redlines, flashes */
+  var fx = [];
+  function addFx(f){ f.a = 1; fx.push(f); }
+
+  /* ---------- Step library ---------- */
+  function corner(r){ return [r.left, r.top]; }
+  function mid(r){ return [r.left + r.width / 2, r.top + r.height / 2]; }
+  var STEP = {
+    frame: function(label){ return { to: corner, cur: "cross", d: .5, run: function(p, r, b, j){
+      var e = ease(p), w = r.width * e, h = r.height * e;
+      b.x = r.left + w; b.y = r.top + h;
+      ctx.fillStyle = b.color; ctx.globalAlpha = .05; ctx.fillRect(r.left, r.top, w, h); ctx.globalAlpha = 1;
+      frameBox(r.left, r.top, w, h, b.color, (label || "") + Math.round(w) + " × " + Math.round(h));
+    } }; },
+    fill: function(extra){ return { to: mid, cur: "hand", d: .4, start: function(j){
+      j.el.classList.add("bt--on", "bt--anim", "bt--shell", "bt--noicon"); (extra || []).forEach(function(c){ j.el.classList.add(c); });
+    }, run: function(p, r, b){
+      var c = mid(r);
+      ctx.strokeStyle = b.color; ctx.globalAlpha = 1 - p; ctx.lineWidth = 2;
+      ctx.beginPath(); ctx.arc(c[0], c[1], 6 + p * 40, 0, 6.29); ctx.stroke(); ctx.lineWidth = 1; ctx.globalAlpha = 1;
+      frameBox(r.left, r.top, r.width, r.height, b.color);
+      pill("Fill", c[0] + 14, c[1] + 18, b.color);
+    } }; },
+    padding: function(){ return { d: .55, start: function(j){
+      var s = getComputedStyle(j.el); j.pad = ["Top", "Right", "Bottom", "Left"].map(function(k){ return parseFloat(s["padding" + k]) || 0; });
+    }, run: function(p, r, b, j){
+      var P = j.pad; b.x = r.left + P[3]; b.y = r.top + P[0];
+      ctx.globalAlpha = .28 * Math.sin(p * 3.14); ctx.fillStyle = "#7fc45a";
+      ctx.fillRect(r.left, r.top, r.width, P[0]); ctx.fillRect(r.left, r.bottom - P[2], r.width, P[2]);
+      ctx.fillRect(r.left, r.top + P[0], P[3], r.height - P[0] - P[2]); ctx.fillRect(r.right - P[1], r.top + P[0], P[1], r.height - P[0] - P[2]);
+      ctx.globalAlpha = 1;
+      frameBox(r.left, r.top, r.width, r.height, b.color);
+      if (P[0] > 6) pill("padding " + Math.round(P[0]) + " · " + Math.round(P[3]), r.left + P[3], r.top + P[0] / 2 - 8, "#7fc45a");
+    } }; },
+    type: function(cps, maxD, look){ return { cur: "beam", d: 1, start: function(j){
+      if (!j.T) j.T = texts(j.el);
+      this.d = Math.max(.25, Math.min(maxD, j.T.total / cps));
+      j.el.classList.add("bt--on", "bt--kids");
+      if (look) css(j.el, look);
+    }, to: function(r){ return [r.left, r.top + 10]; }, run: function(p, r, b, j){
+      var k = Math.round(j.T.total * p); typed(j.T, k);
+      var c = caret(j.T, k); if (c) { b.x = c[0] + 2; b.y = c[1]; }
+      ctx.strokeStyle = b.color; ctx.globalAlpha = .6; ctx.setLineDash([3, 3]);
+      ctx.strokeRect(px(r.left - 2), px(r.top - 2), Math.round(r.width + 4), Math.round(r.height + 4)); ctx.setLineDash([]); ctx.globalAlpha = 1;
+    }, end: function(j){ restore(j.T); } }; },
+    select: function(){ return { cur: "beam", d: .35, run: function(p, r, b, j){
+      var L = lines(j.el), last = L[L.length - 1];
+      if (last) { b.x = last.left + last.width * p; b.y = last.top + last.height / 2; }
+      ctx.fillStyle = b.color; ctx.globalAlpha = .22;
+      L.forEach(function(q){ ctx.fillRect(Math.round(q.left), Math.round(q.top), Math.round(q.width * Math.min(1, p * 1.6)), Math.round(q.height)); });
+      ctx.globalAlpha = 1;
+    } }; },
+    fonts: function(list){ return { cur: "arrow", d: .34 * list.length, run: function(p, r, b, j){
+      var q = Math.min(list.length - 1, Math.floor(p * list.length));
+      if (j.fq !== q) { j.fq = q; j.el.style.fontFamily = list[q][0]; }
+      hilite(j.el, b.color, .18);
+      var P = panel(r.right - 150, r.top - 30 - list.length * 18, "Font", list.map(function(f){ return f[1]; }), q, b.color);
+      b.x = P.x + 30; b.y = P.y + 30 + q * 18;
+    } }; },
+    size: function(from){ return { cur: "arrow", d: .5, run: function(p, r, b, j){
+      var s = from + (1 - from) * ease(p);
+      j.el.style.fontSize = (j.fs * s).toFixed(1) + "px";
+      hilite(j.el, b.color, .18);
+      var P = panel(r.right - 150, r.top - 48, "Size", [Math.round(j.fs * from) + " → " + Math.round(j.fs * s) + " px"], 0, b.color);
+      b.x = P.x + P.w - 12; b.y = P.y + 30;
+    }, end: function(j){ j.el.style.fontSize = ""; } }; },
+    colour: function(pick, done){ return { cur: "arrow", d: .45, run: function(p, r, b, j){
+      var at = swatches(r.left + Math.min(r.width - 110, 40), r.top - 40, pick, b.color);
+      b.x = at[0]; b.y = at[1];
+      if (p > .55 && !j.cd) { j.cd = 1; done(j); }
+    }, end: function(j){ j.cd = 0; } }; },
+    marks: function(){ return { cur: "pen", d: .5, start: function(j){ j.mk = Array.prototype.slice.call(j.el.querySelectorAll(".mark")); },
+      run: function(p, r, b, j){
+        if (!j.mk.length) return;
+        var segs = []; j.mk.forEach(function(m){ Array.prototype.forEach.call(m.getClientRects(), function(q){ segs.push(q); }); });
+        var tot = 0; segs.forEach(function(q){ tot += q.width; });
+        var left = tot * ease(p);
+        ctx.fillStyle = "#f5c518";
+        segs.forEach(function(q){
+          var w = Math.max(0, Math.min(q.width, left)); left -= q.width;
+          var y = Math.round(q.bottom - q.height * .02);
+          if (w > 0) { ctx.fillRect(Math.round(q.left), y, Math.round(w), 4); b.x = q.left + w; b.y = y; }
+          ctx.fillStyle = "#0a0a0b"; ctx.fillRect(Math.round(q.left) - 3, y - 2, 7, 7); ctx.fillStyle = "#f6f6f3"; ctx.fillRect(Math.round(q.left) - 2, y - 1, 5, 5); ctx.fillStyle = "#f5c518";
+        });
+      }, end: function(j){ j.el.classList.remove("bt--nomark"); } }; },
+    icons: function(){ return { cur: "arrow", d: .3, start: function(j){
+      j.el.classList.remove("bt--noicon");
+      Array.prototype.forEach.call(j.el.querySelectorAll("svg"), function(s){ flash(s, "#7fc45a"); });
+    } }; },
+    shadow: function(){ return { cur: "arrow", d: .45, start: function(j){ j.el.classList.remove("bt--noshadow"); }, run: function(p, r, b){
+      var P = panel(r.right + 10, r.top - 6, "Drop shadow", ["x 4  y 4  blur 0"], 0, b.color); b.x = P.x + 20; b.y = P.y + 30;
+    } }; },
+    ghost: function(){ return { cur: "arrow", d: .6, to: function(r, j){ var m = j.dep2.el.getBoundingClientRect(); return [m.left + 8, m.top + 8]; }, run: function(p, r, b, j){
+      var m = j.dep2.el.getBoundingClientRect(), e = ease(p);
+      var x = m.left + (r.left - m.left) * e, y = m.top + (r.top - m.top) * e, w = m.width + (r.width - m.width) * e, h = m.height + (r.height - m.height) * e;
+      ctx.fillStyle = b.color; ctx.globalAlpha = .08; ctx.fillRect(x, y, w, h); ctx.globalAlpha = 1;
+      ctx.setLineDash([5, 4]); ctx.strokeStyle = b.color; ctx.strokeRect(px(x), px(y), Math.round(w), Math.round(h)); ctx.setLineDash([]);
+      b.x = x + 8; b.y = y + 8;
+      pill("⌥ drag · duplicate", x + 18, y + 18, b.color);
+    }, end: function(j){
+      j.T = null; j.el.classList.add("bt--on");
+      var first = j.el.querySelector("h3, summary, a, dd, .card__n") || j.el;
+      j.T = texts(first); typed(j.T, 0);
+    } }; },
+    retype: function(){ return { cur: "beam", d: .5, start: function(j){ this.d = Math.max(.2, Math.min(.8, j.T.total / 40)); },
+      run: function(p, r, b, j){ var k = Math.round(j.T.total * p); typed(j.T, k); var c = caret(j.T, k); if (c) { b.x = c[0] + 2; b.y = c[1]; } },
+      end: function(j){ restore(j.T); } }; },
+    placeholder: function(){ return { cur: "cross", d: .45, run: function(p, r, b){
+      var e = ease(p);
+      ctx.strokeStyle = b.color; ctx.globalAlpha = .7; ctx.beginPath();
+      ctx.moveTo(r.left, r.top); ctx.lineTo(r.left + r.width * e, r.top + r.height * e);
+      ctx.moveTo(r.right, r.top); ctx.lineTo(r.right - r.width * e, r.top + r.height * e); ctx.stroke(); ctx.globalAlpha = 1;
+      b.x = r.right - r.width * e; b.y = r.top + r.height * e;
+      pill("Place image", r.left + r.width / 2, r.top + r.height / 2 - 8, b.color, true);
+    } }; },
+    scan: function(){ return { cur: "arrow", d: 1.1, start: function(j){ j.svg = j.el.querySelector("svg"); if (j.svg) j.svg.style.opacity = "1"; }, run: function(p, r, b, j){
+      if (!j.svg) return;
+      var s = j.svg.getBoundingClientRect(), y = s.top + s.height * p;
+      var v = "inset(0 0 " + ((1 - p) * 100).toFixed(1) + "% 0)"; j.svg.style.clipPath = v; j.svg.style.webkitClipPath = v;
+      ctx.fillStyle = b.color; ctx.fillRect(Math.round(s.left), Math.round(y), Math.round(s.width), 2);
+      ctx.globalAlpha = .12; ctx.fillRect(Math.round(s.left), Math.round(y) - 18, Math.round(s.width), 18); ctx.globalAlpha = 1;
+      b.x = s.right - 4; b.y = y;
+    }, end: function(j){ if (j.svg) { j.svg.style.clipPath = ""; j.svg.style.webkitClipPath = ""; } } }; },
+    tags: function(){ return { cur: "arrow", d: .6, start: function(j){
+      var t = j.el.querySelector(".tags"); if (!t) return; t.style.opacity = "1";
+      Array.prototype.forEach.call(t.children, function(c, q){ setTimeout(function(){ flash(c, COLORS[q % 3]); }, q * 120); });
+    } }; },
+    art: function(){ return { to: function(r){ return [Math.max(2, r.left + 2), Math.max(RUL + 2, r.top + 2)]; }, cur: "cross", d: .55, run: function(p, r, b, j){
+      var e = ease(p), top = Math.max(RUL, r.top), w = (r.width - 4) * e, h = (Math.min(vh - 4, r.bottom) - top) * e;
+      b.x = r.left + 2 + w; b.y = top + h;
+      ctx.setLineDash([6, 4]); ctx.strokeStyle = b.color; ctx.strokeRect(px(r.left + 2), px(top), Math.round(w), Math.round(h)); ctx.setLineDash([]);
+      pill((j.el.id || j.el.className.split(" ")[0] || "section") + " · " + Math.round(r.width) + " × " + Math.round(r.height), r.left + 8, top + 6, b.color);
+    }, end: function(j){ j.el.classList.add("bt--anim"); j.el.classList.remove("bt-art"); } }; }
+  };
+
+  function flash(el, color){ addFx({ el: el, color: color, kind: "flash" }); }
+
+  function plan(j){
+    var el = j.el, s = getComputedStyle(el);
+    j.fs = parseFloat(s.fontSize) || 16;
+    var final = fam(el);
+    j.lock = { minHeight: el.style.minHeight, minWidth: el.style.minWidth };
+    var r = el.getBoundingClientRect();
+    if (j.kind !== "art") css(el, { minHeight: r.height + "px", minWidth: r.width + "px" });
+    j.T = j.kind === "dup" || j.kind === "art" ? null : texts(el);
+    if (j.T) typed(j.T, 0);
+    var grey = { fontFamily: SERIF, color: "#8b8f97" }, greySmall = { fontFamily: SERIF, color: "#8b8f97", fontSize: (j.fs * .55).toFixed(1) + "px" };
+    var L = [];
+    switch (j.kind) {
+      case "art": L = [STEP.art()]; break;
+      case "head":
+        el.classList.add("bt--nomark");
+        L = [STEP.frame("Text · "), STEP.type(small ? 45 : 32, 1.4, greySmall), STEP.select(),
+          STEP.fonts(small ? [[SERIF, "Georgia"], ["", final]] : [[SERIF, "Georgia"], [ARIAL, "Arial"], [MONO, "Geist Mono"], ["", final]]),
+          STEP.size(.55), STEP.colour(1, function(x){ x.el.style.color = ""; }), STEP.marks()];
+        break;
+      case "para":
+        el.classList.add("bt--nomark");
+        L = [STEP.frame("Text · "), STEP.type(small ? 140 : 110, 1.1, grey), STEP.select(),
+          STEP.fonts(small ? [["", final]] : [[SERIF, "Georgia"], [MONO, "Geist Mono"], ["", final]]),
+          STEP.colour(1, function(x){ x.el.style.color = ""; })];
+        if (el.querySelector(".mark")) L.push(STEP.marks());
+        break;
+      case "tiny": L = [STEP.type(70, .6), STEP.colour(0, function(){})]; break;
+      case "btn":
+        L = [STEP.frame("Button · "), STEP.fill(["bt--grey", "bt--noshadow"]), STEP.type(40, .5),
+          STEP.colour(2, function(x){ x.el.classList.remove("bt--grey"); }), STEP.shadow()];
+        break;
+      case "scene": L = [STEP.frame("Frame · "), STEP.fill(), STEP.placeholder(), STEP.scan(), STEP.tags()]; break;
+      case "dup": L = [STEP.ghost(), STEP.retype()]; break;
+      default:
+        L = [STEP.frame(), STEP.fill(), STEP.padding(), STEP.type(small ? 160 : 120, 1.3), STEP.icons()];
+        if (small) L.splice(2, 1);
+    }
+    j.steps = L; j.si = 0;
+  }
+
+  function finish(j, quick){
+    if (j.state === "done") return;
+    if (j.bot) { j.bot.job = null; j.bot = null; }
+    j.state = "done";
+    var el = j.el;
+    if (j.art) { el.classList.add("bt--anim"); el.classList.remove("bt-art"); }
+    else {
+      restore(j.T);
+      if (j.lock) css(el, j.lock);
+      css(el, { fontFamily: "", fontSize: "", color: "" });
+      ["svg", ".tags"].forEach(function(q){ var c = el.querySelector(q); if (c && el.matches(".scene")) css(c, { opacity: "", clipPath: "", webkitClipPath: "" }); });
+      CLS.forEach(function(c){ el.classList.remove(c); });
+      if (quick) el.classList.add("bt--fade");
+      el.classList.add("bt--on");
+      if (!quick) addFx({ el: el, color: j.color || "#f5c518", kind: "flash" }), redline(j);
+    }
+    setTimeout(function(){ el.classList.remove("bt--anim"); }, 500);
+    pending--;
+  }
+
+  /* After a block lands, show its distance to the block above it, like a designer checking spacing */
+  function redline(j){
+    var idx = jobs.indexOf(j);
+    for (var q = idx - 1; q >= 0; q--) {
+      var o = jobs[q]; if (o.state !== "done" || o.dep !== j.dep) continue;
+      addFx({ kind: "gap", a1: o.el, a2: j.el, color: "#ec5b33" }); return;
+    }
+  }
+
+  /* ---------- Main loop ---------- */
+  var pending = all.length, ppx = -1e4, ppy = -1e4, last = 0, lastAssign = 0, running = false, dirty = true, now = 0, rul = 0;
 
   function steer(b, tx, ty, max, dt){
-    var dx = tx - b.x, dy = ty - b.y, d = Math.sqrt(dx * dx + dy * dy) || 1, want = Math.min(max, d * 5);
-    var k = Math.min(1, dt * 7);
+    var dx = tx - b.x, dy = ty - b.y, d = Math.sqrt(dx * dx + dy * dy) || 1, want = Math.min(max, d * 6);
+    var k = Math.min(1, dt * 8);
     b.vx += (dx / d * want - b.vx) * k; b.vy += (dy / d * want - b.vy) * k;
     return d;
   }
 
+  /* copies can start as soon as their original has its frame and fill */
+  function ready(j){ return (!j.dep || j.dep.state === "done") && (!j.dep2 || j.dep2.state === "done" || (j.dep2.state === "run" && j.dep2.si >= 1)); }
+
+  var dead = false;
   function frame(ts){
+    if (dead) return;
     var dt = Math.min(.05, last ? (ts - last) / 1000 : .016); last = ts; now += dt;
     if (dirty) { measure(); dirty = false; }
 
-    /* Read every pending rect first, then write styles, so layout is computed once per frame */
-    var backlog = 0, queue = [];
-    for (var j = 0; j < tasks.length; j++) {
-      var t = tasks[j];
-      if (t.state === "done") continue;
-      t.r = t.el.getBoundingClientRect();
-      if (t.state !== "wait") { if (t.r.bottom < -40) reveal(t, true); continue; }
-      {
-        if (t.r.bottom < 0) { reveal(t, true); continue; }           /* scrolled past: just show it */
-        if (t.r.top < vh * .95 && t.r.width) {
-          if (!t.since) t.since = now;
-          if (now - t.since > 2.2) { reveal(t, true); continue; }   /* swarm too busy: don't make anyone wait */
-          queue.push(t); backlog++;
-        }
+    var backlog = 0, queue = [], active = 0;
+    var line = (window.innerHeight + (window.scrollY || 0) >= document.documentElement.scrollHeight - 4) ? vh : vh * .97;
+    for (var q = 0; q < all.length; q++) {
+      var j = all[q];
+      if (j.state === "done") continue;
+      j.r = j.el.getBoundingClientRect();
+      /* scrolled (mostly) past: no point building what the visitor has already left behind */
+      var gone = j.r.bottom < (j.state === "run" || j.art ? 0 : vh * .2), off = j.r.top > vh + 120;
+      if (j.state === "run") {
+        if (gone || off) { finish(j, true); continue; }
+        active++; continue;
+      }
+      if (gone || (!j.r.width && !j.art)) { if (ready(j) || gone) { finish(j, true); continue; } }
+      if (j.r.top < line && ready(j)) {
+        if (!j.since) j.since = now;
+        if (now - j.since > 4) { finish(j, true); continue; }
+        queue.push(j); backlog++;
       }
     }
-    var rush = backlog > n ? 1.8 : backlog > n / 2 ? 1.3 : 1;
+    var load = (backlog + active) / n, rush = load > 1.5 ? 2.6 : load > 1 ? 2 : load > .6 ? 1.4 : 1;
 
-    /* Hand out work to the nearest free cursor, a little staggered so it looks organic */
-    if (queue.length && now - lastAssign > .06) {
-      var t2 = queue[0], best = null, bd = 1e12;
+    if (queue.length && now - lastAssign > .045) {
+      var t = queue[0], best = null, bd = 1e12;
       bots.forEach(function(b){
         if (b.job) return;
-        var d = (b.x - t2.r.left) * (b.x - t2.r.left) + (b.y - t2.r.top) * (b.y - t2.r.top);
+        var d = (b.x - t.r.left) * (b.x - t.r.left) + (b.y - t.r.top) * (b.y - t.r.top);
         if (d < bd) { bd = d; best = b; }
       });
-      if (best) { best.job = t2; best.mode = "go"; t2.bot = best; t2.state = "go"; lastAssign = now; }
+      if (best) { best.job = t; t.bot = best; t.color = best.color; t.state = "run"; lastAssign = now; plan(t); guides(t); }
     }
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, vw, vh);
     ctx.imageSmoothingEnabled = false;
+    ctx.lineWidth = 1;
 
-    /* Blocks still waiting for the swarm show as a dashed blueprint, so nothing looks broken */
-    ctx.strokeStyle = "#43464d"; ctx.lineWidth = 1; ctx.setLineDash([4, 4]);
-    for (var q = 0; q < tasks.length; q++) {
-      var bq = tasks[q], rq = bq.r;
-      if ((bq.state === "wait" || bq.state === "go") && rq && rq.bottom > 0 && rq.top < vh && rq.width)
-        ctx.strokeRect(Math.round(rq.left) + .5, Math.round(rq.top) + .5, Math.round(rq.width) - 1, Math.round(rq.height) - 1);
+    drawGrid();
+    /* Blocks still waiting for a cursor show as a dashed blueprint, so the page never looks broken */
+    ctx.strokeStyle = "#43464d"; ctx.setLineDash([4, 4]);
+    for (var w = 0; w < jobs.length; w++) {
+      var wj = jobs[w], wr = wj.r;
+      if (wj.state === "wait" && wr && wr.width && wr.bottom > 0 && wr.top < vh && (!wj.dep || wj.dep.state === "done"))
+        ctx.strokeRect(px(wr.left), px(wr.top), Math.round(wr.width) - 1, Math.round(wr.height) - 1);
     }
     ctx.setLineDash([]);
+    drawFx(dt);
 
-    var busy = false;
+    var busy = active > 0;
     bots.forEach(function(b, bi){
-      var t = b.job;
-      if (t && t.state === "done") { b.job = null; b.mode = "idle"; t = null; }
-      if (t) {
+      var j = b.job;
+      if (j && j.state === "done") { b.job = null; j = null; }
+      if (j) {
         busy = true;
-        var r = t.r;
-        if (b.mode === "go") {
-          var d = steer(b, r.left, r.top, 1500 * rush, dt);
-          if (d < 6) { b.mode = "drag"; b.t = 0; b.dur = Math.min(1, .35 + Math.sqrt(r.width * r.height) / 900) / rush; t.el.classList.add("bt--live"); clip(t.el, "inset(0 100% 100% 0)"); }
-        } else {
-          b.t = Math.min(1, b.t + dt / b.dur);
-          var p = ease(b.t);
-          b.x = r.left + r.width * p;
-          b.y = t.text ? r.top + r.height * .5 : r.top + r.height * p;
-          b.vx = b.vy = 0;
-          var cut = ((1 - p) * 100).toFixed(2) + "%";
-          clip(t.el, t.text ? "inset(0 " + cut + " 0 0)" : "inset(0 " + cut + " " + cut + " 0)");
-          drawFrame(r, b, p, t.text);
-          if (b.t >= 1) { flashes.push({ el: t.el, color: b.color, a: 1 }); reveal(t, false); }
+        var st = j.steps[j.si];
+        if (!st) { finish(j, false); b.job = null; b.cur = "arrow"; }
+        else {
+          if (!st.ok && st.to) {
+            var to = st.to(j.r, j);
+            b.cur = "arrow";
+            if (steer(b, to[0], to[1], 2200 * rush, dt) < 10) st.ok = true;
+            b.x += b.vx * dt; b.y += b.vy * dt;
+          } else {
+            if (!st.begun) { st.begun = true; st.t = 0; if (st.start) st.start(j); }
+            b.cur = st.cur || "arrow"; b.vx = b.vy = 0;
+            st.t += dt * rush / st.d;
+            var p = Math.min(1, st.t);
+            if (st.run) st.run(p, j.r, b, j);
+            if (p >= 1) { if (st.end) st.end(j); j.si++; }
+          }
         }
       } else {
-        /* Idle: orbit the free margin on wide screens, or wait in line at the right edge */
+        b.cur = "arrow";
         var tx, ty;
         if (park) { tx = vw - (small ? 9 : 12); ty = vh * (.3 + bi * (.4 / n)) + Math.sin(now * 1.4 + b.ph) * 4; }
-        else {
-          var a = b.ph + now * b.spin;
-          tx = ax + Math.cos(a) * orbit * b.rr; ty = ay + Math.sin(a) * orbit * 1.6 * b.rr;
-        }
-        steer(b, tx, ty, 420, dt);
-        /* keep a little personal space, and move out of the visitor's way */
+        else { var a = b.ph + now * b.spin; tx = ax + Math.cos(a) * orbit * b.rr; ty = ay + Math.sin(a) * orbit * 1.6 * b.rr; }
+        steer(b, tx, ty, 520, dt);
         bots.forEach(function(o){
           if (o === b) return;
           var dx = b.x - o.x, dy = b.y - o.y, d2 = dx * dx + dy * dy;
           if (d2 < 400 && d2 > .01) { b.vx += dx / d2 * 900 * dt; b.vy += dy / d2 * 900 * dt; }
         });
-        var mx = b.x - px, my = b.y - py, m2 = mx * mx + my * my;
+        var mx = b.x - ppx, my = b.y - ppy, m2 = mx * mx + my * my;
         if (m2 < 8100) { var m = Math.sqrt(m2) || 1; b.vx += mx / m * 1600 * dt; b.vy += my / m * 1600 * dt; }
         if (Math.abs(b.vx) + Math.abs(b.vy) > 8) busy = true;
+        b.x += b.vx * dt; b.y += b.vy * dt;
       }
-      if (b.mode !== "drag") { b.x += b.vx * dt; b.y += b.vy * dt; }
     });
 
-    for (var f = flashes.length - 1; f >= 0; f--) {
-      var fl = flashes[f], fr = fl.el.getBoundingClientRect();
-      fl.a -= dt * 2.2;
-      if (fl.a <= 0) { flashes.splice(f, 1); continue; }
-      busy = true;
-      ctx.globalAlpha = fl.a; ctx.strokeStyle = fl.color; ctx.lineWidth = 1;
-      ctx.strokeRect(Math.round(fr.left) + .5, Math.round(fr.top) + .5, Math.round(fr.width) - 1, Math.round(fr.height) - 1);
-      ctx.globalAlpha = 1;
-    }
+    rul += ((active ? 1 : 0) - rul) * Math.min(1, dt * 5);
+    if (rul > .02) drawRulers();
 
     bots.forEach(function(b){
-      var x = Math.round(b.x), y = Math.round(b.y), drag = b.mode === "drag" && b.job;
-      if (drag && b.job.text) ctx.drawImage(b.beam, x - 7, y - 11);
-      else ctx.drawImage(b.arrow, x - S, y - S);
+      var x = Math.round(b.x), y = Math.round(b.y), h = HOT[b.cur] || HOT.arrow;
+      ctx.drawImage(b.spr[b.cur] || b.spr.arrow, x - (h[0] + 1) * S, y - (h[1] + 1) * S);
       if (!park || b.job) { var lx = x + 14 + b.tag.w > vw ? x - b.tag.w - 4 : x + 14; ctx.drawImage(b.tag.c, lx, y + 20, b.tag.w, 16); }
     });
 
-    /* Phones: stop drawing once the swarm has nothing to do, wake again on scroll */
-    if (left <= 0 && !busy && !flashes.length && park) { running = false; last = 0; ctx.clearRect(0, 0, vw, vh); return; }
-    if (!busy && !backlog && small) { running = false; last = 0; return; }
+    if (skip) skip.hidden = pending <= 0;
+    if (!busy && !fx.length && !backlog && (small || pending <= 0 && park)) { running = false; last = 0; if (pending <= 0) ctx.clearRect(0, 0, vw, vh); return; }
     requestAnimationFrame(frame);
   }
 
-  function drawFrame(r, b, p, text){
-    var x = Math.round(r.left), y = Math.round(r.top), w = Math.max(1, Math.round(r.width * p)), h = text ? Math.round(r.height) : Math.max(1, Math.round(r.height * p));
-    ctx.fillStyle = b.color; ctx.globalAlpha = text ? .14 : .06; ctx.fillRect(x, y, w, h); ctx.globalAlpha = 1;
-    if (text) return;
-    ctx.strokeStyle = b.color; ctx.lineWidth = 1; ctx.strokeRect(x + .5, y + .5, w - 1, h - 1);
-    ctx.fillStyle = b.color;
-    [[x, y], [x + w, y], [x, y + h], [x + w, y + h]].forEach(function(c){ ctx.fillRect(c[0] - 2, c[1] - 2, 4, 4); });
-    if (!small) {
-      ctx.font = "15px VT323, 'Geist Mono', monospace"; ctx.textBaseline = "top";
-      ctx.fillText(Math.round(r.width * p) + " × " + Math.round(r.height * p), x + 4, y + h + 6);
+  /* An idle cursor drags guides out of the rulers to the new block's edges */
+  function guides(j){
+    if (j.art || j.kind === "tiny") return;
+    var r = j.el.getBoundingClientRect();
+    addFx({ kind: "guide", job: j, v: [r.left, r.right], h: [r.top], color: j.color });
+  }
+
+  function drawFx(dt){
+    for (var q = fx.length - 1; q >= 0; q--) {
+      var f = fx[q];
+      if (f.kind === "guide") {
+        if (f.job.state === "done") f.a -= dt * 2.5;
+        if (f.a <= 0) { fx.splice(q, 1); continue; }
+        var r = f.job.r || f.job.el.getBoundingClientRect();
+        ctx.globalAlpha = .55 * f.a; ctx.strokeStyle = f.color; ctx.setLineDash([2, 3]);
+        ctx.beginPath();
+        [r.left, r.right].forEach(function(x){ ctx.moveTo(px(x), RUL); ctx.lineTo(px(x), vh); });
+        ctx.moveTo(RUL, px(r.top)); ctx.lineTo(vw, px(r.top));
+        ctx.stroke(); ctx.setLineDash([]); ctx.globalAlpha = 1;
+      } else if (f.kind === "flash") {
+        f.a -= dt * 2;
+        if (f.a <= 0) { fx.splice(q, 1); continue; }
+        var fr = f.el.getBoundingClientRect();
+        ctx.globalAlpha = f.a; ctx.strokeStyle = f.color;
+        ctx.strokeRect(px(fr.left), px(fr.top), Math.round(fr.width) - 1, Math.round(fr.height) - 1); ctx.globalAlpha = 1;
+      } else if (f.kind === "gap") {
+        f.a -= dt * 1.1;
+        if (f.a <= 0) { fx.splice(q, 1); continue; }
+        var a1 = f.a1.getBoundingClientRect(), a2 = f.a2.getBoundingClientRect();
+        ctx.globalAlpha = Math.min(1, f.a * 2); ctx.strokeStyle = f.color; ctx.fillStyle = f.color;
+        if (a2.top >= a1.bottom - 1 && a2.top - a1.bottom > 3) {
+          var x = Math.round(Math.max(a1.left, a2.left) + 24) + .5, y1 = Math.round(a1.bottom), y2 = Math.round(a2.top);
+          ctx.beginPath(); ctx.moveTo(x, y1); ctx.lineTo(x, y2); ctx.moveTo(x - 4, y1 + .5); ctx.lineTo(x + 4, y1 + .5); ctx.moveTo(x - 4, y2 - .5); ctx.lineTo(x + 4, y2 - .5); ctx.stroke();
+          pill(String(y2 - y1), x + 6, (y1 + y2) / 2 - 8, f.color);
+        } else if (a2.left >= a1.right - 1 && a2.left - a1.right > 3) {
+          var yy = Math.round(Math.max(a1.top, a2.top) + 18) + .5, x1 = Math.round(a1.right), x2 = Math.round(a2.left);
+          ctx.beginPath(); ctx.moveTo(x1, yy); ctx.lineTo(x2, yy); ctx.moveTo(x1 + .5, yy - 4); ctx.lineTo(x1 + .5, yy + 4); ctx.moveTo(x2 - .5, yy - 4); ctx.lineTo(x2 - .5, yy + 4); ctx.stroke();
+          pill(String(x2 - x1), (x1 + x2) / 2, yy + 6, f.color, true);
+        }
+        ctx.globalAlpha = 1;
+      }
     }
+  }
+
+  /* Layout grid over sections that are being designed right now */
+  function drawGrid(){
+    arts.forEach(function(a){
+      var on = 0;
+      if (a.state === "run") on = 1;
+      else for (var q = 0; q < jobs.length; q++) if (jobs[q].dep === a && jobs[q].state === "run") { on = 1; break; }
+      a.g = (a.g || 0) + (on - (a.g || 0)) * .12;
+      if (a.g < .02) return;
+      var r = a.el.getBoundingClientRect(), w = a.el.querySelector(".wrap");
+      if (!w || r.bottom < 0 || r.top > vh) return;
+      var wr = w.getBoundingClientRect(), cols = small ? 4 : 12, gut = 16, cw = (wr.width - gut * (cols - 1)) / cols;
+      var top = Math.max(0, r.top), bot = Math.min(vh, r.bottom);
+      ctx.globalAlpha = .05 * a.g; ctx.fillStyle = "#ec5b33";
+      for (var c = 0; c < cols; c++) ctx.fillRect(Math.round(wr.left + c * (cw + gut)), top, Math.round(cw), bot - top);
+      ctx.globalAlpha = .25 * a.g; ctx.strokeStyle = "#ec5b33"; ctx.setLineDash([1, 3]); ctx.beginPath();
+      ctx.moveTo(px(wr.left), top); ctx.lineTo(px(wr.left), bot); ctx.moveTo(px(wr.right), top); ctx.lineTo(px(wr.right), bot); ctx.stroke(); ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+    });
+  }
+
+  /* Design-tool rulers along the top and left edges while anything is being built */
+  function drawRulers(){
+    ctx.globalAlpha = rul;
+    ctx.fillStyle = "#0a0a0b"; ctx.fillRect(0, 0, vw, RUL); ctx.fillRect(0, 0, RUL, vh);
+    jobs.forEach(function(j){
+      if (j.state !== "run" || !j.r) return;
+      ctx.fillStyle = j.color; ctx.globalAlpha = .35 * rul;
+      ctx.fillRect(Math.round(j.r.left), 0, Math.round(j.r.width), RUL); ctx.fillRect(0, Math.round(j.r.top), RUL, Math.round(j.r.height));
+    });
+    ctx.globalAlpha = rul; ctx.fillStyle = "#43464d";
+    var sy = window.scrollY || 0;
+    for (var x = 0; x < vw; x += 10) { var hx = x % 100 === 0 ? RUL : x % 50 === 0 ? RUL * .55 : RUL * .3; ctx.fillRect(x, RUL - hx, 1, hx); }
+    for (var y = -(sy % 10); y < vh; y += 10) { var v = Math.round(y + sy), hy = v % 100 === 0 ? RUL : v % 50 === 0 ? RUL * .55 : RUL * .3; ctx.fillRect(RUL - hy, Math.round(y), hy, 1); }
+    if (!small) {
+      ctx.fillStyle = "#8b8f97"; ctx.font = "10px " + MONO; ctx.textBaseline = "top";
+      for (x = 100; x < vw; x += 100) ctx.fillText(String(x), x + 3, 2);
+    }
+    ctx.fillStyle = "#2e3035"; ctx.fillRect(0, RUL, vw, 1); ctx.fillRect(RUL, 0, 1, vh);
+    ctx.globalAlpha = 1;
   }
 
   function wake(){ if (!running) { running = true; requestAnimationFrame(frame); } }
 
-  /* Arm everything only now, so a script error above can never leave the page hidden */
+  function skipAll(){
+    try { sessionStorage.setItem("swarm-off", "1"); } catch (e) {}
+    all.forEach(function(j){ finish(j, true); });
+    fx.length = 0; bots.forEach(function(b){ b.job = null; });
+    if (skip) skip.remove(); skip = null;
+    cv.remove(); dead = true; running = true;
+  }
+
+  /* ---------- Arm ---------- */
   cv.className = "swarm-cv"; cv.setAttribute("aria-hidden", "true");
   document.body.appendChild(cv);
+  var skip = document.createElement("button");
+  skip.type = "button"; skip.className = "swarm-skip"; skip.textContent = "Preskoči animaciju ✕";
+  skip.addEventListener("click", skipAll);
+  document.body.appendChild(skip);
+  ARTS.forEach(function(el){ el.classList.add("bt-art"); });
+  blocks.forEach(function(el){ el.classList.add("bt"); });
   root.classList.add("swarm");
+  root.classList.remove("swarm-pre");
+
   window.addEventListener("scroll", wake, { passive: true });
   window.addEventListener("resize", function(){ dirty = true; wake(); }, { passive: true });
-  window.addEventListener("pointermove", function(e){ if (e.pointerType === "mouse") { px = e.clientX; py = e.clientY; wake(); } }, { passive: true });
-  document.addEventListener("mouseleave", function(){ px = py = -1e4; });
-  /* Keyboard users and in-page search never land on an unbuilt block */
-  document.addEventListener("focusin", function(e){ tasks.forEach(function(t){ if (t.state !== "done" && t.el.contains(e.target)) reveal(t, true); }); });
-  window.addEventListener("beforeprint", function(){ tasks.forEach(function(t){ reveal(t, false); }); });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ bots.forEach(function(b){ b.tag = tag(NAMES[b.i % NAMES.length], b.color); }); });
+  window.addEventListener("pointermove", function(e){ if (e.pointerType === "mouse") { ppx = e.clientX; ppy = e.clientY; wake(); } }, { passive: true });
+  document.addEventListener("mouseleave", function(){ ppx = ppy = -1e4; });
+  /* Keyboard users never land on an unbuilt block */
+  document.addEventListener("focusin", function(e){
+    if (e.target === skip) return;
+    all.forEach(function(j){ if (j.state !== "done" && j.el.contains(e.target)) finish(j, true); });
+  });
+  window.addEventListener("beforeprint", function(){ all.forEach(function(j){ finish(j, true); }); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ bots.forEach(function(b){ b.tag = tag(NAMES[b.i], b.color); }); });
   wake();
 })();
 </script>
