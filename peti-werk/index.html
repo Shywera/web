@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peti werk | dnevni kviz iz tiskare</title>
+<meta name="description" content="Pet odjela, pet pitanja, svaki dan novi radni nalog. Provedi arak od palete papira do skladišta.">
+<meta property="og:title" content="Peti werk">
+<meta property="og:description" content="Pet odjela, pet pitanja, svaki dan novi radni nalog. Provedi arak od palete papira do skladišta.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kai-sol.com/peti-werk/">
+<link rel="canonical" href="https://kai-sol.com/peti-werk/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="fonts/fontovi.css">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="stil.css">
+</head>
+<body>
+<div class="okvir">
+  <header class="glava">
+    <a class="znak" href="./" aria-label="Peti werk, početna">
+      <span class="znak-strip" aria-hidden="true"><i class="w-k"></i><i class="w-c"></i><i class="w-m"></i><i class="w-y"></i><i class="w-s"></i></span>
+      <span class="znak-ime">Peti werk</span>
+    </a>
+    <div class="glava-desno">
+      <span class="glava-datum" id="datum"></span>
+      <button type="button" class="glava-veza" id="gumb-ljestvica">Ljestvica</button>
+    </div>
+  </header>
+
+  <div class="scena" id="scena"></div>
+  <div class="rok" aria-hidden="true"><span class="rok-crta" id="rok-crta"></span></div>
+
+  <ol class="strip" id="strip" aria-label="Odjeli kroz koje arak prolazi"></ol>
+
+  <main class="ploca" id="ploca" tabindex="-1"></main>
+
+  <footer class="dno">
+    <p>Pitanja su iz prakse offsetnog tiska iz arka. Novi radni nalog svaki dan u ponoć.</p>
+  </footer>
+</div>
+
+<noscript><p class="bez-js">Igra treba JavaScript.</p></noscript>
+<script src="postavke.js"></script>
+<script src="pitanja.js"></script>
+<script src="scena.js"></script>
+<script src="igra.js"></script>
+</body>
+</html>
